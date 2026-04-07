@@ -1,0 +1,16 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Editor / AI tools
+.claude
+.superpowers
+.playwright-mcp
+
+# Node (por si acaso)
+node_modules/
+
+# Env
+.env
+.env.local

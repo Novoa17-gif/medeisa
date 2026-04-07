@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="assets/logo.PNG" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="MEDEISA — Mueblería industrial en Ocotlán, Jalisco. Transformamos acero en estilo. Cotiza tus muebles metálicos a medida." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="MEDEISA — Metales de Innovación" />
+  <meta property="og:description" content="Mueblería industrial en Ocotlán, Jalisco. Transformamos acero en estilo." />
+  <meta property="og:image" content="assets/hero-v4.jpeg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="MEDEISA" />
+  <meta property="og:locale" content="es_MX" />
+
+  <title>MEDEISA — Mueblería Industrial en Ocotlán, Jalisco</title>
+
+  <!-- Google Fonts: Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400&family=Montserrat:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- Schema markup: negocio local -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FurnitureStore",
+    "name": "MEDEISA S.A. de C.V.",
+    "description": "Mueblería industrial en Ocotlán, Jalisco. Fabricamos libreros, mesas, escritorios y sillas de metal a medida.",
+    "url": "https://medeisa.com",
+    "telephone": "+523921236728",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Carr. Santa Rosa La Barca KM 49+200",
+      "addressLocality": "Cuitzeo, Poncitlán",
+      "addressRegion": "Jalisco",
+      "postalCode": "45965",
+      "addressCountry": "MX"
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+        "opens": "08:00",
+        "closes": "16:00"
+      }
+    ],
+    "priceRange": "$$",
+    "image": "assets/hero-v4.jpeg"
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Skip link para accesibilidad -->
+  <a class="skip-link" href="#contenido-principal">Saltar al contenido principal</a>
+
+  <!-- ============================================================
+       NAV
+  ============================================================ -->
+  <header class="encabezado" id="encabezado">
+    <nav class="nav contenedor" aria-label="Navegación principal">
+
+      <!-- Logo -->
+      <a class="nav__logo" href="#contenido-principal" aria-label="MEDEISA — Ir al inicio">
+        <img src="assets/logo.PNG" alt="MEDEISA" class="nav__logo-img" width="140" height="48" />
+      </a>
+
+      <!-- Links de navegación desktop — pill con cursor deslizante (adaptado de 21st.dev/krittyz) -->
+      <div class="nav__pill" aria-hidden="false">
+        <div class="nav__cursor" aria-hidden="true"></div>
+        <ul class="nav__links" role="list">
+          <li><a class="nav__link" href="#nosotros">Nosotros</a></li>
+          <li><a class="nav__link" href="#productos">Productos</a></li>
+          <li><a class="nav__link" href="#galeria">Expo</a></li>
+          <li><a class="nav__link" href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+
+      <!-- Selector de idioma — reemplaza el botón de WhatsApp, misma posición -->
+      <div class="nav__idioma" role="region" aria-label="Seleccionar idioma / Language selector">
+        <button
+          class="hero__idioma-btn activo"
+          data-lang="es"
+          aria-pressed="true"
+          aria-label="Español (idioma actual)"
+          type="button"
+        ><span aria-hidden="true">🇲🇽</span><span class="hero__idioma-label">MX</span></button>
+        <span class="hero__idioma-sep" aria-hidden="true"></span>
+        <button
+          class="hero__idioma-btn"
+          data-lang="en"
+          aria-pressed="false"
+          aria-label="English"
+          type="button"
+        ><span aria-hidden="true">🇺🇸</span><span class="hero__idioma-label">US</span></button>
+      </div>
+
+      <!-- Botón hamburguesa (móvil) -->
+      <button
+        type="button"
+        class="nav__hamburguesa"
+        aria-controls="nav-menu-movil"
+        aria-expanded="false"
+        aria-label="Abrir menú de navegación"
+      >
+        <span class="nav__hamburguesa-linea"></span>
+        <span class="nav__hamburguesa-linea"></span>
+        <span class="nav__hamburguesa-linea"></span>
+      </button>
+
+    </nav>
+
+  </header>
+
+  <!-- Menú móvil desplegable (fuera del header fijo para no escaparse) -->
+  <div class="nav__menu-movil" id="nav-menu-movil" aria-hidden="true">
+    <ul class="nav__menu-movil-links" role="list">
+      <li><a class="nav__link" href="#nosotros">Nosotros</a></li>
+      <li><a class="nav__link" href="#productos">Productos</a></li>
+      <li><a class="nav__link" href="#galeria">Expo</a></li>
+      <li><a class="nav__link" href="#contacto">Contacto</a></li>
+    </ul>
+  </div>
+
+  <main id="contenido-principal" tabindex="-1">
+
+    <!-- ============================================================
+         HERO
+    ============================================================ -->
+    <section class="hero" aria-label="Presentación principal">
+
+      <!-- Overlay: muy oscuro izquierda, transparente derecha -->
+      <div class="hero__overlay" aria-hidden="true"></div>
+
+      <div class="hero__contenido contenedor">
+        <div class="hero__texto">
+
+          <!-- Eyebrow -->
+          <p class="hero__eyebrow animar-entrada">
+            <span class="hero__eyebrow-linea" aria-hidden="true"></span>
+            Ocotlán, Jalisco
+          </p>
+
+          <!-- Wordmark de marca -->
+          <p class="hero__wordmark animar-entrada">MEDEISA</p>
+
+          <!-- Línea divisora entre wordmark y título -->
+          <span class="hero__divisor animar-entrada" aria-hidden="true"></span>
+
+          <!-- Título principal -->
+          <h1 class="hero__titulo animar-entrada">
+            <span class="hero__titulo-linea1">Acero</span>
+            <span class="hero__titulo-linea2"><em>en estilo</em></span>
+          </h1>
+
+          <!-- Subtítulo -->
+          <p class="hero__subtitulo animar-entrada">Mueblería industrial a medida</p>
+
+          <!-- CTAs -->
+          <div class="hero__acciones animar-entrada">
+            <a class="hero__btn-primario" href="#productos">Ver productos</a>
+            <a
+              class="hero__cta-ghost"
+              href="https://wa.me/523921236728?text=Hola%2C%20me%20gustar%C3%ADa%20cotizar%20un%20producto%20de%20MEDEISA."
+              target="_blank"
+              rel="noopener noreferrer"
+            >Cotizar ahora &nbsp;→</a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Texto decorativo esquina inferior derecha -->
+      <p class="hero__deco-texto" aria-hidden="true">Diseño industrial / hecho a mano</p>
+
+      <!-- Indicador de scroll: línea vertical pulsante -->
+      <div class="hero__scroll" aria-hidden="true">
+        <span class="hero__scroll-linea"></span>
+      </div>
+
+    </section>
+
+    <!-- ============================================================
+         NOSOTROS
+    ============================================================ -->
+    <section class="nosotros" id="nosotros" aria-labelledby="nosotros-titulo">
+      <div class="contenedor nosotros__contenido">
+
+        <!-- ——— Top Zone: editorial headline ——— -->
+        <div class="nosotros__top">
+
+          <p class="nosotros__etiqueta animar-entrada">
+            <span class="nosotros__etiqueta-linea" aria-hidden="true"></span>
+            Quiénes somos
+          </p>
+
+          <h2 class="nosotros__titulo animar-entrada" id="nosotros-titulo">
+            Fabricamos con precisión,
+            <em>entregamos con orgullo</em>
+          </h2>
+
+          <span class="nosotros__divisor animar-entrada" aria-hidden="true"></span>
+
+          <p class="nosotros__descripcion animar-entrada">
+            Desde Ocotlán, Jalisco, transformamos acero en piezas que unen
+            técnica artesanal con precisión industrial.
+            Cada mueble nace aquí, pensado para durar décadas.
+          </p>
+
+        </div>
+
+        <!-- ——— Bottom Zone: 3-column values grid ——— -->
+        <ul class="nosotros__pilares" role="list">
+
+          <li class="nosotros__pilar animar-entrada">
+            <span class="nosotros__pilar-num" aria-hidden="true">01</span>
+            <strong class="nosotros__pilar-nombre">Precisión</strong>
+            <p class="nosotros__pilar-desc">Cortes y soldaduras al milímetro, sin margen de error.</p>
+          </li>
+
+          <li class="nosotros__pilar animar-entrada">
+            <span class="nosotros__pilar-num" aria-hidden="true">02</span>
+            <strong class="nosotros__pilar-nombre">Durabilidad</strong>
+            <p class="nosotros__pilar-desc">Materiales que resisten el paso del tiempo y el uso diario.</p>
+          </li>
+
+          <li class="nosotros__pilar animar-entrada">
+            <span class="nosotros__pilar-num" aria-hidden="true">03</span>
+            <strong class="nosotros__pilar-nombre">Diseño a medida</strong>
+            <p class="nosotros__pilar-desc">Cada pieza nace de tu visión, adaptada a tu espacio.</p>
+          </li>
+
+        </ul>
+
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PRODUCTOS
+    ============================================================ -->
+    <section class="productos" id="productos" aria-labelledby="productos-titulo">
+      <div class="contenedor">
+
+        <div class="productos__encabezado">
+          <p class="productos__etiqueta animar-entrada">
+            <span class="productos__etiqueta-linea" aria-hidden="true"></span>
+            Lo que fabricamos
+          </p>
+          <h2 class="productos__titulo animar-entrada" id="productos-titulo">
+            Nuestros productos
+          </h2>
+          <span class="productos__divisor animar-entrada" aria-hidden="true"></span>
+        </div>
+
+        <ul class="productos__grid animar-entrada" role="list">
+
+          <li class="producto-tarjeta">
+            <div class="producto-tarjeta__imagen">
+              <img
+                src="assets/producto-librero.jpg"
+                alt="Librero y estante industrial de metal fabricado por MEDEISA"
+                class="producto-tarjeta__img"
+                loading="lazy"
+                width="480"
+                height="360"
+              />
+            </div>
+            <div class="producto-tarjeta__cuerpo">
+              <span class="producto-tarjeta__acento" aria-hidden="true"></span>
+              <h3 class="producto-tarjeta__nombre">Libreros / Estantes industriales</h3>
+              <a
+                class="btn btn--rojo producto-tarjeta__btn"
+                href="https://wa.me/523921236728?text=Hola%2C%20me%20gustar%C3%ADa%20cotizar%20un%20librero%20o%20estante%20industrial."
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Cotizar
+              </a>
+            </div>
+          </li>
+
+          <li class="producto-tarjeta">
+            <div class="producto-tarjeta__imagen">
+              <img
+                src="assets/producto-mesa.jpg"
+                alt="Mesa de centro y auxiliar de acero industrial fabricada por MEDEISA"
+                class="producto-tarjeta__img"
+                loading="lazy"
+                width="480"
+                height="360"
+              />
+            </div>
+            <div class="producto-tarjeta__cuerpo">
+              <span class="producto-tarjeta__acento" aria-hidden="true"></span>
+              <h3 class="producto-tarjeta__nombre">Mesas de centro y auxiliares</h3>
+              <a
+                class="btn btn--rojo producto-tarjeta__btn"
+                href="https://wa.me/523921236728?text=Hola%2C%20me%20gustar%C3%ADa%20cotizar%20una%20mesa%20de%20centro%20o%20auxiliar."
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Cotizar
+              </a>
+            </div>
+          </li>
+
+          <li class="producto-tarjeta">
+            <div class="producto-tarjeta__imagen">
+              <img
+                src="assets/producto-escritorio.jpg"
+                alt="Escritorio industrial de metal fabricado a medida por MEDEISA"
+                class="producto-tarjeta__img"
+                loading="lazy"
+                width="480"
+                height="360"
+              />
+            </div>
+            <div class="producto-tarjeta__cuerpo">
+              <span class="producto-tarjeta__acento" aria-hidden="true"></span>
+              <h3 class="producto-tarjeta__nombre">Escritorios</h3>
+              <a
+                class="btn btn--rojo producto-tarjeta__btn"
+                href="https://wa.me/523921236728?text=Hola%2C%20me%20gustar%C3%ADa%20cotizar%20un%20escritorio."
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Cotizar
+              </a>
+            </div>
+          </li>
+
+          <li class="producto-tarjeta">
+            <div class="producto-tarjeta__imagen">
+              <img
+                src="assets/producto-comedor.jpg"
+                alt="Sillas y muebles de comedor metálicos industriales fabricados por MEDEISA"
+                class="producto-tarjeta__img"
+                loading="lazy"
+                width="480"
+                height="360"
+              />
+            </div>
+            <div class="producto-tarjeta__cuerpo">
+              <span class="producto-tarjeta__acento" aria-hidden="true"></span>
+              <h3 class="producto-tarjeta__nombre">Sillas y sillones</h3>
+              <a
+                class="btn btn--rojo producto-tarjeta__btn"
+                href="https://wa.me/523921236728?text=Hola%2C%20me%20gustar%C3%ADa%20cotizar%20sillas%20o%20sillones."
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Cotizar
+              </a>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         EXPO MUEBLES OCOTLÁN
+    ============================================================ -->
+    <section class="galeria" id="galeria" aria-labelledby="galeria-titulo">
+      <div class="contenedor">
+
+        <!-- Encabezado — mismo patrón editorial del sitio -->
+        <div class="galeria__encabezado">
+          <p class="galeria__etiqueta animar-entrada">
+            <span class="galeria__etiqueta-linea" aria-hidden="true"></span>
+            Presencia anual
+          </p>
+          <h2 class="galeria__titulo animar-entrada" id="galeria-titulo">Expo Muebles Ocotlán</h2>
+          <span class="galeria__divisor animar-entrada" aria-hidden="true"></span>
+        </div>
+
+        <!-- Intro: descripción + badge de edición -->
+        <div class="expo__intro animar-entrada">
+          <p class="expo__desc">
+            Cada año MEDEISA tiene presencia en Expo Muebles Ocotlán,
+            la feria más importante de la región. Presentamos nuestro catálogo de
+            muebles industriales fabricados a mano y conectamos con clientes de todo Jalisco.
+          </p>
+          <div class="expo__badge" aria-label="Edición 2026">
+            <span class="expo__badge-label">Edición</span>
+            <span class="expo__badge-year">2026</span>
+            <span class="expo__badge-acento" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <!-- Grilla de fotos del evento -->
+        <div class="expo__grid animar-entrada" role="list" aria-label="Fotografías del evento">
+
+          <figure class="expo__foto" role="listitem">
+            <img src="assets/expo-1.jpeg"
+                 alt="Stand de MEDEISA en Expo Muebles Ocotlán"
+                 loading="lazy">
+          </figure>
+
+          <figure class="expo__foto" role="listitem">
+            <img src="assets/expo-2.jpeg"
+                 alt="Productos MEDEISA exhibidos en Expo Muebles Ocotlán"
+                 loading="lazy">
+          </figure>
+
+        </div>
+
+        <!-- Franja de datos confirmados del evento -->
+        <div class="expo__datos animar-entrada">
+          <div class="expo__dato">
+            <span class="expo__dato-label">Evento</span>
+            <span class="expo__dato-valor">Expo Muebles Ocotlán</span>
+          </div>
+          <div class="expo__dato">
+            <span class="expo__dato-label">Participación</span>
+            <span class="expo__dato-valor">Anual · Febrero</span>
+          </div>
+          <div class="expo__dato">
+            <span class="expo__dato-label">Sede</span>
+            <span class="expo__dato-valor">Ocotlán, Jalisco</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CONTACTO
+    ============================================================ -->
+    <section class="contacto" id="contacto" aria-labelledby="contacto-titulo">
+      <div class="contenedor contacto__contenedor">
+
+        <!-- Columna izquierda: información -->
+        <div class="contacto__info">
+
+          <p class="contacto__etiqueta animar-entrada">
+  <span class="contacto__etiqueta-linea" aria-hidden="true"></span>
+  Encuéntranos
+</p>
+          <h2 class="contacto__titulo animar-entrada" id="contacto-titulo">
+            Contáctanos
+          </h2>
+          <p class="contacto__subtexto animar-entrada">
+            Estamos listos para cotizar tu proyecto. Escríbenos o visítanos.
+          </p>
+
+          <!-- Datos de contacto -->
+          <ul class="contacto__datos" role="list">
+
+            <!-- Teléfono -->
+            <li class="contacto__dato animar-entrada">
+              <span class="contacto__dato-icono" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.6a16 16 0 0 0 6.29 6.29l1.66-1.84a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+              </span>
+              <div class="contacto__dato-contenido">
+                <span class="contacto__dato-label">Teléfono</span>
+                <a class="contacto__dato-valor contacto__dato-valor--link" href="tel:+523921236728">
+                  392 123 6728
+                </a>
+              </div>
+            </li>
+
+            <!-- Horario -->
+            <li class="contacto__dato animar-entrada">
+              <span class="contacto__dato-icono" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </span>
+              <div class="contacto__dato-contenido">
+                <span class="contacto__dato-label">Horario</span>
+                <span class="contacto__dato-valor">Lunes a Viernes · 8:00 am – 4:00 pm</span>
+              </div>
+            </li>
+
+            <!-- Dirección -->
+            <li class="contacto__dato animar-entrada">
+              <span class="contacto__dato-icono" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+              </span>
+              <div class="contacto__dato-contenido">
+                <span class="contacto__dato-label">Dirección</span>
+                <span class="contacto__dato-valor">
+                  Carr. Santa Rosa La Barca KM 49+200,<br />
+                  Cuitzeo, Poncitlán, Jalisco CP 45965
+                </span>
+              </div>
+            </li>
+
+          </ul>
+
+          <!-- Botón WhatsApp -->
+          <a
+            class="btn btn--rojo contacto__btn-whatsapp animar-entrada"
+            href="https://wa.me/523921236728?text=Hola%2C%20me%20gustar%C3%ADa%20cotizar%20un%20producto%20de%20MEDEISA."
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+            </svg>
+            <span class="contacto__btn-texto">Escribir por WhatsApp</span>
+          </a>
+
+          <!-- Redes sociales -->
+          <div class="contacto__redes animar-entrada">
+            <span class="contacto__redes-label">Síguenos</span>
+            <div class="contacto__redes-links">
+
+              <a
+                class="contacto__red"
+                href="https://instagram.com/medeisa.muebles"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram de MEDEISA (@medeisa.muebles)"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                </svg>
+                @medeisa.muebles
+              </a>
+
+              <a
+                class="contacto__red"
+                href="https://www.facebook.com/profile.php?id=61580795922902"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook de MEDEISA"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+                Medeisa
+              </a>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Columna derecha: mapa -->
+        <div class="contacto__mapa-wrap animar-entrada">
+          <iframe
+            class="contacto__mapa"
+            title="Ubicación de MEDEISA en Google Maps"
+            sandbox="allow-scripts allow-same-origin allow-popups"
+            src="https://maps.google.com/maps?q=Carr.+Santa+Rosa+La+Barca+KM+49%2B200,+Cuitzeo,+Poncitl%C3%A1n,+Jalisco+CP+45965,+M%C3%A9xico&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+          ></iframe>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="pie-pagina">
+    <div class="contenedor pie-pagina__contenedor">
+
+      <!-- Logo + tagline -->
+      <div class="pie-pagina__marca">
+        <a href="#contenido-principal" aria-label="MEDEISA — Ir al inicio" class="pie-pagina__logo-link">
+          <img
+            src="assets/logo.PNG"
+            alt="MEDEISA"
+            class="pie-pagina__logo"
+            width="120"
+            height="40"
+            loading="lazy"
+          />
+        </a>
+        <p class="pie-pagina__tagline">Transformamos acero en estilo</p>
+      </div>
+
+      <!-- Links de navegación -->
+      <nav class="pie-pagina__nav" aria-label="Navegación del pie de página">
+        <ul role="list">
+          <li><a class="pie-pagina__link" href="#nosotros">Nosotros</a></li>
+          <li><a class="pie-pagina__link" href="#productos">Productos</a></li>
+          <li><a class="pie-pagina__link" href="#galeria">Expo</a></li>
+          <li><a class="pie-pagina__link" href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <!-- Redes sociales -->
+      <div class="pie-pagina__redes">
+        <a
+          class="pie-pagina__red"
+          href="https://instagram.com/medeisa.muebles"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram de MEDEISA"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+          </svg>
+        </a>
+        <a
+          class="pie-pagina__red"
+          href="https://www.facebook.com/profile.php?id=61580795922902"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Facebook de MEDEISA"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+          </svg>
+        </a>
+        <a
+          class="pie-pagina__red"
+          href="https://wa.me/523921236728"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="WhatsApp de MEDEISA"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Barra inferior de créditos -->
+    <div class="pie-pagina__creditos">
+      <div class="contenedor pie-pagina__creditos-contenedor">
+        <p>&copy; <span id="anio-actual"></span> MEDEISA S.A. de C.V. <span class="pie-pagina__creditos-derechos">Todos los derechos reservados.</span></p>
+        <p class="pie-pagina__creditos-ciudad">Ocotlán, Jalisco, México</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       BOTÓN WHATSAPP FLOTANTE
+  ============================================================ -->
+  <a
+    class="whatsapp-flotante"
+    href="https://wa.me/523921236728?text=Hola%2C%20me%20gustar%C3%ADa%20cotizar%20un%20producto%20de%20MEDEISA."
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Contactar por WhatsApp"
+  >
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+    </svg>
+  </a>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>
