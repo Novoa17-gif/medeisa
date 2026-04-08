@@ -1015,6 +1015,123 @@ button {
   transition-delay: 0.42s;
 }
 
+/* ——— Afiliación AFAMO — card editorial prominente ——— */
+.nosotros__afamo {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  transition-delay: 0.48s;
+}
+
+/* Card: contenedor clickeable completo */
+.nosotros__afamo-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xl);
+  padding: clamp(1.5rem, 3vw, 2rem) clamp(1.5rem, 3vw, 2.5rem);
+  border: 1px solid rgba(28, 28, 28, 0.15);
+  background-color: rgba(255, 255, 255, 0.45);
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.35s ease, box-shadow 0.35s ease, background-color 0.35s ease;
+}
+
+.nosotros__afamo-card:hover {
+  border-color: rgba(28, 28, 28, 0.3);
+  background-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 6px 32px rgba(0, 0, 0, 0.07);
+}
+
+/* Columna izquierda: etiqueta + nombre AFAMO */
+.nosotros__afamo-izq {
+  flex-shrink: 0;
+  padding-right: clamp(1.5rem, 3vw, 2.5rem);
+  border-right: 1px solid rgba(28, 28, 28, 0.1);
+}
+
+.nosotros__afamo-etiqueta {
+  display: block;
+  font-family: var(--font-jost);
+  font-size: 0.6rem;
+  font-weight: var(--fw-light);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-rojo);
+  margin-bottom: 0.6rem;
+}
+
+/* "AFAMO" en serif grande — el elemento protagonista */
+.nosotros__afamo-nombre {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-weight: 300;
+  color: #1C1C1C;
+  letter-spacing: 0.06em;
+  line-height: 1;
+}
+
+/* Columna derecha: descripción + lema */
+.nosotros__afamo-der {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.nosotros__afamo-desc {
+  font-family: var(--font-jost);
+  font-size: 0.82rem;
+  font-weight: var(--fw-regular);
+  color: #3A3A38;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+
+/* Lema oficial de AFAMO en serif itálica */
+.nosotros__afamo-lema {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 1rem;
+  color: #767672;
+  letter-spacing: 0.01em;
+}
+
+/* Línea roja que desliza al hover desde la izquierda */
+.nosotros__afamo-acento {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-rojo);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.45s ease;
+}
+
+.nosotros__afamo-card:hover .nosotros__afamo-acento {
+  transform: scaleX(1);
+}
+
+/* ——— Mobile ——— */
+@media (max-width: 600px) {
+  .nosotros__afamo-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-lg);
+  }
+
+  .nosotros__afamo-izq {
+    padding-right: 0;
+    border-right: none;
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid rgba(28, 28, 28, 0.1);
+    width: 100%;
+  }
+}
+
+
 /* ——— Mobile tweaks ——— */
 @media (max-width: 767px) {
   .nosotros__titulo {

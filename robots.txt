@@ -1,0 +1,102 @@
+# ══════════════════════════════════════════════════════
+#  MEDEISA — medeisamuebles.com
+#  robots.txt · Estándar 2026
+#  Ref: https://www.robotstxt.org/robotstxt.html
+# ══════════════════════════════════════════════════════
+
+# ──────────────────────────────────────────────────────
+# Motores de búsqueda legítimos — Acceso total
+# ──────────────────────────────────────────────────────
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /assets/
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+# ──────────────────────────────────────────────────────
+# Bots de IA — Bloqueados (protección de contenido
+# e imágenes propias de MEDEISA)
+# ──────────────────────────────────────────────────────
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: OAI-SearchBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: YouBot
+Disallow: /
+
+# ──────────────────────────────────────────────────────
+# Bots de scraping / spam — Bloqueados
+# ──────────────────────────────────────────────────────
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+# ──────────────────────────────────────────────────────
+# Regla global de respaldo
+# ──────────────────────────────────────────────────────
+User-agent: *
+Allow: /
+Crawl-delay: 10
+
+# ──────────────────────────────────────────────────────
+# Sitemap
+# ──────────────────────────────────────────────────────
+Sitemap: https://www.medeisamuebles.com/sitemap.xml
