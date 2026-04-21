@@ -1132,6 +1132,331 @@ button {
 }
 
 
+/* ——— Sub-etiqueta: versión compacta para bloques internos ——— */
+.nosotros__sub-etiqueta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  font-family: var(--font-jost);
+  font-size: 0.65rem;
+  font-weight: var(--fw-light);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-rojo);
+  margin-bottom: var(--space-xl);
+}
+
+.nosotros__sub-etiqueta-linea {
+  display: block;
+  width: 24px;
+  height: 1px;
+  background-color: var(--color-rojo);
+  flex-shrink: 0;
+}
+
+/* ——— Separador horizontal entre bloques internos ——— */
+.nosotros__sep {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.08);
+  margin-block: clamp(3rem, 6vw, 4.5rem);
+}
+
+/* ——— Enfoque: grid de 6 keywords ——— */
+.nosotros__enfoque {
+  margin-bottom: 0;
+}
+
+.nosotros__enfoque-lista {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.nosotros__enfoque-item {
+  padding: clamp(1rem, 2.5vw, 1.5rem) clamp(var(--space-md), 2vw, var(--space-xl));
+  font-family: var(--font-jost);
+  font-size: 0.7rem;
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #1C1C1C;
+  text-align: center;
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+  transition: color var(--transicion-hover);
+}
+
+/* Las 3 del top tienen borde inferior en mobile (separador de fila) */
+.nosotros__enfoque-lista li:nth-child(-n+3) {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.nosotros__enfoque-item:nth-child(3n) {
+  border-right: none;
+}
+
+/* Línea roja de hover deslizante por abajo */
+.nosotros__enfoque-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--color-rojo);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.35s ease;
+}
+
+.nosotros__enfoque-item:hover {
+  color: var(--color-rojo);
+}
+
+.nosotros__enfoque-item:hover::after {
+  transform: scaleX(1);
+}
+
+@media (min-width: 768px) {
+  .nosotros__enfoque-lista {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  /* En desktop: todos en una fila, no hay separador inferior */
+  .nosotros__enfoque-lista li:nth-child(-n+3) {
+    border-bottom: none;
+  }
+
+  /* Separador derecho entre todos salvo el último */
+  .nosotros__enfoque-item:nth-child(3n) {
+    border-right: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .nosotros__enfoque-item:last-child {
+    border-right: none;
+  }
+}
+
+/* ——— Misión y Visión ——— */
+.nosotros__mv {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.nosotros__mv-texto {
+  font-family: var(--font-jost);
+  font-size: var(--text-base);
+  font-weight: var(--fw-regular);
+  line-height: 1.85;
+  color: #3A3A38;
+  max-width: 50ch;
+}
+
+@media (max-width: 767px) {
+  .nosotros__mision {
+    padding-bottom: clamp(2rem, 4vw, 3rem);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+}
+
+@media (min-width: 768px) {
+  .nosotros__mv {
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  .nosotros__mision {
+    padding-right: clamp(2rem, 5vw, 4rem);
+  }
+
+  .nosotros__vision {
+    padding-left: clamp(2rem, 5vw, 4rem);
+    border-left: 1px solid rgba(0, 0, 0, 0.08);
+  }
+}
+
+/* ——— Valores: wrap del bloque ——— */
+.nosotros__valores-wrap {
+  margin-bottom: 0;
+}
+
+/* Override: 5 columnas para los valores en desktop */
+@media (min-width: 768px) {
+  .nosotros__valores-wrap .nosotros__pilares {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* ——— Valores: BounceCard effect (adaptado de shadcnblocks/gallery6) ——— */
+
+/* Gap entre cards en todos los breakpoints */
+.nosotros__valores-wrap .nosotros__pilares {
+  gap: var(--space-md);
+}
+
+/* Card base: resetea lógica de separadores, aplica borde completo propio */
+.nosotros__valores-wrap .nosotros__pilar,
+.nosotros__valores-wrap .nosotros__pilar:not(:first-child) {
+  background-color: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(28, 28, 28, 0.1);
+  padding: var(--space-xl) var(--space-lg);
+  border-top: 1px solid rgba(28, 28, 28, 0.1);
+  padding-top: var(--space-xl);
+  transition:
+    transform 250ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 250ms ease;
+  will-change: transform;
+}
+
+/* Hover: escala + rotación sutil — el "bounce" de la card */
+.nosotros__valores-wrap .nosotros__pilar:hover {
+  transform: scale(0.95) rotate(-1deg);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.08);
+}
+
+/* El número rojo actúa como el panel interno que sube al hover */
+.nosotros__valores-wrap .nosotros__pilar-num {
+  transition: transform 250ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.nosotros__valores-wrap .nosotros__pilar:hover .nosotros__pilar-num {
+  transform: translateY(-6px);
+}
+
+/* Desktop: padding uniforme para todas las cards (anula first/last-child sin padding) */
+@media (min-width: 768px) {
+  .nosotros__valores-wrap .nosotros__pilar,
+  .nosotros__valores-wrap .nosotros__pilar:not(:first-child),
+  .nosotros__valores-wrap .nosotros__pilar:first-child,
+  .nosotros__valores-wrap .nosotros__pilar:last-child {
+    padding-inline: var(--space-lg);
+    border-left: 1px solid rgba(28, 28, 28, 0.1);
+    padding-top: var(--space-xl);
+  }
+}
+
+/* ——— BounceCard en cards de afiliación (AFAMO + CIMEJAL) ——— */
+.nosotros__afil-cards .nosotros__afamo-card {
+  transition:
+    transform 250ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 250ms ease,
+    border-color 0.35s ease,
+    background-color 0.35s ease;
+  will-change: transform;
+}
+
+.nosotros__afil-cards .nosotros__afamo-card:hover {
+  transform: scale(0.95) rotate(-1deg);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.08);
+}
+
+/* El nombre (AFAMO / CIMEJAL) sube al hover como el panel interno */
+.nosotros__afil-cards .nosotros__afamo-nombre {
+  transition: transform 250ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.nosotros__afil-cards .nosotros__afamo-card:hover .nosotros__afamo-nombre {
+  transform: translateY(-6px);
+}
+
+/* ——— Grid de 2 cards de afiliación ——— */
+.nosotros__afil-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+@media (min-width: 640px) {
+  .nosotros__afil-cards {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+  }
+}
+
+/* ——— Afiliaciones: dos logos clickeables ——— */
+.nosotros__afiliaciones {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.nosotros__afiliaciones-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+@media (min-width: 480px) {
+  .nosotros__afiliaciones-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.nosotros__afil-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  padding: clamp(1.5rem, 3vw, 2rem) clamp(1.5rem, 3vw, 2.5rem);
+  background-color: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(28, 28, 28, 0.12);
+  overflow: hidden;
+  text-decoration: none;
+  transition: border-color 0.35s ease, background-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.nosotros__afil-card:hover {
+  border-color: rgba(28, 28, 28, 0.28);
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+.nosotros__afil-logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 72px;
+}
+
+.nosotros__afil-logo {
+  max-height: 72px;
+  max-width: 180px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.nosotros__afil-etiqueta {
+  display: block;
+  font-family: var(--font-jost);
+  font-size: 0.6rem;
+  font-weight: var(--fw-light);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-rojo);
+}
+
+/* Línea roja deslizante al hover */
+.nosotros__afil-acento {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-rojo);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.45s ease;
+}
+
+.nosotros__afil-card:hover .nosotros__afil-acento {
+  transform: scaleX(1);
+}
+
 /* ——— Mobile tweaks ——— */
 @media (max-width: 767px) {
   .nosotros__titulo {
@@ -1874,6 +2199,7 @@ button {
 .pie-pagina__red:hover {
   color: var(--color-rojo);
 }
+
 
 /* Barra de créditos */
 .pie-pagina__creditos {
