@@ -146,7 +146,7 @@ const TRADUCCIONES = {
     'nav.contacto':   'Contacto',
     'nav.cotizar':    'Cotizar por WhatsApp',
     /* Hero */
-    'hero.eyebrow':   'Ocotlán, Jalisco — Desde 2018',
+    'hero.eyebrow':   'Ocotlán, Jalisco',
     'hero.titulo-l1': 'Acero',
     'hero.titulo-l2': 'en estilo',
     'hero.subtitulo': 'Mueblería industrial a medida',
@@ -217,7 +217,7 @@ const TRADUCCIONES = {
     'nav.contacto':   'Contact',
     'nav.cotizar':    'Quote via WhatsApp',
     /* Hero */
-    'hero.eyebrow':   'Ocotlán, Jalisco — Since 2018',
+    'hero.eyebrow':   'Ocotlán, Jalisco',
     'hero.titulo-l1': 'Steel',
     'hero.titulo-l2': 'in style',
     'hero.subtitulo': 'Custom industrial furniture',

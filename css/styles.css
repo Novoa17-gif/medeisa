@@ -1185,7 +1185,8 @@ button {
   text-align: center;
   border-right: 1px solid rgba(0, 0, 0, 0.08);
   position: relative;
-  overflow: hidden;
+  white-space: normal;
+  word-break: break-word;
   transition: color var(--transicion-hover);
 }
 
