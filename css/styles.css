@@ -1775,22 +1775,23 @@ button {
   margin-top: var(--space-md);
 }
 
-/* ---- Grilla de 2 fotos ----
-   Móvil:   1 columna apilada
-   Tablet+: 2 columnas iguales, altura generosa
+/* ---- Imagen panorámica de 1 foto ----
+   Móvil:   altura compacta
+   Tablet+: altura cinematográfica
 */
 .expo__grid {
   display: grid;
-  gap: 6px;
+  gap: 0;
   grid-template-columns: 1fr;
-  grid-auto-rows: 300px;
+  grid-auto-rows: 340px;
   transition-delay: 0.18s;
+  border-radius: 2px;
+  overflow: hidden;
 }
 
 @media (min-width: 640px) {
   .expo__grid {
-    grid-template-columns: 1fr 1fr;
-    grid-auto-rows: 440px;
+    grid-auto-rows: 520px;
   }
 }
 
