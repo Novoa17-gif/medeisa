@@ -5,6 +5,10 @@
 
 'use strict';
 
+/* Marca que JS está activo — el CSS usa .js .animar-entrada para el
+   estado oculto inicial, así si el JS falla el contenido no queda invisible */
+document.documentElement.classList.add('js');
+
 
 /* ================================================================
    CONFIGURACIÓN GLOBAL
@@ -142,9 +146,8 @@ const TRADUCCIONES = {
     /* Nav */
     'nav.nosotros':   'Nosotros',
     'nav.productos':  'Productos',
-    'nav.galeria':    'Galería',
+    'nav.galeria':    'Expo',
     'nav.contacto':   'Contacto',
-    'nav.cotizar':    'Cotizar por WhatsApp',
     /* Hero */
     'hero.eyebrow':   'Ocotlán, Jalisco',
     'hero.titulo-l1': 'Acero',
@@ -158,12 +161,12 @@ const TRADUCCIONES = {
     'nos.titulo':            'Fabricamos con propósito,\n            <em>crecemos con identidad</em>',
     'nos.desc':              'Desde Ocotlán, Jalisco, transformamos acero en piezas que unen técnica artesanal con precisión industrial. Cada mueble nace aquí, pensado para durar décadas.',
     'nos.enfoque-etiqueta':  '<span class="nosotros__sub-etiqueta-linea" aria-hidden="true"></span>Enfoque',
-    'nos.enf1':              'Calidad',
-    'nos.enf2':              'Diseño',
-    'nos.enf3':              'Clientes',
-    'nos.enf4':              'Crecimiento',
-    'nos.enf5':              'Identidad',
-    'nos.enf6':              'Marca',
+    'nos.enf1':              'Acero calibrado',
+    'nos.enf2':              'Soldadura a mano',
+    'nos.enf3':              'Fabricación a medida',
+    'nos.enf4':              'Acabados al horno',
+    'nos.enf5':              'Diseño propio',
+    'nos.enf6':              'Entrega en todo Jalisco',
     'nos.mision-etiqueta':   '<span class="nosotros__sub-etiqueta-linea" aria-hidden="true"></span>Misión',
     'nos.mision-texto':      'Nuestra misión es impulsar la activación económica de la empresa, nuestros colaboradores y socios comerciales, a través de la fabricación de muebles con calidad en procesos, productos y talento humano. Nos enfocamos en generar bienestar en nuestra comunidad, operando de manera responsable y sostenible con el medio ambiente.',
     'nos.vision-etiqueta':   '<span class="nosotros__sub-etiqueta-linea" aria-hidden="true"></span>Visión',
@@ -186,9 +189,10 @@ const TRADUCCIONES = {
     'prod.sillas':   'Sillas y sillones',
     'prod.cotizar':  'Cotizar',
     /* Galería / Expo */
-    'gal.etiqueta':  '<span class="galeria__etiqueta-linea" aria-hidden="true"></span>Presencia anual',
+    'gal.etiqueta':  '<span class="galeria__etiqueta-linea" aria-hidden="true"></span>Presencia semestral',
     'gal.titulo':    'Expo Muebles Ocotlán',
-    'expo.desc':     'Cada año MEDEISA tiene presencia en Expo Muebles Ocotlán, la feria más importante de la región. Presentamos nuestro catálogo de muebles industriales fabricados a mano y conectamos con clientes de todo Jalisco.',
+    'expo.desc':     'Dos veces al año, en febrero y agosto, MEDEISA tiene presencia en Expo Muebles Ocotlán, la feria más importante de la región. Presentamos nuestro catálogo de muebles industriales fabricados a mano y conectamos con clientes de todo Jalisco.',
+    'expo.badge':    'Edición',
     /* Contacto */
     'cnt.etiqueta':  '<span class="contacto__etiqueta-linea" aria-hidden="true"></span>Encuéntranos',
     'cnt.titulo':    'Contáctanos',
@@ -198,12 +202,13 @@ const TRADUCCIONES = {
     'cnt.lbl.dir':   'Dirección',
     'cnt.val.hor':   'Lunes a Viernes · 8:00 am – 4:00 pm',
     'cnt.btn-wa':    'Escribir por WhatsApp',
+    'cnt.mapa-link': 'Ver en Maps&nbsp;→',
     'cnt.redes':     'Síguenos',
     /* Footer */
     'pie.tagline':   'Transformamos acero en estilo',
     'pie.nosotros':  'Nosotros',
     'pie.productos': 'Productos',
-    'pie.galeria':   'Galería',
+    'pie.galeria':   'Expo',
     'pie.contacto':  'Contacto',
     'pie.derechos':  'Todos los derechos reservados.',
     'pie.ciudad':    'Ocotlán, Jalisco, México',
@@ -213,9 +218,8 @@ const TRADUCCIONES = {
     /* Nav */
     'nav.nosotros':   'About',
     'nav.productos':  'Products',
-    'nav.galeria':    'Gallery',
+    'nav.galeria':    'Expo',
     'nav.contacto':   'Contact',
-    'nav.cotizar':    'Quote via WhatsApp',
     /* Hero */
     'hero.eyebrow':   'Ocotlán, Jalisco',
     'hero.titulo-l1': 'Steel',
@@ -229,12 +233,12 @@ const TRADUCCIONES = {
     'nos.titulo':            'We build with purpose,\n            <em>we grow with identity</em>',
     'nos.desc':              'From Ocotlán, Jalisco, we transform steel into pieces that unite artisan technique with industrial precision. Each piece is born here, built to last decades.',
     'nos.enfoque-etiqueta':  '<span class="nosotros__sub-etiqueta-linea" aria-hidden="true"></span>Focus',
-    'nos.enf1':              'Quality',
-    'nos.enf2':              'Design',
-    'nos.enf3':              'Clients',
-    'nos.enf4':              'Growth',
-    'nos.enf5':              'Identity',
-    'nos.enf6':              'Brand',
+    'nos.enf1':              'Calibrated steel',
+    'nos.enf2':              'Hand welding',
+    'nos.enf3':              'Made to measure',
+    'nos.enf4':              'Oven-cured finishes',
+    'nos.enf5':              'In-house design',
+    'nos.enf6':              'Delivery across Jalisco',
     'nos.mision-etiqueta':   '<span class="nosotros__sub-etiqueta-linea" aria-hidden="true"></span>Mission',
     'nos.mision-texto':      'Our mission is to drive the economic activation of the company, our collaborators and commercial partners, through the manufacturing of furniture with quality in processes, products and human talent. We focus on generating wellbeing in our community, operating responsibly and sustainably with the environment.',
     'nos.vision-etiqueta':   '<span class="nosotros__sub-etiqueta-linea" aria-hidden="true"></span>Vision',
@@ -257,9 +261,10 @@ const TRADUCCIONES = {
     'prod.sillas':   'Chairs & Armchairs',
     'prod.cotizar':  'Quote',
     /* Galería / Expo */
-    'gal.etiqueta':  '<span class="galeria__etiqueta-linea" aria-hidden="true"></span>Annual presence',
+    'gal.etiqueta':  '<span class="galeria__etiqueta-linea" aria-hidden="true"></span>Biannual presence',
     'gal.titulo':    'Expo Muebles Ocotlán',
-    'expo.desc':     'Every year MEDEISA participates in Expo Muebles Ocotlán, the most important trade fair in the region. We showcase our catalog of handcrafted industrial furniture and connect with clients from all over Jalisco.',
+    'expo.desc':     'Twice a year, in February and August, MEDEISA participates in Expo Muebles Ocotlán, the most important trade fair in the region. We showcase our catalog of handcrafted industrial furniture and connect with clients from all over Jalisco.',
+    'expo.badge':    'Edition',
     /* Contacto */
     'cnt.etiqueta':  '<span class="contacto__etiqueta-linea" aria-hidden="true"></span>Find us',
     'cnt.titulo':    'Contact us',
@@ -269,12 +274,13 @@ const TRADUCCIONES = {
     'cnt.lbl.dir':   'Address',
     'cnt.val.hor':   'Monday to Friday · 8:00 am – 4:00 pm',
     'cnt.btn-wa':    'Message on WhatsApp',
+    'cnt.mapa-link': 'View on Maps&nbsp;→',
     'cnt.redes':     'Follow us',
     /* Footer */
     'pie.tagline':   'We transform steel into style',
     'pie.nosotros':  'About',
     'pie.productos': 'Products',
-    'pie.galeria':   'Gallery',
+    'pie.galeria':   'Expo',
     'pie.contacto':  'Contact',
     'pie.derechos':  'All rights reserved.',
     'pie.ciudad':    'Ocotlán, Jalisco, Mexico',
@@ -288,7 +294,6 @@ const MAPA_TRADUCCION = [
   { sel: '.nav__link[href="#productos"]', clave: 'nav.productos' },
   { sel: '.nav__link[href="#galeria"]',   clave: 'nav.galeria'  },
   { sel: '.nav__link[href="#contacto"]',  clave: 'nav.contacto' },
-  { sel: '.nav__btn-whatsapp',            clave: 'nav.cotizar'  },
   /* Hero */
   { sel: '.hero__eyebrow',      clave: 'hero.eyebrow',   html: true },
   { sel: '.hero__titulo-linea1',clave: 'hero.titulo-l1'           },
@@ -333,6 +338,7 @@ const MAPA_TRADUCCION = [
   { sel: '.galeria__etiqueta', clave: 'gal.etiqueta', html: true  },
   { sel: '.galeria__titulo',   clave: 'gal.titulo'                },
   { sel: '.expo__desc',        clave: 'expo.desc'                 },
+  { sel: '.expo__badge-label', clave: 'expo.badge'                },
   /* Contacto */
   { sel: '.contacto__etiqueta', clave: 'cnt.etiqueta', html: true },
   { sel: '.contacto__titulo',   clave: 'cnt.titulo'               },
@@ -342,6 +348,7 @@ const MAPA_TRADUCCION = [
   { sel: '.contacto__datos .contacto__dato:nth-child(3) .contacto__dato-label', clave: 'cnt.lbl.dir' },
   { sel: '.contacto__datos .contacto__dato:nth-child(2) .contacto__dato-valor', clave: 'cnt.val.hor' },
   { sel: '.contacto__btn-texto',  clave: 'cnt.btn-wa'             },
+  { sel: '.contacto__mapa-link',  clave: 'cnt.mapa-link', html: true },
   { sel: '.contacto__redes-label',clave: 'cnt.redes'              },
   /* Footer */
   { sel: '.pie-pagina__tagline',           clave: 'pie.tagline'   },
@@ -386,6 +393,8 @@ const iniciarIdioma = (recalcularCursor) => {
     btnEN.classList.toggle('activo', lang === 'en');
     btnES.setAttribute('aria-pressed', String(lang === 'es'));
     btnEN.setAttribute('aria-pressed', String(lang === 'en'));
+    btnES.setAttribute('aria-label', lang === 'es' ? 'Español (idioma actual)' : 'Español');
+    btnEN.setAttribute('aria-label', lang === 'en' ? 'English (current language)' : 'English');
 
     /* Persistir elección */
     localStorage.setItem('medeisa-lang', lang);
@@ -429,11 +438,15 @@ const iniciarNavPill = () => {
 
   let linkActivo = links[0];
 
-  /* Mueve y redimensiona el cursor sobre el elemento dado */
+  /* Mueve y redimensiona el cursor sobre el elemento dado.
+     Usa translateX para la posición (anima en el compositor) y
+     width para el tamaño: scaleX distorsionaría el border-radius
+     del pill al estirar sus esquinas. */
   const moverCursor = (el) => {
     const pillRect = pill.getBoundingClientRect();
     const elRect   = el.getBoundingClientRect();
-    cursor.style.left  = `${elRect.left - pillRect.left}px`;
+    const x = elRect.left - pillRect.left;
+    cursor.style.transform = `translateX(${x}px)`;
     cursor.style.width = `${elRect.width}px`;
   };
 
@@ -481,18 +494,6 @@ const iniciarNavPill = () => {
 
 
 /* ================================================================
-   BOTÓN WHATSAPP FLOTANTE
-   Visible en todas las secciones, incluido el Hero.
-================================================================ */
-const iniciarWhatsappFlotante = () => {
-  const btn = document.querySelector('.whatsapp-flotante');
-  if (!btn) return;
-
-  btn.classList.add('visible');
-};
-
-
-/* ================================================================
    FOOTER — Año dinámico en los créditos
 ================================================================ */
 const iniciarFooter = () => {
@@ -510,6 +511,5 @@ document.addEventListener('DOMContentLoaded', () => {
   iniciarIdioma(recalcularCursor);
   iniciarHero();
   iniciarAnimacionesEntrada();
-  iniciarWhatsappFlotante();
   iniciarFooter();
 });

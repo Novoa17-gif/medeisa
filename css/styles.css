@@ -11,24 +11,21 @@
   /* Colores */
   --color-negro:    #0a0a0a;
   --color-rojo:     #F11E24;
+  --color-rojo-texto: #c0001f;
   --color-blanco:   #F5F5F5;
   --color-gris:     #1a1a1a;
   --color-gris-mid: #444444;
   --color-gris-claro: #888888;
 
   /* Tipografía — escala fluida con clamp() */
-  --font-base: 'Montserrat', sans-serif;
+  --font-base: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
 
-  --text-sm:   clamp(0.75rem,  1.5vw, 0.875rem);
-  --text-base: clamp(0.875rem, 2vw,   1rem);
-  --text-lg:   clamp(1rem,     2.5vw, 1.125rem);
-  --text-xl:   clamp(1.125rem, 3vw,   1.375rem);
-  --text-2xl:  clamp(1.375rem, 4vw,   1.875rem);
-  --text-3xl:  clamp(1.875rem, 5vw,   2.75rem);
-  --text-4xl:  clamp(2.5rem,   7vw,   4rem);
+  --text-xs:   clamp(0.6875rem, 0.65rem + 0.2vw, 0.75rem);
+  --text-sm:   clamp(0.75rem,  0.7rem + 0.25vw, 0.875rem);
+  --text-base: clamp(0.875rem, 0.8rem + 0.4vw, 1rem);
 
-  --font-serif: 'Cormorant Garamond', serif;
-  --font-jost:  'Jost', sans-serif;
+  --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-jost:  'Jost', 'Avenir Next', 'Segoe UI', system-ui, sans-serif;
 
   /* Pesos tipográficos */
   --fw-ultralight: 200;
@@ -52,21 +49,26 @@
 
   /* Bordes y radios */
   --radio-sm: 4px;
-  --radio-md: 8px;
-  --radio-lg: 16px;
 
   /* Transiciones */
   --transicion-hover:    0.3s ease;
   --transicion-entrada:  0.6s ease;
 
   /* Sombras */
-  --sombra-suave: 0 4px 24px rgba(0, 0, 0, 0.3);
   --sombra-fuerte: 0 8px 40px rgba(0, 0, 0, 0.6);
+
+  /* Escala de elevación — sombras de tarjetas y superficies */
+  --elev-reposo:    0 2px 12px rgba(0, 0, 0, 0.06);
+  --elev-hover:     0 12px 40px rgba(0, 0, 0, 0.12);
+  --elev-superficie: 0 8px 32px rgba(0, 0, 0, 0.10);
 
   /* Colores semánticos del sistema — uso en secciones */
   --color-hueso:        #E3E1DE;   /* fondo secciones claras */
   --color-texto-oscuro: #1C1C1C;   /* texto sobre fondo hueso */
   --color-texto-calido: #f5f4f0;   /* texto sobre fondo oscuro */
+
+  /* Layout */
+  --altura-nav: 4.5rem;
 }
 
 
@@ -84,7 +86,7 @@
 html {
   scroll-behavior: smooth;
   font-size: 100%;
-  scroll-padding-top: 72px; /* compensa el nav fijo en anchor links */
+  scroll-padding-top: var(--altura-nav); /* compensa el nav fijo en anchor links */
 }
 
 body {
@@ -128,8 +130,16 @@ button {
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+    transition-delay: 0s !important;
+  }
+
+  .animar-entrada {
+    transform: none !important;
+    transition: opacity 200ms ease !important;
+  }
+
+  html {
+    scroll-behavior: auto;
   }
 }
 
@@ -149,7 +159,6 @@ button {
   font-weight: var(--fw-semibold);
   border-radius: var(--radio-sm);
   z-index: 9999;
-  transition: top var(--transicion-hover);
 }
 
 .skip-link:focus {
@@ -188,8 +197,10 @@ button {
   border-width: 0;
 }
 
-/* Clase base para animaciones de entrada (activadas por JS) */
-.animar-entrada {
+/* Clase base para animaciones de entrada (activadas por JS).
+   El estado oculto inicial solo aplica si JS cargó (clase .js en <html>),
+   para que la página no quede invisible si el script falla. */
+.js .animar-entrada {
   opacity: 0;
   transform: translateY(24px);
   transition:
@@ -231,25 +242,40 @@ button {
 }
 
 .btn--rojo {
-  background-color: var(--color-rojo);
+  background-color: var(--color-rojo-texto);
   color: var(--color-blanco);
   border: 2px solid var(--color-rojo);
 }
 
 .btn--rojo:hover {
   background-color: transparent;
-  color: var(--color-rojo);
+  color: var(--color-rojo-texto);
 }
 
-.btn--borde {
-  background-color: transparent;
-  color: var(--color-blanco);
-  border: 2px solid var(--color-blanco);
+/* ================================================================
+   Estados de presión (feedback en pointer-down)
+   La transición corta pisa las transiciones de 0.3s de la base,
+   para que el feedback sea instantáneo al tocar/hacer clic.
+================================================================ */
+.btn:active,
+.producto-tarjeta__btn:active,
+.contacto__btn-whatsapp:active,
+.hero__cta-ghost:active {
+  transform: scale(0.97);
+  transition: transform 100ms ease-out;
 }
 
-.btn--borde:hover {
-  background-color: var(--color-blanco);
-  color: var(--color-negro);
+.nav__link:active,
+.contacto__red:active,
+.pie-pagina__red:active,
+.hero__idioma-btn:active {
+  transform: scale(0.95);
+  transition: transform 100ms ease-out;
+}
+
+.whatsapp-flotante:active {
+  transform: scale(0.92);
+  transition: transform 100ms ease-out;
 }
 
 /* ================================================================
@@ -262,20 +288,47 @@ button {
   right: 0;
   z-index: 100;
   background-color: transparent;
-  transition: background-color var(--transicion-hover), box-shadow var(--transicion-hover);
+  transition: background-color var(--transicion-hover);
+}
+
+/* Sombra en pseudo-elemento aparte: transiciona opacity (compositor)
+   en vez de box-shadow (pintado) sobre el header fijo. */
+.encabezado::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  transition: opacity var(--transicion-hover);
+  pointer-events: none;
+  z-index: -1;
 }
 
 /* Estado al hacer scroll — activado por JS */
 .encabezado.scrolled {
-  background-color: var(--color-negro);
-  box-shadow: var(--sombra-fuerte);
+  background-color: rgba(10, 10, 10, 0.72);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.encabezado.scrolled::after {
+  opacity: 1;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .encabezado.scrolled {
+    background-color: var(--color-negro);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
 }
 
 .nav {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  height: 72px;
+  height: var(--altura-nav);
 }
 
 /* Logo */
@@ -306,8 +359,17 @@ button {
   border: 1px solid rgba(245, 245, 245, 0.18);
   border-radius: 50px;
   padding: 4px;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background-color: rgba(10, 10, 10, 0.35);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .nav__pill {
+    background-color: rgba(10, 10, 10, 0.9);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
 }
 
 /* Cursor deslizante — traduce el motion.div spring de Framer Motion
@@ -316,20 +378,20 @@ button {
   position: absolute;
   top: 4px;
   left: 0;
+  width: 0;
   height: calc(100% - 8px);
   border-radius: 50px;
   background-color: rgba(245, 245, 245, 0.12);
   pointer-events: none;
   z-index: 0;
-  will-change: left, width;
-  transition:
-    left 0.38s cubic-bezier(0.34, 1.56, 0.64, 1),
-    width 0.38s cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: transform;
+  transition: transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1),
+              width 0.38s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .nav__cursor {
-    transition: left 0.15s ease, width 0.15s ease;
+    transition: transform 0.15s ease, width 0.15s ease !important;
   }
 }
 
@@ -364,22 +426,24 @@ button {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 0;
+  width: 100%;
   height: 2px;
   background-color: var(--color-rojo);
-  transition: width var(--transicion-hover);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--transicion-hover);
 }
 
 .nav__link:hover::after,
 .nav__link.activo::after {
-  width: 100%;
+  transform: scaleX(1);
 }
 
 /* Selector de idioma en nav — siempre visible */
 .nav__idioma {
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: 8px;
   margin-left: auto; /* en flex: empuja al extremo derecho */
   margin-right: var(--space-sm);
 }
@@ -390,6 +454,10 @@ button {
   flex-direction: column;
   gap: 5px;
   padding: var(--space-sm);
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
 }
 
 .nav__hamburguesa-linea {
@@ -419,18 +487,31 @@ button {
    position: fixed lo ancla justo debajo del nav. */
 .nav__menu-movil {
   position: fixed;
-  top: 72px;
+  top: var(--altura-nav);
   left: 0;
   right: 0;
   z-index: 99;
-  background-color: var(--color-gris);
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease;
+  background-color: rgba(26, 26, 26, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition: grid-template-rows 0.3s ease, visibility 0s 0.3s;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .nav__menu-movil {
+    background-color: var(--color-gris);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
 }
 
 .nav__menu-movil.abierto {
-  max-height: 400px;
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition: grid-template-rows 0.3s ease;
 }
 
 .nav__menu-movil-links {
@@ -439,6 +520,8 @@ button {
   align-items: center;
   gap: var(--space-md);
   padding: var(--space-lg);
+  overflow: hidden;
+  min-height: 0;
 }
 
 /* Desktop: grid para centrar el pill, ocultar hamburguesa */
@@ -531,7 +614,7 @@ button {
 .hero__contenido {
   position: relative;
   z-index: 2;
-  padding-block-start: calc(72px + var(--space-2xl));
+  padding-block-start: calc(var(--altura-nav) + var(--space-2xl));
   padding-block-end: var(--space-xl);
 }
 
@@ -547,10 +630,10 @@ button {
   gap: var(--space-md);
   font-family: var(--font-jost);
   font-size: var(--text-sm);
-  font-weight: var(--fw-ultralight);
+  font-weight: var(--fw-regular);
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(245, 245, 245, 0.5);
+  color: rgba(245, 245, 245, 0.85);
   margin-bottom: var(--space-md);
   transition-delay: 0s;
 }
@@ -602,13 +685,13 @@ button {
 }
 
 .hero__titulo-linea1 {
-  font-size: clamp(3.5rem, 8.5vw, 4.75rem);
+  font-size: clamp(3.5rem, 1.55rem + 4vw, 4.75rem);
   display: block;
 }
 
 .hero__titulo-linea2 {
-  font-size: clamp(3.5rem, 8.5vw, 4.75rem);
-  color: rgba(245, 245, 245, 0.48);
+  font-size: clamp(3.5rem, 1.55rem + 4vw, 4.75rem);
+  color: rgba(245, 245, 245, 0.75);
   display: block;
   line-height: 1.08;
 }
@@ -687,10 +770,12 @@ button {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 0;
+  width: 100%;
   height: 1px;
   background-color: var(--color-blanco);
-  transition: width 0.4s ease;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.4s ease;
 }
 
 .hero__cta-ghost:hover {
@@ -698,22 +783,22 @@ button {
 }
 
 .hero__cta-ghost:hover::after {
-  width: 100%;
+  transform: scaleX(1);
 }
 
 /* ---- Selector de idioma (botones reutilizados en .nav__idioma) ---- */
 .hero__idioma-btn {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 3px;
-  font-size: 1.35rem;
+  justify-content: center;
   line-height: 1;
   background: none;
   border: none;
   cursor: pointer;
   padding: 4px 6px;
   border-radius: 4px;
+  min-width: 44px;
+  min-height: 44px;
   opacity: 0.35;
   filter: grayscale(30%);
   transition: opacity 0.25s ease, filter 0.25s ease, transform 0.2s ease;
@@ -721,7 +806,7 @@ button {
 
 .hero__idioma-label {
   font-family: var(--font-jost);
-  font-size: 0.55rem;
+  font-size: 0.75rem;
   font-weight: var(--fw-medium);
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -775,7 +860,7 @@ button {
   bottom: var(--space-xl);
   left: 50%;
   transform: translateX(-50%);
-  z-index: 4; /* encima de la cuña diagonal */
+  z-index: 4;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -784,9 +869,9 @@ button {
 .hero__scroll-linea {
   width: 1px;
   height: 56px;
-  background: linear-gradient(to bottom, rgba(28, 28, 28, 0.65), transparent);
+  background: linear-gradient(to bottom, rgba(245, 245, 245, 0.6), transparent);
   transform-origin: top center;
-  animation: pulso-linea 2.6s ease-in-out infinite;
+  animation: pulso-linea 2.6s ease-in-out 3;
 }
 
 @keyframes pulso-linea {
@@ -816,7 +901,7 @@ button {
   }
 
   .hero__contenido {
-    padding-block-start: calc(72px + var(--space-md));
+    padding-block-start: calc(var(--altura-nav) + var(--space-md));
     padding-block-end: var(--space-lg);
   }
 
@@ -858,7 +943,7 @@ button {
    Typography-driven, no image. Warm bone palette, generous space.
 ================================================================ */
 .nosotros {
-  background-color: #E3E1DE;
+  background-color: var(--color-hueso);
   position: relative;
   overflow: hidden;
   z-index: 1;
@@ -885,11 +970,11 @@ button {
   align-items: center;
   gap: var(--space-md);
   font-family: var(--font-jost);
-  font-size: 0.7rem;
+  font-size: var(--text-xs);
   font-weight: var(--fw-light);
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--color-rojo);
+  color: var(--color-rojo-texto);
   margin-bottom: clamp(var(--space-xl), 4vw, var(--space-2xl));
   transition-delay: 0.05s;
 }
@@ -905,11 +990,11 @@ button {
 /* Título: large serif, editorial headline — max 60% width */
 .nosotros__titulo {
   font-family: var(--font-serif);
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-size: clamp(2.5rem, 0.9rem + 4.5vw, 4.5rem);
   font-weight: 300;
   letter-spacing: -0.01em;
   line-height: 1.12;
-  color: #1C1C1C;
+  color: var(--color-texto-oscuro);
   max-width: 60%;
   margin-bottom: clamp(var(--space-xl), 4vw, var(--space-2xl));
   transition-delay: 0.12s;
@@ -920,7 +1005,7 @@ button {
   font-style: italic;
   font-weight: 300;
   display: block;
-  color: #1C1C1C;
+  color: var(--color-texto-oscuro);
 }
 
 /* Horizontal divider line below headline */
@@ -944,25 +1029,26 @@ button {
   transition-delay: 0.24s;
 }
 
-/* ——— Bottom Zone: 3-column values grid ——— */
+/* ——— Bottom Zone: values grid (5 columns on desktop) ——— */
 .nosotros__pilares {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-2xl);
   margin-bottom: clamp(4rem, 8vw, 6rem);
-  transition-delay: 0.32s;
 }
 
 .nosotros__pilar {
   padding-block: var(--space-lg) 0;
 }
 
-/* Stagger escalonado para cada columna: 01 → 02 → 03 */
-.nosotros__pilar:nth-child(1) { transition-delay: 0.06s; }
-.nosotros__pilar:nth-child(2) { transition-delay: 0.2s;  }
-.nosotros__pilar:nth-child(3) { transition-delay: 0.34s; }
+/* Stagger escalonado para cada columna: 01 → 05 */
+.nosotros__pilar:nth-child(1) { transition-delay: 0.08s; }
+.nosotros__pilar:nth-child(2) { transition-delay: 0.16s; }
+.nosotros__pilar:nth-child(3) { transition-delay: 0.24s; }
+.nosotros__pilar:nth-child(4) { transition-delay: 0.32s; }
+.nosotros__pilar:nth-child(5) { transition-delay: 0.40s; }
 
-/* Vertical separator lines — applied via border on col 2 and 3 */
+/* Vertical separator lines — applied via border on columns 2–5 */
 /* Mobile: top border instead */
 .nosotros__pilar:not(:first-child) {
   border-top: 1px solid rgba(0, 0, 0, 0.08);
@@ -989,30 +1075,8 @@ button {
   font-weight: var(--fw-medium);
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #1C1C1C;
+  color: var(--color-texto-oscuro);
   margin-bottom: var(--space-md);
-}
-
-/* Value description: warm gray */
-.nosotros__pilar-desc {
-  font-family: var(--font-jost);
-  font-size: 0.85rem;
-  font-weight: var(--fw-regular);
-  line-height: 1.7;
-  color: #3A3A38;
-  max-width: 32ch;
-}
-
-/* ——— Bottom credential ——— */
-.nosotros__credencial {
-  text-align: center;
-  font-family: var(--font-jost);
-  font-size: 0.7rem;
-  font-weight: var(--fw-ultralight);
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: #767672;
-  transition-delay: 0.42s;
 }
 
 /* ——— Afiliación AFAMO — card editorial prominente ——— */
@@ -1035,10 +1099,12 @@ button {
   transition: border-color 0.35s ease, box-shadow 0.35s ease, background-color 0.35s ease;
 }
 
-.nosotros__afamo-card:hover {
-  border-color: rgba(28, 28, 28, 0.3);
-  background-color: rgba(255, 255, 255, 0.7);
-  box-shadow: 0 6px 32px rgba(0, 0, 0, 0.07);
+@media (hover: hover) and (pointer: fine) {
+  .nosotros__afamo-card:hover {
+    border-color: rgba(28, 28, 28, 0.3);
+    background-color: rgba(255, 255, 255, 0.7);
+    box-shadow: var(--elev-hover);
+  }
 }
 
 /* Columna izquierda: etiqueta + nombre AFAMO */
@@ -1051,11 +1117,11 @@ button {
 .nosotros__afamo-etiqueta {
   display: block;
   font-family: var(--font-jost);
-  font-size: 0.6rem;
+  font-size: 0.6875rem;
   font-weight: var(--fw-light);
-  letter-spacing: 0.3em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--color-rojo);
+  color: var(--color-rojo-texto);
   margin-bottom: 0.6rem;
 }
 
@@ -1065,7 +1131,7 @@ button {
   font-family: var(--font-serif);
   font-size: clamp(2rem, 3.5vw, 2.75rem);
   font-weight: 300;
-  color: #1C1C1C;
+  color: var(--color-texto-oscuro);
   letter-spacing: 0.06em;
   line-height: 1;
 }
@@ -1110,8 +1176,10 @@ button {
   transition: transform 0.45s ease;
 }
 
-.nosotros__afamo-card:hover .nosotros__afamo-acento {
-  transform: scaleX(1);
+@media (hover: hover) and (pointer: fine) {
+  .nosotros__afamo-card:hover .nosotros__afamo-acento {
+    transform: scaleX(1);
+  }
 }
 
 /* ——— Mobile ——— */
@@ -1142,7 +1210,7 @@ button {
   font-weight: var(--fw-light);
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--color-rojo);
+  color: var(--color-rojo-texto);
   margin-bottom: var(--space-xl);
 }
 
@@ -1181,7 +1249,7 @@ button {
   font-weight: var(--fw-medium);
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #1C1C1C;
+  color: var(--color-texto-oscuro);
   text-align: center;
   border-right: 1px solid rgba(0, 0, 0, 0.08);
   position: relative;
@@ -1217,8 +1285,10 @@ button {
   color: var(--color-rojo);
 }
 
-.nosotros__enfoque-item:hover::after {
-  transform: scaleX(1);
+@media (hover: hover) and (pointer: fine) {
+  .nosotros__enfoque-item:hover::after {
+    transform: scaleX(1);
+  }
 }
 
 @media (min-width: 768px) {
@@ -1292,7 +1362,7 @@ button {
   }
 }
 
-/* ——— Valores: BounceCard effect (adaptado de shadcnblocks/gallery6) ——— */
+/* ——— Valores: hover de elevación ——— */
 
 /* Gap entre cards en todos los breakpoints */
 .nosotros__valores-wrap .nosotros__pilares {
@@ -1308,15 +1378,16 @@ button {
   border-top: 1px solid rgba(28, 28, 28, 0.1);
   padding-top: var(--space-xl);
   transition:
-    transform 250ms cubic-bezier(0.34, 1.56, 0.64, 1),
-    box-shadow 250ms ease;
-  will-change: transform;
+    transform 250ms ease-out,
+    box-shadow 250ms ease-out;
 }
 
-/* Hover: escala + rotación sutil — el "bounce" de la card */
-.nosotros__valores-wrap .nosotros__pilar:hover {
-  transform: scale(0.95) rotate(-1deg);
-  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.08);
+/* Hover: elevación */
+@media (hover: hover) and (pointer: fine) {
+  .nosotros__valores-wrap .nosotros__pilar:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--elev-hover);
+  }
 }
 
 /* El número rojo actúa como el panel interno que sube al hover */
@@ -1324,8 +1395,10 @@ button {
   transition: transform 250ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.nosotros__valores-wrap .nosotros__pilar:hover .nosotros__pilar-num {
-  transform: translateY(-6px);
+@media (hover: hover) and (pointer: fine) {
+  .nosotros__valores-wrap .nosotros__pilar:hover .nosotros__pilar-num {
+    transform: translateY(-6px);
+  }
 }
 
 /* Desktop: padding uniforme para todas las cards (anula first/last-child sin padding) */
@@ -1340,19 +1413,20 @@ button {
   }
 }
 
-/* ——— BounceCard en cards de afiliación (AFAMO + CIMEJAL) ——— */
+/* ——— Hover de elevación en cards de afiliación (AFAMO + CIMEJAL) ——— */
 .nosotros__afil-cards .nosotros__afamo-card {
   transition:
-    transform 250ms cubic-bezier(0.34, 1.56, 0.64, 1),
-    box-shadow 250ms ease,
+    transform 250ms ease-out,
+    box-shadow 250ms ease-out,
     border-color 0.35s ease,
     background-color 0.35s ease;
-  will-change: transform;
 }
 
-.nosotros__afil-cards .nosotros__afamo-card:hover {
-  transform: scale(0.95) rotate(-1deg);
-  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.08);
+@media (hover: hover) and (pointer: fine) {
+  .nosotros__afil-cards .nosotros__afamo-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--elev-hover);
+  }
 }
 
 /* El nombre (AFAMO / CIMEJAL) sube al hover como el panel interno */
@@ -1360,8 +1434,10 @@ button {
   transition: transform 250ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.nosotros__afil-cards .nosotros__afamo-card:hover .nosotros__afamo-nombre {
-  transform: translateY(-6px);
+@media (hover: hover) and (pointer: fine) {
+  .nosotros__afil-cards .nosotros__afamo-card:hover .nosotros__afamo-nombre {
+    transform: translateY(-6px);
+  }
 }
 
 /* ——— Grid de 2 cards de afiliación ——— */
@@ -1376,86 +1452,6 @@ button {
     grid-template-columns: 1fr 1fr;
     gap: var(--space-lg);
   }
-}
-
-/* ——— Afiliaciones: dos logos clickeables ——— */
-.nosotros__afiliaciones {
-  margin-top: clamp(2.5rem, 5vw, 4rem);
-}
-
-.nosotros__afiliaciones-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-md);
-}
-
-@media (min-width: 480px) {
-  .nosotros__afiliaciones-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-.nosotros__afil-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-md);
-  padding: clamp(1.5rem, 3vw, 2rem) clamp(1.5rem, 3vw, 2.5rem);
-  background-color: rgba(255, 255, 255, 0.55);
-  border: 1px solid rgba(28, 28, 28, 0.12);
-  overflow: hidden;
-  text-decoration: none;
-  transition: border-color 0.35s ease, background-color 0.35s ease, box-shadow 0.35s ease;
-}
-
-.nosotros__afil-card:hover {
-  border-color: rgba(28, 28, 28, 0.28);
-  background-color: rgba(255, 255, 255, 0.8);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
-}
-
-.nosotros__afil-logo-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 72px;
-}
-
-.nosotros__afil-logo {
-  max-height: 72px;
-  max-width: 180px;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-}
-
-.nosotros__afil-etiqueta {
-  display: block;
-  font-family: var(--font-jost);
-  font-size: 0.6rem;
-  font-weight: var(--fw-light);
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--color-rojo);
-}
-
-/* Línea roja deslizante al hover */
-.nosotros__afil-acento {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: var(--color-rojo);
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform 0.45s ease;
-}
-
-.nosotros__afil-card:hover .nosotros__afil-acento {
-  transform: scaleX(1);
 }
 
 /* ——— Mobile tweaks ——— */
@@ -1496,10 +1492,10 @@ button {
 .productos__etiqueta {
   font-family: var(--font-jost);
   font-size: var(--text-sm);
-  font-weight: var(--fw-ultralight);
+  font-weight: var(--fw-regular);
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(245, 245, 245, 0.5);
+  color: rgba(245, 245, 245, 0.85);
   margin-bottom: var(--space-md);
   transition-delay: 0.05s;
 }
@@ -1508,8 +1504,9 @@ button {
 .productos__titulo,
 .galeria__titulo {
   font-family: var(--font-serif);
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-size: clamp(2.5rem, 2rem + 2.5vw, 3.5rem);
   font-weight: 300;
+  line-height: 1.1;
   letter-spacing: -0.01em;
   color: var(--color-blanco);
   transition-delay: 0.1s;
@@ -1521,7 +1518,7 @@ button {
 ================================================================ */
 .productos {
   padding-block: var(--space-3xl);
-  background-color: #E3E1DE;
+  background-color: var(--color-hueso);
 }
 
 .productos__encabezado {
@@ -1534,8 +1531,8 @@ button {
   display: flex;
   align-items: center;
   gap: var(--space-md);
-  color: var(--color-rojo);
-  font-size: 0.7rem;
+  color: var(--color-rojo-texto);
+  font-size: var(--text-xs);
   letter-spacing: 0.3em;
 }
 
@@ -1549,7 +1546,7 @@ button {
 
 /* Título: override para fondo claro */
 .productos__titulo {
-  color: #1C1C1C;
+  color: var(--color-texto-oscuro);
   margin-top: var(--space-md);
   margin-bottom: 0;
 }
@@ -1592,13 +1589,15 @@ button {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--elev-reposo);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-.producto-tarjeta:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+@media (hover: hover) and (pointer: fine) {
+  .producto-tarjeta:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--elev-hover);
+  }
 }
 
 /* Imagen: altura fija, sin overlay */
@@ -1618,8 +1617,10 @@ button {
   transition: transform 0.6s ease;
 }
 
-.producto-tarjeta:hover .producto-tarjeta__img {
-  transform: scale(1.03);
+@media (hover: hover) and (pointer: fine) {
+  .producto-tarjeta:hover .producto-tarjeta__img {
+    transform: scale(1.03);
+  }
 }
 
 /* Cuerpo de la tarjeta */
@@ -1643,7 +1644,7 @@ button {
 .producto-tarjeta__nombre {
   font-size: 1rem;
   font-weight: var(--fw-medium);
-  color: #1C1C1C;
+  color: var(--color-texto-oscuro);
   letter-spacing: 0.02em;
   line-height: 1.4;
   margin-bottom: var(--space-lg);
@@ -1661,9 +1662,9 @@ button {
 
 /* Override hover en contexto de tarjeta: rojo oscuro, sin transparencia */
 .producto-tarjeta .btn--rojo:hover {
-  background-color: #c0001f;
+  background-color: #a80019;
   color: var(--color-blanco);
-  border-color: #c0001f;
+  border-color: #a80019;
   transform: none;
 }
 
@@ -1673,7 +1674,7 @@ button {
 ================================================================ */
 .galeria {
   padding-block: var(--space-3xl);
-  background-color: #E3E1DE;
+  background-color: var(--color-hueso);
 }
 
 /* Encabezado — patrón editorial compartido */
@@ -1687,8 +1688,8 @@ button {
   align-items: center;
   justify-content: center;
   gap: var(--space-md);
-  color: var(--color-rojo);
-  font-size: 0.7rem;
+  color: var(--color-rojo-texto);
+  font-size: var(--text-xs);
   letter-spacing: 0.3em;
   text-transform: uppercase;
 }
@@ -1703,10 +1704,11 @@ button {
 
 .galeria__titulo {
   font-family: var(--font-serif);
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-size: clamp(2.5rem, 2rem + 2.5vw, 3.5rem);
   font-weight: 300;
+  line-height: 1.1;
   letter-spacing: -0.01em;
-  color: #1C1C1C;
+  color: var(--color-texto-oscuro);
   transition-delay: 0.1s;
 }
 
@@ -1750,9 +1752,9 @@ button {
 .expo__badge-label {
   display: block;
   font-family: var(--font-jost);
-  font-size: 0.6rem;
+  font-size: 0.6875rem;
   font-weight: var(--fw-regular);
-  letter-spacing: 0.3em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: #777773;
   margin-bottom: var(--space-xs);
@@ -1763,7 +1765,7 @@ button {
   font-family: var(--font-serif);
   font-size: 2.5rem;
   font-weight: 300;
-  color: #1C1C1C;
+  color: var(--color-texto-oscuro);
   line-height: 1;
 }
 
@@ -1779,40 +1781,20 @@ button {
    Móvil:   altura compacta
    Tablet+: altura cinematográfica
 */
-.expo__grid {
-  display: grid;
-  gap: 0;
-  grid-template-columns: 1fr;
-  grid-auto-rows: 340px;
-  transition-delay: 0.18s;
-  border-radius: 2px;
-  overflow: hidden;
-}
-
-@media (min-width: 640px) {
-  .expo__grid {
-    grid-auto-rows: 520px;
-  }
-}
-
-/* Celda base */
 .expo__foto {
   position: relative;
   overflow: hidden;
+  height: 340px;
+  border-radius: 2px;
+  transition-delay: 0.18s;
 }
 
-/* Ícono y texto placeholder — desaparece cuando haya una imagen real */
-.expo__foto:not(:has(img))::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 24 24' fill='none' stroke='rgba(28,28,28,0.2)' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z'/%3E%3Ccircle cx='12' cy='13' r='4'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: 28px 28px;
+@media (min-width: 640px) {
+  .expo__foto {
+    height: 520px;
+  }
 }
 
-/* Imagen real: cubre todo el contenedor */
 .expo__foto img {
   position: absolute;
   inset: 0;
@@ -1822,8 +1804,10 @@ button {
   transition: transform 0.5s ease;
 }
 
-.expo__foto:hover img {
-  transform: scale(1.03);
+@media (hover: hover) and (pointer: fine) {
+  .expo__foto:hover img {
+    transform: scale(1.03);
+  }
 }
 
 /* ---- Franja de datos del evento ---- */
@@ -1855,7 +1839,7 @@ button {
 .expo__dato-label {
   display: block;
   font-family: var(--font-jost);
-  font-size: 0.6rem;
+  font-size: 0.6875rem;
   font-weight: var(--fw-regular);
   letter-spacing: 0.25em;
   text-transform: uppercase;
@@ -1867,7 +1851,7 @@ button {
   font-family: var(--font-jost);
   font-size: 0.9rem;
   font-weight: var(--fw-regular);
-  color: #1C1C1C;
+  color: var(--color-texto-oscuro);
 }
 
 /* Móvil: franja de datos en columna */
@@ -1908,7 +1892,7 @@ button {
 .contacto {
   padding-block-start: var(--space-3xl);
   padding-block-end: clamp(1.5rem, 3vw, 2.5rem);
-  background-color: #E3E1DE;
+  background-color: var(--color-hueso);
 }
 
 .contacto__contenedor {
@@ -1930,8 +1914,8 @@ button {
   display: flex;
   align-items: center;
   gap: var(--space-md);
-  color: var(--color-rojo);
-  font-size: 0.7rem;
+  color: var(--color-rojo-texto);
+  font-size: var(--text-xs);
   letter-spacing: 0.3em;
 }
 
@@ -1946,9 +1930,11 @@ button {
 /* Heading: serif, oscuro sobre fondo hueso */
 .contacto__titulo {
   font-family: var(--font-serif);
-  font-size: clamp(2.5rem, 4vw, 3.5rem);
-  color: #1C1C1C;
-  font-weight: normal;
+  font-size: clamp(2.5rem, 2.1rem + 2vw, 3.5rem);
+  color: var(--color-texto-oscuro);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
   margin-top: var(--space-md);
   margin-bottom: var(--space-md);
 }
@@ -2001,7 +1987,7 @@ button {
 .contacto__dato-valor {
   font-size: 0.95rem;
   font-weight: var(--fw-regular);
-  color: #1C1C1C;
+  color: var(--color-texto-oscuro);
   line-height: 1.6;
 }
 
@@ -2030,6 +2016,11 @@ button {
   margin-bottom: var(--space-xl);
   transition-delay: 0.25s;
   border-radius: 2px;
+}
+
+/* Una vez completada la entrada, el hover no debe seguir retrasado */
+.contacto__btn-whatsapp.visible {
+  transition-delay: 0s;
 }
 
 /* Redes sociales */
@@ -2072,8 +2063,8 @@ button {
 }
 
 .contacto__red:hover {
-  color: #1C1C1C;
-  border-color: #1C1C1C;
+  color: var(--color-texto-oscuro);
+  border-color: var(--color-texto-oscuro);
 }
 
 /* Mapa: integración editorial */
@@ -2081,7 +2072,7 @@ button {
   border-radius: 2px;
   overflow: hidden;
   border: 1px solid rgba(28, 28, 28, 0.15);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--elev-superficie);
   transition-delay: 0.15s;
 }
 
@@ -2092,7 +2083,7 @@ button {
   justify-content: space-between;
   gap: var(--space-md);
   padding: 0.9rem 1.25rem;
-  background-color: #1C1C1C;
+  background-color: var(--color-texto-oscuro);
   border-bottom: 2px solid var(--color-rojo);
 }
 
@@ -2131,7 +2122,7 @@ button {
 .contacto__mapa-dir {
   font-family: var(--font-jost);
   font-size: 0.68rem;
-  color: rgba(245, 245, 245, 0.5);
+  color: rgba(245, 245, 245, 0.62);
   letter-spacing: 0.02em;
   white-space: nowrap;
   overflow: hidden;
@@ -2141,13 +2132,15 @@ button {
 .contacto__mapa-link {
   flex-shrink: 0;
   font-family: var(--font-jost);
-  font-size: 0.62rem;
-  font-weight: var(--fw-regular);
+  font-size: 0.6875rem;
+  font-weight: 500;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: rgba(245, 245, 245, 0.45);
+  color: rgba(245, 245, 245, 0.85);
   white-space: nowrap;
   transition: color var(--transicion-hover);
+  padding: 0.9rem 0.5rem;
+  margin: -0.9rem -0.5rem;
 }
 
 .contacto__mapa-link:hover {
@@ -2166,17 +2159,6 @@ button {
     height: 300px;
   }
 }
-
-/* prefers-reduced-motion */
-@media (prefers-reduced-motion: reduce) {
-  .contacto__dato,
-  .contacto__btn-whatsapp,
-  .contacto__redes,
-  .contacto__mapa-wrap {
-    transition-delay: 0s;
-  }
-}
-
 
 /* ================================================================
    FOOTER
@@ -2290,7 +2272,7 @@ button {
 .pie-pagina__creditos p {
   font-size: 0.68rem;
   font-weight: var(--fw-regular);
-  color: rgba(245, 244, 240, 0.45);
+  color: rgba(245, 244, 240, 0.62);
 }
 
 @media (min-width: 768px) {
@@ -2321,20 +2303,9 @@ button {
   color: #fff;
 
   box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4);
-  opacity: 0;
-  transform: scale(0.8);
-  pointer-events: none;
   transition:
-    opacity var(--transicion-hover),
     transform var(--transicion-hover),
     box-shadow var(--transicion-hover);
-}
-
-/* Visible al hacer scroll — activado por JS */
-.whatsapp-flotante.visible {
-  opacity: 1;
-  transform: scale(1);
-  pointer-events: auto;
 }
 
 .whatsapp-flotante:hover {
@@ -2349,7 +2320,7 @@ button {
   inset: 0;
   border-radius: 50%;
   background-color: #25D366;
-  animation: pulso-whatsapp 2.5s ease-out infinite;
+  animation: pulso-whatsapp 2.5s ease-out 3;
   z-index: -1;
 }
 
