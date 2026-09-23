@@ -301,6 +301,8 @@ const TRADUCCIONES = {
     'hero.reanudar':  'Reanudar animación de fondo',
 
     /* --- DECLARACION --- */
+    'decl.aria':   'Declaración de marca',
+    'decl.texto':  'Hecho a mano en Jalisco, pensado para durar <em>décadas</em>.',
 
     /* --- NOSOTROS --- */
     'nos.etiqueta':          'Quiénes somos',
@@ -326,6 +328,13 @@ const TRADUCCIONES = {
     'nos.afil-etiqueta':     'Afiliaciones',
     'nos.afil1-lbl':         'Socio activo',
     'nos.afil2-lbl':         'Afiliado',
+    'nos.alt':               'Integrante del equipo MEDEISA, de espaldas y con la playera de la marca, acomoda decoración en un librero de acero negro y madera',
+    'nos.afil1-desc':        'Asociación de Fabricantes de Muebles de Ocotlán',
+    'nos.afil1-lema':        'La Capital del Mueble',
+    'nos.afil1-aria':        'AFAMO, Asociación de Fabricantes de Muebles de Ocotlán (abre en nueva pestaña)',
+    'nos.afil2-desc':        'Cámara de la Industria del Mueble de Jalisco',
+    'nos.afil2-lema':        'Jalisco, México',
+    'nos.afil2-aria':        'CIMEJAL, Cámara de la Industria del Mueble de Jalisco (abre en nueva pestaña)',
 
     /* --- CATALOGO --- */
     'prod.etiqueta': 'Lo que fabricamos',
@@ -399,6 +408,8 @@ const TRADUCCIONES = {
     'hero.reanudar':  'Play background animation',
 
     /* --- DECLARACION --- */
+    'decl.aria':   'Brand statement',
+    'decl.texto':  'Handmade in Jalisco, built to last <em>decades</em>.',
 
     /* --- NOSOTROS --- */
     'nos.etiqueta':          'Who we are',
@@ -424,6 +435,13 @@ const TRADUCCIONES = {
     'nos.afil-etiqueta':     'Affiliations',
     'nos.afil1-lbl':         'Active member',
     'nos.afil2-lbl':         'Affiliate',
+    'nos.alt':               'MEDEISA team member, seen from behind in a branded T-shirt, styling decor on a black steel and wood bookshelf',
+    'nos.afil1-desc':        'Association of Furniture Manufacturers of Ocotlán',
+    'nos.afil1-lema':        'The Furniture Capital',
+    'nos.afil1-aria':        'AFAMO, Association of Furniture Manufacturers of Ocotlán (opens in a new tab)',
+    'nos.afil2-desc':        'Jalisco Furniture Industry Chamber',
+    'nos.afil2-lema':        'Jalisco, Mexico',
+    'nos.afil2-aria':        'CIMEJAL, Jalisco Furniture Industry Chamber (opens in a new tab)',
 
     /* --- CATALOGO --- */
     'prod.etiqueta': 'What we make',

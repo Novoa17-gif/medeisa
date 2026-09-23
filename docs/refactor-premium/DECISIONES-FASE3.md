@@ -48,3 +48,17 @@ Una línea por decisión no trivial. Orden de prioridad: SPEC > DESIGN > BLUEPRI
 - Revisión: `.nav__logo` con `justify-self: start`; en el grid desktop el enlace se estiraba a 412px de ancho (área clicable y anillo de foco invisibles a la derecha del logo).
 - Revisión: la clase `.js` se pone con un script inline de una línea en el `<head>`; con solo `main.js` (defer) el primer pintado podía mostrar el nav sólido con CTA (estado sin JS) y luego pasar a transparente.
 - Revisión: el botón de pausa se ancla a la primera pantalla (`top: 100svh - ...`), no al fondo del hero (en vertical el hero puede superar el viewport), y lleva relleno papel: sobre el acero negro del mueble el contorno negro solo daba 1:1.
+
+## Paso 2 - Declaración + Nosotros
+
+- Declaración: texto del SPEC ("Hecho a mano en Jalisco, pensado para durar *décadas*." / "Handmade in Jalisco, built to last *decades*."), 52 caracteres; medido: 3 líneas a la izquierda a 375, 2 líneas centradas a 768, 1024 y 1440. Se añade `text-wrap: balance`.
+- Foto de Nosotros: `assets/images/nosotros.jpg` (998x1271, única fuente real) recortada a 4:5 desde arriba (se pierden 23px del borde inferior) en `assets/nosotros/nosotros.{jpg,webp}` 992x1240 y `nosotros-800w.{jpg,webp}`; no existe original a 1600px, así que no se genera una versión 1600w inflada. Original sin tocar.
+- En móvil y tableta la foto se limita a 28rem (448px) de ancho; a 768 ocupar 696px de ancho x 870 de alto dominaba la sección.
+- Se conservan las claves i18n existentes (`nos.enfoque-etiqueta`, `nos.v1.nom`...) en vez de renombrarlas a los nombres del BLUEPRINT: ya funcionan con `data-i18n` y renombrar solo añade riesgo. Claves nuevas: `decl.aria`, `decl.texto`, `nos.alt`, `nos.afil1-desc|lema|aria`, `nos.afil2-desc|lema|aria`.
+- Subtítulos de bloque (Enfoque, Misión, Visión, Valores, Afiliaciones) pasan a `<h3>` con clase `.etiqueta`: dan estructura de encabezados bajo el h2; las listas usan `aria-labelledby` a su h3 (se quita el `aria-label` fijo en español del enfoque).
+- La etiqueta "Quiénes somos" lleva texto negro: el número 01 ya es la nota roja del grupo (BLUEPRINT 0.3).
+- Se conserva el titular original con tres palabras en cursiva ("crecemos con identidad"); cambiar el texto no es parte del refactor visual.
+- Valores en 5 columnas solo desde 1280px (3 + 2 entre 768 y 1279): a 1024 cada columna mide 174px y "Commitment" (EN) medía 176px y se desbordaba.
+- Afiliaciones: la línea roja de hover/foco es un `::after` escalado desde la izquierda sobre el hairline inferior (sin span extra); `aria-label` con "(abre en nueva pestaña)" en vez de raya.
+- Descripción de la intro en negro (texto principal, es el lead); Misión y Visión en piedra `#5C5854` como indica el BLUEPRINT.
+- Revisión: en 2 columnas (>= 768) cada afiliación lleva su propio hairline superior; el `border-top` de la lista cruzaba el hueco entre columnas mientras los inferiores iban cortados.

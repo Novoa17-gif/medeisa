@@ -235,41 +235,64 @@
     </section>
 
     <!-- ============================================================
+         DECLARACIÓN
+    ============================================================ -->
+    <section class="declaracion" aria-label="Declaración de marca" data-i18n-aria="decl.aria">
+      <div class="contenedor">
+        <p class="declaracion__texto animar-entrada" data-i18n-html="decl.texto">Hecho a mano en Jalisco, pensado para durar <em>décadas</em>.</p>
+      </div>
+    </section>
+
+    <!-- ============================================================
          NOSOTROS
     ============================================================ -->
     <section class="nosotros" id="nosotros" aria-labelledby="nosotros-titulo">
       <div class="contenedor nosotros__contenido">
 
-        <!-- ——— Top Zone: editorial headline ——— -->
-        <div class="nosotros__top">
+        <!-- Intro: cabecera + descripción a la izquierda, foto real a la derecha (desktop) -->
+        <div class="nosotros__intro">
+          <div class="nosotros__texto">
+            <header class="cabecera-seccion animar-entrada">
+              <span class="numero-seccion" aria-hidden="true">01</span>
+              <p class="etiqueta">
+                <span class="etiqueta__linea" aria-hidden="true"></span>
+                <span data-i18n="nos.etiqueta">Quiénes somos</span>
+              </p>
+              <h2 class="titulo-seccion" id="nosotros-titulo" data-i18n-html="nos.titulo">Fabricamos con propósito, <em>crecemos con identidad</em></h2>
+            </header>
 
-          <p class="nosotros__etiqueta animar-entrada">
-            <span class="nosotros__etiqueta-linea" aria-hidden="true"></span>
-            <span data-i18n="nos.etiqueta">Quiénes somos</span>
-          </p>
+            <p class="nosotros__descripcion animar-entrada" style="--orden: 1" data-i18n="nos.desc">Desde Ocotlán, Jalisco, transformamos acero en piezas que unen técnica artesanal con precisión industrial. Cada mueble nace aquí, pensado para durar décadas.</p>
+          </div>
 
-          <h2 class="nosotros__titulo animar-entrada" id="nosotros-titulo" data-i18n-html="nos.titulo">
-            Fabricamos con propósito,
-            <em>crecemos con identidad</em>
-          </h2>
-
-          <span class="nosotros__divisor animar-entrada" aria-hidden="true"></span>
-
-          <p class="nosotros__descripcion animar-entrada" data-i18n="nos.desc">
-            Desde Ocotlán, Jalisco, transformamos acero en piezas que unen
-            técnica artesanal con precisión industrial.
-            Cada mueble nace aquí, pensado para durar décadas.
-          </p>
-
+          <figure class="nosotros__figura marco-imagen animar-entrada" style="--orden: 2">
+            <picture>
+              <source
+                type="image/webp"
+                srcset="assets/nosotros/nosotros-800w.webp 800w, assets/nosotros/nosotros.webp 992w"
+                sizes="(min-width: 1024px) 40vw, (min-width: 768px) 448px, calc(100vw - 40px)"
+              />
+              <img
+                src="assets/nosotros/nosotros-800w.jpg"
+                srcset="assets/nosotros/nosotros-800w.jpg 800w, assets/nosotros/nosotros.jpg 992w"
+                sizes="(min-width: 1024px) 40vw, (min-width: 768px) 448px, calc(100vw - 40px)"
+                width="800"
+                height="1000"
+                loading="lazy"
+                decoding="async"
+                alt="Integrante del equipo MEDEISA, de espaldas y con la playera de la marca, acomoda decoración en un librero de acero negro y madera"
+                data-i18n-alt="nos.alt"
+              />
+            </picture>
+          </figure>
         </div>
 
-        <!-- ——— Enfoque ——— -->
+        <!-- Enfoque: 6 términos entre hairlines -->
         <div class="nosotros__enfoque animar-entrada">
-          <p class="nosotros__sub-etiqueta">
-            <span class="nosotros__sub-etiqueta-linea" aria-hidden="true"></span>
+          <h3 class="etiqueta nosotros__subtitulo" id="nosotros-enfoque">
+            <span class="etiqueta__linea" aria-hidden="true"></span>
             <span data-i18n="nos.enfoque-etiqueta">Enfoque</span>
-          </p>
-          <ul class="nosotros__enfoque-lista" role="list" aria-label="Pilares de enfoque MEDEISA">
+          </h3>
+          <ul class="nosotros__enfoque-lista" role="list" aria-labelledby="nosotros-enfoque">
             <li class="nosotros__enfoque-item" data-i18n="nos.enf1">Acero calibrado</li>
             <li class="nosotros__enfoque-item" data-i18n="nos.enf2">Soldadura a mano</li>
             <li class="nosotros__enfoque-item" data-i18n="nos.enf3">Fabricación a medida</li>
@@ -279,123 +302,93 @@
           </ul>
         </div>
 
-        <span class="nosotros__sep animar-entrada" aria-hidden="true"></span>
-
-        <!-- ——— Misión y Visión ——— -->
-        <div class="nosotros__mv animar-entrada">
-
-          <div class="nosotros__mision">
-            <p class="nosotros__sub-etiqueta">
-              <span class="nosotros__sub-etiqueta-linea" aria-hidden="true"></span>
+        <!-- Misión y Visión: 2 columnas con hairline vertical desde 768px -->
+        <div class="nosotros__mision-vision">
+          <div class="nosotros__columna animar-entrada">
+            <h3 class="etiqueta nosotros__subtitulo">
+              <span class="etiqueta__linea" aria-hidden="true"></span>
               <span data-i18n="nos.mision-etiqueta">Misión</span>
-            </p>
-            <p class="nosotros__mv-texto" data-i18n="nos.mision-texto">
-              Nuestra misión es impulsar la activación económica de la empresa, nuestros
-              colaboradores y socios comerciales, a través de la fabricación de muebles con
-              calidad en procesos, productos y talento humano. Nos enfocamos en generar
-              bienestar en nuestra comunidad, operando de manera responsable y sostenible
-              con el medio ambiente.
-            </p>
+            </h3>
+            <p class="nosotros__parrafo" data-i18n="nos.mision-texto">Nuestra misión es impulsar la activación económica de la empresa, nuestros colaboradores y socios comerciales, a través de la fabricación de muebles con calidad en procesos, productos y talento humano. Nos enfocamos en generar bienestar en nuestra comunidad, operando de manera responsable y sostenible con el medio ambiente.</p>
           </div>
 
-          <div class="nosotros__vision">
-            <p class="nosotros__sub-etiqueta">
-              <span class="nosotros__sub-etiqueta-linea" aria-hidden="true"></span>
+          <div class="nosotros__columna animar-entrada" style="--orden: 1">
+            <h3 class="etiqueta nosotros__subtitulo">
+              <span class="etiqueta__linea" aria-hidden="true"></span>
               <span data-i18n="nos.vision-etiqueta">Visión</span>
-            </p>
-            <p class="nosotros__mv-texto" data-i18n="nos.vision-texto">
-              Ser una empresa líder en la fabricación del mueble, reconocida por nuestro
-              diseño, innovación y compromiso para así expandir nuestra presencia en el
-              mercado nacional e internacional, posicionándonos y consolidándonos como
-              una marca confiable, reconocida y preferida por nuestros clientes.
-            </p>
+            </h3>
+            <p class="nosotros__parrafo" data-i18n="nos.vision-texto">Ser una empresa líder en la fabricación del mueble, reconocida por nuestro diseño, innovación y compromiso para así expandir nuestra presencia en el mercado nacional e internacional, posicionándonos y consolidándonos como una marca confiable, reconocida y preferida por nuestros clientes.</p>
           </div>
-
         </div>
 
-        <span class="nosotros__sep animar-entrada" aria-hidden="true"></span>
-
-        <!-- ——— Valores ——— -->
-        <div class="nosotros__valores-wrap animar-entrada">
-          <p class="nosotros__sub-etiqueta">
-            <span class="nosotros__sub-etiqueta-linea" aria-hidden="true"></span>
+        <!-- Valores: lista ordenada, sin tarjetas -->
+        <div class="nosotros__valores">
+          <h3 class="etiqueta nosotros__subtitulo animar-entrada" id="nosotros-valores">
+            <span class="etiqueta__linea" aria-hidden="true"></span>
             <span data-i18n="nos.valores-etiqueta">Valores</span>
-          </p>
-          <ul class="nosotros__pilares" role="list">
-
-            <li class="nosotros__pilar animar-entrada" style="--orden: 0">
-              <span class="nosotros__pilar-num" aria-hidden="true">01</span>
-              <strong class="nosotros__pilar-nombre" data-i18n="nos.v1.nom">Compromiso</strong>
+          </h3>
+          <ol class="valores" role="list" aria-labelledby="nosotros-valores">
+            <li class="valores__item animar-entrada" style="--orden: 0">
+              <span class="valores__numero" aria-hidden="true">01</span>
+              <span class="valores__nombre" data-i18n="nos.v1.nom">Compromiso</span>
             </li>
-
-            <li class="nosotros__pilar animar-entrada" style="--orden: 1">
-              <span class="nosotros__pilar-num" aria-hidden="true">02</span>
-              <strong class="nosotros__pilar-nombre" data-i18n="nos.v2.nom">Trabajo en equipo</strong>
+            <li class="valores__item animar-entrada" style="--orden: 1">
+              <span class="valores__numero" aria-hidden="true">02</span>
+              <span class="valores__nombre" data-i18n="nos.v2.nom">Trabajo en equipo</span>
             </li>
-
-            <li class="nosotros__pilar animar-entrada" style="--orden: 2">
-              <span class="nosotros__pilar-num" aria-hidden="true">03</span>
-              <strong class="nosotros__pilar-nombre" data-i18n="nos.v3.nom">Autenticidad</strong>
+            <li class="valores__item animar-entrada" style="--orden: 2">
+              <span class="valores__numero" aria-hidden="true">03</span>
+              <span class="valores__nombre" data-i18n="nos.v3.nom">Autenticidad</span>
             </li>
-
-            <li class="nosotros__pilar animar-entrada" style="--orden: 3">
-              <span class="nosotros__pilar-num" aria-hidden="true">04</span>
-              <strong class="nosotros__pilar-nombre" data-i18n="nos.v4.nom">Eficiencia</strong>
+            <li class="valores__item animar-entrada" style="--orden: 3">
+              <span class="valores__numero" aria-hidden="true">04</span>
+              <span class="valores__nombre" data-i18n="nos.v4.nom">Eficiencia</span>
             </li>
-
-            <li class="nosotros__pilar animar-entrada" style="--orden: 3">
-              <span class="nosotros__pilar-num" aria-hidden="true">05</span>
-              <strong class="nosotros__pilar-nombre" data-i18n="nos.v5.nom">Innovación</strong>
+            <li class="valores__item animar-entrada" style="--orden: 3">
+              <span class="valores__numero" aria-hidden="true">05</span>
+              <span class="valores__nombre" data-i18n="nos.v5.nom">Innovación</span>
             </li>
-
-          </ul>
+          </ol>
         </div>
 
-        <!-- ——— Afiliaciones ——— -->
-        <div class="nosotros__afamo animar-entrada">
-          <p class="nosotros__sub-etiqueta">
-            <span class="nosotros__sub-etiqueta-linea" aria-hidden="true"></span>
+        <!-- Afiliaciones: filas enlazadas con hairlines; línea roja en hover/foco -->
+        <div class="nosotros__afiliaciones">
+          <h3 class="etiqueta nosotros__subtitulo animar-entrada" id="nosotros-afiliaciones">
+            <span class="etiqueta__linea" aria-hidden="true"></span>
             <span data-i18n="nos.afil-etiqueta">Afiliaciones</span>
-          </p>
-          <div class="nosotros__afil-cards">
-
-            <a
-              class="nosotros__afamo-card"
-              href="https://afamo.com.mx"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="AFAMO — Asociación de Fabricantes de Muebles de Ocotlán, abre en nueva pestaña"
-            >
-              <div class="nosotros__afamo-izq">
-                <span class="nosotros__afamo-etiqueta" data-i18n="nos.afil1-lbl">Socio activo</span>
-                <strong class="nosotros__afamo-nombre">AFAMO</strong>
-              </div>
-              <div class="nosotros__afamo-der">
-                <span class="nosotros__afamo-desc">Asociación de Fabricantes de Muebles de Ocotlán</span>
-                <em class="nosotros__afamo-lema">La Capital del Mueble</em>
-              </div>
-              <span class="nosotros__afamo-acento" aria-hidden="true"></span>
-            </a>
-
-            <a
-              class="nosotros__afamo-card"
-              href="https://cimejal.com.mx"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="CIMEJAL — Cámara de la Industria del Mueble de Jalisco, abre en nueva pestaña"
-            >
-              <div class="nosotros__afamo-izq">
-                <span class="nosotros__afamo-etiqueta" data-i18n="nos.afil2-lbl">Afiliado</span>
-                <strong class="nosotros__afamo-nombre">CIMEJAL</strong>
-              </div>
-              <div class="nosotros__afamo-der">
-                <span class="nosotros__afamo-desc">Cámara de la Industria del Mueble de Jalisco</span>
-                <em class="nosotros__afamo-lema">Jalisco, México</em>
-              </div>
-              <span class="nosotros__afamo-acento" aria-hidden="true"></span>
-            </a>
-
-          </div>
+          </h3>
+          <ul class="afiliaciones" role="list" aria-labelledby="nosotros-afiliaciones">
+            <li class="animar-entrada">
+              <a
+                class="afiliacion"
+                href="https://afamo.com.mx"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="AFAMO, Asociación de Fabricantes de Muebles de Ocotlán (abre en nueva pestaña)"
+                data-i18n-aria="nos.afil1-aria"
+              >
+                <span class="afiliacion__etiqueta" data-i18n="nos.afil1-lbl">Socio activo</span>
+                <span class="afiliacion__nombre">AFAMO</span>
+                <span class="afiliacion__desc" data-i18n="nos.afil1-desc">Asociación de Fabricantes de Muebles de Ocotlán</span>
+                <span class="afiliacion__lema" data-i18n="nos.afil1-lema">La Capital del Mueble</span>
+              </a>
+            </li>
+            <li class="animar-entrada" style="--orden: 1">
+              <a
+                class="afiliacion"
+                href="https://cimejal.com.mx"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="CIMEJAL, Cámara de la Industria del Mueble de Jalisco (abre en nueva pestaña)"
+                data-i18n-aria="nos.afil2-aria"
+              >
+                <span class="afiliacion__etiqueta" data-i18n="nos.afil2-lbl">Afiliado</span>
+                <span class="afiliacion__nombre">CIMEJAL</span>
+                <span class="afiliacion__desc" data-i18n="nos.afil2-desc">Cámara de la Industria del Mueble de Jalisco</span>
+                <span class="afiliacion__lema" data-i18n="nos.afil2-lema">Jalisco, México</span>
+              </a>
+            </li>
+          </ul>
         </div>
 
       </div>
