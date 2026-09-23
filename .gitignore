@@ -14,3 +14,7 @@ node_modules/
 # Env
 .env
 .env.local
+
+# Crudos de Higgsfield (170 MB): se guardan en local, no en git
+docs/refactor-premium/colecciones/generados/
+docs/refactor-premium/colecciones/rescate/
