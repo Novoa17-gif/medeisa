@@ -1,7 +1,7 @@
 /* ================================================================
    MEDEISA - JavaScript principal
    Orden: Nav → Hero (entrada + video) → Animaciones →
-          Idioma (i18n + WhatsApp) → Footer → Init
+          Idioma (i18n + WhatsApp) → Catálogo → Footer → Init
 ================================================================ */
 
 'use strict';
@@ -337,17 +337,30 @@ const TRADUCCIONES = {
     'nos.afil2-aria':        'CIMEJAL, Cámara de la Industria del Mueble de Jalisco (abre en nueva pestaña)',
 
     /* --- CATALOGO --- */
-    'prod.etiqueta': 'Lo que fabricamos',
-    'prod.titulo':   'Nuestros productos',
-    'prod.libreros': 'Libreros / Estantes industriales',
-    'prod.mesas':    'Mesas de centro y auxiliares',
-    'prod.escrts':   'Centros de TV',
-    'prod.sillas':   'Sillas y sillones',
-    'prod.cotizar':  'Cotizar',
-    'wa.libreros':   'Hola, me gustaría cotizar un librero o estante industrial.',
-    'wa.mesas':      'Hola, me gustaría cotizar una mesa de centro o auxiliar.',
-    'wa.tv':         'Hola, me gustaría cotizar un centro de TV.',
-    'wa.sillas':     'Hola, me gustaría cotizar sillas o sillones.',
+    'cat.etiqueta':    'Lo que fabricamos',
+    'cat.titulo':      'Nuestros <em>productos</em>',
+    'cat.intro':       'Una selección de nuestra línea industrial: acero y madera trabajados en Jalisco. Cotiza cualquier pieza por WhatsApp.',
+    'cat.cotizar':     'Cotizar por WhatsApp',
+    'cat.ver-ambiente': 'Ver en ambiente',
+    'cat.ver-estudio':  'Ver en estudio',
+    'cat.centro-tv-catania.categoria': 'Centro de TV · Acero y madera',
+    'cat.centro-tv-catania.alt':       'Centro de TV Catania: estructura trapezoidal de acero negro, repisa superior de madera y gabinete de madera miel con tres cajones sin jaladeras, sobre fondo hueso',
+    'cat.centro-tv-catania.mensaje':   'Hola, me interesa cotizar el Centro de TV Catania de MEDEISA.',
+    'cat.mesa-centro-catania.categoria': 'Mesa de centro · Acero y parota',
+    'cat.mesa-centro-catania.alt':       'Mesa de Centro Catania: base rectangular de tubo de acero negro y cubierta de tablones de parota unidos por dos bandas de acero negro, sobre fondo hueso',
+    'cat.mesa-centro-catania.mensaje':   'Hola, me interesa cotizar la Mesa de Centro Catania de MEDEISA.',
+    'cat.silla-sahara.categoria': 'Sala · Tapizado bouclé y acero',
+    'cat.silla-sahara.alt':       'Sillón Sahara: sillón individual tapizado en bouclé gris carbón con patas de acero negro en V invertida, sobre fondo hueso',
+    'cat.silla-sahara.mensaje':   'Hola, me interesa cotizar el Sillón Sahara de MEDEISA.',
+    'cat.centro-tv-sierra-azul.categoria': 'Centro de TV · Acero y parota',
+    'cat.centro-tv-sierra-azul.alt':       'Centro de TV Sierra Azul: mueble ovalado de acero negro con barras verticales y repisa central de parota, sobre fondo hueso',
+    'cat.centro-tv-sierra-azul.mensaje':   'Hola, me interesa cotizar el Centro de TV Sierra Azul de MEDEISA.',
+    'cat.mesa-centro-sierra-azul.categoria': 'Mesa de centro · Parota maciza y acero',
+    'cat.mesa-centro-sierra-azul.alt':       'Mesa de Centro Sierra Azul Parota: cubierta redonda de parota maciza con veta clara al centro sobre base circular de barras verticales de acero negro, sobre fondo hueso',
+    'cat.mesa-centro-sierra-azul.mensaje':   'Hola, me interesa cotizar la Mesa de Centro Sierra Azul Parota de MEDEISA.',
+    'cat.recamara-tulum.categoria': 'Recámara · Chapa de madera y acero',
+    'cat.recamara-tulum.alt':       'Recámara Tulum: cama con cabecera de chapa de madera y marco de acero negro con dos óvalos, y un buró a juego, ambos sobre patines de acero negro, sobre fondo hueso',
+    'cat.recamara-tulum.mensaje':   'Hola, me interesa cotizar la Recámara Tulum de MEDEISA.',
 
     /* --- EXPO --- */
     'gal.etiqueta':  'Presencia semestral',
@@ -444,17 +457,30 @@ const TRADUCCIONES = {
     'nos.afil2-aria':        'CIMEJAL, Jalisco Furniture Industry Chamber (opens in a new tab)',
 
     /* --- CATALOGO --- */
-    'prod.etiqueta': 'What we make',
-    'prod.titulo':   'Our products',
-    'prod.libreros': 'Industrial Bookshelves & Shelves',
-    'prod.mesas':    'Coffee & Side Tables',
-    'prod.escrts':   'TV Stands',
-    'prod.sillas':   'Chairs & Armchairs',
-    'prod.cotizar':  'Quote',
-    'wa.libreros':   'Hello, I would like a quote for an industrial bookshelf or shelf.',
-    'wa.mesas':      'Hello, I would like a quote for a coffee or side table.',
-    'wa.tv':         'Hello, I would like a quote for a TV stand.',
-    'wa.sillas':     'Hello, I would like a quote for chairs or armchairs.',
+    'cat.etiqueta':    'What we make',
+    'cat.titulo':      'Our <em>products</em>',
+    'cat.intro':       'A selection from our industrial line: steel and wood crafted in Jalisco. Request a quote for any piece on WhatsApp.',
+    'cat.cotizar':     'Quote on WhatsApp',
+    'cat.ver-ambiente': 'View in room',
+    'cat.ver-estudio':  'View in studio',
+    'cat.centro-tv-catania.categoria': 'TV console · Steel and wood',
+    'cat.centro-tv-catania.alt':       'Centro de TV Catania: trapezoidal black steel frame, wooden top shelf and honey-toned wood cabinet with three handleless drawers, on a bone background',
+    'cat.centro-tv-catania.mensaje':   'Hi, I would like a quote for the Centro de TV Catania by MEDEISA.',
+    'cat.mesa-centro-catania.categoria': 'Coffee table · Steel and parota',
+    'cat.mesa-centro-catania.alt':       'Mesa de Centro Catania: rectangular black steel tube base and a top of parota planks joined by two black steel bands, on a bone background',
+    'cat.mesa-centro-catania.mensaje':   'Hi, I would like a quote for the Mesa de Centro Catania by MEDEISA.',
+    'cat.silla-sahara.categoria': 'Living · Bouclé and steel',
+    'cat.silla-sahara.alt':       'Sillón Sahara: armchair upholstered in charcoal bouclé with black steel legs in an inverted V, on a bone background',
+    'cat.silla-sahara.mensaje':   'Hi, I would like a quote for the Sillón Sahara by MEDEISA.',
+    'cat.centro-tv-sierra-azul.categoria': 'TV console · Steel and parota',
+    'cat.centro-tv-sierra-azul.alt':       'Centro de TV Sierra Azul: oval black steel console with vertical bars and a central parota shelf, on a bone background',
+    'cat.centro-tv-sierra-azul.mensaje':   'Hi, I would like a quote for the Centro de TV Sierra Azul by MEDEISA.',
+    'cat.mesa-centro-sierra-azul.categoria': 'Coffee table · Solid parota and steel',
+    'cat.mesa-centro-sierra-azul.alt':       'Mesa de Centro Sierra Azul Parota: round solid parota top with a light streak through the center on a circular base of vertical black steel bars, on a bone background',
+    'cat.mesa-centro-sierra-azul.mensaje':   'Hi, I would like a quote for the Mesa de Centro Sierra Azul Parota by MEDEISA.',
+    'cat.recamara-tulum.categoria': 'Bedroom · Wood veneer and steel',
+    'cat.recamara-tulum.alt':       'Recámara Tulum: bed with a wood veneer headboard framed in black steel with two oval outlines, and a matching nightstand, both on black steel sled legs, on a bone background',
+    'cat.recamara-tulum.mensaje':   'Hi, I would like a quote for the Recámara Tulum by MEDEISA.',
 
     /* --- EXPO --- */
     'gal.etiqueta':  'Biannual presence',
@@ -587,6 +613,48 @@ const iniciarIdioma = () => {
 
 
 /* ================================================================
+   CATÁLOGO - Alternar estudio / ambiente
+   Un solo listener delegado en el grid. El botón alterna siempre; tocar
+   la foto solo alterna en táctil (con ratón ya lo hace el hover).
+================================================================ */
+const iniciarCatalogo = () => {
+  const grid = document.querySelector('.catalogo__grid');
+  if (!grid) return;
+
+  const punteroFino = window.matchMedia('(hover: hover) and (pointer: fine)');
+
+  const alternarPieza = (pieza, forzar) => {
+    const ambiente = pieza.classList.toggle('pieza--ambiente', forzar);
+    const alternar = pieza.querySelector('.pieza__alternar');
+    if (!alternar) return;
+
+    /* El texto del botón cambia con el estado; aplicarIdioma lo mantiene
+       al cambiar de idioma porque se actualiza su data-i18n */
+    const clave = ambiente ? 'cat.ver-estudio' : 'cat.ver-ambiente';
+    alternar.dataset.i18n = clave;
+    alternar.textContent = TRADUCCIONES[document.documentElement.lang]?.[clave] ?? alternar.textContent;
+  };
+
+  grid.addEventListener('click', (e) => {
+    const boton = e.target.closest('.pieza__alternar');
+    const marco = e.target.closest('.pieza__marco');
+    if (!boton && (!marco || punteroFino.matches)) return;
+    alternarPieza(marco.closest('.pieza'));
+  });
+
+  /* Con puntero fino el botón solo se ve con foco: si el foco sale de la
+     pieza se vuelve a estudio, para que el ambiente no quede fijo sin
+     control visible (el clic en la foto no alterna con ratón) */
+  grid.addEventListener('focusout', (e) => {
+    if (!punteroFino.matches) return;
+    const pieza = e.target.closest('.pieza');
+    if (!pieza?.classList.contains('pieza--ambiente') || pieza.contains(e.relatedTarget)) return;
+    alternarPieza(pieza, false);
+  });
+};
+
+
+/* ================================================================
    FOOTER - Año dinámico en los créditos
 ================================================================ */
 const iniciarFooter = () => {
@@ -604,5 +672,6 @@ document.addEventListener('DOMContentLoaded', () => {
   iniciarHero();
   iniciarVideoHero();
   iniciarAnimacionesEntrada();
+  iniciarCatalogo();
   iniciarFooter();
 });

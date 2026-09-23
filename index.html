@@ -395,130 +395,352 @@
     </section>
 
     <!-- ============================================================
-         PRODUCTOS
+         CATÁLOGO
     ============================================================ -->
-    <section class="productos" id="productos" aria-labelledby="productos-titulo">
+    <section class="catalogo" id="productos" aria-labelledby="catalogo-titulo">
       <div class="contenedor">
 
-        <div class="productos__encabezado">
-          <p class="productos__etiqueta animar-entrada">
-            <span class="productos__etiqueta-linea" aria-hidden="true"></span>
-            <span data-i18n="prod.etiqueta">Lo que fabricamos</span>
+        <header class="cabecera-seccion animar-entrada">
+          <span class="numero-seccion" aria-hidden="true">02</span>
+          <p class="etiqueta">
+            <span class="etiqueta__linea" aria-hidden="true"></span>
+            <span data-i18n="cat.etiqueta">Lo que fabricamos</span>
           </p>
-          <h2 class="productos__titulo animar-entrada" id="productos-titulo" data-i18n="prod.titulo">
-            Nuestros productos
-          </h2>
-          <span class="productos__divisor animar-entrada" aria-hidden="true"></span>
-        </div>
+          <h2 class="titulo-seccion" id="catalogo-titulo" data-i18n-html="cat.titulo">Nuestros <em>productos</em></h2>
+          <p class="catalogo__intro" data-i18n="cat.intro">Una selección de nuestra línea industrial: acero y madera trabajados en Jalisco. Cotiza cualquier pieza por WhatsApp.</p>
+        </header>
 
-        <ul class="productos__grid animar-entrada" role="list">
+        <!-- 6 piezas: foto de estudio; hover (desktop), foco o toque muestran el ambiente -->
+        <ul class="catalogo__grid" role="list">
 
-          <li class="producto-tarjeta">
-            <div class="producto-tarjeta__imagen">
-              <img
-                src="assets/producto-librero-monte-calido.jpg"
-                alt="Librero de acero negro con estructura geométrica asimétrica de barras verticales finas y cuatro repisas de madera clara con veta visible"
-                class="producto-tarjeta__img"
-                loading="lazy"
-                width="480"
-                height="600"
-              />
-            </div>
-            <div class="producto-tarjeta__cuerpo">
-              <span class="producto-tarjeta__acento" aria-hidden="true"></span>
-              <h3 class="producto-tarjeta__nombre" data-i18n="prod.libreros">Libreros / Estantes industriales</h3>
+          <li class="pieza animar-entrada" style="--orden: 0" data-pieza="centro-tv-catania">
+            <article class="pieza__articulo" aria-labelledby="pieza-centro-tv-catania">
+              <div class="pieza__marco marco-imagen">
+                <picture class="pieza__foto pieza__foto--estudio">
+                  <source
+                    type="image/webp"
+                    srcset="assets/catalogo/centro-tv-catania-estudio-800w.webp 800w, assets/catalogo/centro-tv-catania-estudio.webp 1600w"
+                    sizes="(min-width: 1280px) 389px, (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 768px) calc((100vw - 92px) / 2), calc(100vw - 40px)"
+                  />
+                  <img
+                    src="assets/catalogo/centro-tv-catania-estudio-800w.jpg"
+                    srcset="assets/catalogo/centro-tv-catania-estudio-800w.jpg 800w, assets/catalogo/centro-tv-catania-estudio.jpg 1600w"
+                    sizes="(min-width: 1280px) 389px, (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 768px) calc((100vw - 92px) / 2), calc(100vw - 40px)"
+                    width="800"
+                    height="1000"
+                    loading="lazy"
+                    decoding="async"
+                    alt="Centro de TV Catania: estructura trapezoidal de acero negro, repisa superior de madera y gabinete de madera miel con tres cajones sin jaladeras, sobre fondo hueso" data-i18n-alt="cat.centro-tv-catania.alt"
+                  />
+                </picture>
+                <picture class="pieza__foto pieza__foto--ambiente">
+                  <source
+                    type="image/webp"
+                    srcset="assets/catalogo/centro-tv-catania-ambiente-800w.webp 800w, assets/catalogo/centro-tv-catania-ambiente.webp 1600w"
+                    sizes="(min-width: 1280px) 389px, (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 768px) calc((100vw - 92px) / 2), calc(100vw - 40px)"
+                  />
+                  <img
+                    src="assets/catalogo/centro-tv-catania-ambiente-800w.jpg"
+                    srcset="assets/catalogo/centro-tv-catania-ambiente-800w.jpg 800w, assets/catalogo/centro-tv-catania-ambiente.jpg 1600w"
+                    sizes="(min-width: 1280px) 389px, (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 768px) calc((100vw - 92px) / 2), calc(100vw - 40px)"
+                    width="800"
+                    height="1000"
+                    loading="lazy"
+                    decoding="async"
+                    alt=""
+                  />
+                </picture>
+                <button class="pieza__alternar" type="button" aria-describedby="pieza-centro-tv-catania" data-i18n="cat.ver-ambiente">Ver en ambiente</button>
+              </div>
+              <h3 class="pieza__nombre" id="pieza-centro-tv-catania">Centro de TV Catania</h3>
+              <p class="pieza__categoria" data-i18n="cat.centro-tv-catania.categoria">Centro de TV · Acero y madera</p>
               <a
-                class="btn btn--rojo producto-tarjeta__btn"
-                data-i18n="prod.cotizar"
-                data-wa="libreros"
-                href="https://wa.me/523921236728?text=Hola%2C%20me%20gustar%C3%ADa%20cotizar%20un%20librero%20o%20estante%20industrial."
+                class="enlace-cotizar"
+                data-wa-pieza="cat.centro-tv-catania.nombre"
+                href="https://wa.me/523921236728?text=Hola%2C%20me%20interesa%20cotizar%20el%20Centro%20de%20TV%20Catania%20de%20MEDEISA."
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-describedby="pieza-centro-tv-catania"
               >
-                Cotizar
+                <span data-i18n="cat.cotizar">Cotizar por WhatsApp</span>
+                <span class="enlace-cotizar__linea" aria-hidden="true"></span>
               </a>
-            </div>
+            </article>
           </li>
 
-          <li class="producto-tarjeta">
-            <div class="producto-tarjeta__imagen producto-tarjeta__imagen--degradado">
-              <img
-                src="assets/producto-mesa-sierra-azul.png"
-                alt="Mesa de centro redonda con cubierta de madera maciza en tonos café con vetas onduladas y base cilíndrica de barras verticales de metal negro"
-                class="producto-tarjeta__img producto-tarjeta__img--mesa"
-                loading="lazy"
-                width="480"
-                height="600"
-              />
-            </div>
-            <div class="producto-tarjeta__cuerpo">
-              <span class="producto-tarjeta__acento" aria-hidden="true"></span>
-              <h3 class="producto-tarjeta__nombre" data-i18n="prod.mesas">Mesas de centro y auxiliares</h3>
+          <li class="pieza animar-entrada" style="--orden: 1" data-pieza="mesa-centro-catania">
+            <article class="pieza__articulo" aria-labelledby="pieza-mesa-centro-catania">
+              <div class="pieza__marco marco-imagen">
+                <picture class="pieza__foto pieza__foto--estudio">
+                  <source
+                    type="image/webp"
+                    srcset="assets/catalogo/mesa-centro-catania-estudio-800w.webp 800w, assets/catalogo/mesa-centro-catania-estudio.webp 1600w"
+                    sizes="(min-width: 1280px) 389px, (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 768px) calc((100vw - 92px) / 2), calc(100vw - 40px)"
+                  />
+                  <img
+                    src="assets/catalogo/mesa-centro-catania-estudio-800w.jpg"
+                    srcset="assets/catalogo/mesa-centro-catania-estudio-800w.jpg 800w, assets/catalogo/mesa-centro-catania-estudio.jpg 1600w"
+                    sizes="(min-width: 1280px) 389px, (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 768px) calc((100vw - 92px) / 2), calc(100vw - 40px)"
+                    width="800"
+                    height="1000"
+                    loading="lazy"
+                    decoding="async"
+                    alt="Mesa de Centro Catania: base rectangular de tubo de acero negro y cubierta de tablones de parota unidos por dos bandas de acero negro, sobre fondo hueso" data-i18n-alt="cat.mesa-centro-catania.alt"
+                  />
+                </picture>
+                <picture class="pieza__foto pieza__foto--ambiente">
+                  <source
+                    type="image/webp"
+                    srcset="assets/catalogo/mesa-centro-catania-ambiente-800w.webp 800w, assets/catalogo/mesa-centro-catania-ambiente.webp 1600w"
+                    sizes="(min-width: 1280px) 389px, (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 768px) calc((100vw - 92px) / 2), calc(100vw - 40px)"
+                  />
+                  <img
+                    src="assets/catalogo/mesa-centro-catania-ambiente-800w.jpg"
+                    srcset="assets/catalogo/mesa-centro-catania-ambiente-800w.jpg 800w, assets/catalogo/mesa-centro-catania-ambiente.jpg 1600w"
+                    sizes="(min-width: 1280px) 389px, (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 768px) calc((100vw - 92px) / 2), calc(100vw - 40px)"
+                    width="800"
+                    height="1000"
+                    loading="lazy"
+                    decoding="async"
+                    alt=""
+                  />
+                </picture>
+                <button class="pieza__alternar" type="button" aria-describedby="pieza-mesa-centro-catania" data-i18n="cat.ver-ambiente">Ver en ambiente</button>
+              </div>
+              <h3 class="pieza__nombre" id="pieza-mesa-centro-catania">Mesa de Centro Catania</h3>
+              <p class="pieza__categoria" data-i18n="cat.mesa-centro-catania.categoria">Mesa de centro · Acero y parota</p>
               <a
-                class="btn btn--rojo producto-tarjeta__btn"
-                data-i18n="prod.cotizar"
-                data-wa="mesas"
-                href="https://wa.me/523921236728?text=Hola%2C%20me%20gustar%C3%ADa%20cotizar%20una%20mesa%20de%20centro%20o%20auxiliar."
+                class="enlace-cotizar"
+                data-wa-pieza="cat.mesa-centro-catania.nombre"
+                href="https://wa.me/523921236728?text=Hola%2C%20me%20interesa%20cotizar%20la%20Mesa%20de%20Centro%20Catania%20de%20MEDEISA."
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-describedby="pieza-mesa-centro-catania"
               >
-                Cotizar
+                <span data-i18n="cat.cotizar">Cotizar por WhatsApp</span>
+                <span class="enlace-cotizar__linea" aria-hidden="true"></span>
               </a>
-            </div>
+            </article>
           </li>
 
-          <li class="producto-tarjeta">
-            <div class="producto-tarjeta__imagen">
-              <img
-                src="assets/producto-centro-tv-catania.jpg"
-                alt="Centro de TV de madera clara con tres cajones y repisa superior flotante sobre estructura de patas de metal negro en ángulo"
-                class="producto-tarjeta__img producto-tarjeta__img--tv"
-                loading="lazy"
-                width="480"
-                height="600"
-              />
-            </div>
-            <div class="producto-tarjeta__cuerpo">
-              <span class="producto-tarjeta__acento" aria-hidden="true"></span>
-              <h3 class="producto-tarjeta__nombre" data-i18n="prod.escrts">Centros de TV</h3>
+          <li class="pieza animar-entrada" style="--orden: 2" data-pieza="silla-sahara">
+            <article class="pieza__articulo" aria-labelledby="pieza-silla-sahara">
+              <div class="pieza__marco marco-imagen">
+                <picture class="pieza__foto pieza__foto--estudio">
+                  <source
+                    type="image/webp"
+                    srcset="assets/catalogo/silla-sahara-estudio-800w.webp 800w, assets/catalogo/silla-sahara-estudio.webp 1600w"
+                    sizes="(min-width: 1280px) 389px, (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 768px) calc((100vw - 92px) / 2), calc(100vw - 40px)"
+                  />
+                  <img
+                    src="assets/catalogo/silla-sahara-estudio-800w.jpg"
+                    srcset="assets/catalogo/silla-sahara-estudio-800w.jpg 800w, assets/catalogo/silla-sahara-estudio.jpg 1600w"
+                    sizes="(min-width: 1280px) 389px, (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 768px) calc((100vw - 92px) / 2), calc(100vw - 40px)"
+                    width="800"
+                    height="1000"
+                    loading="lazy"
+                    decoding="async"
+                    alt="Sillón Sahara: sillón individual tapizado en bouclé gris carbón con patas de acero negro en V invertida, sobre fondo hueso" data-i18n-alt="cat.silla-sahara.alt"
+                  />
+                </picture>
+                <picture class="pieza__foto pieza__foto--ambiente">
+                  <source
+                    type="image/webp"
+                    srcset="assets/catalogo/silla-sahara-ambiente-800w.webp 800w, assets/catalogo/silla-sahara-ambiente.webp 1600w"
+                    sizes="(min-width: 1280px) 389px, (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 768px) calc((100vw - 92px) / 2), calc(100vw - 40px)"
+                  />
+                  <img
+                    src="assets/catalogo/silla-sahara-ambiente-800w.jpg"
+                    srcset="assets/catalogo/silla-sahara-ambiente-800w.jpg 800w, assets/catalogo/silla-sahara-ambiente.jpg 1600w"
+                    sizes="(min-width: 1280px) 389px, (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 768px) calc((100vw - 92px) / 2), calc(100vw - 40px)"
+                    width="800"
+                    height="1000"
+                    loading="lazy"
+                    decoding="async"
+                    alt=""
+                  />
+                </picture>
+                <button class="pieza__alternar" type="button" aria-describedby="pieza-silla-sahara" data-i18n="cat.ver-ambiente">Ver en ambiente</button>
+              </div>
+              <h3 class="pieza__nombre" id="pieza-silla-sahara">Sillón Sahara</h3>
+              <p class="pieza__categoria" data-i18n="cat.silla-sahara.categoria">Sala · Tapizado bouclé y acero</p>
               <a
-                class="btn btn--rojo producto-tarjeta__btn"
-                data-i18n="prod.cotizar"
-                data-wa="tv"
-                href="https://wa.me/523921236728?text=Hola%2C%20me%20gustar%C3%ADa%20cotizar%20un%20centro%20de%20TV."
+                class="enlace-cotizar"
+                data-wa-pieza="cat.silla-sahara.nombre"
+                href="https://wa.me/523921236728?text=Hola%2C%20me%20interesa%20cotizar%20el%20Sill%C3%B3n%20Sahara%20de%20MEDEISA."
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-describedby="pieza-silla-sahara"
               >
-                Cotizar
+                <span data-i18n="cat.cotizar">Cotizar por WhatsApp</span>
+                <span class="enlace-cotizar__linea" aria-hidden="true"></span>
               </a>
-            </div>
+            </article>
           </li>
 
-          <li class="producto-tarjeta">
-            <div class="producto-tarjeta__imagen producto-tarjeta__imagen--degradado">
-              <img
-                src="assets/producto-sillon-sahara.png"
-                alt="Sillón individual tapizado en tela boucle gris oscuro con textura moteada y patas de metal negro en ángulo tipo compás"
-                class="producto-tarjeta__img producto-tarjeta__img--silla"
-                loading="lazy"
-                width="480"
-                height="600"
-              />
-            </div>
-            <div class="producto-tarjeta__cuerpo">
-              <span class="producto-tarjeta__acento" aria-hidden="true"></span>
-              <h3 class="producto-tarjeta__nombre" data-i18n="prod.sillas">Sillas y sillones</h3>
+          <li class="pieza animar-entrada" style="--orden: 0" data-pieza="centro-tv-sierra-azul">
+            <article class="pieza__articulo" aria-labelledby="pieza-centro-tv-sierra-azul">
+              <div class="pieza__marco marco-imagen">
+                <picture class="pieza__foto pieza__foto--estudio">
+                  <source
+                    type="image/webp"
+                    srcset="assets/catalogo/centro-tv-sierra-azul-estudio-800w.webp 800w, assets/catalogo/centro-tv-sierra-azul-estudio.webp 1600w"
+                    sizes="(min-width: 1280px) 389px, (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 768px) calc((100vw - 92px) / 2), calc(100vw - 40px)"
+                  />
+                  <img
+                    src="assets/catalogo/centro-tv-sierra-azul-estudio-800w.jpg"
+                    srcset="assets/catalogo/centro-tv-sierra-azul-estudio-800w.jpg 800w, assets/catalogo/centro-tv-sierra-azul-estudio.jpg 1600w"
+                    sizes="(min-width: 1280px) 389px, (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 768px) calc((100vw - 92px) / 2), calc(100vw - 40px)"
+                    width="800"
+                    height="1000"
+                    loading="lazy"
+                    decoding="async"
+                    alt="Centro de TV Sierra Azul: mueble ovalado de acero negro con barras verticales y repisa central de parota, sobre fondo hueso" data-i18n-alt="cat.centro-tv-sierra-azul.alt"
+                  />
+                </picture>
+                <picture class="pieza__foto pieza__foto--ambiente">
+                  <source
+                    type="image/webp"
+                    srcset="assets/catalogo/centro-tv-sierra-azul-ambiente-800w.webp 800w, assets/catalogo/centro-tv-sierra-azul-ambiente.webp 1600w"
+                    sizes="(min-width: 1280px) 389px, (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 768px) calc((100vw - 92px) / 2), calc(100vw - 40px)"
+                  />
+                  <img
+                    src="assets/catalogo/centro-tv-sierra-azul-ambiente-800w.jpg"
+                    srcset="assets/catalogo/centro-tv-sierra-azul-ambiente-800w.jpg 800w, assets/catalogo/centro-tv-sierra-azul-ambiente.jpg 1600w"
+                    sizes="(min-width: 1280px) 389px, (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 768px) calc((100vw - 92px) / 2), calc(100vw - 40px)"
+                    width="800"
+                    height="1000"
+                    loading="lazy"
+                    decoding="async"
+                    alt=""
+                  />
+                </picture>
+                <button class="pieza__alternar" type="button" aria-describedby="pieza-centro-tv-sierra-azul" data-i18n="cat.ver-ambiente">Ver en ambiente</button>
+              </div>
+              <h3 class="pieza__nombre" id="pieza-centro-tv-sierra-azul">Centro de TV Sierra Azul</h3>
+              <p class="pieza__categoria" data-i18n="cat.centro-tv-sierra-azul.categoria">Centro de TV · Acero y parota</p>
               <a
-                class="btn btn--rojo producto-tarjeta__btn"
-                data-i18n="prod.cotizar"
-                data-wa="sillas"
-                href="https://wa.me/523921236728?text=Hola%2C%20me%20gustar%C3%ADa%20cotizar%20sillas%20o%20sillones."
+                class="enlace-cotizar"
+                data-wa-pieza="cat.centro-tv-sierra-azul.nombre"
+                href="https://wa.me/523921236728?text=Hola%2C%20me%20interesa%20cotizar%20el%20Centro%20de%20TV%20Sierra%20Azul%20de%20MEDEISA."
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-describedby="pieza-centro-tv-sierra-azul"
               >
-                Cotizar
+                <span data-i18n="cat.cotizar">Cotizar por WhatsApp</span>
+                <span class="enlace-cotizar__linea" aria-hidden="true"></span>
               </a>
-            </div>
+            </article>
+          </li>
+
+          <li class="pieza animar-entrada" style="--orden: 1" data-pieza="mesa-centro-sierra-azul">
+            <article class="pieza__articulo" aria-labelledby="pieza-mesa-centro-sierra-azul">
+              <div class="pieza__marco marco-imagen">
+                <picture class="pieza__foto pieza__foto--estudio">
+                  <source
+                    type="image/webp"
+                    srcset="assets/catalogo/mesa-centro-sierra-azul-estudio-800w.webp 800w, assets/catalogo/mesa-centro-sierra-azul-estudio.webp 1600w"
+                    sizes="(min-width: 1280px) 389px, (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 768px) calc((100vw - 92px) / 2), calc(100vw - 40px)"
+                  />
+                  <img
+                    src="assets/catalogo/mesa-centro-sierra-azul-estudio-800w.jpg"
+                    srcset="assets/catalogo/mesa-centro-sierra-azul-estudio-800w.jpg 800w, assets/catalogo/mesa-centro-sierra-azul-estudio.jpg 1600w"
+                    sizes="(min-width: 1280px) 389px, (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 768px) calc((100vw - 92px) / 2), calc(100vw - 40px)"
+                    width="800"
+                    height="1000"
+                    loading="lazy"
+                    decoding="async"
+                    alt="Mesa de Centro Sierra Azul Parota: cubierta redonda de parota maciza con veta clara al centro sobre base circular de barras verticales de acero negro, sobre fondo hueso" data-i18n-alt="cat.mesa-centro-sierra-azul.alt"
+                  />
+                </picture>
+                <picture class="pieza__foto pieza__foto--ambiente">
+                  <source
+                    type="image/webp"
+                    srcset="assets/catalogo/mesa-centro-sierra-azul-ambiente-800w.webp 800w, assets/catalogo/mesa-centro-sierra-azul-ambiente.webp 1600w"
+                    sizes="(min-width: 1280px) 389px, (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 768px) calc((100vw - 92px) / 2), calc(100vw - 40px)"
+                  />
+                  <img
+                    src="assets/catalogo/mesa-centro-sierra-azul-ambiente-800w.jpg"
+                    srcset="assets/catalogo/mesa-centro-sierra-azul-ambiente-800w.jpg 800w, assets/catalogo/mesa-centro-sierra-azul-ambiente.jpg 1600w"
+                    sizes="(min-width: 1280px) 389px, (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 768px) calc((100vw - 92px) / 2), calc(100vw - 40px)"
+                    width="800"
+                    height="1000"
+                    loading="lazy"
+                    decoding="async"
+                    alt=""
+                  />
+                </picture>
+                <button class="pieza__alternar" type="button" aria-describedby="pieza-mesa-centro-sierra-azul" data-i18n="cat.ver-ambiente">Ver en ambiente</button>
+              </div>
+              <h3 class="pieza__nombre" id="pieza-mesa-centro-sierra-azul">Mesa de Centro Sierra Azul Parota</h3>
+              <p class="pieza__categoria" data-i18n="cat.mesa-centro-sierra-azul.categoria">Mesa de centro · Parota maciza y acero</p>
+              <a
+                class="enlace-cotizar"
+                data-wa-pieza="cat.mesa-centro-sierra-azul.nombre"
+                href="https://wa.me/523921236728?text=Hola%2C%20me%20interesa%20cotizar%20la%20Mesa%20de%20Centro%20Sierra%20Azul%20Parota%20de%20MEDEISA."
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-describedby="pieza-mesa-centro-sierra-azul"
+              >
+                <span data-i18n="cat.cotizar">Cotizar por WhatsApp</span>
+                <span class="enlace-cotizar__linea" aria-hidden="true"></span>
+              </a>
+            </article>
+          </li>
+
+          <li class="pieza animar-entrada" style="--orden: 2" data-pieza="recamara-tulum">
+            <article class="pieza__articulo" aria-labelledby="pieza-recamara-tulum">
+              <div class="pieza__marco marco-imagen">
+                <picture class="pieza__foto pieza__foto--estudio">
+                  <source
+                    type="image/webp"
+                    srcset="assets/catalogo/recamara-tulum-estudio-800w.webp 800w, assets/catalogo/recamara-tulum-estudio.webp 1600w"
+                    sizes="(min-width: 1280px) 389px, (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 768px) calc((100vw - 92px) / 2), calc(100vw - 40px)"
+                  />
+                  <img
+                    src="assets/catalogo/recamara-tulum-estudio-800w.jpg"
+                    srcset="assets/catalogo/recamara-tulum-estudio-800w.jpg 800w, assets/catalogo/recamara-tulum-estudio.jpg 1600w"
+                    sizes="(min-width: 1280px) 389px, (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 768px) calc((100vw - 92px) / 2), calc(100vw - 40px)"
+                    width="800"
+                    height="1000"
+                    loading="lazy"
+                    decoding="async"
+                    alt="Recámara Tulum: cama con cabecera de chapa de madera y marco de acero negro con dos óvalos, y un buró a juego, ambos sobre patines de acero negro, sobre fondo hueso" data-i18n-alt="cat.recamara-tulum.alt"
+                  />
+                </picture>
+                <picture class="pieza__foto pieza__foto--ambiente">
+                  <source
+                    type="image/webp"
+                    srcset="assets/catalogo/recamara-tulum-ambiente-800w.webp 800w, assets/catalogo/recamara-tulum-ambiente.webp 1600w"
+                    sizes="(min-width: 1280px) 389px, (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 768px) calc((100vw - 92px) / 2), calc(100vw - 40px)"
+                  />
+                  <img
+                    src="assets/catalogo/recamara-tulum-ambiente-800w.jpg"
+                    srcset="assets/catalogo/recamara-tulum-ambiente-800w.jpg 800w, assets/catalogo/recamara-tulum-ambiente.jpg 1600w"
+                    sizes="(min-width: 1280px) 389px, (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 768px) calc((100vw - 92px) / 2), calc(100vw - 40px)"
+                    width="800"
+                    height="1000"
+                    loading="lazy"
+                    decoding="async"
+                    alt=""
+                  />
+                </picture>
+                <button class="pieza__alternar" type="button" aria-describedby="pieza-recamara-tulum" data-i18n="cat.ver-ambiente">Ver en ambiente</button>
+              </div>
+              <h3 class="pieza__nombre" id="pieza-recamara-tulum">Recámara Tulum</h3>
+              <p class="pieza__categoria" data-i18n="cat.recamara-tulum.categoria">Recámara · Chapa de madera y acero</p>
+              <a
+                class="enlace-cotizar"
+                data-wa-pieza="cat.recamara-tulum.nombre"
+                href="https://wa.me/523921236728?text=Hola%2C%20me%20interesa%20cotizar%20la%20Rec%C3%A1mara%20Tulum%20de%20MEDEISA."
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-describedby="pieza-recamara-tulum"
+              >
+                <span data-i18n="cat.cotizar">Cotizar por WhatsApp</span>
+                <span class="enlace-cotizar__linea" aria-hidden="true"></span>
+              </a>
+            </article>
           </li>
 
         </ul>

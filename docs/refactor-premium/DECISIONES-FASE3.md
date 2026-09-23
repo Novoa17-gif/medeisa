@@ -62,3 +62,19 @@ Una línea por decisión no trivial. Orden de prioridad: SPEC > DESIGN > BLUEPRI
 - Afiliaciones: la línea roja de hover/foco es un `::after` escalado desde la izquierda sobre el hairline inferior (sin span extra); `aria-label` con "(abre en nueva pestaña)" en vez de raya.
 - Descripción de la intro en negro (texto principal, es el lead); Misión y Visión en piedra `#5C5854` como indica el BLUEPRINT.
 - Revisión: en 2 columnas (>= 768) cada afiliación lleva su propio hairline superior; el `border-top` de la lista cruzaba el hueco entre columnas mientras los inferiores iban cortados.
+
+## Paso 3 - Catálogo
+
+- Nombres de pieza iguales en ES y EN (SPEC: "nombres propios NO se traducen, solo la categoría"): el `<h3>` no lleva `data-i18n`, se traducen categoría, alt, botón y mensaje. Por eso no existen claves `cat.<slug>.nombre`; `data-wa-pieza="cat.<slug>.nombre"` se deja así porque el motor solo deriva de ella `cat.<slug>.mensaje`.
+- Silla Sahara se muestra como "Sillón Sahara" (SPEC Fase 1); el slug `silla-sahara` se conserva porque así están los archivos.
+- Mensajes EN con el nombre sin traducir: "Hi, I would like a quote for the Centro de TV Catania by MEDEISA."
+- Título: "Nuestros *productos*" / "Our *products*" (se conserva el texto original, igual que en Nosotros); etiqueta en negro porque el 02 ya es la nota roja; intro nueva en piedra dentro de la cabecera.
+- Botón alternar: cambia su texto ("Ver en ambiente" / "Ver en estudio") y NO usa `aria-pressed` (mismo criterio que el botón de pausa del paso 1: nombre y estado a la vez se leían contradictorios); lleva `aria-describedby` al nombre de la pieza para distinguir los 6.
+- Con puntero fino el hover del marco muestra el ambiente, el clic en la foto no alterna (si no, el estado quedaba pegado al salir el ratón) y el botón queda invisible y sin `pointer-events` salvo con `:focus-visible`. En táctil alternan el botón y el toque en la foto.
+- Foco de teclado: el ambiente se muestra con `.pieza:has(.enlace-cotizar:focus-visible)`, no con cualquier `:focus-visible`; si el botón alternar también lo activara, pulsarlo no cambiaría nada visible.
+- Las 6 fotos de ambiente traen franjas negras de 0.35% arriba y abajo (3px a 800w, 7px a 1600w; medido). Se recortan con `transform: scale(1.02)` fijo en el `img` de ambiente (no es zoom animado); corregir los archivos queda pendiente para el paso 8 o una regeneración local.
+- `width="800" height="1000"` en los `img` (igual que Nosotros; misma proporción 4:5 que 1600x2000).
+- Escalonado de entrada `--orden` = índice % 3 (0-2) en cada `li.pieza`, que es contenedor, no interactivo.
+- Padding de banda `--space-2xl` (antes `--space-3xl`, que DESIGN reserva para la Declaración).
+- Se borran `prod.*` y las claves transitorias `wa.libreros|mesas|tv|sillas`; `.btn--rojo` LEGADO se queda porque Contacto aún lo usa. El schema ("libreros, mesas, escritorios y sillas") se deja para el paso 7.
+- Revisión: con puntero fino, si el foco sale de una pieza que quedó en ambiente por el botón (teclado), vuelve a estudio (`focusout` delegado en el grid); antes quedaba fija en ambiente sin control visible para el ratón.
