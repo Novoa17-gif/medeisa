@@ -1,7 +1,7 @@
 /* ================================================================
    MEDEISA - JavaScript principal
-   Orden: Nav → Hero → Animaciones → Idioma (i18n + WhatsApp) →
-          Nav pill → Footer → Init
+   Orden: Nav → Hero (entrada + video) → Animaciones →
+          Idioma (i18n + WhatsApp) → Footer → Init
 ================================================================ */
 
 'use strict';
@@ -14,69 +14,92 @@ document.documentElement.classList.add('js');
 /* ================================================================
    NAV
 ================================================================ */
+
+/* Cambia la clave i18n de un aria-label según el estado y lo aplica ya
+   en el idioma actual; aplicarIdioma lo mantiene al cambiar de idioma */
+const traducirAria = (el, clave) => {
+  if (!el) return;
+  el.dataset.i18nAria = clave;
+  const valor = TRADUCCIONES[document.documentElement.lang]?.[clave];
+  if (valor) el.setAttribute('aria-label', valor);
+};
+
 const iniciarNav = () => {
-  const encabezado   = document.getElementById('encabezado');
-  const hamburguesa  = document.querySelector('.nav__hamburguesa');
-  const menuMovil    = document.getElementById('nav-menu-movil');
-  const linksNav     = document.querySelectorAll('.nav__link');
+  const encabezado  = document.getElementById('encabezado');
+  const hamburguesa = document.querySelector('.nav__hamburguesa');
+  const menuMovil   = document.getElementById('menu-movil');
+  const hero        = document.querySelector('.hero');
+  const enlaces     = document.querySelectorAll('.nav__enlace, .menu-movil__enlace');
 
   if (!encabezado) return;
 
-  /* — Fondo sólido al hacer scroll — */
-  const manejarScroll = () => {
-    encabezado.classList.toggle('scrolled', window.scrollY > 40);
+  /* — Nav sólido al salir del hero (IO, no eventos de scroll) —
+     El margen superior negativo descuenta la altura del nav fijo */
+  if (hero) {
+    const alturaNav = encabezado.offsetHeight;
+    const observadorHero = new IntersectionObserver(
+      ([entrada]) => {
+        encabezado.classList.toggle('encabezado--solido', !entrada.isIntersecting);
+      },
+      { rootMargin: `-${alturaNav}px 0px 0px 0px` }
+    );
+    observadorHero.observe(hero);
+  } else {
+    encabezado.classList.add('encabezado--solido');
+  }
+
+  /* — Menú móvil — */
+  const alternarMenu = (abrir) => {
+    if (!hamburguesa || !menuMovil) return;
+    hamburguesa.setAttribute('aria-expanded', String(abrir));
+    traducirAria(hamburguesa, abrir ? 'nav.menu-cerrar' : 'nav.menu-abrir');
+    menuMovil.hidden = !abrir;
+    encabezado.classList.toggle('encabezado--menu-abierto', abrir);
   };
 
-  window.addEventListener('scroll', manejarScroll, { passive: true });
-  manejarScroll(); // estado inicial
-
-  /* — Menú móvil hamburguesa — */
   hamburguesa?.addEventListener('click', () => {
-    const abierto = hamburguesa.getAttribute('aria-expanded') === 'true';
-    hamburguesa.setAttribute('aria-expanded', String(!abierto));
-    menuMovil.setAttribute('aria-hidden', String(abierto));
-    menuMovil.classList.toggle('abierto', !abierto);
+    alternarMenu(hamburguesa.getAttribute('aria-expanded') !== 'true');
   });
 
-  /* — Cerrar menú móvil al hacer clic en cualquier link — */
-  linksNav.forEach((link) => {
-    link.addEventListener('click', () => {
-      hamburguesa?.setAttribute('aria-expanded', 'false');
-      menuMovil?.setAttribute('aria-hidden', 'true');
-      menuMovil?.classList.remove('abierto');
-    });
+  /* Delegación: un solo listener cierra el menú al elegir un enlace */
+  menuMovil?.addEventListener('click', (e) => {
+    if (e.target.closest('a')) alternarMenu(false);
   });
 
-  /* — Cerrar menú móvil con tecla Escape (accesibilidad) — */
+  /* Escape cierra y devuelve el foco a la hamburguesa */
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && hamburguesa?.getAttribute('aria-expanded') === 'true') {
-      hamburguesa.setAttribute('aria-expanded', 'false');
-      menuMovil?.setAttribute('aria-hidden', 'true');
-      menuMovil?.classList.remove('abierto');
+      alternarMenu(false);
       hamburguesa.focus();
     }
   });
 
-  /* — Link activo según sección visible (Intersection Observer) —
-     Solo se observan las secciones con id, no los h2 con id que viven
-     dentro de ellas (antes apagaban el enlace activo). */
+  /* Al pasar a desktop el menú móvil no existe: se cierra */
+  window.matchMedia('(min-width: 1024px)').addEventListener('change', (e) => {
+    if (e.matches) alternarMenu(false);
+  });
+
+  /* — Enlace activo según la sección visible —
+     Solo secciones hijas directas de main (no los h2 con id) */
   const secciones = document.querySelectorAll('main > section[id]');
 
-  const observadorNav = new IntersectionObserver(
+  const observadorSecciones = new IntersectionObserver(
     (entradas) => {
       entradas.forEach((entrada) => {
-        if (entrada.isIntersecting) {
-          linksNav.forEach((link) => {
-            const activo = link.getAttribute('href') === `#${entrada.target.id}`;
-            link.classList.toggle('activo', activo);
-          });
-        }
+        if (!entrada.isIntersecting) return;
+        const destino = `#${entrada.target.id}`;
+        enlaces.forEach((enlace) => {
+          const activo = enlace.getAttribute('href') === destino;
+          enlace.classList.toggle('activo', activo);
+          if (activo) enlace.setAttribute('aria-current', 'location');
+          else enlace.removeAttribute('aria-current');
+        });
       });
     },
     { rootMargin: '-40% 0px -55% 0px' }
   );
 
-  secciones.forEach((s) => observadorNav.observe(s));
+  secciones.forEach((s) => observadorSecciones.observe(s));
 };
 
 
@@ -92,6 +115,115 @@ const iniciarHero = () => {
   requestAnimationFrame(() => {
     elementosHero.forEach((el) => el.classList.add('visible'));
   });
+};
+
+
+/* ================================================================
+   HERO - Video "Galería de luz"
+   La imagen es el LCP; el video se carga después de load, solo sin
+   reduced-motion ni Save-Data, y cada dispositivo baja solo su versión.
+================================================================ */
+
+/* Misma consulta que los <source> verticales del <picture> y el CSS */
+const CONSULTA_HERO_VERTICAL = '(max-width: 767px), (orientation: portrait) and (max-width: 1279px)';
+
+const iniciarVideoHero = () => {
+  const hero   = document.querySelector('.hero');
+  const video  = hero?.querySelector('.hero__video');
+  const imagen = hero?.querySelector('.hero__imagen');
+  const pausa  = hero?.querySelector('.hero__pausa');
+
+  if (!hero || !video) return;
+
+  const movimientoReducido = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const vertical = window.matchMedia(CONSULTA_HERO_VERTICAL);
+
+  if (movimientoReducido.matches || navigator.connection?.saveData) return;
+
+  let pausadoPorUsuario = false;
+  let heroVisible = true;
+
+  const reproducir = async () => {
+    if (pausadoPorUsuario || !heroVisible || document.hidden) return;
+    try {
+      await video.play();
+    } catch {
+      /* Autoplay bloqueado (p. ej. bajo consumo en iOS): se queda la imagen */
+    }
+  };
+
+  /* Crea las dos fuentes (webm primero) de la versión que toca y recarga */
+  const cargarFuentes = () => {
+    const sufijo = vertical.matches ? 'Movil' : '';
+    const fragmento = document.createDocumentFragment();
+
+    [['webm', 'video/webm'], ['mp4', 'video/mp4']].forEach(([formato, tipo]) => {
+      const fuente = document.createElement('source');
+      fuente.src = video.dataset[`fuente${sufijo}${formato === 'webm' ? 'Webm' : 'Mp4'}`];
+      fuente.type = tipo;
+      fragmento.append(fuente);
+    });
+
+    hero.classList.remove('hero--video-activo');
+    video.replaceChildren(fragmento);
+    video.poster = imagen?.currentSrc ?? '';
+    video.load();
+    reproducir();
+  };
+
+  const arrancar = () => {
+    cargarFuentes();
+
+    /* Solo al reproducir de verdad se muestra el video y su control */
+    video.addEventListener('playing', () => {
+      hero.classList.add('hero--video-activo');
+      if (pausa) pausa.hidden = false;
+    });
+
+    /* Rotación o cambio de tamaño: cambia a la otra proporción */
+    vertical.addEventListener('change', cargarFuentes);
+
+    /* Fuera de vista o pestaña oculta: pausa; al volver, reanuda */
+    new IntersectionObserver(([entrada]) => {
+      heroVisible = entrada.isIntersecting;
+      if (heroVisible) reproducir();
+      else video.pause();
+    }).observe(hero);
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) video.pause();
+      else reproducir();
+    });
+
+    /* Si el usuario activa reduced-motion con la página abierta */
+    movimientoReducido.addEventListener('change', (e) => {
+      if (!e.matches) return;
+      pausadoPorUsuario = true;
+      video.pause();
+      hero.classList.remove('hero--video-activo');
+      if (pausa) pausa.hidden = true;
+    });
+
+    /* Botón de pausa (WCAG 2.2.2) */
+    pausa?.addEventListener('click', () => {
+      pausadoPorUsuario = !pausadoPorUsuario;
+      /* Solo cambia la etiqueta (no aria-pressed): un toggle no debe cambiar
+         de nombre y de estado a la vez ("Reanudar, presionado" confunde) */
+      pausa.classList.toggle('hero__pausa--pausado', pausadoPorUsuario);
+      traducirAria(pausa, pausadoPorUsuario ? 'hero.reanudar' : 'hero.pausa');
+      if (pausadoPorUsuario) video.pause();
+      else reproducir();
+    });
+  };
+
+  /* Después de load y en un momento ocioso: no compite con el LCP */
+  const alEstarOcioso = () =>
+    'requestIdleCallback' in window
+      ? requestIdleCallback(arrancar, { timeout: 2000 })
+      : setTimeout(arrancar, 200);
+
+  if (document.readyState === 'complete') alEstarOcioso();
+  else window.addEventListener('load', alEstarOcioso, { once: true });
 };
 
 
@@ -148,19 +280,25 @@ const TRADUCCIONES = {
     'wa.general':  'Hola, me gustaría cotizar un producto de MEDEISA.',
 
     /* --- NAV --- */
-    'nav.nosotros':   'Nosotros',
-    'nav.productos':  'Productos',
-    'nav.galeria':    'Expo',
-    'nav.contacto':   'Contacto',
+    'nav.aria':         'Navegación principal',
+    'nav.logo-aria':    'MEDEISA, ir al inicio',
+    'nav.nosotros':     'Nosotros',
+    'nav.productos':    'Productos',
+    'nav.galeria':      'Expo',
+    'nav.contacto':     'Contacto',
+    'nav.idioma-aria':  'Idioma',
+    'nav.cta':          'Cotizar por WhatsApp',
+    'nav.menu-abrir':   'Abrir menú de navegación',
+    'nav.menu-cerrar':  'Cerrar menú de navegación',
 
     /* --- HERO --- */
-    'hero.eyebrow':   'Ocotlán, Jalisco',
-    'hero.titulo-l1': 'Acero',
-    'hero.titulo-l2': 'en estilo',
-    'hero.subtitulo': 'Mueblería industrial a medida',
-    'hero.btn-prim':  'Ver productos',
-    'hero.cta-ghost': 'Cotizar ahora  →',
-    'hero.deco':      'Diseño industrial / hecho a mano',
+    'hero.etiqueta':  'Mueblería industrial · Ocotlán, Jalisco',
+    'hero.titulo':    'Transformamos acero en <em>estilo</em>',
+    'hero.cta':       'Cotizar por WhatsApp',
+    'hero.catalogo':  'Ver catálogo',
+    'hero.alt':       'Centro de TV Catania de acero negro y madera exhibido solo frente a un muro de yeso hueso con sombras de ventana',
+    'hero.pausa':     'Pausar animación de fondo',
+    'hero.reanudar':  'Reanudar animación de fondo',
 
     /* --- DECLARACION --- */
 
@@ -240,19 +378,25 @@ const TRADUCCIONES = {
     'wa.general':  'Hello, I would like a quote for a MEDEISA product.',
 
     /* --- NAV --- */
-    'nav.nosotros':   'About',
-    'nav.productos':  'Products',
-    'nav.galeria':    'Expo',
-    'nav.contacto':   'Contact',
+    'nav.aria':         'Main navigation',
+    'nav.logo-aria':    'MEDEISA, back to top',
+    'nav.nosotros':     'About',
+    'nav.productos':    'Products',
+    'nav.galeria':      'Expo',
+    'nav.contacto':     'Contact',
+    'nav.idioma-aria':  'Language',
+    'nav.cta':          'Quote on WhatsApp',
+    'nav.menu-abrir':   'Open navigation menu',
+    'nav.menu-cerrar':  'Close navigation menu',
 
     /* --- HERO --- */
-    'hero.eyebrow':   'Ocotlán, Jalisco',
-    'hero.titulo-l1': 'Steel',
-    'hero.titulo-l2': 'in style',
-    'hero.subtitulo': 'Custom industrial furniture',
-    'hero.btn-prim':  'View products',
-    'hero.cta-ghost': 'Get a quote  →',
-    'hero.deco':      'Industrial design / handmade',
+    'hero.etiqueta':  'Industrial furniture · Ocotlán, Jalisco',
+    'hero.titulo':    'We transform steel into <em>style</em>',
+    'hero.cta':       'Quote on WhatsApp',
+    'hero.catalogo':  'View catalog',
+    'hero.alt':       'Catania TV stand in black steel and wood, displayed alone against an off-white plaster wall with window shadows',
+    'hero.pausa':     'Pause background animation',
+    'hero.reanudar':  'Play background animation',
 
     /* --- DECLARACION --- */
 
@@ -387,39 +531,31 @@ const aplicarIdioma = (lang) => {
   document.querySelector('meta[name="description"]')?.setAttribute('content', t['meta.desc'] ?? '');
 };
 
-const iniciarIdioma = (recalcularCursor) => {
-  const botones = document.querySelectorAll('.hero__idioma-btn[data-lang]');
+const iniciarIdioma = () => {
+  const selector = document.querySelector('.idioma');
+  const botones = selector?.querySelectorAll('.idioma__boton[lang]') ?? [];
   if (!botones.length) return;
 
-  /* Estado visual y accesible de los botones del selector */
+  /* Estado visual y accesible: el nombre accesible es el texto visible (ES/EN) */
   const marcarBotones = (lang) => {
     botones.forEach((btn) => {
-      const activo = btn.dataset.lang === lang;
+      const activo = btn.lang === lang;
       btn.classList.toggle('activo', activo);
       btn.setAttribute('aria-pressed', String(activo));
     });
-    document.querySelector('.hero__idioma-btn[data-lang="es"]')
-      ?.setAttribute('aria-label', lang === 'es' ? 'Español (idioma actual)' : 'Español');
-    document.querySelector('.hero__idioma-btn[data-lang="en"]')
-      ?.setAttribute('aria-label', lang === 'en' ? 'English (current language)' : 'English');
   };
 
   const cambiarIdioma = (lang) => {
     aplicarIdioma(lang);
     marcarBotones(lang);
-
-    /* Recalcular el cursor del nav pill una vez repintados los textos */
-    if (typeof recalcularCursor === 'function') {
-      requestAnimationFrame(recalcularCursor);
-    }
   };
 
   /* Delegación: un solo listener para el selector */
-  document.querySelector('.nav__idioma')?.addEventListener('click', (e) => {
-    const btn = e.target.closest('.hero__idioma-btn[data-lang]');
+  selector.addEventListener('click', (e) => {
+    const btn = e.target.closest('.idioma__boton[lang]');
     if (!btn || btn.classList.contains('activo')) return;
-    cambiarIdioma(btn.dataset.lang);
-    guardarIdioma(btn.dataset.lang);
+    cambiarIdioma(btn.lang);
+    guardarIdioma(btn.lang);
   });
 
   /* Idioma inicial: guardado > navegador > español (el HTML ya viene en ES) */
@@ -429,62 +565,6 @@ const iniciarIdioma = (recalcularCursor) => {
   if (idiomaInicial !== 'es' && TRADUCCIONES[idiomaInicial]) {
     cambiarIdioma(idiomaInicial);
   }
-};
-
-
-/* ================================================================
-   NAV PILL - Cursor deslizante (se elimina en el paso 1)
-================================================================ */
-const iniciarNavPill = () => {
-  const pill    = document.querySelector('.nav__pill');
-  const cursor  = document.querySelector('.nav__cursor');
-  const links   = document.querySelectorAll('.nav__pill .nav__link');
-
-  if (!pill || !cursor || !links.length) return;
-
-  let linkActivo = links[0];
-
-  /* Mueve y redimensiona el cursor sobre el elemento dado */
-  const moverCursor = (el) => {
-    const pillRect = pill.getBoundingClientRect();
-    const elRect   = el.getBoundingClientRect();
-    const x = elRect.left - pillRect.left;
-    cursor.style.transform = `translateX(${x}px)`;
-    cursor.style.width = `${elRect.width}px`;
-  };
-
-  /* Recalcula el cursor sobre el link activo actual (tras cambio de idioma) */
-  const recalcularCursor = () => moverCursor(linkActivo);
-
-  requestAnimationFrame(recalcularCursor);
-
-  links.forEach((link) => {
-    link.addEventListener('mouseenter', () => moverCursor(link));
-    link.addEventListener('mouseleave', () => moverCursor(linkActivo));
-    link.addEventListener('focus',  () => moverCursor(link));
-    link.addEventListener('blur',   () => moverCursor(linkActivo));
-    link.addEventListener('click', () => {
-      linkActivo = link;
-      moverCursor(link);
-    });
-  });
-
-  /* Sincronizar con la clase .activo que gestiona el Intersection Observer del nav */
-  const observerClase = new MutationObserver(() => {
-    const activoActual = document.querySelector('.nav__pill .nav__link.activo');
-    if (activoActual && activoActual !== linkActivo) {
-      linkActivo = activoActual;
-      moverCursor(activoActual);
-    }
-  });
-
-  links.forEach((link) => {
-    observerClase.observe(link, { attributes: true, attributeFilter: ['class'] });
-  });
-
-  window.addEventListener('resize', recalcularCursor, { passive: true });
-
-  return recalcularCursor;
 };
 
 
@@ -502,9 +582,9 @@ const iniciarFooter = () => {
 ================================================================ */
 document.addEventListener('DOMContentLoaded', () => {
   iniciarNav();
-  const recalcularCursor = iniciarNavPill();
-  iniciarIdioma(recalcularCursor);
+  iniciarIdioma();
   iniciarHero();
+  iniciarVideoHero();
   iniciarAnimacionesEntrada();
   iniciarFooter();
 });
