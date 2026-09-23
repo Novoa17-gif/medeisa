@@ -384,8 +384,12 @@ const TRADUCCIONES = {
     'cnt.lbl.dir':   'Dirección',
     'cnt.val.hor':   'Lunes a Viernes · 8:00 am – 4:00 pm',
     'cnt.btn-wa':    'Escribir por WhatsApp',
-    'cnt.mapa-link': 'Ver en Maps →',
     'cnt.redes':     'Síguenos',
+    'cnt.ig-aria':   'Instagram @medeisa.muebles (abre en nueva pestaña)',
+    'cnt.fb-aria':   'Facebook Medeisa (abre en nueva pestaña)',
+    'cnt.mapa-titulo': 'Ubicación de MEDEISA en Google Maps',
+    'cnt.mapa-link': 'Ver en Google Maps',
+    'cnt.mapa-aria': 'Ver en Google Maps: ubicación de MEDEISA (abre en nueva pestaña)',
 
     /* --- FOOTER --- */
     'pie.tagline':   'Transformamos acero en estilo',
@@ -511,8 +515,12 @@ const TRADUCCIONES = {
     'cnt.lbl.dir':   'Address',
     'cnt.val.hor':   'Monday to Friday · 8:00 am – 4:00 pm',
     'cnt.btn-wa':    'Message on WhatsApp',
-    'cnt.mapa-link': 'View on Maps →',
     'cnt.redes':     'Follow us',
+    'cnt.ig-aria':   'Instagram @medeisa.muebles (opens in a new tab)',
+    'cnt.fb-aria':   'Facebook Medeisa (opens in a new tab)',
+    'cnt.mapa-titulo': 'MEDEISA location on Google Maps',
+    'cnt.mapa-link': 'View on Google Maps',
+    'cnt.mapa-aria': 'View on Google Maps: MEDEISA location (opens in a new tab)',
 
     /* --- FOOTER --- */
     'pie.tagline':   'We transform steel into style',

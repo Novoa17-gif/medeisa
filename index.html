@@ -818,156 +818,113 @@
     <section class="contacto" id="contacto" aria-labelledby="contacto-titulo">
       <div class="contenedor contacto__contenedor">
 
-        <!-- Columna izquierda: información -->
+        <!-- Columna de información: cabecera, datos, CTA y redes -->
         <div class="contacto__info">
 
-          <p class="contacto__etiqueta animar-entrada">
-            <span class="contacto__etiqueta-linea" aria-hidden="true"></span>
-            <span data-i18n="cnt.etiqueta">Encuéntranos</span>
-          </p>
-          <h2 class="contacto__titulo animar-entrada" id="contacto-titulo" data-i18n="cnt.titulo">
-            Contáctanos
-          </h2>
-          <p class="contacto__subtexto animar-entrada" data-i18n="cnt.subtexto">
-            Estamos listos para cotizar tu proyecto. Escríbenos o visítanos.
-          </p>
+          <header class="cabecera-seccion animar-entrada">
+            <span class="numero-seccion" aria-hidden="true">04</span>
+            <p class="etiqueta">
+              <span class="etiqueta__linea" aria-hidden="true"></span>
+              <span data-i18n="cnt.etiqueta">Encuéntranos</span>
+            </p>
+            <h2 class="titulo-seccion" id="contacto-titulo" data-i18n="cnt.titulo">Contáctanos</h2>
+            <p class="contacto__subtexto" data-i18n="cnt.subtexto">Estamos listos para cotizar tu proyecto. Escríbenos o visítanos.</p>
+          </header>
 
-          <!-- Datos de contacto -->
-          <ul class="contacto__datos" role="list">
-
-            <!-- Teléfono -->
-            <li class="contacto__dato animar-entrada" style="--orden: 1">
-              <span class="contacto__dato-icono" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.6a16 16 0 0 0 6.29 6.29l1.66-1.84a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
-                </svg>
-              </span>
-              <div class="contacto__dato-contenido">
-                <span class="contacto__dato-label" data-i18n="cnt.lbl.tel">Teléfono</span>
-                <a class="contacto__dato-valor contacto__dato-valor--link" href="tel:+523921236728">
-                  392 123 6728
-                </a>
-              </div>
-            </li>
-
-            <!-- Horario -->
-            <li class="contacto__dato animar-entrada" style="--orden: 2">
-              <span class="contacto__dato-icono" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="10"/>
-                  <polyline points="12 6 12 12 16 14"/>
-                </svg>
-              </span>
-              <div class="contacto__dato-contenido">
-                <span class="contacto__dato-label" data-i18n="cnt.lbl.hor">Horario</span>
-                <span class="contacto__dato-valor" data-i18n="cnt.val.hor">Lunes a Viernes · 8:00 am – 4:00 pm</span>
-              </div>
-            </li>
-
-            <!-- Dirección -->
-            <li class="contacto__dato animar-entrada" style="--orden: 3">
-              <span class="contacto__dato-icono" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                  <circle cx="12" cy="10" r="3"/>
-                </svg>
-              </span>
-              <div class="contacto__dato-contenido">
-                <span class="contacto__dato-label" data-i18n="cnt.lbl.dir">Dirección</span>
-                <span class="contacto__dato-valor">
+          <!-- Datos del negocio: filas con hairline -->
+          <dl class="contacto__datos">
+            <div class="contacto__dato animar-entrada" style="--orden: 1">
+              <dt class="contacto__dato-termino" data-i18n="cnt.lbl.tel">Teléfono</dt>
+              <dd class="contacto__dato-valor contacto__dato-valor--cifras">
+                <a class="contacto__telefono" href="tel:+523921236728">392 123 6728</a>
+              </dd>
+            </div>
+            <div class="contacto__dato animar-entrada" style="--orden: 2">
+              <dt class="contacto__dato-termino" data-i18n="cnt.lbl.hor">Horario</dt>
+              <dd class="contacto__dato-valor contacto__dato-valor--cifras" data-i18n="cnt.val.hor">Lunes a Viernes · 8:00 am – 4:00 pm</dd>
+            </div>
+            <div class="contacto__dato animar-entrada" style="--orden: 3">
+              <dt class="contacto__dato-termino" data-i18n="cnt.lbl.dir">Dirección</dt>
+              <dd class="contacto__dato-valor">
+                <address class="contacto__direccion">
                   Carr. Santa Rosa La Barca KM 49+200,<br />
                   Cuitzeo, Poncitlán, Jalisco CP 45965
-                </span>
-              </div>
-            </li>
-
-          </ul>
-
-          <!-- Botón WhatsApp -->
-          <a
-            class="btn btn--rojo contacto__btn-whatsapp animar-entrada"
-            data-wa="general"
-            href="https://wa.me/523921236728?text=Hola%2C%20me%20gustar%C3%ADa%20cotizar%20un%20producto%20de%20MEDEISA."
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
-            </svg>
-            <span class="contacto__btn-texto" data-i18n="cnt.btn-wa">Escribir por WhatsApp</span>
-          </a>
-
-          <!-- Redes sociales -->
-          <div class="contacto__redes animar-entrada">
-            <span class="contacto__redes-label" data-i18n="cnt.redes">Síguenos</span>
-            <div class="contacto__redes-links">
-
-              <a
-                class="contacto__red"
-                href="https://instagram.com/medeisa.muebles"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram de MEDEISA (@medeisa.muebles)"
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-                </svg>
-                @medeisa.muebles
-              </a>
-
-              <a
-                class="contacto__red"
-                href="https://www.facebook.com/profile.php?id=61580795922902"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook de MEDEISA"
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                </svg>
-                Medeisa
-              </a>
-
+                </address>
+              </dd>
             </div>
+          </dl>
+
+          <!-- CTA principal de la banda (envuelto: la entrada no va sobre el enlace) -->
+          <div class="contacto__accion animar-entrada">
+            <a
+              class="btn btn--relleno"
+              data-wa="general"
+              href="https://wa.me/523921236728?text=Hola%2C%20me%20gustar%C3%ADa%20cotizar%20un%20producto%20de%20MEDEISA."
+              target="_blank"
+              rel="noopener noreferrer"
+              data-i18n="cnt.btn-wa"
+            >Escribir por WhatsApp</a>
+          </div>
+
+          <!-- Redes sociales como enlaces de texto -->
+          <div class="contacto__redes animar-entrada">
+            <p class="contacto__redes-titulo" id="contacto-redes-titulo" data-i18n="cnt.redes">Síguenos</p>
+            <ul class="contacto__redes-lista" role="list" aria-labelledby="contacto-redes-titulo">
+              <li>
+                <a
+                  class="contacto__red"
+                  href="https://instagram.com/medeisa.muebles"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram @medeisa.muebles (abre en nueva pestaña)"
+                  data-i18n-aria="cnt.ig-aria"
+                >Instagram @medeisa.muebles</a>
+              </li>
+              <li>
+                <a
+                  class="contacto__red"
+                  href="https://www.facebook.com/profile.php?id=61580795922902"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Facebook Medeisa (abre en nueva pestaña)"
+                  data-i18n-aria="cnt.fb-aria"
+                >Facebook Medeisa</a>
+              </li>
+            </ul>
           </div>
 
         </div>
 
-        <!-- Columna derecha: mapa -->
-        <div class="contacto__mapa-wrap animar-entrada">
-          <div class="contacto__mapa-header">
-            <div class="contacto__mapa-header-izq">
-              <span class="contacto__mapa-icono" aria-hidden="true">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/>
-                </svg>
-              </span>
-              <div class="contacto__mapa-header-texto">
-                <strong class="contacto__mapa-nombre">MEDEISA S.A. de C.V.</strong>
-                <span class="contacto__mapa-dir">Carr. Santa Rosa La Barca KM 49+200, Cuitzeo, Jal.</span>
-              </div>
-            </div>
+        <!-- Columna del mapa: marco de 32px + pie claro -->
+        <figure class="contacto__mapa animar-entrada">
+          <div class="contacto__mapa-marco marco-imagen">
+            <iframe
+              class="contacto__mapa-iframe"
+              title="Ubicación de MEDEISA en Google Maps"
+              data-i18n-title="cnt.mapa-titulo"
+              sandbox="allow-scripts allow-same-origin allow-popups"
+              src="https://maps.google.com/maps?q=Carr.+Santa+Rosa+La+Barca+KM+49%2B200,+Cuitzeo,+Poncitl%C3%A1n,+Jalisco+CP+45965,+M%C3%A9xico&z=16&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <figcaption class="contacto__mapa-pie">
+            <span class="contacto__mapa-texto">
+              <span class="contacto__mapa-nombre">MEDEISA S.A. de C.V.</span>
+              <span class="contacto__mapa-dir">Carr. Santa Rosa La Barca KM 49+200, Cuitzeo, Jal.</span>
+            </span>
             <a
-              class="contacto__mapa-link"
+              class="btn btn--contorno contacto__mapa-enlace"
               href="https://www.google.com/maps/search/MEDEISA+S.A.+DE+C.V.,+Cuitzeo,+Jalisco"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Abrir ubicación de MEDEISA en Google Maps, abre en nueva pestaña"
+              aria-label="Ver en Google Maps: ubicación de MEDEISA (abre en nueva pestaña)"
+              data-i18n-aria="cnt.mapa-aria"
               data-i18n="cnt.mapa-link"
-            >Ver en Maps&nbsp;→</a>
-          </div>
-          <iframe
-            class="contacto__mapa"
-            title="Ubicación de MEDEISA en Google Maps"
-            sandbox="allow-scripts allow-same-origin allow-popups"
-            src="https://maps.google.com/maps?q=Carr.+Santa+Rosa+La+Barca+KM+49%2B200,+Cuitzeo,+Poncitl%C3%A1n,+Jalisco+CP+45965,+M%C3%A9xico&z=16&output=embed"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            allowfullscreen
-          ></iframe>
-        </div>
+            >Ver en Google Maps</a>
+          </figcaption>
+        </figure>
 
       </div>
     </section>

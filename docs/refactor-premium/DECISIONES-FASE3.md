@@ -94,3 +94,19 @@ Una línea por decisión no trivial. Orden de prioridad: SPEC > DESIGN > BLUEPRI
 - Fondo del marco mientras carga = carbón (panel), no hueso: sobre la banda negra un rectángulo hueso destellaba antes de la foto.
 - Padding de banda `--space-2xl` (antes `--space-3xl`, reservado a la Declaración). Sin zoom en hover.
 - Revisión: `.numero-seccion` pasa a `font-variant-numeric: lining-nums` (Cormorant pintaba cifras antiguas y "03" se leía "o3"); arregla 01-04 a la vez.
+
+## Paso 5 - Contacto
+
+- Se conservan textos y claves existentes (`cnt.titulo` "Contáctanos", subtexto, horario "Lunes a Viernes · 8:00 am – 4:00 pm"): el BLUEPRINT pide copiar los datos del negocio, no reescribirlos. El titular no lleva cursiva: es una sola palabra y cambiar el texto no es parte del refactor.
+- Subtexto dentro de `.cabecera-seccion` en piedra (mismo patrón que `catalogo__intro`); etiqueta "Encuéntranos" en negro porque el 04 ya es la nota roja del grupo.
+- Datos en `<dl>` con un `<div>` por par (patrón de Expo); dirección completa en `<address>` (sin cursiva) y copiada tal cual del HTML anterior; `tnum` en teléfono y horario.
+- Teléfono con subrayado hairline `#D6D3CF` que pasa a rojo en hover (indica que es enlace sin poner texto rojo) y área táctil de 44px.
+- CTA `.btn--relleno` sin icono (DESIGN: sin iconos decorativos); el texto del botón se traduce con `data-i18n` sobre el propio enlace y la entrada va en un contenedor `.contacto__accion`.
+- Redes como `<ul>` de enlaces de texto ("Instagram @medeisa.muebles", "Facebook Medeisa") con la línea roja `::after` de nav/afiliaciones; "Síguenos" es un `<p>` con estilo de término (no h3) enlazado a la lista con `aria-labelledby`.
+- `aria-label` de redes y del enlace a Maps empiezan con el texto visible y añaden "(abre en nueva pestaña)" (WCAG 2.5.3 label-in-name; el anterior "Abrir ubicación..." no contenía "Ver en Maps"); todos traducibles: `cnt.ig-aria`, `cnt.fb-aria`, `cnt.mapa-aria`, `cnt.mapa-titulo` (title del iframe), `cnt.mapa-link` "Ver en Google Maps" sin flecha ni `&nbsp;`.
+- Mapa en `<figure>` con `<figcaption>` (nombre Cormorant 400 + dirección corta piedra + `.btn--contorno`); en móvil el pie se apila, desde 768px nombre a la izquierda y botón a la derecha.
+- Recorte del iframe al radio: `isolation: isolate` + `mask-image` (con prefijo `-webkit-`) desde el principio, sin esperar a probar en Safari (no hay WebKit en el entorno de verificación; la máscara es el recorte fiable conocido).
+- Fondo del marco del mapa mientras carga = papel, no hueso: sobre la banda hueso el marco sería invisible hasta que carga el iframe.
+- Iframe 320px en móvil y 520px desde 768px (en 768-1023 ya hay ancho suficiente aunque siga en una columna).
+- Grid desktop `5fr 7fr` desde 1024px con `column-gap: --space-xl`, alineado arriba; padding de banda `--space-2xl` arriba y abajo (antes `--space-3xl` arriba y casi nada abajo).
+- Se eliminan del bloque: iconos SVG, borde rojo de 3px, cabecera oscura del mapa, sombra y borde del mapa, grises sueltos `#777773`/`#3A3A38`, estados `:active` con `scale`. `.btn--rojo` LEGADO ya no tiene uso en el HTML; se deja en COMPONENTES COMPARTIDOS para que lo borre el paso 8.
