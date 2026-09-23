@@ -1,7 +1,7 @@
 /* ================================================================
    MEDEISA - JavaScript principal
    Orden: Nav → Hero (video) → Animaciones →
-          Idioma (i18n + WhatsApp) → Catálogo → Footer → Init
+          Idioma (i18n + WhatsApp) → Catálogo (salas) → Footer → Init
 ================================================================ */
 
 'use strict';
@@ -269,7 +269,7 @@ const TRADUCCIONES = {
   es: {
     /* --- GLOBAL --- */
     'meta.title':  'MEDEISA — Mueblería Industrial en Ocotlán, Jalisco',
-    'meta.desc':   'MEDEISA — Mueblería industrial en Ocotlán, Jalisco. Transformamos acero en estilo. Cotiza tus muebles metálicos a medida.',
+    'meta.desc':   'MEDEISA — Muebles de acero y madera en Ocotlán, Jalisco: colecciones Industrial, Nex y Kai. Transformamos acero en estilo. Cotiza por WhatsApp.',
     'global.skip': 'Saltar al contenido principal',
     'wa.general':  'Hola, me gustaría cotizar un producto de MEDEISA.',
     'wa.aria':     'Contactar por WhatsApp (abre en nueva pestaña)',
@@ -287,7 +287,7 @@ const TRADUCCIONES = {
     'nav.menu-cerrar':  'Cerrar menú de navegación',
 
     /* --- HERO --- */
-    'hero.etiqueta':  'Mueblería industrial\u00a0· Ocotlán, Jalisco',   /* \u00a0: el punto no abre renglón */
+    'hero.etiqueta':  'Muebles de acero y madera\u00a0· Ocotlán, Jalisco',   /* \u00a0: el punto no abre renglón */
     'hero.titulo':    'Transformamos acero en <em>estilo</em>',
     'hero.cta':       'Cotizar por WhatsApp',
     'hero.catalogo':  'Ver catálogo',
@@ -333,8 +333,29 @@ const TRADUCCIONES = {
 
     /* --- CATALOGO --- */
     'cat.etiqueta':    'Lo que fabricamos',
-    'cat.titulo':      'Nuestros <em>productos</em>',
-    'cat.intro':       'Una selección de nuestra línea industrial: acero y madera trabajados en Jalisco. Cotiza cualquier pieza por WhatsApp.',
+    'cat.titulo':      'Nuestras <em>colecciones</em>',
+    'cat.intro':       'Tres colecciones, tres salas: Industrial, Nex y Kai. Acero y madera trabajados en Jalisco; cotiza cualquier pieza por WhatsApp.',
+    'cat.indice-aria': 'Colecciones',
+    'cat.sala-01':     'Sala 01',
+    'cat.sala-02':     'Sala 02',
+    'cat.sala-03':     'Sala 03',
+    'cat.conteo':      '6 piezas',
+    'cat.materiales-aria': 'Materiales',
+    'cat.material.acero-negro':    'Acero negro',
+    'cat.material.parota':         'Parota',
+    'cat.material.nogal':          'Nogal',
+    'cat.material.encino-claro':   'Encino claro',
+    'cat.material.metal-champana': 'Metal champaña',
+    'cat.variante-cabecera': 'Con o sin cabecera',
+    'cat.industrial.frase':       'Acero negro y parota: la línea con la que nació MEDEISA, con la estructura a la vista.',
+    'cat.industrial.alt-portada': 'Piezas de la colección Industrial, de acero negro y parota, en la galería MEDEISA con muro de yeso hueso y luz rasante de tarde',
+    'cat.industrial.carril-aria': 'Piezas de la sala Industrial',
+    'cat.nex.frase':              'Nogal americano sobre acero negro, con listones de nogal como único agarre.',
+    'cat.nex.alt-portada':        'Bufetera Nex de nogal y acero negro en la galería MEDEISA, con muro de yeso hueso y luz rasante de tarde',
+    'cat.nex.carril-aria':        'Piezas de la sala Nex',
+    'cat.kai.frase':              'Encino claro sobre patas de metal champaña, con la ola Kai como agarre.',
+    'cat.kai.alt-portada':        'Credenza Kai de encino claro y metal champaña en la galería MEDEISA, con muro de yeso hueso y luz rasante de tarde',
+    'cat.kai.carril-aria':        'Piezas de la sala Kai',
     'cat.cotizar':     'Cotizar por WhatsApp',
     'cat.ver-ambiente': 'Ver en ambiente',
     'cat.ver-estudio':  'Ver en estudio',
@@ -363,10 +384,60 @@ const TRADUCCIONES = {
     'cat.recamara-tulum.alt-ambiente': 'Recámara Tulum con ropa de cama clara y su buró con un jarrón de ramas secas, en una galería de yeso hueso con luz de tarde',
     'cat.recamara-tulum.mensaje':   'Hola, me interesa cotizar la Recámara Tulum de MEDEISA.',
 
+    /* Colecciones Nex y Kai: nombres provisionales, no se traducen */
+    'cat.nex-cama.categoria': 'Cama · Nogal y acero negro',
+    'cat.nex-cama.alt': 'Cama Nex: cabecera de nogal con marco de tubo cuadrado de acero negro y una columna central de tres listones, base de nogal de cantos rectos sobre patas de acero negro en marco, sobre fondo hueso',
+    'cat.nex-cama.alt-ambiente': 'Cama Nex en la galería MEDEISA: muro de yeso hueso, luz rasante de tarde y un jarrón con una rama de olivo',
+    'cat.nex-cama.mensaje': 'Hola, me interesa cotizar la Cama Nex de MEDEISA.',
+    'cat.nex-buro.categoria': 'Buró · Nogal y acero negro',
+    'cat.nex-buro.alt': 'Buró Nex: caja de nogal con cubierta de charola, cuatro cajones lisos y una columna central de listones, sobre base de acero negro con travesaños en X, sobre fondo hueso',
+    'cat.nex-buro.alt-ambiente': 'Buró Nex en la galería MEDEISA: muro de yeso hueso, luz rasante de tarde y un jarrón con una rama de olivo',
+    'cat.nex-buro.mensaje': 'Hola, me interesa cotizar el Buró Nex de MEDEISA.',
+    'cat.nex-comoda.categoria': 'Cómoda · Nogal y acero negro',
+    'cat.nex-comoda.alt': 'Cómoda Nex: cómoda alta de nogal con dos columnas de cinco cajones lisos y una columna central de listones, sobre patas delgadas de acero negro, sobre fondo hueso',
+    'cat.nex-comoda.alt-ambiente': 'Cómoda Nex en la galería MEDEISA: muro de yeso hueso, luz rasante de tarde y un jarrón con una rama de olivo',
+    'cat.nex-comoda.mensaje': 'Hola, me interesa cotizar la Cómoda Nex de MEDEISA.',
+    'cat.nex-bufetera.categoria': 'Bufetera · Nogal y acero negro',
+    'cat.nex-bufetera.alt': 'Bufetera Nex: bufetera larga de nogal con una banda de cajones y listones, cuatro puertas lisas de veta vertical y base de acero negro con travesaños en X, sobre fondo hueso',
+    'cat.nex-bufetera.alt-ambiente': 'Bufetera Nex en la galería MEDEISA: muro de yeso hueso, luz rasante de tarde y un jarrón con una rama de olivo',
+    'cat.nex-bufetera.mensaje': 'Hola, me interesa cotizar la Bufetera Nex de MEDEISA.',
+    'cat.nex-mesa-centro.categoria': 'Mesa de centro · Nogal y acero negro',
+    'cat.nex-mesa-centro.alt': 'Mesa de centro Nex: cubierta gruesa de nogal con marquetería en marco, un apoyo escultórico de nogal en V y otro de acero negro en marco rectangular, sobre fondo hueso',
+    'cat.nex-mesa-centro.alt-ambiente': 'Mesa de centro Nex en la galería MEDEISA: muro de yeso hueso, luz rasante de tarde y un jarrón con una rama de olivo',
+    'cat.nex-mesa-centro.mensaje': 'Hola, me interesa cotizar la Mesa de centro Nex de MEDEISA.',
+    'cat.nex-centro-tv.categoria': 'Centro de TV · Nogal y acero negro',
+    'cat.nex-centro-tv.alt': 'Centro de TV Nex: mueble largo y bajo de nogal con esquinas redondeadas, dos nichos abiertos y tres cajones sin jaladeras, sobre patas cónicas negras, sobre fondo hueso',
+    'cat.nex-centro-tv.alt-ambiente': 'Centro de TV Nex en la galería MEDEISA: muro de yeso hueso, luz rasante de tarde y un jarrón con una rama de olivo',
+    'cat.nex-centro-tv.mensaje': 'Hola, me interesa cotizar el Centro de TV Nex de MEDEISA.',
+    'cat.kai-credenza.categoria': 'Credenza · Encino claro y metal champaña',
+    'cat.kai-credenza.alt': 'Credenza Kai: credenza de encino claro con extremos redondeados, dos nichos abiertos y cuatro cajones lisos, sobre patas cónicas de metal champaña, sobre fondo hueso',
+    'cat.kai-credenza.alt-ambiente': 'Credenza Kai en la galería MEDEISA: muro de yeso hueso, luz rasante de tarde y un jarrón con una rama de olivo',
+    'cat.kai-credenza.mensaje': 'Hola, me interesa cotizar la Credenza Kai de MEDEISA.',
+    'cat.kai-mesa-redonda.categoria': 'Mesa redonda · Encino claro y metal champaña',
+    'cat.kai-mesa-redonda.alt': 'Mesa redonda Kai: cubierta redonda de encino claro sobre un pedestal de barras de metal champaña en forma de reloj de arena y un aro de encino apoyado en el piso, sobre fondo hueso',
+    'cat.kai-mesa-redonda.alt-ambiente': 'Mesa redonda Kai en la galería MEDEISA: muro de yeso hueso, luz rasante de tarde y un jarrón con una rama de olivo',
+    'cat.kai-mesa-redonda.mensaje': 'Hola, me interesa cotizar la Mesa redonda Kai de MEDEISA.',
+    'cat.kai-mesa-comedor.categoria': 'Mesa de comedor · Encino claro y metal champaña',
+    'cat.kai-mesa-comedor.alt': 'Mesa de comedor Kai: cubierta ovalada larga de encino claro sobre dos pedestales de barras de metal champaña con aro de encino, sobre fondo hueso',
+    'cat.kai-mesa-comedor.alt-ambiente': 'Mesa de comedor Kai en la galería MEDEISA: muro de yeso hueso, luz rasante de tarde y un jarrón con una rama de olivo',
+    'cat.kai-mesa-comedor.mensaje': 'Hola, me interesa cotizar la Mesa de comedor Kai de MEDEISA.',
+    'cat.kai-cama.categoria': 'Cama · Encino claro y metal champaña',
+    'cat.kai-cama.alt': 'Cama Kai: cabecera de encino claro con un cojín tapizado color crema de borde ondulado y base de esquinas redondeadas sobre patas cónicas de metal champaña, sobre fondo hueso',
+    'cat.kai-cama.alt-ambiente': 'Cama Kai en la galería MEDEISA: muro de yeso hueso, luz rasante de tarde y un jarrón con una rama de olivo',
+    'cat.kai-cama.mensaje': 'Hola, me interesa cotizar la Cama Kai de MEDEISA.',
+    'cat.kai-comoda.categoria': 'Cómoda · Encino claro y metal champaña',
+    'cat.kai-comoda.alt': 'Cómoda Kai: cómoda de encino claro de esquinas muy redondeadas con seis cajones y la ranura ondulada Kai como agarre, sobre patas cónicas de metal champaña, sobre fondo hueso',
+    'cat.kai-comoda.alt-ambiente': 'Cómoda Kai en la galería MEDEISA: muro de yeso hueso, luz rasante de tarde y un jarrón con una rama de olivo',
+    'cat.kai-comoda.mensaje': 'Hola, me interesa cotizar la Cómoda Kai de MEDEISA.',
+    'cat.kai-buro.categoria': 'Buró · Encino claro y metal champaña',
+    'cat.kai-buro.alt': 'Buró Kai: buró de encino claro con dos cajones separados por la ranura ondulada Kai, sobre patas cónicas de metal champaña, sobre fondo hueso',
+    'cat.kai-buro.alt-ambiente': 'Buró Kai en la galería MEDEISA: muro de yeso hueso, luz rasante de tarde y un jarrón con una rama de olivo',
+    'cat.kai-buro.mensaje': 'Hola, me interesa cotizar el Buró Kai de MEDEISA.',
+
     /* --- EXPO --- */
     'expo.etiqueta':   'Presencia semestral',
     'expo.titulo':     'Expo Muebles Ocotlán',
-    'expo.desc':       'Dos veces al año, en febrero y agosto, MEDEISA tiene presencia en Expo Muebles Ocotlán, la feria más importante de la región. Presentamos nuestro catálogo de muebles industriales fabricados a mano y conectamos con clientes de todo Jalisco.',
+    'expo.desc':       'Dos veces al año, en febrero y agosto, MEDEISA tiene presencia en Expo Muebles Ocotlán, la feria más importante de la región. Presentamos nuestras colecciones de muebles de acero y madera fabricados a mano y conectamos con clientes de todo Jalisco.',
     'expo.edicion':    'Edición',
     'expo.alt':        'Stand de MEDEISA en Expo Muebles Ocotlán: letrero negro con el logo, celosía de listones claros y libreros, mesas y estanterías de acero negro y madera iluminados con luz cálida',
     'expo.dato1-lbl':  'Evento',
@@ -409,7 +480,7 @@ const TRADUCCIONES = {
   en: {
     /* --- GLOBAL --- */
     'meta.title':  'MEDEISA — Industrial Furniture in Ocotlán, Jalisco',
-    'meta.desc':   'MEDEISA — Industrial furniture maker in Ocotlán, Jalisco. We transform steel into style. Get a quote for custom metal furniture.',
+    'meta.desc':   'MEDEISA — Steel and wood furniture in Ocotlán, Jalisco: the Industrial, Nex and Kai collections. We transform steel into style. Get a quote on WhatsApp.',
     'global.skip': 'Skip to main content',
     'wa.general':  'Hello, I would like a quote for a MEDEISA product.',
     'wa.aria':     'Contact us on WhatsApp (opens in a new tab)',
@@ -427,7 +498,7 @@ const TRADUCCIONES = {
     'nav.menu-cerrar':  'Close navigation menu',
 
     /* --- HERO --- */
-    'hero.etiqueta':  'Industrial furniture\u00a0· Ocotlán, Jalisco',
+    'hero.etiqueta':  'Steel and wood furniture\u00a0· Ocotlán, Jalisco',
     'hero.titulo':    'We transform steel into <em>style</em>',
     'hero.cta':       'Quote on WhatsApp',
     'hero.catalogo':  'View catalog',
@@ -473,8 +544,29 @@ const TRADUCCIONES = {
 
     /* --- CATALOGO --- */
     'cat.etiqueta':    'What we make',
-    'cat.titulo':      'Our <em>products</em>',
-    'cat.intro':       'A selection from our industrial line: steel and wood crafted in Jalisco. Request a quote for any piece on WhatsApp.',
+    'cat.titulo':      'Our <em>collections</em>',
+    'cat.intro':       'Three collections, three rooms: Industrial, Nex and Kai. Steel and wood crafted in Jalisco; request a quote for any piece on WhatsApp.',
+    'cat.indice-aria': 'Collections',
+    'cat.sala-01':     'Room 01',
+    'cat.sala-02':     'Room 02',
+    'cat.sala-03':     'Room 03',
+    'cat.conteo':      '6 pieces',
+    'cat.materiales-aria': 'Materials',
+    'cat.material.acero-negro':    'Black steel',
+    'cat.material.parota':         'Parota',
+    'cat.material.nogal':          'Walnut',
+    'cat.material.encino-claro':   'Light oak',
+    'cat.material.metal-champana': 'Champagne metal',
+    'cat.variante-cabecera': 'With or without headboard',
+    'cat.industrial.frase':       'Black steel and parota: the line MEDEISA was born with, its structure on display.',
+    'cat.industrial.alt-portada': 'Pieces from the Industrial collection, in black steel and parota, in the MEDEISA gallery with an off-white plaster wall and low afternoon light',
+    'cat.industrial.carril-aria': 'Pieces in the Industrial room',
+    'cat.nex.frase':              'American walnut on black steel, with walnut slats as the only pulls.',
+    'cat.nex.alt-portada':        'Bufetera Nex in walnut and black steel in the MEDEISA gallery, with an off-white plaster wall and low afternoon light',
+    'cat.nex.carril-aria':        'Pieces in the Nex room',
+    'cat.kai.frase':              'Light oak on champagne metal legs, with the Kai wave as the pull.',
+    'cat.kai.alt-portada':        'Credenza Kai in light oak and champagne metal in the MEDEISA gallery, with an off-white plaster wall and low afternoon light',
+    'cat.kai.carril-aria':        'Pieces in the Kai room',
     'cat.cotizar':     'Quote on WhatsApp',
     'cat.ver-ambiente': 'View in room',
     'cat.ver-estudio':  'View in studio',
@@ -503,10 +595,60 @@ const TRADUCCIONES = {
     'cat.recamara-tulum.alt-ambiente': 'Recámara Tulum with light bedding and its nightstand holding a vase of dried branches, in an off-white plaster gallery with afternoon light',
     'cat.recamara-tulum.mensaje':   'Hi, I would like a quote for the Recámara Tulum by MEDEISA.',
 
+    /* Colecciones Nex y Kai: nombres provisionales, no se traducen */
+    'cat.nex-cama.categoria': 'Bed · Walnut and black steel',
+    'cat.nex-cama.alt': 'Cama Nex: walnut headboard framed in black square steel tube with a central column of three slats, straight-edged walnut base on black steel frame legs, on a bone background',
+    'cat.nex-cama.alt-ambiente': 'Cama Nex in the MEDEISA gallery: off-white plaster wall, low afternoon light and a vase with an olive branch',
+    'cat.nex-cama.mensaje': 'Hi, I would like a quote for the Cama Nex by MEDEISA.',
+    'cat.nex-buro.categoria': 'Nightstand · Walnut and black steel',
+    'cat.nex-buro.alt': 'Buró Nex: walnut case with a tray top, four plain drawers and a central slat column, on a black steel base with X braces, on a bone background',
+    'cat.nex-buro.alt-ambiente': 'Buró Nex in the MEDEISA gallery: off-white plaster wall, low afternoon light and a vase with an olive branch',
+    'cat.nex-buro.mensaje': 'Hi, I would like a quote for the Buró Nex by MEDEISA.',
+    'cat.nex-comoda.categoria': 'Dresser · Walnut and black steel',
+    'cat.nex-comoda.alt': 'Cómoda Nex: tall walnut dresser with two columns of five plain drawers and a central slat column, on slim black steel legs, on a bone background',
+    'cat.nex-comoda.alt-ambiente': 'Cómoda Nex in the MEDEISA gallery: off-white plaster wall, low afternoon light and a vase with an olive branch',
+    'cat.nex-comoda.mensaje': 'Hi, I would like a quote for the Cómoda Nex by MEDEISA.',
+    'cat.nex-bufetera.categoria': 'Sideboard · Walnut and black steel',
+    'cat.nex-bufetera.alt': 'Bufetera Nex: long walnut sideboard with a band of drawers and slats, four plain vertical-grain doors and a black steel base with X braces, on a bone background',
+    'cat.nex-bufetera.alt-ambiente': 'Bufetera Nex in the MEDEISA gallery: off-white plaster wall, low afternoon light and a vase with an olive branch',
+    'cat.nex-bufetera.mensaje': 'Hi, I would like a quote for the Bufetera Nex by MEDEISA.',
+    'cat.nex-mesa-centro.categoria': 'Coffee table · Walnut and black steel',
+    'cat.nex-mesa-centro.alt': 'Mesa de centro Nex: thick walnut top with framed marquetry, a sculptural walnut V support and a rectangular black steel frame support, on a bone background',
+    'cat.nex-mesa-centro.alt-ambiente': 'Mesa de centro Nex in the MEDEISA gallery: off-white plaster wall, low afternoon light and a vase with an olive branch',
+    'cat.nex-mesa-centro.mensaje': 'Hi, I would like a quote for the Mesa de centro Nex by MEDEISA.',
+    'cat.nex-centro-tv.categoria': 'TV console · Walnut and black steel',
+    'cat.nex-centro-tv.alt': 'Centro de TV Nex: long, low walnut console with rounded corners, two open niches and three handleless drawers, on tapered black legs, on a bone background',
+    'cat.nex-centro-tv.alt-ambiente': 'Centro de TV Nex in the MEDEISA gallery: off-white plaster wall, low afternoon light and a vase with an olive branch',
+    'cat.nex-centro-tv.mensaje': 'Hi, I would like a quote for the Centro de TV Nex by MEDEISA.',
+    'cat.kai-credenza.categoria': 'Credenza · Light oak and champagne metal',
+    'cat.kai-credenza.alt': 'Credenza Kai: light oak credenza with rounded ends, two open niches and four plain drawers, on tapered champagne metal legs, on a bone background',
+    'cat.kai-credenza.alt-ambiente': 'Credenza Kai in the MEDEISA gallery: off-white plaster wall, low afternoon light and a vase with an olive branch',
+    'cat.kai-credenza.mensaje': 'Hi, I would like a quote for the Credenza Kai by MEDEISA.',
+    'cat.kai-mesa-redonda.categoria': 'Round table · Light oak and champagne metal',
+    'cat.kai-mesa-redonda.alt': 'Mesa redonda Kai: round light oak top on an hourglass pedestal of champagne metal bars and an oak ring resting on the floor, on a bone background',
+    'cat.kai-mesa-redonda.alt-ambiente': 'Mesa redonda Kai in the MEDEISA gallery: off-white plaster wall, low afternoon light and a vase with an olive branch',
+    'cat.kai-mesa-redonda.mensaje': 'Hi, I would like a quote for the Mesa redonda Kai by MEDEISA.',
+    'cat.kai-mesa-comedor.categoria': 'Dining table · Light oak and champagne metal',
+    'cat.kai-mesa-comedor.alt': 'Mesa de comedor Kai: long oval light oak top on two champagne metal bar pedestals with oak rings, on a bone background',
+    'cat.kai-mesa-comedor.alt-ambiente': 'Mesa de comedor Kai in the MEDEISA gallery: off-white plaster wall, low afternoon light and a vase with an olive branch',
+    'cat.kai-mesa-comedor.mensaje': 'Hi, I would like a quote for the Mesa de comedor Kai by MEDEISA.',
+    'cat.kai-cama.categoria': 'Bed · Light oak and champagne metal',
+    'cat.kai-cama.alt': 'Cama Kai: light oak headboard with a cream upholstered cushion with a wave-shaped edge and a round-cornered base on tapered champagne metal legs, on a bone background',
+    'cat.kai-cama.alt-ambiente': 'Cama Kai in the MEDEISA gallery: off-white plaster wall, low afternoon light and a vase with an olive branch',
+    'cat.kai-cama.mensaje': 'Hi, I would like a quote for the Cama Kai by MEDEISA.',
+    'cat.kai-comoda.categoria': 'Dresser · Light oak and champagne metal',
+    'cat.kai-comoda.alt': 'Cómoda Kai: light oak dresser with deeply rounded corners, six drawers and the wavy Kai groove as a pull, on tapered champagne metal legs, on a bone background',
+    'cat.kai-comoda.alt-ambiente': 'Cómoda Kai in the MEDEISA gallery: off-white plaster wall, low afternoon light and a vase with an olive branch',
+    'cat.kai-comoda.mensaje': 'Hi, I would like a quote for the Cómoda Kai by MEDEISA.',
+    'cat.kai-buro.categoria': 'Nightstand · Light oak and champagne metal',
+    'cat.kai-buro.alt': 'Buró Kai: light oak nightstand with two drawers divided by the wavy Kai groove, on tapered champagne metal legs, on a bone background',
+    'cat.kai-buro.alt-ambiente': 'Buró Kai in the MEDEISA gallery: off-white plaster wall, low afternoon light and a vase with an olive branch',
+    'cat.kai-buro.mensaje': 'Hi, I would like a quote for the Buró Kai by MEDEISA.',
+
     /* --- EXPO --- */
     'expo.etiqueta':   'Biannual presence',
     'expo.titulo':     'Expo Muebles Ocotlán',
-    'expo.desc':       'Twice a year, in February and August, MEDEISA participates in Expo Muebles Ocotlán, the most important trade fair in the region. We showcase our catalog of handcrafted industrial furniture and connect with clients from all over Jalisco.',
+    'expo.desc':       'Twice a year, in February and August, MEDEISA participates in Expo Muebles Ocotlán, the most important trade fair in the region. We showcase our collections of handcrafted steel and wood furniture and connect with clients from all over Jalisco.',
     'expo.edicion':    'Edition',
     'expo.alt':        'MEDEISA booth at Expo Muebles Ocotlán: black sign with the logo, light slatted screen, and black steel and wood bookshelves, tables and shelving lit with warm light',
     'expo.dato1-lbl':  'Event',
@@ -647,11 +789,12 @@ const iniciarIdioma = () => {
 
 /* ================================================================
    CATÁLOGO - Alternar estudio / ambiente
-   Un solo listener delegado en el grid. El botón alterna siempre; tocar
-   la foto solo alterna en táctil (con ratón ya lo hace el hover).
+   Un solo listener delegado en toda la sección (las 3 salas). El botón
+   alterna siempre; tocar la foto solo alterna en táctil (con ratón ya lo
+   hace el hover).
 ================================================================ */
 const iniciarCatalogo = () => {
-  const grid = document.querySelector('.catalogo__grid');
+  const grid = document.querySelector('.catalogo');
   if (!grid) return;
 
   const punteroFino = window.matchMedia('(hover: hover) and (pointer: fine)');
@@ -698,6 +841,59 @@ const iniciarCatalogo = () => {
 
 
 /* ================================================================
+   CATÁLOGO - Índice de salas y carriles móviles
+   El enlace de la sala que cruza la franja superior del viewport se
+   marca con .activo (línea roja) y aria-current (IO, no eventos de
+   scroll). Los carriles solo son enfocables cuando son carril (< 768px).
+================================================================ */
+const iniciarIndiceSalas = () => {
+  const salas = [...document.querySelectorAll('.sala[id]')];
+  const enlaces = document.querySelectorAll('.indice-salas__enlace');
+  if (!salas.length || !enlaces.length) return;
+
+  const visibles = new Set();
+
+  const marcar = () => {
+    /* La primera sala (orden del DOM) dentro de la franja; ninguna si se
+       está sobre el encabezado del catálogo */
+    const destino = salas.find((s) => visibles.has(s));
+    enlaces.forEach((enlace) => {
+      const activo = destino !== undefined && enlace.hash === `#${destino.id}`;
+      enlace.classList.toggle('activo', activo);
+      if (activo) enlace.setAttribute('aria-current', 'location');
+      else enlace.removeAttribute('aria-current');
+    });
+  };
+
+  /* Franja fina a ~30% del alto: bajo la nav y el índice en cualquier pantalla */
+  const observador = new IntersectionObserver(
+    (entradas) => {
+      entradas.forEach(({ target, isIntersecting }) => {
+        if (isIntersecting) visibles.add(target);
+        else visibles.delete(target);
+      });
+      marcar();
+    },
+    { rootMargin: '-30% 0px -69% 0px' }
+  );
+
+  salas.forEach((s) => observador.observe(s));
+
+  /* Carriles: tabindex solo donde hay desplazamiento horizontal */
+  const carriles = document.querySelectorAll('.sala__carril');
+  const esCarril = window.matchMedia('(max-width: 767px)');
+  const ajustarCarriles = () => {
+    carriles.forEach((c) => {
+      if (esCarril.matches) c.setAttribute('tabindex', '0');
+      else c.removeAttribute('tabindex');
+    });
+  };
+  ajustarCarriles();
+  esCarril.addEventListener('change', ajustarCarriles);
+};
+
+
+/* ================================================================
    FOOTER - Año dinámico en los créditos
 ================================================================ */
 const iniciarFooter = () => {
@@ -715,5 +911,6 @@ document.addEventListener('DOMContentLoaded', () => {
   iniciarVideoHero();
   iniciarAnimacionesEntrada();
   iniciarCatalogo();
+  iniciarIndiceSalas();
   iniciarFooter();
 });

@@ -103,12 +103,23 @@
   --ancho-texto: 720px;
   --padding-contenedor: var(--space-md);      /* 36px (--space-lg) desde 768px */
   --altura-nav: 4.5rem;
+  --altura-indice: 3rem;                      /* índice fijo de salas del catálogo */
+  --gutter-carril: 1rem;                      /* 16px entre tarjetas del carril móvil */
   --area-tactil: 44px;                        /* objetivo táctil mínimo */
 
   /* Radios */
   --radio-control: 5px;
   --radio-imagen: 32px;
   --radio-linea: 2px;
+
+  /* Muestras de material de las salas (círculos de 14px, decorativos) */
+  --muestra-tamano: 14px;
+  --muestra-acero-negro: #1E1E1E;
+  --muestra-parota: #8A5634;
+  --muestra-nogal: #5E3B26;
+  --muestra-encino-claro: #C99A62;
+  --muestra-metal-champana: #C6B08A;
+  --muestra-borde: rgba(10, 10, 10, 0.18);
 
   /* Sombra (solo botón flotante) */
   --sombra-flotante: 0 10px 15px -3px rgba(10, 10, 10, 0.12);
@@ -1218,29 +1229,256 @@ html:not(.js) .encabezado,
 
 
 /* ====== CATÁLOGO ====== */
-/* Banda papel: las fotos de estudio en hueso se leen como piezas enmarcadas */
+/* "Tres salas de una galería": encabezado en papel, índice fijo de anclas
+   y tres salas a sangre. Industrial (papel) / Nex (negro) / Kai (hueso).
+   Cada sala: portada editorial + 6 piezas (rejilla 3x2 en desktop, 2
+   columnas en tableta, carril con scroll-snap en móvil). */
 .catalogo {
-  padding-block: var(--space-2xl);
+  padding-top: var(--space-2xl);
   background-color: var(--superficie-papel);
   color: var(--color-texto);
 }
 
-/* Grid: 1 columna móvil, 2 desde 768px, 3 desde 1024px */
-.catalogo__grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  column-gap: var(--space-md);
-  row-gap: var(--space-lg);
+.catalogo > .contenedor .cabecera-seccion {
+  margin-bottom: var(--space-lg);
 }
 
-@media (min-width: 768px) {
-  .catalogo__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+/* ---- Índice fijo de salas: bajo la nav, papel como la nav sólida ---- */
+.indice-salas {
+  position: sticky;
+  top: var(--altura-nav);
+  z-index: 50;
+  background-color: var(--superficie-papel);
+  border-block: 1px solid var(--color-linea);
+  color: var(--color-texto);
+}
+
+/* Móvil: desplazable en horizontal si no cabe (sin barra visible) */
+.indice-salas__lista {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  min-height: var(--altura-indice);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.indice-salas__lista::-webkit-scrollbar {
+  display: none;
+}
+
+.indice-salas__enlace {
+  gap: var(--space-xs);
+  white-space: nowrap;
+}
+
+/* El foco no se recorta contra el borde del índice (overflow) */
+.indice-salas__enlace:focus-visible {
+  outline-offset: -2px;
+}
+
+.indice-salas__conteo {
+  color: var(--color-texto-secundario);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- Sala: banda a sangre con su propio contenedor ---- */
+.sala {
+  padding-block: var(--space-2xl);
+  background-color: var(--superficie-papel);
+  color: var(--color-texto);
+  scroll-margin-top: var(--altura-indice);   /* + scroll-padding de html (nav) */
+}
+
+/* Industrial sigue al encabezado en la misma banda papel */
+.sala--industrial {
+  padding-top: var(--space-xl);
+}
+
+/* Nex: sala oscura. Se redefinen los tokens de texto para que todo lo que
+   hay dentro (piezas, enlaces, etiquetas) pase AA sobre negro:
+   papel 18.16:1, ceniza 6.81:1, foco rojo 4.67:1 */
+.sala--nex {
+  background-color: var(--superficie-oscura);
+  color: var(--color-texto-invertido);
+  --color-texto: var(--color-texto-invertido);
+  --color-texto-secundario: var(--color-texto-secundario-oscuro);
+  --muestra-borde: rgba(245, 245, 245, 0.35);
+}
+
+/* Kai: papel como Industrial (la banda negra de Nex las separa). En hueso,
+   el mismo tono que el fondo de estudio, las tarjetas se perdían en la banda */
+
+/* ---- Portada: foto de ambiente + texto ---- */
+.sala__portada {
+  display: grid;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+/* Móvil 4:5; desde 768px 3:2. La proporción la fija el marco (sin CLS) */
+.sala__figura {
+  aspect-ratio: 4 / 5;
+}
+
+.sala--nex .sala__figura {
+  background-color: var(--superficie-panel);
+}
+
+.sala__texto {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-sm);
+}
+
+.sala__nombre {
+  font-family: var(--font-serif);
+  font-size: var(--text-3xl);
+  font-weight: var(--fw-regular);
+  line-height: var(--leading-titulo);
+  letter-spacing: var(--tracking-display);
+}
+
+.sala__frase {
+  max-width: 40ch;
+  font-size: var(--text-base);
+  line-height: var(--leading-cuerpo);
+  color: var(--color-texto-secundario);
+}
+
+/* Muestras de material: círculo de 14px + nombre */
+.sala__materiales {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm) var(--space-lg);
+  margin-top: var(--space-sm);
+}
+
+.sala__material {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--text-sm);
+  line-height: var(--leading-etiqueta);
+}
+
+.sala__muestra {
+  flex-shrink: 0;
+  width: var(--muestra-tamano);
+  height: var(--muestra-tamano);
+  border-radius: 50%;
+  border: 1px solid var(--muestra-borde);
+}
+
+.sala__muestra--acero-negro    { background-color: var(--muestra-acero-negro); }
+.sala__muestra--parota         { background-color: var(--muestra-parota); }
+.sala__muestra--nogal          { background-color: var(--muestra-nogal); }
+.sala__muestra--encino-claro   { background-color: var(--muestra-encino-claro); }
+.sala__muestra--metal-champana { background-color: var(--muestra-metal-champana); }
+
+.sala__conteo {
+  margin-top: var(--space-sm);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-medium);
+  line-height: var(--leading-etiqueta);
+  letter-spacing: var(--tracking-etiqueta);
+  text-transform: uppercase;
+  color: var(--color-texto-secundario);
+}
+
+/* ---- Carril móvil: ~1.15 tarjetas visibles, gutter 16px, sin flechas.
+   Sale del contenedor hasta el borde de la pantalla; el desplazamiento es
+   interno (la página no desborda). Enfocable para moverlo con flechas. ---- */
+.sala__carril {
+  margin-inline: calc(var(--padding-contenedor) * -1);
+  padding: var(--space-xs) var(--padding-contenedor) var(--space-sm);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--padding-contenedor);
+  scrollbar-width: none;
+}
+
+.sala__carril::-webkit-scrollbar {
+  display: none;
+}
+
+/* El anillo va por dentro: por fuera lo recortaría el borde de la pantalla */
+.sala__carril:focus-visible {
+  outline-offset: -2px;
+}
+
+/* Ancho de tarjeta: (visible - gutter izq. - espacio) / 1.15 */
+.sala__grid {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% + var(--padding-contenedor) - var(--gutter-carril)) / 1.15);
+  gap: var(--gutter-carril);
+}
+
+.sala__grid .pieza {
+  scroll-snap-align: start;
+}
+
+/* En el carril las tarjetas fuera de vista no cruzan el viewport: se
+   muestran sin la entrada escalonada (excepción max-width justificada:
+   solo existe el carril por debajo de 768px) */
+@media (max-width: 767px) {
+  .js .sala__grid .animar-entrada {
+    opacity: 1;
+    transform: none;
   }
 }
 
+/* ---- Tableta (>= 768px): portada apilada 3:2, rejilla de 2 columnas ---- */
+@media (min-width: 768px) {
+  .sala__figura {
+    aspect-ratio: 3 / 2;
+  }
+
+  .sala__carril {
+    margin-inline: 0;
+    padding: 0;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  .sala__grid {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--space-md);
+    row-gap: var(--space-lg);
+  }
+}
+
+/* ---- Desktop (>= 1024px): portada 7/5 alternando lados, rejilla 3x2 ---- */
 @media (min-width: 1024px) {
-  .catalogo__grid {
+  .sala__portada {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: center;
+  }
+
+  .sala__figura {
+    grid-row: 1;
+    grid-column: 1 / span 7;
+  }
+
+  .sala__texto {
+    grid-row: 1;
+    grid-column: 8 / span 5;
+  }
+
+  /* Nex: foto a la derecha */
+  .sala--nex .sala__figura {
+    grid-column: 6 / span 7;
+  }
+
+  .sala--nex .sala__texto {
+    grid-column: 1 / span 5;
+  }
+
+  .sala__grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
@@ -1297,6 +1535,24 @@ html:not(.js) .encabezado,
   color: var(--color-texto-secundario);
 }
 
+/* Cédula de museo sobre el nombre: "NEX · 03" */
+.pieza__cedula {
+  margin-bottom: var(--space-xs);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-medium);
+  line-height: var(--leading-etiqueta);
+  letter-spacing: var(--tracking-etiqueta);
+  text-transform: uppercase;
+  color: var(--color-texto-secundario);
+}
+
+/* Variante resumida en texto (camas): "Con o sin cabecera" */
+.pieza__variante {
+  font-size: var(--text-sm);
+  line-height: var(--leading-cuerpo);
+  color: var(--color-texto);
+}
+
 .pieza .enlace-cotizar {
   margin-top: var(--space-xs);
 }
@@ -1344,7 +1600,7 @@ html:not(.js) .encabezado,
   line-height: var(--leading-etiqueta);
   letter-spacing: var(--tracking-etiqueta);
   text-transform: uppercase;
-  color: var(--color-texto);
+  color: var(--color-negro);   /* va sobre la foto: fijo aunque la sala sea oscura */
   background-color: var(--color-blanco);
   border: 1px solid var(--color-borde-control);
   border-radius: var(--radio-control);
