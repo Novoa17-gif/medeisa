@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # Genera fotos de ESTUDIO unificadas del catalogo MEDEISA (local, PIL + numpy).
-# Uso: python3 docs/refactor-premium/scripts/estudio.py
+# Uso: python3 docs/refactor-premium/scripts/estudio.py [slug ...]
+#      sin argumentos regenera todo; con slugs solo esas piezas (la hoja de
+#      contacto usa las salidas existentes para el resto)
 #
 # Idea: cada fuente se "divide" entre su fondo (blanco puro en los renders, o un
 # modelo suave del ciclorama gris en la foto real de Catania) y se multiplica por
@@ -9,6 +11,7 @@
 # se compone normal con alfa. Despues se reencuadra todo con la misma escala, el
 # mismo punto de piso y una sombra de contacto sintetica comun.
 
+import sys
 from pathlib import Path
 import numpy as np
 from PIL import Image, ImageFilter, ImageOps
@@ -32,6 +35,40 @@ PIEZAS = {
     "mesa-centro-sierra-azul": ("Mesas de centro : TV/Linea Industrial/Mesa de Centro Sierra Azul Parota/Mesa Centro Sierra Azul.png", "blanco"),
     "recamara-tulum": ("Recamara/Línea Industrial /Juego de Recamara/Recamara Tulum Chapa/Recámara Tulum Chapa SF.png", "blanco"),
 }
+
+# Ancho por pieza: Catania es baja y de perfil delgado; a 0.72 se ve chica junto a
+# las demas, asi que se abre a 0.85 para igualar su area visual (w*h) al resto
+ANCHO = {"centro-tv-catania": 0.85}
+
+
+# --- Recamara Tulum: solo cama + buro izquierdo (decision del usuario) ---
+def solo_cama_buro(img):
+    img = img.copy()
+    img[:, 1110:] = 255                                    # fuera la cajonera
+    # buro derecho: queda detras de la cama. Arriba de la linea superior de la
+    # cama (trazada a mano sobre el render) todo se pinta de blanco; en una banda
+    # de tolerancia solo lo que no es tela (madera saturada o acero negro).
+    # Junto a la sabana (x<860) la tela es clara (lum>150), asi que el umbral sube y se va la
+    # pata oscura; a partir de x=975 no hay riel y la orilla negra de la cobija es cama
+    xs = np.arange(786, 1008)
+    borde = np.interp(xs, [786, 820, 860, 880, 920, 960, 990, 1008],
+                          [518, 529, 544, 552, 562, 575, 585, 592])
+    for x, yb in zip(xs, borde.astype(int)):
+        img[440:yb - (1 if x < 805 else 6), x] = 255    # x<805: filo de la pata
+        if x >= 975:
+            continue
+        col = img[yb - 6:yb + 8, x]
+        sat = col.max(1) - col.min(1)
+        lum = col.mean(1)
+        tela = (sat < 70) & (lum > (150 if x < 860 else 45)) & (lum < 238)
+        # todo lo que queda arriba de la primera tela de la banda es buro o su
+        # antialias oscuro; se blanquea completo para dejar un filo limpio
+        primera = int(np.argmax(tela)) if tela.any() else len(tela)
+        col[:primera] = 255
+    return img
+
+
+PREPROCESO = {"recamara-tulum": solo_cama_buro}
 
 
 # --- Fondo del canvas: degradado vertical sutil (piso un poco mas oscuro) ---
@@ -72,6 +109,39 @@ def fondo_gris(img):
     return np.asarray(im).astype(float)
 
 
+# --- Cubiertas de madera vistas desde arriba (foto real de Catania) ---
+# Son grises-rosadas como el muro, asi que pixel a pixel salen a medias (manchas).
+# Se deciden por fila: sobre cada frente macizo (repisa, gabinete) se sube mientras
+# la fila, en la mediana, sea mas oscura que el muro. El muro se modela por fila
+# con una recta entre los bordes izquierdo y derecho de la foto (fuera del mueble).
+def cubiertas(img, alfa, costura):
+    h, w, _ = img.shape
+    lum = img.mean(2)
+    izq = lum[:, 10:110].mean(1)
+    der = lum[:, w - 110:w - 10].mean(1)
+    t = (np.arange(w) - 60) / (w - 120)
+    muro = izq[:, None] + (der - izq)[:, None] * t[None, :]
+    dif = 1 - lum / np.maximum(muro, 1)
+    alfa = alfa.copy()
+    macizo = alfa > 0.5
+    y = costura - 1
+    while y > h // 4:
+        fila = macizo[y]
+        cols = np.where(fila)[0]
+        # fila de frente macizo: casi todo solido entre sus extremos y ancha
+        if len(cols) > w * 0.4 and fila[cols[0]:cols[-1]].mean() > 0.9 and not macizo[y - 1, cols[0]:cols[-1]].mean() > 0.9:
+            x0, x1 = cols[0], cols[-1]
+            yy = y - 1
+            while yy > y - 160 and np.median(dif[yy, x0 + 20:x1 - 20]) > 0.09:
+                # en los extremos el frente incluye el poste; ahi solo se toma lo
+                # que de verdad es mas oscuro que el muro
+                alfa[yy, x0:x1] = np.maximum(alfa[yy, x0:x1], dif[yy, x0:x1] > 0.11)
+                yy -= 1
+            y = yy
+        y -= 1
+    return alfa
+
+
 # --- Recorte: devuelve RGB recompuesto sobre hueso "plano" + alfa del nucleo ---
 def recomponer(img, tipo):
     if tipo == "blanco":
@@ -95,11 +165,23 @@ def recomponer(img, tipo):
         costura = int(np.argmin(np.diff(perfil[len(perfil) // 4:]))) + len(perfil) // 4
         rel = np.clip((dif - 0.30) / 0.16, 0, 1)
         rel[costura - 6:] = 0
+        # bajo la costura no hay madera (solo patas y riel de acero): las manchas
+        # calidas del concreto junto a la pata salian como motas grises
+        alfa_madera[costura + 10:] = 0
+        am = Image.fromarray((alfa_madera * 255).astype(np.uint8))
+        am = am.filter(ImageFilter.MinFilter(5)).filter(ImageFilter.MaxFilter(5))
+        alfa_madera = np.asarray(am).astype(float) / 255
         alfa_acero = np.maximum(np.clip((92 - img.mean(2)) / 30, 0, 1), rel)
+        # sobre el concreto la sombra junto a la pata llega a ~80 de luminancia: ahi
+        # el acero se mide contra el piso local (el riel con reflejo queda ~0.35)
+        rel_piso = img[costura + 10:].mean(2) / np.maximum(bg[costura + 10:].mean(2), 1)
+        alfa_acero[costura + 10:] = np.clip((0.62 - rel_piso) / 0.15, 0, 1)
         # apertura morfologica: quita motas de polvo del concreto sin tocar el perfil de acero
         ac = Image.fromarray((alfa_acero * 255).astype(np.uint8))
         ac = ac.filter(ImageFilter.MinFilter(5)).filter(ImageFilter.MaxFilter(5))
         alfa = np.maximum(alfa_madera, np.asarray(ac).astype(float) / 255)
+        alfa = np.clip((alfa - 0.45) / 0.15, 0, 1)
+        alfa = cubiertas(img, alfa, costura)
     alfa = suave(alfa, 1.2)
     # Las sombras propias se aclaran para que mande la sombra comun
     if tipo == "blanco":
@@ -129,10 +211,12 @@ def procesar(slug, ruta, tipo):
     if max(im.size) > 2600:
         im.thumbnail((2600, 2600), Image.LANCZOS)
     img = np.asarray(im).astype(float)
+    if slug in PREPROCESO:
+        img = PREPROCESO[slug](img)
     nucleo, capa_sombra, alfa = recomponer(img, tipo)
     x0, y0, x1, y1 = bbox(alfa)
     ow, oh = x1 - x0, y1 - y0
-    esc = min(W * ANCHO_OBJ / ow, H * ALTO_MAX / oh)
+    esc = min(W * ANCHO.get(slug, ANCHO_OBJ) / ow, H * ALTO_MAX / oh)
 
     # Escalar solo la region util (con margen para sombras propias)
     pad = int(0.06 * max(ow, oh))
@@ -192,12 +276,16 @@ def guardar(im, slug):
 
 def main():
     SALIDA.mkdir(parents=True, exist_ok=True)
+    elegidas = set(sys.argv[1:]) or set(PIEZAS)
     fotos = []
     for slug, (ruta, tipo) in PIEZAS.items():
-        im = procesar(slug, ruta, tipo)
-        guardar(im, slug)
+        if slug in elegidas:
+            im = procesar(slug, ruta, tipo)
+            guardar(im, slug)
+            print("ok", slug)
+        else:
+            im = Image.open(SALIDA / f"{slug}-estudio.jpg").convert("RGB")
         fotos.append(im)
-        print("ok", slug)
     tw, th, gap = 480, 600, 24
     hoja = Image.new("RGB", (gap + len(fotos) * (tw + gap), th + 2 * gap), (250, 250, 248))
     for i, im in enumerate(fotos):
