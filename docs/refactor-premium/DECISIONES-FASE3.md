@@ -110,3 +110,17 @@ Una línea por decisión no trivial. Orden de prioridad: SPEC > DESIGN > BLUEPRI
 - Iframe 320px en móvil y 520px desde 768px (en 768-1023 ya hay ancho suficiente aunque siga en una columna).
 - Grid desktop `5fr 7fr` desde 1024px con `column-gap: --space-xl`, alineado arriba; padding de banda `--space-2xl` arriba y abajo (antes `--space-3xl` arriba y casi nada abajo).
 - Se eliminan del bloque: iconos SVG, borde rojo de 3px, cabecera oscura del mapa, sombra y borde del mapa, grises sueltos `#777773`/`#3A3A38`, estados `:active` con `scale`. `.btn--rojo` LEGADO ya no tiene uso en el HTML; se deja en COMPONENTES COMPARTIDOS para que lo borre el paso 8.
+
+## Paso 6 - Footer + WhatsApp flotante
+
+- Flotante VERDE `#25D366` (SPEC gana al BLUEPRINT, que pedía rojo); hover/active `--color-whatsapp-hover` #1DA851, sin escalar ni pulso; aparición única de opacidad 0.6s (el bloque global de reduced-motion la anula). Icono blanco `--color-icono-flotante`: 1.98:1 sobre el verde, se acepta por ser el glifo de marca WhatsApp (decisión del usuario: verde). Ojo: el círculo verde solo pasa 3:1 sobre negro (10:1); sobre hueso 1.52:1 y papel 1.82:1, la sombra ayuda a separarlo. Desviación WCAG 1.4.11 consciente, pendiente de visto bueno del usuario (alternativa: glifo #0a0a0a, 10:1).
+- Foco del flotante: se queda el anillo rojo global (sobre verde se distingue; el anillo negro del BLUEPRINT era por el fondo rojo, que ya no aplica).
+- Tokens nuevos `--flotante-tamano` (56px) y `--flotante-margen` (`--space-md` móvil, `--space-lg` desde 768px) + `env(safe-area-inset-*)`; `.hero__pausa` (paso 2) pasa a usarlos para seguir centrado sobre el flotante con el nuevo margen móvil.
+- `aria-label` del flotante traducible (`wa.aria`), con "(abre en nueva pestaña)"; `data-wa="general"` ya existía.
+- Footer: logo = `assets/logo/medeisa-logo.png` en papel monocromo (`brightness(0) invert(0.96)`): `invert(1)` volvía cian la M roja; rojo del footer queda solo en la línea de hover (BLUEPRINT).
+- "Metales de Innovación" (subtítulo de marca) no se traduce, igual que los nombres propios; clave `pie.subtitulo` con el mismo valor en ES/EN.
+- Lema `pie.tagline` pasa a `data-i18n-html` con `<em>estilo</em>` / `<em>style</em>`, Cormorant 300 `--text-2xl`, alineado a la derecha desde 768px.
+- Redes como texto (Instagram, Facebook, WhatsApp) sin `aria-label`; el aviso de nueva pestaña va en `.sr-only` traducible (`pie.nueva-pestana`) para que el nombre accesible empiece por el texto visible. WhatsApp del footer usa `data-wa="general"`.
+- Lista de redes con `aria-label` traducible (`pie.redes-aria`); nav del footer con `pie.nav-aria`. Logo con `nav.logo-aria` (misma frase que el nav) y ancla `#inicio`.
+- Créditos dentro del contenedor (la hairline mide lo mismo que el contenido). Para no quedar bajo el flotante: en móvil `padding-bottom` = flotante + 2 márgenes; desde 768px `padding-right` que se reduce a 0 cuando el margen lateral del contenedor ya libra el botón (a 1440 queda alineado con el borde del contenido).
+- Se eliminan: borde superior del footer, todos los `rgba(245,244,240,...)`, iconos SVG de redes, `:active` con `scale`, sombra verde, `::before` y `@keyframes pulso-whatsapp`.

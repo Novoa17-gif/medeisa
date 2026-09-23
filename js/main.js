@@ -278,6 +278,7 @@ const TRADUCCIONES = {
     'meta.desc':   'MEDEISA — Mueblería industrial en Ocotlán, Jalisco. Transformamos acero en estilo. Cotiza tus muebles metálicos a medida.',
     'global.skip': 'Saltar al contenido principal',
     'wa.general':  'Hola, me gustaría cotizar un producto de MEDEISA.',
+    'wa.aria':     'Contactar por WhatsApp (abre en nueva pestaña)',
 
     /* --- NAV --- */
     'nav.aria':         'Navegación principal',
@@ -392,7 +393,11 @@ const TRADUCCIONES = {
     'cnt.mapa-aria': 'Ver en Google Maps: ubicación de MEDEISA (abre en nueva pestaña)',
 
     /* --- FOOTER --- */
-    'pie.tagline':   'Transformamos acero en estilo',
+    'pie.tagline':   'Transformamos acero en <em>estilo</em>',
+    'pie.subtitulo': 'Metales de Innovación',
+    'pie.nav-aria':  'Navegación del pie de página',
+    'pie.redes-aria': 'Redes sociales',
+    'pie.nueva-pestana': ' (abre en nueva pestaña)',
     'pie.nosotros':  'Nosotros',
     'pie.productos': 'Productos',
     'pie.galeria':   'Expo',
@@ -409,6 +414,7 @@ const TRADUCCIONES = {
     'meta.desc':   'MEDEISA — Industrial furniture maker in Ocotlán, Jalisco. We transform steel into style. Get a quote for custom metal furniture.',
     'global.skip': 'Skip to main content',
     'wa.general':  'Hello, I would like a quote for a MEDEISA product.',
+    'wa.aria':     'Contact us on WhatsApp (opens in a new tab)',
 
     /* --- NAV --- */
     'nav.aria':         'Main navigation',
@@ -523,7 +529,11 @@ const TRADUCCIONES = {
     'cnt.mapa-aria': 'View on Google Maps: MEDEISA location (opens in a new tab)',
 
     /* --- FOOTER --- */
-    'pie.tagline':   'We transform steel into style',
+    'pie.tagline':   'We transform steel into <em>style</em>',
+    'pie.subtitulo': 'Metales de Innovación',
+    'pie.nav-aria':  'Footer navigation',
+    'pie.redes-aria': 'Social media',
+    'pie.nueva-pestana': ' (opens in a new tab)',
     'pie.nosotros':  'About',
     'pie.productos': 'Products',
     'pie.galeria':   'Expo',

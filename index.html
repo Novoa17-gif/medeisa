@@ -937,80 +937,53 @@
   <footer class="pie-pagina">
     <div class="contenedor pie-pagina__contenedor">
 
-      <!-- Logo + tagline -->
-      <div class="pie-pagina__marca">
-        <a href="#contenido-principal" aria-label="MEDEISA — Ir al inicio" class="pie-pagina__logo-link">
-          <img
-            src="assets/logo.PNG"
-            alt="MEDEISA"
-            class="pie-pagina__logo"
-            width="120"
-            height="40"
-            loading="lazy"
-          />
-        </a>
-        <p class="pie-pagina__tagline" data-i18n="pie.tagline">Transformamos acero en estilo</p>
-
-
+      <!-- Fila 1: marca + lema -->
+      <div class="pie-pagina__superior">
+        <div class="pie-pagina__marca">
+          <a class="pie-pagina__logo-enlace" href="#inicio" aria-label="MEDEISA, ir al inicio" data-i18n-aria="nav.logo-aria">
+            <img class="pie-pagina__logo" src="assets/logo/medeisa-logo.png" alt="" width="140" height="95" loading="lazy" />
+          </a>
+          <p class="pie-pagina__subtitulo" data-i18n="pie.subtitulo">Metales de Innovación</p>
+        </div>
+        <p class="pie-pagina__lema" data-i18n-html="pie.tagline">Transformamos acero en <em>estilo</em></p>
       </div>
 
-      <!-- Links de navegación -->
-      <nav class="pie-pagina__nav" aria-label="Navegación del pie de página">
-        <ul role="list">
-          <li><a class="pie-pagina__link" href="#nosotros" data-i18n="pie.nosotros">Nosotros</a></li>
-          <li><a class="pie-pagina__link" href="#productos" data-i18n="pie.productos">Productos</a></li>
-          <li><a class="pie-pagina__link" href="#galeria" data-i18n="pie.galeria">Expo</a></li>
-          <li><a class="pie-pagina__link" href="#contacto" data-i18n="pie.contacto">Contacto</a></li>
+      <!-- Fila 2: navegación + redes como texto -->
+      <div class="pie-pagina__enlaces">
+        <nav aria-label="Navegación del pie de página" data-i18n-aria="pie.nav-aria">
+          <ul class="pie-pagina__lista" role="list">
+            <li><a class="pie-pagina__enlace" href="#nosotros" data-i18n="pie.nosotros">Nosotros</a></li>
+            <li><a class="pie-pagina__enlace" href="#productos" data-i18n="pie.productos">Productos</a></li>
+            <li><a class="pie-pagina__enlace" href="#galeria" data-i18n="pie.galeria">Expo</a></li>
+            <li><a class="pie-pagina__enlace" href="#contacto" data-i18n="pie.contacto">Contacto</a></li>
+          </ul>
+        </nav>
+
+        <ul class="pie-pagina__lista" role="list" aria-label="Redes sociales" data-i18n-aria="pie.redes-aria">
+          <li>
+            <a class="pie-pagina__enlace" href="https://instagram.com/medeisa.muebles" target="_blank" rel="noopener noreferrer">
+              Instagram<span class="sr-only" data-i18n="pie.nueva-pestana"> (abre en nueva pestaña)</span>
+            </a>
+          </li>
+          <li>
+            <a class="pie-pagina__enlace" href="https://www.facebook.com/profile.php?id=61580795922902" target="_blank" rel="noopener noreferrer">
+              Facebook<span class="sr-only" data-i18n="pie.nueva-pestana"> (abre en nueva pestaña)</span>
+            </a>
+          </li>
+          <li>
+            <a class="pie-pagina__enlace" href="https://wa.me/523921236728?text=Hola%2C%20me%20gustar%C3%ADa%20cotizar%20un%20producto%20de%20MEDEISA." data-wa="general" target="_blank" rel="noopener noreferrer">
+              WhatsApp<span class="sr-only" data-i18n="pie.nueva-pestana"> (abre en nueva pestaña)</span>
+            </a>
+          </li>
         </ul>
-      </nav>
-
-      <!-- Redes sociales -->
-      <div class="pie-pagina__redes">
-        <a
-          class="pie-pagina__red"
-          href="https://instagram.com/medeisa.muebles"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Instagram de MEDEISA"
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-          </svg>
-        </a>
-        <a
-          class="pie-pagina__red"
-          href="https://www.facebook.com/profile.php?id=61580795922902"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Facebook de MEDEISA"
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-          </svg>
-        </a>
-        <a
-          class="pie-pagina__red"
-          href="https://wa.me/523921236728"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="WhatsApp de MEDEISA"
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
-          </svg>
-        </a>
       </div>
 
-    </div>
-
-    <!-- Barra inferior de créditos -->
-    <div class="pie-pagina__creditos">
-      <div class="contenedor pie-pagina__creditos-contenedor">
-        <p>&copy; <span id="anio-actual"></span> MEDEISA S.A. de C.V. <span class="pie-pagina__creditos-derechos" data-i18n="pie.derechos">Todos los derechos reservados.</span></p>
-        <p class="pie-pagina__creditos-ciudad" data-i18n="pie.ciudad">Ocotlán, Jalisco, México</p>
+      <!-- Fila 3: créditos -->
+      <div class="pie-pagina__creditos">
+        <p>&copy; <span id="anio-actual"></span> MEDEISA S.A. de C.V. <span data-i18n="pie.derechos">Todos los derechos reservados.</span></p>
+        <p data-i18n="pie.ciudad">Ocotlán, Jalisco, México</p>
       </div>
+
     </div>
   </footer>
 
@@ -1023,7 +996,8 @@
     href="https://wa.me/523921236728?text=Hola%2C%20me%20gustar%C3%ADa%20cotizar%20un%20producto%20de%20MEDEISA."
     target="_blank"
     rel="noopener noreferrer"
-    aria-label="Contactar por WhatsApp"
+    aria-label="Contactar por WhatsApp (abre en nueva pestaña)"
+    data-i18n-aria="wa.aria"
   >
     <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
