@@ -149,3 +149,28 @@ Una línea por decisión no trivial. Orden de prioridad: SPEC > DESIGN > BLUEPRI
 - Revisión final sin hallazgos: 0 clases CSS sin uso en HTML/JS, 0 tokens sin uso (salvo `--orden`, que se define inline en el HTML), 0 colores hex sueltos fuera de `:root`, sin `backdrop-filter`, `mix-blend-mode`, `transition-delay` fijos, pesos >= 600, `var`, `MAPA_TRADUCCION`, `iniciarNavPill` ni listener de `scroll`. Los únicos `!important` son los del bloque global de reduced-motion (justificados en su comentario).
 - Lighthouse no se corrió: no está instalado y el CLAUDE.md pide consultar antes de instalar dependencias (`npx lighthouse`). Queda pendiente para el usuario.
 - Assets sin referencia (se listan, NO se borran): `assets/hero-v4.jpeg`, `hero-phone.jpeg`, `hero-v3.jpg`, `afamo.jpg`, `cimejal.jpeg`, `expo-1.jpeg`, `expo-2.jpeg`, `new-expo.jpeg` (fuente de `assets/expo/`), `logo.PNG` (fuente del logo y favicon), `producto-*.jpg|png` (4) e `images/nosotros.jpg` (fuente de `assets/nosotros/`).
+
+## Paso 9 - Correcciones de la auditoría final
+
+- Nav desktop: el CTA oculto sobre el hero sale del flujo (`position: absolute` en `.nav__acciones`); ES/EN termina en 1324 a 1440, alineado con el contenido. Con el nav sólido vuelve a `static` (ES/EN se desplaza a la izquierda al aparecer el CTA, sin animación de layout).
+- `.valores__numero` con `lining-nums`, como `.numero-seccion` y la edición 2026.
+- `assets/nosotros/*` regenerados con `scripts/nosotros.py` (PIL, sin Higgsfield): se descartan las columnas 988-997 del original (franja gris), recorte 984x1230 (4:5) + 800w; el srcset pasa de 992w a 984w.
+- Entrada bajo el h2 unificada: nueva clase compartida `.entrada-seccion` (sustituye `.nosotros__descripcion`, `.catalogo__intro` y `.contacto__subtexto`) dentro de `.cabecera-seccion` en las tres secciones: 20px del h2 en todas. La de Nosotros pasa a gris piedra como las otras dos.
+- `.etiqueta`: la línea roja se alinea con la primera línea (`align-items: flex-start` + margen de media interlínea) y `text-wrap: balance`; en el hero, `&nbsp;` antes del `·` (ES y EN) para que el punto no abra renglón.
+- Logo: nuevo `assets/logo/medeisa-logo-horizontal.png` (M + palabra MEDEISA del `logo.PNG`, 298x80 = 2x, `scripts/logo-horizontal.py`), 40px en nav y 48px en footer; el subtítulo queda una sola vez, como texto. `medeisa-logo.png` se conserva para el schema.
+- Créditos del footer a `--text-sm` (15px): texto en minúsculas no baja de 14px.
+- Menú móvil: `focusout` en el encabezado lo cierra cuando el foco sale del header.
+- Icono del WhatsApp flotante a `#0a0a0a` (10.5:1 sobre #25D366; el blanco daba 1.98:1). El fondo verde se mantiene (decisión del usuario); DESIGN decía icono blanco, gana WCAG 1.4.11.
+- Fotos de ambiente con alt traducible (`cat.<slug>.alt-ambiente`, 12 claves nuevas, 120 en ES y EN) y `aria-hidden` alternado en `alternarPieza`: el lector solo expone la foto visible.
+- Hero: fuera del gate `.js .animar-entrada`. Etiqueta y acciones entran con `@keyframes` (`.entrada-hero`, sin JS); el H1 NO se anima: medido, Chrome no registra como LCP un texto pintado a opacidad 0 que sube en el compositor (el LCP pasaba a ser el logo y, con JS retrasado 2.5 s, el H1 a 3280 ms). Ahora LCP = H1 a 200-310 ms con o sin retraso del JS. Se borra `iniciarHero`.
+- Fuentes: `preload` de los woff2 latinos variables de Cormorant (normal y cursiva) y Jost (v21/v20 de gstatic). CLS medido 0-0.0003 a 1440 y 0 a 375 (antes ~0.036). Si Google cambia la versión hay que actualizar las URL.
+- `sitemap.xml`: sin `xhtml:link` hreflang ni namespace xhtml (revierte la decisión del paso 7): mientras no exista una URL /en/ propia no aportan nada.
+- Tokens nuevos en `:root`: `--text-etiqueta` (0.75rem), `--area-tactil` (44px), `--leading-nombre` (1.25); ya no quedan `0.75rem`, `44px` ni `1.25` escritos a mano en reglas.
+- Clase compartida `.enlace-linea` (tipografía + línea roja con hover, focus-visible y .activo) para `.nav__enlace`, `.contacto__red` y `.pie-pagina__enlace`; el nav gana el estado focus-visible que le faltaba.
+- `@media (max-width: 359px)` eliminado: `--hero-texto-fin: max(26.5rem, 85rem - 260vw)` (528px a 320, 424px desde 360). Medido de 320 a 767 en ES/EN: siempre >= fin del texto + 19px.
+- `--hero-foco` y `--hero-texto-fin` declarados en `:root`; `.hero` y sus media queries solo los redefinen.
+- `main.js`: borrada la línea duplicada de `.js` (vive en el script inline del head), los comentarios vacíos de WHATSAPP FLOTANTE y el comentario falso "la imagen es el LCP". `data-wa-pieza="cat.<slug>"` sin el `.replace`. `data-pieza` eliminado.
+- Clases sin regla quitadas (`contacto__info`, `contacto__mapa`, `hero__etiqueta`); los contenedores de Enfoque, Valores y Afiliaciones pasan de `<div>` a `<section aria-labelledby>` (agrupan h3 + lista y son hijos del flex con gap). `pieza__foto--estudio` se queda: ahora la usa JS.
+- `.enlace-cotizar` pasa al bloque CATÁLOGO (solo se usa ahí).
+- `.skip-link` -> `.enlace-salto`, `.sr-only` -> `.solo-lector`.
+- Capturas finales en `docs/refactor-premium/capturas/`. El iframe del mapa sale en blanco en el navegador headless (no es un fallo de la página).

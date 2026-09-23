@@ -1,14 +1,13 @@
 /* ================================================================
    MEDEISA - JavaScript principal
-   Orden: Nav → Hero (entrada + video) → Animaciones →
+   Orden: Nav → Hero (video) → Animaciones →
           Idioma (i18n + WhatsApp) → Catálogo → Footer → Init
 ================================================================ */
 
 'use strict';
 
-/* Marca que JS está activo: el CSS usa .js .animar-entrada para el
-   estado oculto inicial, así si el JS falla el contenido no queda invisible */
-document.documentElement.classList.add('js');
+/* La clase .js de <html> la pone el script inline del <head>, antes del
+   primer pintado (el CSS la usa para el estado oculto de .animar-entrada) */
 
 
 /* ================================================================
@@ -74,6 +73,13 @@ const iniciarNav = () => {
     }
   });
 
+  /* Si el foco sale del encabezado (Tab más allá del menú), se cierra: así
+     el panel nunca tapa el elemento enfocado (WCAG 2.4.7 y 2.4.11) */
+  encabezado.addEventListener('focusout', (e) => {
+    if (hamburguesa?.getAttribute('aria-expanded') !== 'true') return;
+    if (!encabezado.contains(e.relatedTarget)) alternarMenu(false);
+  });
+
   /* Al pasar a desktop el menú móvil no existe: se cierra */
   window.matchMedia('(min-width: 1024px)').addEventListener('change', (e) => {
     if (e.matches) alternarMenu(false);
@@ -104,24 +110,12 @@ const iniciarNav = () => {
 
 
 /* ================================================================
-   HERO - Animación de entrada inmediata al cargar
-================================================================ */
-const iniciarHero = () => {
-  /* Los elementos .animar-entrada del hero se revelan en secuencia
-     según su --orden. Solo hay que agregarles .visible en el siguiente
-     frame para disparar la transición. */
-  const elementosHero = document.querySelectorAll('.hero .animar-entrada');
-
-  requestAnimationFrame(() => {
-    elementosHero.forEach((el) => el.classList.add('visible'));
-  });
-};
-
-
-/* ================================================================
    HERO - Video "Galería de luz"
-   La imagen es el LCP; el video se carga después de load, solo sin
-   reduced-motion ni Save-Data, y cada dispositivo baja solo su versión.
+   La entrada del texto es CSS puro (.entrada-hero), no espera a este
+   archivo. La imagen es el póster a sangre (Chrome no la toma como LCP por
+   cubrir todo el viewport; el LCP es el H1). El video se carga después de
+   load, solo sin reduced-motion ni Save-Data, y cada dispositivo baja solo
+   su versión.
 ================================================================ */
 
 /* Misma consulta que los <source> verticales del <picture> y el CSS */
@@ -262,7 +256,7 @@ const iniciarAnimacionesEntrada = () => {
    - data-i18n-aria="clave"   → atributo aria-label
    - data-i18n-title="clave"  → atributo title
    - data-wa="x"              → href de WhatsApp con el mensaje wa.x
-   - data-wa-pieza="cat.<slug>.nombre" → href con cat.<slug>.mensaje
+   - data-wa-pieza="cat.<slug>"  → href con el mensaje cat.<slug>.mensaje
    Cada sección edita solo su bloque, delimitado por comentarios idénticos
    en ES y EN.
 ================================================================ */
@@ -293,7 +287,7 @@ const TRADUCCIONES = {
     'nav.menu-cerrar':  'Cerrar menú de navegación',
 
     /* --- HERO --- */
-    'hero.etiqueta':  'Mueblería industrial · Ocotlán, Jalisco',
+    'hero.etiqueta':  'Mueblería industrial\u00a0· Ocotlán, Jalisco',   /* \u00a0: el punto no abre renglón */
     'hero.titulo':    'Transformamos acero en <em>estilo</em>',
     'hero.cta':       'Cotizar por WhatsApp',
     'hero.catalogo':  'Ver catálogo',
@@ -346,21 +340,27 @@ const TRADUCCIONES = {
     'cat.ver-estudio':  'Ver en estudio',
     'cat.centro-tv-catania.categoria': 'Centro de TV · Acero y madera',
     'cat.centro-tv-catania.alt':       'Centro de TV Catania: estructura trapezoidal de acero negro, repisa superior de madera y gabinete de madera miel con tres cajones sin jaladeras, sobre fondo hueso',
+    'cat.centro-tv-catania.alt-ambiente': 'Centro de TV Catania con un jarrón de ramas secas sobre la repisa, en una galería de muros de yeso hueso con luz de tarde y sombras de ventana',
     'cat.centro-tv-catania.mensaje':   'Hola, me interesa cotizar el Centro de TV Catania de MEDEISA.',
     'cat.mesa-centro-catania.categoria': 'Mesa de centro · Acero y parota',
     'cat.mesa-centro-catania.alt':       'Mesa de Centro Catania: base rectangular de tubo de acero negro y cubierta de tablones de parota unidos por dos bandas de acero negro, sobre fondo hueso',
+    'cat.mesa-centro-catania.alt-ambiente': 'Mesa de Centro Catania con un jarrón de ramas secas sobre la cubierta, en una galería de yeso hueso con piso de concreto claro y luz de tarde',
     'cat.mesa-centro-catania.mensaje':   'Hola, me interesa cotizar la Mesa de Centro Catania de MEDEISA.',
     'cat.silla-sahara.categoria': 'Sala · Tapizado bouclé y acero',
     'cat.silla-sahara.alt':       'Sillón Sahara: sillón individual tapizado en bouclé gris carbón con patas de acero negro en V invertida, sobre fondo hueso',
+    'cat.silla-sahara.alt-ambiente': 'Sillón Sahara junto a un jarrón de ramas secas en una galería de yeso hueso con luz de tarde y sombras de ventana',
     'cat.silla-sahara.mensaje':   'Hola, me interesa cotizar el Sillón Sahara de MEDEISA.',
     'cat.centro-tv-sierra-azul.categoria': 'Centro de TV · Acero y parota',
     'cat.centro-tv-sierra-azul.alt':       'Centro de TV Sierra Azul: mueble ovalado de acero negro con barras verticales y repisa central de parota, sobre fondo hueso',
+    'cat.centro-tv-sierra-azul.alt-ambiente': 'Centro de TV Sierra Azul con un jarrón de ramas secas encima, en una galería de yeso hueso con sombras de ventana en muro y piso',
     'cat.centro-tv-sierra-azul.mensaje':   'Hola, me interesa cotizar el Centro de TV Sierra Azul de MEDEISA.',
     'cat.mesa-centro-sierra-azul.categoria': 'Mesa de centro · Parota maciza y acero',
     'cat.mesa-centro-sierra-azul.alt':       'Mesa de Centro Sierra Azul Parota: cubierta redonda de parota maciza con veta clara al centro sobre base circular de barras verticales de acero negro, sobre fondo hueso',
+    'cat.mesa-centro-sierra-azul.alt-ambiente': 'Mesa de Centro Sierra Azul Parota con un jarrón de ramas secas al centro, en una galería de yeso hueso con luz rasante de tarde',
     'cat.mesa-centro-sierra-azul.mensaje':   'Hola, me interesa cotizar la Mesa de Centro Sierra Azul Parota de MEDEISA.',
     'cat.recamara-tulum.categoria': 'Recámara · Chapa de madera y acero',
     'cat.recamara-tulum.alt':       'Recámara Tulum: cama con cabecera de chapa de madera y marco de acero negro con dos óvalos, y un buró a juego, ambos sobre patines de acero negro, sobre fondo hueso',
+    'cat.recamara-tulum.alt-ambiente': 'Recámara Tulum con ropa de cama clara y su buró con un jarrón de ramas secas, en una galería de yeso hueso con luz de tarde',
     'cat.recamara-tulum.mensaje':   'Hola, me interesa cotizar la Recámara Tulum de MEDEISA.',
 
     /* --- EXPO --- */
@@ -404,8 +404,6 @@ const TRADUCCIONES = {
     'pie.contacto':  'Contacto',
     'pie.derechos':  'Todos los derechos reservados.',
     'pie.ciudad':    'Ocotlán, Jalisco, México',
-
-    /* --- WHATSAPP FLOTANTE --- */
   },
 
   en: {
@@ -429,7 +427,7 @@ const TRADUCCIONES = {
     'nav.menu-cerrar':  'Close navigation menu',
 
     /* --- HERO --- */
-    'hero.etiqueta':  'Industrial furniture · Ocotlán, Jalisco',
+    'hero.etiqueta':  'Industrial furniture\u00a0· Ocotlán, Jalisco',
     'hero.titulo':    'We transform steel into <em>style</em>',
     'hero.cta':       'Quote on WhatsApp',
     'hero.catalogo':  'View catalog',
@@ -482,21 +480,27 @@ const TRADUCCIONES = {
     'cat.ver-estudio':  'View in studio',
     'cat.centro-tv-catania.categoria': 'TV console · Steel and wood',
     'cat.centro-tv-catania.alt':       'Centro de TV Catania: trapezoidal black steel frame, wooden top shelf and honey-toned wood cabinet with three handleless drawers, on a bone background',
+    'cat.centro-tv-catania.alt-ambiente': 'Centro de TV Catania with a vase of dried branches on the top shelf, in a gallery with off-white plaster walls, afternoon light and window shadows',
     'cat.centro-tv-catania.mensaje':   'Hi, I would like a quote for the Centro de TV Catania by MEDEISA.',
     'cat.mesa-centro-catania.categoria': 'Coffee table · Steel and parota',
     'cat.mesa-centro-catania.alt':       'Mesa de Centro Catania: rectangular black steel tube base and a top of parota planks joined by two black steel bands, on a bone background',
+    'cat.mesa-centro-catania.alt-ambiente': 'Mesa de Centro Catania with a vase of dried branches on the top, in an off-white plaster gallery with a light concrete floor and afternoon light',
     'cat.mesa-centro-catania.mensaje':   'Hi, I would like a quote for the Mesa de Centro Catania by MEDEISA.',
     'cat.silla-sahara.categoria': 'Living · Bouclé and steel',
     'cat.silla-sahara.alt':       'Sillón Sahara: armchair upholstered in charcoal bouclé with black steel legs in an inverted V, on a bone background',
+    'cat.silla-sahara.alt-ambiente': 'Sillón Sahara next to a vase of dried branches in an off-white plaster gallery with afternoon light and window shadows',
     'cat.silla-sahara.mensaje':   'Hi, I would like a quote for the Sillón Sahara by MEDEISA.',
     'cat.centro-tv-sierra-azul.categoria': 'TV console · Steel and parota',
     'cat.centro-tv-sierra-azul.alt':       'Centro de TV Sierra Azul: oval black steel console with vertical bars and a central parota shelf, on a bone background',
+    'cat.centro-tv-sierra-azul.alt-ambiente': 'Centro de TV Sierra Azul with a vase of dried branches on top, in an off-white plaster gallery with window shadows on the wall and floor',
     'cat.centro-tv-sierra-azul.mensaje':   'Hi, I would like a quote for the Centro de TV Sierra Azul by MEDEISA.',
     'cat.mesa-centro-sierra-azul.categoria': 'Coffee table · Solid parota and steel',
     'cat.mesa-centro-sierra-azul.alt':       'Mesa de Centro Sierra Azul Parota: round solid parota top with a light streak through the center on a circular base of vertical black steel bars, on a bone background',
+    'cat.mesa-centro-sierra-azul.alt-ambiente': 'Mesa de Centro Sierra Azul Parota with a vase of dried branches in the center, in an off-white plaster gallery with low afternoon light',
     'cat.mesa-centro-sierra-azul.mensaje':   'Hi, I would like a quote for the Mesa de Centro Sierra Azul Parota by MEDEISA.',
     'cat.recamara-tulum.categoria': 'Bedroom · Wood veneer and steel',
     'cat.recamara-tulum.alt':       'Recámara Tulum: bed with a wood veneer headboard framed in black steel with two oval outlines, and a matching nightstand, both on black steel sled legs, on a bone background',
+    'cat.recamara-tulum.alt-ambiente': 'Recámara Tulum with light bedding and its nightstand holding a vase of dried branches, in an off-white plaster gallery with afternoon light',
     'cat.recamara-tulum.mensaje':   'Hi, I would like a quote for the Recámara Tulum by MEDEISA.',
 
     /* --- EXPO --- */
@@ -540,8 +544,6 @@ const TRADUCCIONES = {
     'pie.contacto':  'Contact',
     'pie.derechos':  'All rights reserved.',
     'pie.ciudad':    'Ocotlán, Jalisco, Mexico',
-
-    /* --- WHATSAPP FLOTANTE --- */
   },
 };
 
@@ -596,8 +598,7 @@ const aplicarIdioma = (lang) => {
     }
 
     if (dataset.waPieza) {
-      const base = dataset.waPieza.replace(/\.nombre$/, '');
-      el.href = crearEnlaceWhatsapp(t[`${base}.mensaje`]);
+      el.href = crearEnlaceWhatsapp(t[`${dataset.waPieza}.mensaje`]);
     }
   });
 
@@ -657,6 +658,16 @@ const iniciarCatalogo = () => {
 
   const alternarPieza = (pieza, forzar) => {
     const ambiente = pieza.classList.toggle('pieza--ambiente', forzar);
+
+    /* El lector de pantalla solo expone la foto que se ve
+       (aria-hidden vacío no oculta: se escribe "true" o se quita) */
+    const ocultar = (el, oculto) => {
+      if (oculto) el?.setAttribute('aria-hidden', 'true');
+      else el?.removeAttribute('aria-hidden');
+    };
+    ocultar(pieza.querySelector('.pieza__foto--estudio'), ambiente);
+    ocultar(pieza.querySelector('.pieza__foto--ambiente'), !ambiente);
+
     const alternar = pieza.querySelector('.pieza__alternar');
     if (!alternar) return;
 
@@ -701,7 +712,6 @@ const iniciarFooter = () => {
 document.addEventListener('DOMContentLoaded', () => {
   iniciarNav();
   iniciarIdioma();
-  iniciarHero();
   iniciarVideoHero();
   iniciarAnimacionesEntrada();
   iniciarCatalogo();

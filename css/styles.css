@@ -21,7 +21,7 @@
   --color-carbon: #161616;
   --color-whatsapp: #25D366;      /* única excepción cromática: botón flotante (decisión del usuario) */
   --color-whatsapp-hover: #1DA851;
-  --color-icono-flotante: #FFFFFF;
+  --color-icono-flotante: #0a0a0a;   /* 10.5:1 sobre el verde; el blanco daba 1.98:1 (WCAG 1.4.11) */
 
   /* Colores - texto y líneas */
   --color-texto: var(--color-negro);
@@ -56,12 +56,14 @@
   --text-2xl: clamp(2.5rem, 1.88rem + 2.65vw, 4rem);          /* 40-64 */
   --text-3xl: clamp(3rem, 1.96rem + 4.42vw, 5.5rem);          /* 48-88 */
   --text-display: clamp(3.5rem, 1.33rem + 9.28vw, 8.75rem);   /* 56-140 */
+  --text-etiqueta: 0.75rem;   /* 12 fijo: nav, botones y enlaces en mayúsculas */
 
   --leading-display: 0.95;
   --leading-titulo: 1.05;
   --leading-heading: 1.15;
   --leading-cuerpo: 1.6;
   --leading-etiqueta: 1.3;
+  --leading-nombre: 1.25;          /* nombres de pieza y del mapa (Cormorant 400) */
 
   --tracking-display: -0.02em;
   --tracking-titulo: -0.015em;
@@ -82,6 +84,7 @@
   --ancho-texto: 720px;
   --padding-contenedor: var(--space-md);      /* 36px (--space-lg) desde 768px */
   --altura-nav: 4.5rem;
+  --area-tactil: 44px;                        /* objetivo táctil mínimo */
 
   /* Radios */
   --radio-control: 5px;
@@ -105,6 +108,13 @@
   --transicion-entrada: 0.6s var(--curva-entrada);
   --desplazamiento-entrada: 16px;
   --escalonado: 80ms;
+
+  /* Hero: encuadre del medio y fin del bloque de texto en vertical.
+     --hero-texto-fin = fin del texto + 16px de aire (medido: 395-410px en
+     teléfonos, 512px a 320px en inglés); crece en pantallas de menos de
+     360px sin consulta max-width. Se redefinen en el bloque HERO. */
+  --hero-foco: 50% 100%;
+  --hero-texto-fin: max(26.5rem, 85rem - 260vw);
 }
 
 @media (min-width: 768px) {
@@ -175,8 +185,8 @@ body {
   outline-offset: var(--foco-offset);
 }
 
-/* Skip link: fuera de pantalla hasta recibir foco; lleva además .btn .btn--relleno */
-.skip-link {
+/* Enlace de salto: fuera de pantalla hasta recibir foco; lleva además .btn .btn--relleno */
+.enlace-salto {
   position: absolute;
   top: var(--space-md);
   left: var(--space-md);
@@ -184,7 +194,7 @@ body {
   transform: translateY(calc(-100% - var(--space-md) * 2));
 }
 
-.skip-link:focus {
+.enlace-salto:focus {
   transform: none;
 }
 
@@ -200,7 +210,7 @@ body {
 }
 
 /* Texto oculto visualmente pero accesible para lectores de pantalla */
-.sr-only {
+.solo-lector {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -237,6 +247,22 @@ body {
   transform: none;
 }
 
+/* Hero: entrada con @keyframes al cargar (etiqueta y acciones), sin esperar
+   a main.js (defer). El H1 no se anima: Chrome no cuenta como LCP un texto
+   pintado con opacidad 0 que luego sube en el compositor, y lo registraba
+   solo al siguiente repintado (cuando corría el JS). */
+.entrada-hero {
+  animation: entrada-hero var(--transicion-entrada) both;
+  animation-delay: calc(var(--orden, 0) * var(--escalonado));
+}
+
+@keyframes entrada-hero {
+  from {
+    opacity: 0;
+    transform: translateY(var(--desplazamiento-entrada));
+  }
+}
+
 /* Movimiento reducido: sin desplazamiento, solo opacidad corta.
    Los !important están justificados: deben ganar a cualquier regla de
    sección, incluidas animaciones y retardos definidos más abajo. */
@@ -252,6 +278,10 @@ body {
   .animar-entrada {
     transform: none !important;
     transition: opacity 200ms ease !important;
+  }
+
+  .entrada-hero {
+    animation: none !important;
   }
 
   html {
@@ -271,7 +301,7 @@ body {
   min-height: 48px;
   padding: 1rem 1.75rem;
   font-family: var(--font-sans);
-  font-size: 0.75rem;
+  font-size: var(--text-etiqueta);
   font-weight: var(--fw-medium);
   line-height: var(--leading-etiqueta);
   letter-spacing: var(--tracking-etiqueta);
@@ -335,7 +365,7 @@ body {
 /* ---- Etiqueta (eyebrow): la línea roja da el acento, el texto hereda ---- */
 .etiqueta {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--space-sm);
   font-family: var(--font-sans);
   font-size: var(--text-xs);
@@ -343,14 +373,17 @@ body {
   line-height: var(--leading-etiqueta);
   letter-spacing: var(--tracking-etiqueta);
   text-transform: uppercase;
+  text-wrap: balance; /* si parte en dos líneas, sin palabra suelta */
   color: inherit;
 }
 
+/* Centrada en la PRIMERA línea (no en el bloque) si la etiqueta se parte */
 .etiqueta__linea {
   display: block;
   flex-shrink: 0;
   width: 24px;
   height: 1px;
+  margin-top: calc(var(--leading-etiqueta) * 0.5em - 0.5px);
   background-color: var(--color-rojo);
 }
 
@@ -369,6 +402,15 @@ body {
   font-weight: var(--fw-light);
 }
 
+/* ---- Entrada de sección: párrafo bajo el h2, dentro de .cabecera-seccion ---- */
+.entrada-seccion {
+  max-width: 60ch;
+  margin-top: var(--space-sm);
+  font-size: var(--text-base);
+  line-height: var(--leading-cuerpo);
+  color: var(--color-texto-secundario);
+}
+
 /* ---- Marco de imagen: toda foto contenida ---- */
 .marco-imagen {
   overflow: hidden;
@@ -383,32 +425,37 @@ body {
   object-fit: cover;
 }
 
-/* ---- Enlace "Cotizar" de pieza: texto + línea roja que crece ---- */
-.enlace-cotizar {
+/* ---- Enlace de texto en mayúsculas con línea roja de 1px que crece desde
+   la izquierda en hover, foco y estado activo (nav, redes, footer) ---- */
+.enlace-linea {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: var(--space-sm);
-  min-height: 44px;
-  font-family: var(--font-sans);
-  font-size: 0.75rem;
+  min-height: var(--area-tactil);
+  font-size: var(--text-etiqueta);
   font-weight: var(--fw-medium);
+  line-height: var(--leading-etiqueta);
   letter-spacing: var(--tracking-etiqueta);
   text-transform: uppercase;
-  color: var(--color-texto);
 }
 
-.enlace-cotizar__linea {
-  display: block;
-  flex-shrink: 0;
-  width: 24px;
+.enlace-linea::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: var(--tracking-etiqueta); /* compensa el tracking del último carácter */
+  bottom: 0.625rem;
   height: 1px;
   background-color: var(--color-rojo);
-  transition: width var(--transicion-hover);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transicion-hover);
 }
 
-.enlace-cotizar:hover .enlace-cotizar__linea,
-.enlace-cotizar:focus-visible .enlace-cotizar__linea {
-  width: 40px;
+.enlace-linea:hover::after,
+.enlace-linea:focus-visible::after,
+.enlace-linea.activo::after {
+  transform: scaleX(1);
 }
 
 
@@ -448,12 +495,13 @@ html:not(.js) .encabezado,
   align-items: center;
   justify-self: start; /* en el grid desktop no se estira a toda la columna */
   flex-shrink: 0;
-  min-height: 44px;
+  min-height: var(--area-tactil);
 }
 
+/* Logo horizontal (M + MEDEISA), sin el microtexto del PNG completo */
 .nav__logo-img {
   width: auto;
-  height: 48px;
+  height: 40px;
 }
 
 /* ---- Enlaces (solo desktop) ---- */
@@ -461,40 +509,14 @@ html:not(.js) .encabezado,
   display: none;
 }
 
+/* Tipografía y línea roja: .enlace-linea (COMPONENTES COMPARTIDOS) */
 .nav__enlace {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  font-size: 0.75rem;
-  font-weight: var(--fw-medium);
-  line-height: var(--leading-etiqueta);
-  letter-spacing: var(--tracking-etiqueta);
-  text-transform: uppercase;
   color: var(--color-texto);
-}
-
-/* Línea roja de 1px que crece desde la izquierda (hover y activo) */
-.nav__enlace::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: var(--tracking-etiqueta); /* compensa el tracking del último carácter */
-  bottom: 0.625rem;
-  height: 1px;
-  background-color: var(--color-rojo);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform var(--transicion-hover);
-}
-
-.nav__enlace:hover::after,
-.nav__enlace.activo::after {
-  transform: scaleX(1);
 }
 
 /* ---- Acciones: idioma + CTA + hamburguesa ---- */
 .nav__acciones {
+  position: relative; /* ancla del CTA oculto fuera del flujo */
   display: flex;
   align-items: center;
   gap: var(--space-sm);
@@ -511,8 +533,8 @@ html:not(.js) .encabezado,
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 44px;
-  min-height: 44px;
+  min-width: var(--area-tactil);
+  min-height: var(--area-tactil);
   padding-left: var(--tracking-etiqueta); /* centra el texto con tracking */
   font-size: 0.6875rem;
   font-weight: var(--fw-medium);
@@ -558,8 +580,8 @@ html:not(.js) .encabezado,
 /* ---- Hamburguesa: dos líneas de 1px x 20px ---- */
 .nav__hamburguesa {
   position: relative;
-  width: 44px;
-  height: 44px;
+  width: var(--area-tactil);
+  height: var(--area-tactil);
   margin-right: calc(var(--space-sm) * -1); /* alinea las líneas con el gutter */
 }
 
@@ -670,9 +692,13 @@ html:not(.js) .encabezado,
     display: none;
   }
 
+  /* Oculto sobre el hero y FUERA DEL FLUJO: así ES/EN queda pegado al
+     borde derecho del contenedor, alineado con el resto de la página */
   .nav__cta {
+    position: absolute;
+    right: 0;
     display: inline-flex;
-    min-height: 44px;
+    min-height: var(--area-tactil);
     padding: 0.75rem 1.25rem;
     visibility: hidden;
     opacity: 0;
@@ -685,6 +711,7 @@ html:not(.js) .encabezado,
 
   html:not(.js) .nav__cta,
   .encabezado--solido .nav__cta {
+    position: static;
     visibility: visible;
     opacity: 1;
   }
@@ -698,11 +725,7 @@ html:not(.js) .encabezado,
    Horizontal (>= 768px apaisado, o >= 1280px): medio 16:9, texto abajo a la izquierda.
    La consulta vertical coincide con la de los <source> del <picture> y la de JS. */
 .hero {
-  --hero-foco: 50% 100%;
-  /* Vertical: fin del bloque de texto + 16px de aire (medido: 395-410px en
-     teléfonos, 448px en tableta; 512px a 320px en inglés) */
-  --hero-texto-fin: 26.5rem;
-
+  /* --hero-foco y --hero-texto-fin: valores base en :root */
   position: relative;
   isolation: isolate;
   display: grid;
@@ -786,15 +809,15 @@ html:not(.js) .encabezado,
 .hero__pausa {
   position: absolute;
   /* Centrado sobre el eje del WhatsApp flotante */
-  right: calc(var(--flotante-margen) + env(safe-area-inset-right, 0px) + (var(--flotante-tamano) - 44px) / 2);
+  right: calc(var(--flotante-margen) + env(safe-area-inset-right, 0px) + (var(--flotante-tamano) - var(--area-tactil)) / 2);
   /* Anclado a la primera pantalla, no al fondo del hero (que en vertical
      puede ser más alto que el viewport): siempre visible y sobre el flotante */
-  top: calc(100svh - env(safe-area-inset-bottom, 0px) - var(--flotante-margen) - var(--flotante-tamano) - var(--space-md) - 44px);
+  top: calc(100svh - env(safe-area-inset-bottom, 0px) - var(--flotante-margen) - var(--flotante-tamano) - var(--space-md) - var(--area-tactil));
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: var(--area-tactil);
+  height: var(--area-tactil);
   border: 1px solid var(--color-negro);
   border-radius: var(--radio-control);
   /* Relleno papel: el control se percibe también cuando cae sobre el acero
@@ -834,16 +857,10 @@ html:not(.js) .encabezado,
 }
 
 /* ---- Horizontal: medio 16:9, texto abajo a la izquierda sobre el muro ---- */
-/* Tabletas en retrato: titular más grande, el texto termina más abajo */
+/* Tabletas en retrato: titular más grande, el texto termina más abajo (448px medido) */
 @media (min-width: 768px) {
   .hero {
     --hero-texto-fin: 29rem;
-  }
-}
-
-@media (max-width: 359px) {
-  .hero {
-    --hero-texto-fin: 33rem;
   }
 }
 
@@ -950,12 +967,6 @@ html:not(.js) .encabezado,
   gap: var(--space-xl);
 }
 
-.nosotros__descripcion {
-  max-width: 60ch;
-  font-size: var(--text-base);
-  line-height: var(--leading-cuerpo);
-}
-
 /* Foto real 4:5; en tableta se limita para no ocupar toda la pantalla */
 .nosotros__figura {
   aspect-ratio: 4 / 5;
@@ -976,7 +987,7 @@ html:not(.js) .encabezado,
   align-items: center;
   min-height: 3.5rem;
   padding-block: var(--space-sm);
-  font-size: 0.75rem;
+  font-size: var(--text-etiqueta);
   font-weight: var(--fw-medium);
   line-height: var(--leading-etiqueta);
   letter-spacing: var(--tracking-etiqueta);
@@ -1017,6 +1028,7 @@ html:not(.js) .encabezado,
   font-size: 2rem;
   font-weight: var(--fw-light);
   line-height: 1;
+  font-variant-numeric: lining-nums; /* igual que .numero-seccion: "01" se leía "oI" */
   color: var(--color-texto-secundario);
 }
 
@@ -1175,14 +1187,6 @@ html:not(.js) .encabezado,
   color: var(--color-texto);
 }
 
-.catalogo__intro {
-  max-width: 60ch;
-  margin-top: var(--space-sm);
-  font-size: var(--text-base);
-  line-height: var(--leading-cuerpo);
-  color: var(--color-texto-secundario);
-}
-
 /* Grid: 1 columna móvil, 2 desde 768px, 3 desde 1024px */
 .catalogo__grid {
   display: grid;
@@ -1245,7 +1249,7 @@ html:not(.js) .encabezado,
   font-family: var(--font-serif);
   font-size: var(--text-lg);
   font-weight: var(--fw-regular);
-  line-height: 1.25;
+  line-height: var(--leading-nombre);
 }
 
 .pieza__categoria {
@@ -1259,6 +1263,34 @@ html:not(.js) .encabezado,
   margin-top: var(--space-xs);
 }
 
+/* ---- Enlace "Cotizar" de pieza: texto + línea roja que crece ---- */
+.enlace-cotizar {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  min-height: var(--area-tactil);
+  font-family: var(--font-sans);
+  font-size: var(--text-etiqueta);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tracking-etiqueta);
+  text-transform: uppercase;
+  color: var(--color-texto);
+}
+
+.enlace-cotizar__linea {
+  display: block;
+  flex-shrink: 0;
+  width: 24px;
+  height: 1px;
+  background-color: var(--color-rojo);
+  transition: width var(--transicion-hover);
+}
+
+.enlace-cotizar:hover .enlace-cotizar__linea,
+.enlace-cotizar:focus-visible .enlace-cotizar__linea {
+  width: 40px;
+}
+
 /* ---- Botón "Ver en ambiente / en estudio": esquina inferior izquierda ---- */
 .pieza__alternar {
   position: absolute;
@@ -1266,7 +1298,7 @@ html:not(.js) .encabezado,
   bottom: var(--space-md);
   display: inline-flex;
   align-items: center;
-  min-height: 44px;
+  min-height: var(--area-tactil);
   padding: 0 var(--space-md);
   font-family: var(--font-sans);
   font-size: var(--text-xs);
@@ -1461,14 +1493,6 @@ html:not(.js) .encabezado,
   align-items: start;
 }
 
-.contacto__subtexto {
-  max-width: 60ch;
-  margin-top: var(--space-sm);
-  font-size: var(--text-base);
-  line-height: var(--leading-cuerpo);
-  color: var(--color-texto-secundario);
-}
-
 /* ---- Datos: término en etiqueta negra, valor en cuerpo ---- */
 .contacto__datos {
   border-top: 1px solid var(--color-linea);
@@ -1511,7 +1535,7 @@ html:not(.js) .encabezado,
 .contacto__telefono {
   display: inline-flex;
   align-items: center;
-  min-height: 44px;
+  min-height: var(--area-tactil);
   margin-block: calc(var(--space-sm) * -1);
   text-decoration: underline;
   text-decoration-thickness: 1px;
@@ -1544,36 +1568,9 @@ html:not(.js) .encabezado,
   row-gap: var(--space-xs);
 }
 
-/* Línea roja de 1px que crece desde la izquierda en hover y foco */
+/* Tipografía y línea roja: .enlace-linea (COMPONENTES COMPARTIDOS) */
 .contacto__red {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  font-size: 0.75rem;
-  font-weight: var(--fw-medium);
-  line-height: var(--leading-etiqueta);
-  letter-spacing: var(--tracking-etiqueta);
-  text-transform: uppercase;
   color: var(--color-texto);
-}
-
-.contacto__red::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: var(--tracking-etiqueta); /* compensa el tracking del último carácter */
-  bottom: 0.625rem;
-  height: 1px;
-  background-color: var(--color-rojo);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform var(--transicion-hover);
-}
-
-.contacto__red:hover::after,
-.contacto__red:focus-visible::after {
-  transform: scaleX(1);
 }
 
 /* ---- Mapa: marco de 32px + pie claro ---- */
@@ -1611,7 +1608,7 @@ html:not(.js) .encabezado,
   font-family: var(--font-serif);
   font-size: var(--text-lg);
   font-weight: var(--fw-regular);
-  line-height: 1.25;
+  line-height: var(--leading-nombre);
 }
 
 .contacto__mapa-dir {
@@ -1683,7 +1680,7 @@ html:not(.js) .encabezado,
    brightness(0) lo pasa a negro y invert(0.96) a #F5F5F5 aprox. */
 .pie-pagina__logo {
   width: auto;
-  height: 48px;
+  height: 48px; /* logo horizontal sin microtexto: el subtítulo va solo como texto */
   filter: brightness(0) invert(0.96);
 }
 
@@ -1723,36 +1720,9 @@ html:not(.js) .encabezado,
   column-gap: var(--space-md);
 }
 
+/* Tipografía y línea roja (solo la línea cambia, no el texto): .enlace-linea */
 .pie-pagina__enlace {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  font-size: 0.75rem;
-  font-weight: var(--fw-medium);
-  line-height: var(--leading-etiqueta);
-  letter-spacing: var(--tracking-etiqueta);
-  text-transform: uppercase;
   color: var(--color-texto-invertido);
-}
-
-/* Hover y foco: solo la línea inferior en rojo, el texto no cambia */
-.pie-pagina__enlace::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: var(--tracking-etiqueta); /* compensa el tracking del último carácter */
-  bottom: 0.625rem;
-  height: 1px;
-  background-color: var(--color-rojo);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform var(--transicion-hover);
-}
-
-.pie-pagina__enlace:hover::after,
-.pie-pagina__enlace:focus-visible::after {
-  transform: scaleX(1);
 }
 
 /* Fila 3: créditos bajo una hairline oscura */
@@ -1765,8 +1735,9 @@ html:not(.js) .encabezado,
   border-top: 1px solid var(--color-linea-oscura);
 }
 
+/* Texto en minúsculas: tamaño de cuerpo mínimo (14-15px, DESIGN) */
 .pie-pagina__creditos p {
-  font-size: 0.75rem;
+  font-size: var(--text-sm);
   font-weight: var(--fw-regular);
   line-height: var(--leading-cuerpo);
   color: var(--color-texto-secundario-oscuro);
