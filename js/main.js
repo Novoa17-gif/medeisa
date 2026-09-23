@@ -363,10 +363,17 @@ const TRADUCCIONES = {
     'cat.recamara-tulum.mensaje':   'Hola, me interesa cotizar la Recámara Tulum de MEDEISA.',
 
     /* --- EXPO --- */
-    'gal.etiqueta':  'Presencia semestral',
-    'gal.titulo':    'Expo Muebles Ocotlán',
-    'expo.desc':     'Dos veces al año, en febrero y agosto, MEDEISA tiene presencia en Expo Muebles Ocotlán, la feria más importante de la región. Presentamos nuestro catálogo de muebles industriales fabricados a mano y conectamos con clientes de todo Jalisco.',
-    'expo.badge':    'Edición',
+    'expo.etiqueta':   'Presencia semestral',
+    'expo.titulo':     'Expo Muebles Ocotlán',
+    'expo.desc':       'Dos veces al año, en febrero y agosto, MEDEISA tiene presencia en Expo Muebles Ocotlán, la feria más importante de la región. Presentamos nuestro catálogo de muebles industriales fabricados a mano y conectamos con clientes de todo Jalisco.',
+    'expo.edicion':    'Edición',
+    'expo.alt':        'Stand de MEDEISA en Expo Muebles Ocotlán: letrero negro con el logo, celosía de listones claros y libreros, mesas y estanterías de acero negro y madera iluminados con luz cálida',
+    'expo.dato1-lbl':  'Evento',
+    'expo.dato1-val':  'Expo Muebles Ocotlán',
+    'expo.dato2-lbl':  'Participación',
+    'expo.dato2-val':  'Semestral · febrero y agosto',
+    'expo.dato3-lbl':  'Sede',
+    'expo.dato3-val':  'Ocotlán, Jalisco',
 
     /* --- CONTACTO --- */
     'cnt.etiqueta':  'Encuéntranos',
@@ -483,10 +490,17 @@ const TRADUCCIONES = {
     'cat.recamara-tulum.mensaje':   'Hi, I would like a quote for the Recámara Tulum by MEDEISA.',
 
     /* --- EXPO --- */
-    'gal.etiqueta':  'Biannual presence',
-    'gal.titulo':    'Expo Muebles Ocotlán',
-    'expo.desc':     'Twice a year, in February and August, MEDEISA participates in Expo Muebles Ocotlán, the most important trade fair in the region. We showcase our catalog of handcrafted industrial furniture and connect with clients from all over Jalisco.',
-    'expo.badge':    'Edition',
+    'expo.etiqueta':   'Biannual presence',
+    'expo.titulo':     'Expo Muebles Ocotlán',
+    'expo.desc':       'Twice a year, in February and August, MEDEISA participates in Expo Muebles Ocotlán, the most important trade fair in the region. We showcase our catalog of handcrafted industrial furniture and connect with clients from all over Jalisco.',
+    'expo.edicion':    'Edition',
+    'expo.alt':        'MEDEISA booth at Expo Muebles Ocotlán: black sign with the logo, light slatted screen, and black steel and wood bookshelves, tables and shelving lit with warm light',
+    'expo.dato1-lbl':  'Event',
+    'expo.dato1-val':  'Expo Muebles Ocotlán',
+    'expo.dato2-lbl':  'Participation',
+    'expo.dato2-val':  'Biannual · February and August',
+    'expo.dato3-lbl':  'Venue',
+    'expo.dato3-val':  'Ocotlán, Jalisco',
 
     /* --- CONTACTO --- */
     'cnt.etiqueta':  'Find us',

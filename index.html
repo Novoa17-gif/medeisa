@@ -748,58 +748,66 @@
     </section>
 
     <!-- ============================================================
-         EXPO MUEBLES OCOTLÁN
+         EXPO
     ============================================================ -->
-    <section class="galeria" id="galeria" aria-labelledby="galeria-titulo">
+    <section class="expo" id="galeria" aria-labelledby="expo-titulo">
       <div class="contenedor">
 
-        <!-- Encabezado — mismo patrón editorial del sitio -->
-        <div class="galeria__encabezado">
-          <p class="galeria__etiqueta animar-entrada">
-            <span class="galeria__etiqueta-linea" aria-hidden="true"></span>
-            <span data-i18n="gal.etiqueta">Presencia semestral</span>
+        <header class="cabecera-seccion animar-entrada">
+          <span class="numero-seccion" aria-hidden="true">03</span>
+          <p class="etiqueta">
+            <span class="etiqueta__linea" aria-hidden="true"></span>
+            <span data-i18n="expo.etiqueta">Presencia semestral</span>
           </p>
-          <h2 class="galeria__titulo animar-entrada" id="galeria-titulo" data-i18n="gal.titulo">Expo Muebles Ocotlán</h2>
-          <span class="galeria__divisor animar-entrada" aria-hidden="true"></span>
+          <h2 class="titulo-seccion" id="expo-titulo" data-i18n="expo.titulo">Expo Muebles Ocotlán</h2>
+        </header>
+
+        <!-- Intro: descripción a la izquierda, edición a la derecha -->
+        <div class="expo__intro animar-entrada" style="--orden: 1">
+          <p class="expo__desc" data-i18n="expo.desc">Dos veces al año, en febrero y agosto, MEDEISA tiene presencia en Expo Muebles Ocotlán, la feria más importante de la región. Presentamos nuestro catálogo de muebles industriales fabricados a mano y conectamos con clientes de todo Jalisco.</p>
+          <p class="expo__edicion">
+            <span class="expo__edicion-etiqueta" data-i18n="expo.edicion">Edición</span>
+            <span class="expo__edicion-anio">2026</span>
+          </p>
         </div>
 
-        <!-- Intro: descripción + badge de edición -->
-        <div class="expo__intro animar-entrada">
-          <p class="expo__desc" data-i18n="expo.desc">
-            Dos veces al año, en febrero y agosto, MEDEISA tiene presencia en
-            Expo Muebles Ocotlán, la feria más importante de la región. Presentamos
-            nuestro catálogo de muebles industriales fabricados a mano y conectamos
-            con clientes de todo Jalisco.
-          </p>
-          <div class="expo__badge" aria-label="Edición 2026">
-            <span class="expo__badge-label" data-i18n="expo.badge">Edición</span>
-            <span class="expo__badge-year">2026</span>
-            <span class="expo__badge-acento" aria-hidden="true"></span>
-          </div>
-        </div>
-
-        <!-- Foto panorámica del evento -->
-        <figure class="expo__foto animar-entrada">
-          <img src="assets/new-expo.jpeg"
-               alt="Stand de MEDEISA en Expo Muebles Ocotlán"
-               loading="lazy">
+        <!-- Foto panorámica del stand: 16:9 desde 768px, 4:3 en móvil -->
+        <figure class="expo__figura marco-imagen animar-entrada">
+          <picture>
+            <source
+              type="image/webp"
+              srcset="assets/expo/expo-800w.webp 800w, assets/expo/expo-1600w.webp 1600w"
+              sizes="(min-width: 1280px) 1208px, (min-width: 768px) calc(100vw - 72px), calc(100vw - 40px)"
+            />
+            <img
+              src="assets/expo/expo-800w.jpg"
+              srcset="assets/expo/expo-800w.jpg 800w, assets/expo/expo-1600w.jpg 1600w"
+              sizes="(min-width: 1280px) 1208px, (min-width: 768px) calc(100vw - 72px), calc(100vw - 40px)"
+              width="1600"
+              height="900"
+              loading="lazy"
+              decoding="async"
+              alt="Stand de MEDEISA en Expo Muebles Ocotlán: letrero negro con el logo, celosía de listones claros y libreros, mesas y estanterías de acero negro y madera iluminados con luz cálida"
+              data-i18n-alt="expo.alt"
+            />
+          </picture>
         </figure>
 
-        <!-- Franja de datos confirmados del evento -->
-        <div class="expo__datos animar-entrada">
+        <!-- Datos del evento -->
+        <dl class="expo__datos animar-entrada">
           <div class="expo__dato">
-            <span class="expo__dato-label">Evento</span>
-            <span class="expo__dato-valor">Expo Muebles Ocotlán</span>
+            <dt class="expo__dato-termino" data-i18n="expo.dato1-lbl">Evento</dt>
+            <dd class="expo__dato-valor" data-i18n="expo.dato1-val">Expo Muebles Ocotlán</dd>
           </div>
           <div class="expo__dato">
-            <span class="expo__dato-label">Participación</span>
-            <span class="expo__dato-valor">Semestral · Febrero – Agosto</span>
+            <dt class="expo__dato-termino" data-i18n="expo.dato2-lbl">Participación</dt>
+            <dd class="expo__dato-valor" data-i18n="expo.dato2-val">Semestral · febrero y agosto</dd>
           </div>
           <div class="expo__dato">
-            <span class="expo__dato-label">Sede</span>
-            <span class="expo__dato-valor">Ocotlán, Jalisco</span>
+            <dt class="expo__dato-termino" data-i18n="expo.dato3-lbl">Sede</dt>
+            <dd class="expo__dato-valor" data-i18n="expo.dato3-val">Ocotlán, Jalisco</dd>
           </div>
-        </div>
+        </dl>
 
       </div>
     </section>

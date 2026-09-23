@@ -78,3 +78,19 @@ Una línea por decisión no trivial. Orden de prioridad: SPEC > DESIGN > BLUEPRI
 - Padding de banda `--space-2xl` (antes `--space-3xl`, que DESIGN reserva para la Declaración).
 - Se borran `prod.*` y las claves transitorias `wa.libreros|mesas|tv|sillas`; `.btn--rojo` LEGADO se queda porque Contacto aún lo usa. El schema ("libreros, mesas, escritorios y sillas") se deja para el paso 7.
 - Revisión: con puntero fino, si el foco sale de una pieza que quedó en ambiente por el botón (teclado), vuelve a estudio (`focusout` delegado en el grid); antes quedaba fija en ambiente sin control visible para el ratón.
+
+## Paso 4 - Expo
+
+- 1 foto panorámica (SPEC); `expo-1.jpeg` y `expo-2.jpeg` no se usan. `new-expo.jpeg` solo existe a 1600x900: se generan `assets/expo/expo-{800,1600}w.{jpg,webp}` (sin 2560w inflada); original sin tocar. A 1208px de contenedor en pantallas 2x se verá algo blanda (riesgo aceptado del BLUEPRINT).
+- Pesos: 1600w webp 245 KB / jpg 341 KB, 800w webp 86 KB / jpg 105 KB; la foto (celosía y techo de armadura) no baja más sin artefactos visibles.
+- Móvil: el marco pasa a 4:3 con `object-position: 30%` (16:9 a 335px de ancho daba 188px de alto y el stand quedaba diminuto); 16:9 desde 768px. La proporción la fija el `aspect-ratio` del marco + `width/height` del img (sin CLS).
+- Se renombran `.galeria*` a `.expo*` y el h2 a `id="expo-titulo"`; `id="galeria"` se conserva (anclas de nav y footer).
+- Claves `gal.etiqueta|titulo` pasan a `expo.etiqueta|titulo`; `expo.badge` pasa a `expo.edicion`; nuevas `expo.alt` y `expo.dato1-3-lbl|val`. El título "Expo Muebles Ocotlán" es nombre propio: igual en ES y EN.
+- "Semestral · Febrero – Agosto" pasa a "Semestral · febrero y agosto" / "Biannual · February and August" (sin raya, meses en minúscula en ES).
+- Edición: `<p>` con etiqueta ceniza + "2026" en Cormorant `--text-3xl` papel; sin línea roja propia (el 03 ya es la nota roja del grupo) y sin `aria-label` fijo en español (el texto visible ya se lee "Edición 2026").
+- Etiqueta "Presencia semestral" en papel, no roja: el número 03 ya da el acento.
+- Descripción en Jost 300 ceniza `#9A9794` (6.81:1 sobre negro); términos del `<dl>` en etiqueta ceniza, valores Jost 400 papel.
+- Datos: `<dl>` con `<div>` por par; en móvil filas con hairline inferior; desde 768px 3 columnas con separador vertical `--color-linea-oscura` y hairline arriba y abajo.
+- Fondo del marco mientras carga = carbón (panel), no hueso: sobre la banda negra un rectángulo hueso destellaba antes de la foto.
+- Padding de banda `--space-2xl` (antes `--space-3xl`, reservado a la Declaración). Sin zoom en hover.
+- Revisión: `.numero-seccion` pasa a `font-variant-numeric: lining-nums` (Cormorant pintaba cifras antiguas y "03" se leía "o3"); arregla 01-04 a la vez.

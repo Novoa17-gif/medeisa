@@ -358,6 +358,7 @@ body {
   font-weight: var(--fw-light);
   line-height: 1;
   letter-spacing: var(--tracking-heading);
+  font-variant-numeric: lining-nums; /* Cormorant usa cifras antiguas: "03" se leía "o3" */
   color: var(--color-rojo);
 }
 
@@ -1342,211 +1343,138 @@ html:not(.js) .encabezado,
 
 
 /* ====== EXPO ====== */
-.galeria {
-  padding-block: var(--space-3xl);
-  background-color: var(--color-hueso);
+/* Banda negra: única banda oscura de contenido. Texto papel, secundario
+   ceniza (6.81:1); el rojo solo en el número 03 y la línea de la etiqueta. */
+.expo {
+  padding-block: var(--space-2xl);
+  background-color: var(--superficie-oscura);
+  color: var(--color-texto-invertido);
 }
 
-/* Encabezado — patrón editorial compartido */
-.galeria__encabezado {
-  text-align: center;
+/* Intro: en móvil apilada; desde 768px descripción a la izquierda y
+   edición a la derecha */
+.expo__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-lg);
   margin-bottom: var(--space-xl);
 }
 
-.galeria__etiqueta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-md);
-  color: var(--color-rojo-texto);
-  font-size: var(--text-xs);
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-}
-
-.galeria__etiqueta-linea {
-  display: block;
-  width: 36px;
-  height: 1px;
-  background-color: var(--color-rojo);
-  flex-shrink: 0;
-}
-
-.galeria__titulo {
-  font-family: var(--font-serif);
-  font-size: clamp(2.5rem, 2rem + 2.5vw, 3.5rem);
-  font-weight: 300;
-  line-height: 1.1;
-  letter-spacing: -0.01em;
-  color: var(--color-texto-oscuro);
-}
-
-.galeria__divisor {
-  display: block;
-  width: 100%;
-  height: 1px;
-  background-color: rgba(28, 28, 28, 0.1);
-  margin-top: var(--space-xl);
-}
-
-/* ---- Intro: descripción + badge ---- */
-.expo__intro {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: var(--space-2xl);
-  padding-block: var(--space-2xl);
-}
-
 .expo__desc {
-  font-family: var(--font-jost);
+  max-width: 60ch;
   font-size: var(--text-base);
-  font-weight: var(--fw-regular);
-  color: #3A3A38;
-  line-height: 1.75;
-  max-width: 52ch;
+  font-weight: var(--fw-light);
+  line-height: var(--leading-cuerpo);
+  color: var(--color-texto-secundario-oscuro);
 }
 
-/* Badge edición — recuadro minimalista con acento rojo */
-.expo__badge {
-  flex-shrink: 0;
-  border: 1px solid rgba(28, 28, 28, 0.25);
-  padding: var(--space-md) var(--space-lg);
-  text-align: center;
-  min-width: 110px;
-}
-
-.expo__badge-label {
-  display: block;
-  font-family: var(--font-jost);
-  font-size: 0.6875rem;
-  font-weight: var(--fw-regular);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #777773;
-  margin-bottom: var(--space-xs);
-}
-
-.expo__badge-year {
-  display: block;
-  font-family: var(--font-serif);
-  font-size: 2.5rem;
-  font-weight: 300;
-  color: var(--color-texto-oscuro);
-  line-height: 1;
-}
-
-.expo__badge-acento {
-  display: block;
-  width: 100%;
-  height: 2px;
-  background-color: var(--color-rojo);
-  margin-top: var(--space-md);
-}
-
-/* ---- Imagen panorámica de 1 foto ----
-   Móvil:   altura compacta
-   Tablet+: altura cinematográfica
-*/
-.expo__foto {
-  position: relative;
-  overflow: hidden;
-  height: 340px;
-  border-radius: 2px;
-}
-
-@media (min-width: 640px) {
-  .expo__foto {
-    height: 520px;
-  }
-}
-
-.expo__foto img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .expo__foto:hover img {
-    transform: scale(1.03);
-  }
-}
-
-/* ---- Franja de datos del evento ---- */
-.expo__datos {
+.expo__edicion {
   display: flex;
-  align-items: center;
-  gap: 0;
-  border-top: 1px solid rgba(28, 28, 28, 0.12);
-  border-bottom: 1px solid rgba(28, 28, 28, 0.12);
-  padding-block: var(--space-lg);
+  flex-direction: column;
+  gap: var(--space-xs);
+  flex-shrink: 0;
+}
+
+.expo__edicion-etiqueta {
+  font-size: var(--text-xs);
+  font-weight: var(--fw-medium);
+  line-height: var(--leading-etiqueta);
+  letter-spacing: var(--tracking-etiqueta);
+  text-transform: uppercase;
+  color: var(--color-texto-secundario-oscuro);
+}
+
+.expo__edicion-anio {
+  font-family: var(--font-serif);
+  font-size: var(--text-3xl);
+  font-weight: var(--fw-light);
+  line-height: 1;
+  letter-spacing: var(--tracking-display);
+  font-variant-numeric: lining-nums;
+}
+
+/* Foto: el marco fija la proporción antes de cargar (sin CLS). En móvil
+   4:3 con foco a la izquierda para conservar el letrero y el stand. */
+.expo__figura {
+  aspect-ratio: 4 / 3;
+  background-color: var(--superficie-panel);
+}
+
+.expo__figura img {
+  object-position: 30% 50%;
+}
+
+/* Datos: 1 columna en móvil con hairlines oscuros entre filas */
+.expo__datos {
+  display: grid;
+  grid-template-columns: 1fr;
   margin-top: var(--space-lg);
+  border-top: 1px solid var(--color-linea-oscura);
 }
 
 .expo__dato {
-  flex: 1;
-  padding-inline: var(--space-lg);
-  border-right: 1px solid rgba(28, 28, 28, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  padding-block: var(--space-md);
+  border-bottom: 1px solid var(--color-linea-oscura);
 }
 
-.expo__dato:first-child {
-  padding-left: 0;
-}
-
-.expo__dato:last-child {
-  border-right: none;
-}
-
-.expo__dato-label {
-  display: block;
-  font-family: var(--font-jost);
-  font-size: 0.6875rem;
-  font-weight: var(--fw-regular);
-  letter-spacing: 0.25em;
+.expo__dato-termino {
+  font-size: var(--text-xs);
+  font-weight: var(--fw-medium);
+  line-height: var(--leading-etiqueta);
+  letter-spacing: var(--tracking-etiqueta);
   text-transform: uppercase;
-  color: #777773;
-  margin-bottom: 4px;
+  color: var(--color-texto-secundario-oscuro);
 }
 
 .expo__dato-valor {
-  font-family: var(--font-jost);
-  font-size: 0.9rem;
+  font-size: var(--text-base);
   font-weight: var(--fw-regular);
-  color: var(--color-texto-oscuro);
+  line-height: var(--leading-cuerpo);
+  color: var(--color-texto-invertido);
 }
 
-/* Móvil: franja de datos en columna */
-@media (max-width: 600px) {
+@media (min-width: 768px) {
   .expo__intro {
-    flex-direction: column;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
     gap: var(--space-xl);
   }
 
-  .expo__badge {
-    align-self: flex-start;
+  .expo__edicion {
+    align-items: flex-end;
   }
 
+  .expo__figura {
+    aspect-ratio: 16 / 9;
+  }
+
+  .expo__figura img {
+    object-position: 50% 50%;
+  }
+
+  /* 3 columnas: hairline superior e inferior compartidos, separadores
+     verticales entre columnas */
   .expo__datos {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-lg);
+    grid-template-columns: repeat(3, 1fr);
+    border-bottom: 1px solid var(--color-linea-oscura);
   }
 
   .expo__dato {
-    border-right: none;
-    border-bottom: 1px solid rgba(28, 28, 28, 0.1);
-    padding-inline: 0;
-    padding-bottom: var(--space-md);
-    width: 100%;
+    padding-inline: var(--space-lg);
+    border-bottom: 0;
   }
 
-  .expo__dato:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
+  .expo__dato:first-child {
+    padding-inline-start: 0;
+  }
+
+  .expo__dato + .expo__dato {
+    border-inline-start: 1px solid var(--color-linea-oscura);
   }
 }
 
