@@ -105,18 +105,6 @@
   --transicion-entrada: 0.6s var(--curva-entrada);
   --desplazamiento-entrada: 16px;
   --escalonado: 80ms;
-
-  /* LEGADO: borrar en paso 8 - alias para secciones aún no refactorizadas */
-  --font-base: var(--font-sans);
-  --font-jost: var(--font-sans);
-  --fw-ultralight: 300;
-  --fw-semibold: 500;
-  --color-gris: #1a1a1a;
-  --color-texto-oscuro: var(--color-texto);
-  --radio-sm: var(--radio-control);
-  --elev-reposo: 0 2px 12px rgba(0, 0, 0, 0.06);
-  --elev-hover: 0 12px 40px rgba(0, 0, 0, 0.12);
-  --elev-superficie: 0 8px 32px rgba(0, 0, 0, 0.10);
 }
 
 @media (min-width: 768px) {
@@ -321,31 +309,6 @@ body {
 .btn--contorno:active {
   background-color: var(--color-negro);
   color: var(--color-blanco);
-}
-
-/* Contorno para bandas negras */
-.btn--contorno-claro {
-  background-color: transparent;
-  border-color: var(--color-blanco);
-  color: var(--color-blanco);
-}
-
-.btn--contorno-claro:hover,
-.btn--contorno-claro:active {
-  background-color: var(--color-blanco);
-  color: var(--color-negro);
-}
-
-/* LEGADO: borrar en paso 8 - botón rojo viejo de Catálogo y Contacto */
-.btn--rojo {
-  background-color: var(--color-rojo-texto);
-  border-color: var(--color-rojo-texto);
-  color: var(--color-texto-invertido);
-}
-
-.btn--rojo:hover {
-  background-color: var(--color-rojo-hover);
-  border-color: var(--color-rojo-hover);
 }
 
 /* ---- Cabecera de sección: número + etiqueta + h2 ---- */
@@ -1263,12 +1226,6 @@ html:not(.js) .encabezado,
 .pieza__foto--ambiente {
   opacity: 0;
   transition: opacity var(--transicion-entrada);
-}
-
-/* Los archivos de ambiente traen franjas negras de 0.35% arriba y abajo
-   (3px a 800w, 7px a 1600w): se recortan con una escala fija, no animada */
-.pieza__foto--ambiente img {
-  transform: scale(1.02);
 }
 
 /* Ambiente visible: toque o botón (.pieza--ambiente), foco de teclado en

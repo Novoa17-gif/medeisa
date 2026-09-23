@@ -138,3 +138,14 @@ Una línea por decisión no trivial. Orden de prioridad: SPEC > DESIGN > BLUEPRI
 - hreflang del sitemap se conserva (es-MX, en, x-default a la misma URL): el inglés vive en la misma página. Comentario decorativo con caracteres de caja sustituido por texto plano.
 - `robots.txt` no se toca (no está en el paso 7 del BLUEPRINT). Tras este paso `assets/hero-v4.jpeg` y `assets/logo.PNG` ya no tienen referencias (se listan, no se borran, para el paso 8).
 - Verificado: JSON-LD parsea (json.loads), `xmllint` valida el sitemap, las 16 rutas del sitemap y las 9 del schema existen, favicons/sitemap/og responden 200 en localhost:8321, ES/EN cambia título y descripción, sin errores de consola a 375 y 1440.
+
+## Paso 8 - Limpieza
+
+- Se borran los 10 alias LEGADO de `:root` (`--font-base`, `--font-jost`, `--fw-ultralight`, `--fw-semibold`, `--color-gris`, `--color-texto-oscuro`, `--radio-sm`, `--elev-reposo|hover|superficie`): `grep` confirma 0 usos en CSS, HTML y JS antes y después.
+- Se borra `.btn--rojo` (LEGADO, sin uso desde el paso 5).
+- Se borra también `.btn--contorno-claro`: estaba en COMPONENTES COMPARTIDOS (BLUEPRINT 0.3) pero ninguna banda negra lleva botón (Expo y footer no tienen CTA); es CSS huérfano y se recupera del BLUEPRINT si algún día hace falta.
+- Franjas negras de las fotos de ambiente (pendiente del paso 3) corregidas en los archivos con `docs/refactor-premium/scripts/ambiente.py` (PIL, local, sin Higgsfield): recorte de 9 px arriba/abajo y 7 px por lado desde el 1600x2000 (no hay original mayor), vuelta a 4:5 con LANCZOS (+0.9%) y 1600w/800w jpg q86 + webp q80. Pesos similares (webp 10-20% menos, jpg ~5% más). Se quita el parche CSS `transform: scale(1.02)`. Copia de los originales en el scratchpad de la sesión, no en el repo.
+- Claves i18n: 114 en ES y 114 en EN, mismas claves, sin duplicados; todas usadas por `data-i18n*`, `data-wa`, `data-wa-pieza` o literales de JS (`hero.pausa`, `nav.menu-*`, `cat.ver-*`, `meta.*`). No queda ninguna clave sin uso que borrar.
+- Revisión final sin hallazgos: 0 clases CSS sin uso en HTML/JS, 0 tokens sin uso (salvo `--orden`, que se define inline en el HTML), 0 colores hex sueltos fuera de `:root`, sin `backdrop-filter`, `mix-blend-mode`, `transition-delay` fijos, pesos >= 600, `var`, `MAPA_TRADUCCION`, `iniciarNavPill` ni listener de `scroll`. Los únicos `!important` son los del bloque global de reduced-motion (justificados en su comentario).
+- Lighthouse no se corrió: no está instalado y el CLAUDE.md pide consultar antes de instalar dependencias (`npx lighthouse`). Queda pendiente para el usuario.
+- Assets sin referencia (se listan, NO se borran): `assets/hero-v4.jpeg`, `hero-phone.jpeg`, `hero-v3.jpg`, `afamo.jpg`, `cimejal.jpeg`, `expo-1.jpeg`, `expo-2.jpeg`, `new-expo.jpeg` (fuente de `assets/expo/`), `logo.PNG` (fuente del logo y favicon), `producto-*.jpg|png` (4) e `images/nosotros.jpg` (fuente de `assets/nosotros/`).
