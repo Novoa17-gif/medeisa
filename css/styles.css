@@ -908,6 +908,17 @@ html:not(.js) .encabezado,
   }
 }
 
+/* Desktop (>= 1280px, apaisado): texto centrado en el alto. Abajo dejaba medio
+   muro vacío en pantallas altas; el padding-top de la nav lo baja un poco del
+   centro, a la altura del mueble. Por debajo de 1280 se queda abajo: centrado,
+   "Ver catálogo" montaba el mueble (1024x768) */
+@media (min-width: 1280px) and (orientation: landscape) {
+  .hero {
+    align-items: center;
+    padding-bottom: var(--space-lg);
+  }
+}
+
 /* Teléfono apaisado (alto < 500px): en fila, "Ver catálogo" montaba la pata
    del mueble (812x375, 915x412); apilados caben en la columna del muro */
 @media (min-width: 768px) and (orientation: landscape) and (max-height: 500px) {

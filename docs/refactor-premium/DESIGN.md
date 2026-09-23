@@ -300,7 +300,7 @@ Hero a sangre completa (100vw x 100svh); todo lo demás contenido en 1280px con 
 
 **3 prompts de ejemplo**
 
-1. **Hero galería de luz:** imagen a sangre 100svh de un muro de yeso hueso con luz rasante de tarde y el Centro de TV Catania en el tercio inferior derecho. Abajo a la izquierda: línea roja 24px + etiqueta Schibsted Grotesk 500 11px +0.18em `#0a0a0a` "MUEBLERÍA INDUSTRIAL · OCOTLÁN, JALISCO" (texto negro: sobre el muro con sombras de ventana el `#C0001F` puede bajar de 4.5:1); titular Gloock `--text-display` `#0a0a0a` "Transformamos acero en *estilo*"; CTA relleno `#C0001F` "COTIZAR POR WHATSAPP" y botón de contorno negro "VER CATÁLOGO".
+1. **Hero galería de luz:** imagen a sangre 100svh de un muro de yeso hueso con luz rasante de tarde y el Centro de TV Catania en el tercio inferior derecho. A la izquierda (centrado en el alto desde 1280px apaisado, abajo en pantallas menores): línea roja 24px + etiqueta Schibsted Grotesk 500 11px +0.18em `#0a0a0a` "MUEBLERÍA INDUSTRIAL · OCOTLÁN, JALISCO" (texto negro: sobre el muro con sombras de ventana el `#C0001F` puede bajar de 4.5:1); titular Gloock `--text-display` `#0a0a0a` "Transformamos acero en *estilo*"; CTA relleno `#C0001F` "COTIZAR POR WHATSAPP" y botón de contorno negro "VER CATÁLOGO".
 2. **Bloque declaración:** banda `#F5F5F5`, padding `--space-3xl`, texto centrado máx 720px, Gloock `--text-2xl` `#0a0a0a`, dos líneas. Nada más.
 3. **Pieza de catálogo:** marco 4:5 radio 32px con foto de estudio sobre hueso; hover funde a ambiente en 0.6s. Debajo: nombre Gloock 400 `--text-lg`, línea Schibsted Grotesk 400 `--text-sm` `#5C5854`, enlace "COTIZAR" Schibsted Grotesk 500 12px con línea roja de 24px.
 
