@@ -1,22 +1,14 @@
 /* ================================================================
-   MEDEISA — JavaScript principal
-   Orden: Configuración → Nav → Hero → Animaciones → WhatsApp
+   MEDEISA - JavaScript principal
+   Orden: Nav → Hero → Animaciones → Idioma (i18n + WhatsApp) →
+          Nav pill → Footer → Init
 ================================================================ */
 
 'use strict';
 
-/* Marca que JS está activo — el CSS usa .js .animar-entrada para el
+/* Marca que JS está activo: el CSS usa .js .animar-entrada para el
    estado oculto inicial, así si el JS falla el contenido no queda invisible */
 document.documentElement.classList.add('js');
-
-
-/* ================================================================
-   CONFIGURACIÓN GLOBAL
-================================================================ */
-const CONFIG = {
-  whatsapp: '523921236728',
-  mensajeWhatsapp: 'Hola, me gustaría cotizar un producto de MEDEISA.',
-};
 
 
 /* ================================================================
@@ -65,8 +57,10 @@ const iniciarNav = () => {
     }
   });
 
-  /* — Link activo según sección visible (Intersection Observer) — */
-  const secciones = document.querySelectorAll('main [id]');
+  /* — Link activo según sección visible (Intersection Observer) —
+     Solo se observan las secciones con id, no los h2 con id que viven
+     dentro de ellas (antes apagaban el enlace activo). */
+  const secciones = document.querySelectorAll('main > section[id]');
 
   const observadorNav = new IntersectionObserver(
     (entradas) => {
@@ -87,12 +81,12 @@ const iniciarNav = () => {
 
 
 /* ================================================================
-   HERO — Animación de entrada inmediata al cargar
+   HERO - Animación de entrada inmediata al cargar
 ================================================================ */
 const iniciarHero = () => {
   /* Los elementos .animar-entrada del hero se revelan en secuencia
-     con el delay definido en CSS (transition-delay). Solo hay que
-     agregarles .visible en el siguiente frame para disparar la transición. */
+     según su --orden. Solo hay que agregarles .visible en el siguiente
+     frame para disparar la transición. */
   const elementosHero = document.querySelectorAll('.hero .animar-entrada');
 
   requestAnimationFrame(() => {
@@ -104,7 +98,7 @@ const iniciarHero = () => {
 /* ================================================================
    ANIMACIONES DE ENTRADA (Intersection Observer)
    Activa la clase .visible en elementos con .animar-entrada
-   cuando entran al viewport.
+   cuando entran al viewport, una sola vez.
 ================================================================ */
 const iniciarAnimacionesEntrada = () => {
   const elementos = document.querySelectorAll('.animar-entrada');
@@ -120,12 +114,7 @@ const iniciarAnimacionesEntrada = () => {
         }
       });
     },
-    {
-      threshold: 0.12,
-      /* Dispara cuando el elemento lleva al menos 60px dentro del viewport,
-         no en el instante en que asoma. Produce revelaciones más intencionales. */
-      rootMargin: '0px 0px -60px 0px',
-    }
+    { threshold: 0.15 }
   );
 
   elementos.forEach((el) => observador.observe(el));
@@ -133,68 +122,94 @@ const iniciarAnimacionesEntrada = () => {
 
 
 /* ================================================================
-   IDIOMA — Selector ES / EN
-   Motor de traducción sin dependencias externas.
-   Estrategia: mapa de selectores CSS → claves de traducción.
-   innerHTML para elementos con HTML interno (etiquetas con span de línea,
-   títulos con <em>), textContent para textos planos.
+   IDIOMA - Selector ES / EN
+   Motor de traducción por atributos, sin dependencias externas:
+   - data-i18n="clave"        → textContent
+   - data-i18n-html="clave"   → innerHTML (solo claves con <em>)
+   - data-i18n-alt="clave"    → atributo alt
+   - data-i18n-aria="clave"   → atributo aria-label
+   - data-i18n-title="clave"  → atributo title
+   - data-wa="x"              → href de WhatsApp con el mensaje wa.x
+   - data-wa-pieza="cat.<slug>.nombre" → href con cat.<slug>.mensaje
+   Cada sección edita solo su bloque, delimitado por comentarios idénticos
+   en ES y EN.
 ================================================================ */
+
+const WHATSAPP_NUMERO = '523921236728';
+const CLAVE_IDIOMA = 'medeisa-lang';
 
 /* ---- Diccionario de traducciones ---- */
 const TRADUCCIONES = {
   es: {
-    /* Nav */
+    /* --- GLOBAL --- */
+    'meta.title':  'MEDEISA — Mueblería Industrial en Ocotlán, Jalisco',
+    'meta.desc':   'MEDEISA — Mueblería industrial en Ocotlán, Jalisco. Transformamos acero en estilo. Cotiza tus muebles metálicos a medida.',
+    'global.skip': 'Saltar al contenido principal',
+    'wa.general':  'Hola, me gustaría cotizar un producto de MEDEISA.',
+
+    /* --- NAV --- */
     'nav.nosotros':   'Nosotros',
     'nav.productos':  'Productos',
     'nav.galeria':    'Expo',
     'nav.contacto':   'Contacto',
-    /* Hero */
+
+    /* --- HERO --- */
     'hero.eyebrow':   'Ocotlán, Jalisco',
     'hero.titulo-l1': 'Acero',
     'hero.titulo-l2': 'en estilo',
     'hero.subtitulo': 'Mueblería industrial a medida',
     'hero.btn-prim':  'Ver productos',
-    'hero.cta-ghost': 'Cotizar ahora \u00a0→',
+    'hero.cta-ghost': 'Cotizar ahora  →',
     'hero.deco':      'Diseño industrial / hecho a mano',
-    /* Nosotros */
-    'nos.etiqueta':          '<span class="nosotros__etiqueta-linea" aria-hidden="true"></span>Quiénes somos',
-    'nos.titulo':            'Fabricamos con propósito,\n            <em>crecemos con identidad</em>',
+
+    /* --- DECLARACION --- */
+
+    /* --- NOSOTROS --- */
+    'nos.etiqueta':          'Quiénes somos',
+    'nos.titulo':            'Fabricamos con propósito, <em>crecemos con identidad</em>',
     'nos.desc':              'Desde Ocotlán, Jalisco, transformamos acero en piezas que unen técnica artesanal con precisión industrial. Cada mueble nace aquí, pensado para durar décadas.',
-    'nos.enfoque-etiqueta':  '<span class="nosotros__sub-etiqueta-linea" aria-hidden="true"></span>Enfoque',
+    'nos.enfoque-etiqueta':  'Enfoque',
     'nos.enf1':              'Acero calibrado',
     'nos.enf2':              'Soldadura a mano',
     'nos.enf3':              'Fabricación a medida',
     'nos.enf4':              'Acabados al horno',
     'nos.enf5':              'Diseño propio',
     'nos.enf6':              'Entrega en todo Jalisco',
-    'nos.mision-etiqueta':   '<span class="nosotros__sub-etiqueta-linea" aria-hidden="true"></span>Misión',
+    'nos.mision-etiqueta':   'Misión',
     'nos.mision-texto':      'Nuestra misión es impulsar la activación económica de la empresa, nuestros colaboradores y socios comerciales, a través de la fabricación de muebles con calidad en procesos, productos y talento humano. Nos enfocamos en generar bienestar en nuestra comunidad, operando de manera responsable y sostenible con el medio ambiente.',
-    'nos.vision-etiqueta':   '<span class="nosotros__sub-etiqueta-linea" aria-hidden="true"></span>Visión',
+    'nos.vision-etiqueta':   'Visión',
     'nos.vision-texto':      'Ser una empresa líder en la fabricación del mueble, reconocida por nuestro diseño, innovación y compromiso para así expandir nuestra presencia en el mercado nacional e internacional, posicionándonos y consolidándonos como una marca confiable, reconocida y preferida por nuestros clientes.',
-    'nos.valores-etiqueta':  '<span class="nosotros__sub-etiqueta-linea" aria-hidden="true"></span>Valores',
+    'nos.valores-etiqueta':  'Valores',
     'nos.v1.nom':            'Compromiso',
     'nos.v2.nom':            'Trabajo en equipo',
     'nos.v3.nom':            'Autenticidad',
     'nos.v4.nom':            'Eficiencia',
     'nos.v5.nom':            'Innovación',
-    'nos.afil-etiqueta':     '<span class="nosotros__sub-etiqueta-linea" aria-hidden="true"></span>Afiliaciones',
+    'nos.afil-etiqueta':     'Afiliaciones',
     'nos.afil1-lbl':         'Socio activo',
     'nos.afil2-lbl':         'Afiliado',
-    /* Productos */
-    'prod.etiqueta': '<span class="productos__etiqueta-linea" aria-hidden="true"></span>Lo que fabricamos',
+
+    /* --- CATALOGO --- */
+    'prod.etiqueta': 'Lo que fabricamos',
     'prod.titulo':   'Nuestros productos',
     'prod.libreros': 'Libreros / Estantes industriales',
     'prod.mesas':    'Mesas de centro y auxiliares',
     'prod.escrts':   'Centros de TV',
     'prod.sillas':   'Sillas y sillones',
     'prod.cotizar':  'Cotizar',
-    /* Galería / Expo */
-    'gal.etiqueta':  '<span class="galeria__etiqueta-linea" aria-hidden="true"></span>Presencia semestral',
+    'wa.libreros':   'Hola, me gustaría cotizar un librero o estante industrial.',
+    'wa.mesas':      'Hola, me gustaría cotizar una mesa de centro o auxiliar.',
+    'wa.tv':         'Hola, me gustaría cotizar un centro de TV.',
+    'wa.sillas':     'Hola, me gustaría cotizar sillas o sillones.',
+
+    /* --- EXPO --- */
+    'gal.etiqueta':  'Presencia semestral',
     'gal.titulo':    'Expo Muebles Ocotlán',
     'expo.desc':     'Dos veces al año, en febrero y agosto, MEDEISA tiene presencia en Expo Muebles Ocotlán, la feria más importante de la región. Presentamos nuestro catálogo de muebles industriales fabricados a mano y conectamos con clientes de todo Jalisco.',
     'expo.badge':    'Edición',
-    /* Contacto */
-    'cnt.etiqueta':  '<span class="contacto__etiqueta-linea" aria-hidden="true"></span>Encuéntranos',
+
+    /* --- CONTACTO --- */
+    'cnt.etiqueta':  'Encuéntranos',
     'cnt.titulo':    'Contáctanos',
     'cnt.subtexto':  'Estamos listos para cotizar tu proyecto. Escríbenos o visítanos.',
     'cnt.lbl.tel':   'Teléfono',
@@ -202,9 +217,10 @@ const TRADUCCIONES = {
     'cnt.lbl.dir':   'Dirección',
     'cnt.val.hor':   'Lunes a Viernes · 8:00 am – 4:00 pm',
     'cnt.btn-wa':    'Escribir por WhatsApp',
-    'cnt.mapa-link': 'Ver en Maps&nbsp;→',
+    'cnt.mapa-link': 'Ver en Maps →',
     'cnt.redes':     'Síguenos',
-    /* Footer */
+
+    /* --- FOOTER --- */
     'pie.tagline':   'Transformamos acero en estilo',
     'pie.nosotros':  'Nosotros',
     'pie.productos': 'Productos',
@@ -212,61 +228,80 @@ const TRADUCCIONES = {
     'pie.contacto':  'Contacto',
     'pie.derechos':  'Todos los derechos reservados.',
     'pie.ciudad':    'Ocotlán, Jalisco, México',
+
+    /* --- WHATSAPP FLOTANTE --- */
   },
 
   en: {
-    /* Nav */
+    /* --- GLOBAL --- */
+    'meta.title':  'MEDEISA — Industrial Furniture in Ocotlán, Jalisco',
+    'meta.desc':   'MEDEISA — Industrial furniture maker in Ocotlán, Jalisco. We transform steel into style. Get a quote for custom metal furniture.',
+    'global.skip': 'Skip to main content',
+    'wa.general':  'Hello, I would like a quote for a MEDEISA product.',
+
+    /* --- NAV --- */
     'nav.nosotros':   'About',
     'nav.productos':  'Products',
     'nav.galeria':    'Expo',
     'nav.contacto':   'Contact',
-    /* Hero */
+
+    /* --- HERO --- */
     'hero.eyebrow':   'Ocotlán, Jalisco',
     'hero.titulo-l1': 'Steel',
     'hero.titulo-l2': 'in style',
     'hero.subtitulo': 'Custom industrial furniture',
     'hero.btn-prim':  'View products',
-    'hero.cta-ghost': 'Get a quote \u00a0→',
+    'hero.cta-ghost': 'Get a quote  →',
     'hero.deco':      'Industrial design / handmade',
-    /* Nosotros */
-    'nos.etiqueta':          '<span class="nosotros__etiqueta-linea" aria-hidden="true"></span>Who we are',
-    'nos.titulo':            'We build with purpose,\n            <em>we grow with identity</em>',
+
+    /* --- DECLARACION --- */
+
+    /* --- NOSOTROS --- */
+    'nos.etiqueta':          'Who we are',
+    'nos.titulo':            'We build with purpose, <em>we grow with identity</em>',
     'nos.desc':              'From Ocotlán, Jalisco, we transform steel into pieces that unite artisan technique with industrial precision. Each piece is born here, built to last decades.',
-    'nos.enfoque-etiqueta':  '<span class="nosotros__sub-etiqueta-linea" aria-hidden="true"></span>Focus',
+    'nos.enfoque-etiqueta':  'Focus',
     'nos.enf1':              'Calibrated steel',
     'nos.enf2':              'Hand welding',
     'nos.enf3':              'Made to measure',
     'nos.enf4':              'Oven-cured finishes',
     'nos.enf5':              'In-house design',
     'nos.enf6':              'Delivery across Jalisco',
-    'nos.mision-etiqueta':   '<span class="nosotros__sub-etiqueta-linea" aria-hidden="true"></span>Mission',
+    'nos.mision-etiqueta':   'Mission',
     'nos.mision-texto':      'Our mission is to drive the economic activation of the company, our collaborators and commercial partners, through the manufacturing of furniture with quality in processes, products and human talent. We focus on generating wellbeing in our community, operating responsibly and sustainably with the environment.',
-    'nos.vision-etiqueta':   '<span class="nosotros__sub-etiqueta-linea" aria-hidden="true"></span>Vision',
+    'nos.vision-etiqueta':   'Vision',
     'nos.vision-texto':      'To be a leading company in furniture manufacturing, recognized for our design, innovation and commitment, expanding our presence in national and international markets, positioning and consolidating ourselves as a reliable, recognized and preferred brand among our clients.',
-    'nos.valores-etiqueta':  '<span class="nosotros__sub-etiqueta-linea" aria-hidden="true"></span>Values',
+    'nos.valores-etiqueta':  'Values',
     'nos.v1.nom':            'Commitment',
     'nos.v2.nom':            'Teamwork',
     'nos.v3.nom':            'Authenticity',
     'nos.v4.nom':            'Efficiency',
     'nos.v5.nom':            'Innovation',
-    'nos.afil-etiqueta':     '<span class="nosotros__sub-etiqueta-linea" aria-hidden="true"></span>Affiliations',
+    'nos.afil-etiqueta':     'Affiliations',
     'nos.afil1-lbl':         'Active member',
     'nos.afil2-lbl':         'Affiliate',
-    /* Productos */
-    'prod.etiqueta': '<span class="productos__etiqueta-linea" aria-hidden="true"></span>What we make',
+
+    /* --- CATALOGO --- */
+    'prod.etiqueta': 'What we make',
     'prod.titulo':   'Our products',
     'prod.libreros': 'Industrial Bookshelves & Shelves',
     'prod.mesas':    'Coffee & Side Tables',
     'prod.escrts':   'TV Stands',
     'prod.sillas':   'Chairs & Armchairs',
     'prod.cotizar':  'Quote',
-    /* Galería / Expo */
-    'gal.etiqueta':  '<span class="galeria__etiqueta-linea" aria-hidden="true"></span>Biannual presence',
+    'wa.libreros':   'Hello, I would like a quote for an industrial bookshelf or shelf.',
+    'wa.mesas':      'Hello, I would like a quote for a coffee or side table.',
+    'wa.tv':         'Hello, I would like a quote for a TV stand.',
+    'wa.sillas':     'Hello, I would like a quote for chairs or armchairs.',
+
+    /* --- EXPO --- */
+    'gal.etiqueta':  'Biannual presence',
     'gal.titulo':    'Expo Muebles Ocotlán',
     'expo.desc':     'Twice a year, in February and August, MEDEISA participates in Expo Muebles Ocotlán, the most important trade fair in the region. We showcase our catalog of handcrafted industrial furniture and connect with clients from all over Jalisco.',
     'expo.badge':    'Edition',
-    /* Contacto */
-    'cnt.etiqueta':  '<span class="contacto__etiqueta-linea" aria-hidden="true"></span>Find us',
+
+    /* --- CONTACTO --- */
+    'cnt.etiqueta':  'Find us',
     'cnt.titulo':    'Contact us',
     'cnt.subtexto':  'We are ready to quote your project. Write to us or visit us.',
     'cnt.lbl.tel':   'Phone',
@@ -274,9 +309,10 @@ const TRADUCCIONES = {
     'cnt.lbl.dir':   'Address',
     'cnt.val.hor':   'Monday to Friday · 8:00 am – 4:00 pm',
     'cnt.btn-wa':    'Message on WhatsApp',
-    'cnt.mapa-link': 'View on Maps&nbsp;→',
+    'cnt.mapa-link': 'View on Maps →',
     'cnt.redes':     'Follow us',
-    /* Footer */
+
+    /* --- FOOTER --- */
     'pie.tagline':   'We transform steel into style',
     'pie.nosotros':  'About',
     'pie.productos': 'Products',
@@ -284,150 +320,120 @@ const TRADUCCIONES = {
     'pie.contacto':  'Contact',
     'pie.derechos':  'All rights reserved.',
     'pie.ciudad':    'Ocotlán, Jalisco, Mexico',
+
+    /* --- WHATSAPP FLOTANTE --- */
   },
 };
 
-/* ---- Mapa selector → clave (html:true usa innerHTML) ---- */
-const MAPA_TRADUCCION = [
-  /* Nav — pill + menú móvil (misma clase, mismo href) */
-  { sel: '.nav__link[href="#nosotros"]',  clave: 'nav.nosotros' },
-  { sel: '.nav__link[href="#productos"]', clave: 'nav.productos' },
-  { sel: '.nav__link[href="#galeria"]',   clave: 'nav.galeria'  },
-  { sel: '.nav__link[href="#contacto"]',  clave: 'nav.contacto' },
-  /* Hero */
-  { sel: '.hero__eyebrow',      clave: 'hero.eyebrow',   html: true },
-  { sel: '.hero__titulo-linea1',clave: 'hero.titulo-l1'           },
-  { sel: '.hero__titulo-linea2 em', clave: 'hero.titulo-l2'       },
-  { sel: '.hero__subtitulo',    clave: 'hero.subtitulo'           },
-  { sel: '.hero__btn-primario', clave: 'hero.btn-prim'            },
-  { sel: '.hero__cta-ghost',    clave: 'hero.cta-ghost'           },
-  { sel: '.hero__deco-texto',   clave: 'hero.deco'                },
-  /* Nosotros */
-  { sel: '.nosotros__etiqueta',                               clave: 'nos.etiqueta',         html: true },
-  { sel: '.nosotros__titulo',                                 clave: 'nos.titulo',           html: true },
-  { sel: '.nosotros__descripcion',                            clave: 'nos.desc'                        },
-  { sel: '.nosotros__enfoque .nosotros__sub-etiqueta',        clave: 'nos.enfoque-etiqueta', html: true },
-  { sel: '.nosotros__enfoque-item:nth-child(1)',               clave: 'nos.enf1'                        },
-  { sel: '.nosotros__enfoque-item:nth-child(2)',               clave: 'nos.enf2'                        },
-  { sel: '.nosotros__enfoque-item:nth-child(3)',               clave: 'nos.enf3'                        },
-  { sel: '.nosotros__enfoque-item:nth-child(4)',               clave: 'nos.enf4'                        },
-  { sel: '.nosotros__enfoque-item:nth-child(5)',               clave: 'nos.enf5'                        },
-  { sel: '.nosotros__enfoque-item:nth-child(6)',               clave: 'nos.enf6'                        },
-  { sel: '.nosotros__mision .nosotros__sub-etiqueta',         clave: 'nos.mision-etiqueta',  html: true },
-  { sel: '.nosotros__mision .nosotros__mv-texto',             clave: 'nos.mision-texto'                },
-  { sel: '.nosotros__vision .nosotros__sub-etiqueta',         clave: 'nos.vision-etiqueta',  html: true },
-  { sel: '.nosotros__vision .nosotros__mv-texto',             clave: 'nos.vision-texto'                },
-  { sel: '.nosotros__valores-wrap .nosotros__sub-etiqueta',   clave: 'nos.valores-etiqueta', html: true },
-  { sel: '.nosotros__pilares .nosotros__pilar:nth-child(1) .nosotros__pilar-nombre', clave: 'nos.v1.nom' },
-  { sel: '.nosotros__pilares .nosotros__pilar:nth-child(2) .nosotros__pilar-nombre', clave: 'nos.v2.nom' },
-  { sel: '.nosotros__pilares .nosotros__pilar:nth-child(3) .nosotros__pilar-nombre', clave: 'nos.v3.nom' },
-  { sel: '.nosotros__pilares .nosotros__pilar:nth-child(4) .nosotros__pilar-nombre', clave: 'nos.v4.nom' },
-  { sel: '.nosotros__pilares .nosotros__pilar:nth-child(5) .nosotros__pilar-nombre', clave: 'nos.v5.nom' },
-  { sel: '.nosotros__afamo .nosotros__sub-etiqueta',                                          clave: 'nos.afil-etiqueta', html: true },
-  { sel: '.nosotros__afil-cards .nosotros__afamo-card:nth-child(1) .nosotros__afamo-etiqueta', clave: 'nos.afil1-lbl' },
-  { sel: '.nosotros__afil-cards .nosotros__afamo-card:nth-child(2) .nosotros__afamo-etiqueta', clave: 'nos.afil2-lbl' },
-  /* Productos */
-  { sel: '.productos__etiqueta', clave: 'prod.etiqueta', html: true },
-  { sel: '.productos__titulo',   clave: 'prod.titulo'              },
-  { sel: '.productos__grid .producto-tarjeta:nth-child(1) .producto-tarjeta__nombre', clave: 'prod.libreros' },
-  { sel: '.productos__grid .producto-tarjeta:nth-child(2) .producto-tarjeta__nombre', clave: 'prod.mesas'    },
-  { sel: '.productos__grid .producto-tarjeta:nth-child(3) .producto-tarjeta__nombre', clave: 'prod.escrts'   },
-  { sel: '.productos__grid .producto-tarjeta:nth-child(4) .producto-tarjeta__nombre', clave: 'prod.sillas'   },
-  { sel: '.producto-tarjeta__btn', clave: 'prod.cotizar'          },
-  /* Galería / Expo */
-  { sel: '.galeria__etiqueta', clave: 'gal.etiqueta', html: true  },
-  { sel: '.galeria__titulo',   clave: 'gal.titulo'                },
-  { sel: '.expo__desc',        clave: 'expo.desc'                 },
-  { sel: '.expo__badge-label', clave: 'expo.badge'                },
-  /* Contacto */
-  { sel: '.contacto__etiqueta', clave: 'cnt.etiqueta', html: true },
-  { sel: '.contacto__titulo',   clave: 'cnt.titulo'               },
-  { sel: '.contacto__subtexto', clave: 'cnt.subtexto'             },
-  { sel: '.contacto__datos .contacto__dato:nth-child(1) .contacto__dato-label', clave: 'cnt.lbl.tel' },
-  { sel: '.contacto__datos .contacto__dato:nth-child(2) .contacto__dato-label', clave: 'cnt.lbl.hor' },
-  { sel: '.contacto__datos .contacto__dato:nth-child(3) .contacto__dato-label', clave: 'cnt.lbl.dir' },
-  { sel: '.contacto__datos .contacto__dato:nth-child(2) .contacto__dato-valor', clave: 'cnt.val.hor' },
-  { sel: '.contacto__btn-texto',  clave: 'cnt.btn-wa'             },
-  { sel: '.contacto__mapa-link',  clave: 'cnt.mapa-link', html: true },
-  { sel: '.contacto__redes-label',clave: 'cnt.redes'              },
-  /* Footer */
-  { sel: '.pie-pagina__tagline',           clave: 'pie.tagline'   },
-  { sel: '.pie-pagina__link[href="#nosotros"]',  clave: 'pie.nosotros'  },
-  { sel: '.pie-pagina__link[href="#productos"]', clave: 'pie.productos' },
-  { sel: '.pie-pagina__link[href="#galeria"]',   clave: 'pie.galeria'   },
-  { sel: '.pie-pagina__link[href="#contacto"]',  clave: 'pie.contacto'  },
-  { sel: '.pie-pagina__creditos-derechos',       clave: 'pie.derechos'  },
-  { sel: '.pie-pagina__creditos-ciudad',         clave: 'pie.ciudad'    },
+/* ---- Enlace de WhatsApp con mensaje prellenado (función pura) ---- */
+const crearEnlaceWhatsapp = (mensaje = '') =>
+  `https://wa.me/${WHATSAPP_NUMERO}${mensaje ? `?text=${encodeURIComponent(mensaje)}` : ''}`;
+
+/* ---- Preferencia guardada: localStorage puede lanzar (Safari privado) ---- */
+const leerIdiomaGuardado = () => {
+  try {
+    return localStorage.getItem(CLAVE_IDIOMA);
+  } catch {
+    return null;
+  }
+};
+
+const guardarIdioma = (lang) => {
+  try {
+    localStorage.setItem(CLAVE_IDIOMA, lang);
+  } catch {
+    /* Sin almacenamiento: el idioma solo dura la visita */
+  }
+};
+
+/* Atributos traducibles → cómo se aplican */
+const ATRIBUTOS_I18N = [
+  ['i18n',       (el, v) => { el.textContent = v; }],
+  ['i18nHtml',   (el, v) => { el.innerHTML = v; }],
+  ['i18nAlt',    (el, v) => el.setAttribute('alt', v)],
+  ['i18nAria',   (el, v) => el.setAttribute('aria-label', v)],
+  ['i18nTitle',  (el, v) => el.setAttribute('title', v)],
 ];
 
-const iniciarIdioma = (recalcularCursor) => {
-  const btnES = document.querySelector('.hero__idioma-btn[data-lang="es"]');
-  const btnEN = document.querySelector('.hero__idioma-btn[data-lang="en"]');
-  if (!btnES || !btnEN) return;
+const SELECTOR_I18N =
+  '[data-i18n],[data-i18n-html],[data-i18n-alt],[data-i18n-aria],[data-i18n-title],[data-wa],[data-wa-pieza]';
 
-  /* Recuperar preferencia guardada o detectar del navegador */
-  const guardado   = localStorage.getItem('medeisa-lang');
-  const preferido  = navigator.language?.startsWith('en') ? 'en' : 'es';
-  const idiomaInicial = guardado ?? preferido;
+/* Aplica un idioma en una sola pasada sobre el DOM */
+const aplicarIdioma = (lang) => {
+  const t = TRADUCCIONES[lang];
+  if (!t) return;
 
-  /* Aplicar traducción a todos los elementos del mapa */
-  const aplicarIdioma = (lang) => {
-    const t = TRADUCCIONES[lang];
-    if (!t) return;
+  document.querySelectorAll(SELECTOR_I18N).forEach((el) => {
+    const { dataset } = el;
 
-    MAPA_TRADUCCION.forEach(({ sel, clave, html }) => {
-      document.querySelectorAll(sel).forEach((el) => {
-        if (html) {
-          el.innerHTML = t[clave] ?? el.innerHTML;
-        } else {
-          el.textContent = t[clave] ?? el.textContent;
-        }
-      });
+    ATRIBUTOS_I18N.forEach(([attr, aplicar]) => {
+      const valor = dataset[attr] && t[dataset[attr]];
+      if (valor !== undefined && valor !== '') aplicar(el, valor);
     });
 
-    /* Atributo lang en <html> para accesibilidad y SEO */
-    document.documentElement.lang = lang;
+    if (dataset.wa) {
+      el.href = crearEnlaceWhatsapp(t[`wa.${dataset.wa}`]);
+    }
 
-    /* Estados activo/inactivo en los botones */
-    btnES.classList.toggle('activo', lang === 'es');
-    btnEN.classList.toggle('activo', lang === 'en');
-    btnES.setAttribute('aria-pressed', String(lang === 'es'));
-    btnEN.setAttribute('aria-pressed', String(lang === 'en'));
-    btnES.setAttribute('aria-label', lang === 'es' ? 'Español (idioma actual)' : 'Español');
-    btnEN.setAttribute('aria-label', lang === 'en' ? 'English (current language)' : 'English');
+    if (dataset.waPieza) {
+      const base = dataset.waPieza.replace(/\.nombre$/, '');
+      el.href = crearEnlaceWhatsapp(t[`${base}.mensaje`]);
+    }
+  });
 
-    /* Persistir elección */
-    localStorage.setItem('medeisa-lang', lang);
+  /* Atributo lang, título y descripción para accesibilidad y SEO */
+  document.documentElement.lang = lang;
+  if (t['meta.title']) document.title = t['meta.title'];
+  document.querySelector('meta[name="description"]')?.setAttribute('content', t['meta.desc'] ?? '');
+};
 
-    /* Recalcular el cursor del nav pill en el siguiente frame,
-       una vez que el browser haya repintado los nuevos textos */
+const iniciarIdioma = (recalcularCursor) => {
+  const botones = document.querySelectorAll('.hero__idioma-btn[data-lang]');
+  if (!botones.length) return;
+
+  /* Estado visual y accesible de los botones del selector */
+  const marcarBotones = (lang) => {
+    botones.forEach((btn) => {
+      const activo = btn.dataset.lang === lang;
+      btn.classList.toggle('activo', activo);
+      btn.setAttribute('aria-pressed', String(activo));
+    });
+    document.querySelector('.hero__idioma-btn[data-lang="es"]')
+      ?.setAttribute('aria-label', lang === 'es' ? 'Español (idioma actual)' : 'Español');
+    document.querySelector('.hero__idioma-btn[data-lang="en"]')
+      ?.setAttribute('aria-label', lang === 'en' ? 'English (current language)' : 'English');
+  };
+
+  const cambiarIdioma = (lang) => {
+    aplicarIdioma(lang);
+    marcarBotones(lang);
+
+    /* Recalcular el cursor del nav pill una vez repintados los textos */
     if (typeof recalcularCursor === 'function') {
       requestAnimationFrame(recalcularCursor);
     }
   };
 
-  /* Escuchar clic en cada botón */
-  [btnES, btnEN].forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const lang = btn.dataset.lang;
-      if (btn.classList.contains('activo')) return; // ya activo
-      aplicarIdioma(lang);
-    });
+  /* Delegación: un solo listener para el selector */
+  document.querySelector('.nav__idioma')?.addEventListener('click', (e) => {
+    const btn = e.target.closest('.hero__idioma-btn[data-lang]');
+    if (!btn || btn.classList.contains('activo')) return;
+    cambiarIdioma(btn.dataset.lang);
+    guardarIdioma(btn.dataset.lang);
   });
 
-  /* Aplicar idioma inicial */
-  if (idiomaInicial !== 'es') {
-    aplicarIdioma(idiomaInicial);
+  /* Idioma inicial: guardado > navegador > español (el HTML ya viene en ES) */
+  const preferido = navigator.language?.startsWith('en') ? 'en' : 'es';
+  const idiomaInicial = leerIdiomaGuardado() ?? preferido;
+
+  if (idiomaInicial !== 'es' && TRADUCCIONES[idiomaInicial]) {
+    cambiarIdioma(idiomaInicial);
   }
 };
 
 
 /* ================================================================
-   NAV PILL — Cursor deslizante estilo 21st.dev/krittyz
-   Traducción de React + Framer Motion a vanilla JS:
-   - getBoundingClientRect reemplaza los refs de React
-   - cubic-bezier(0.34, 1.56, 0.64, 1) replica el spring de Framer Motion
-   - MutationObserver sincroniza con el IntersectionObserver del nav activo
+   NAV PILL - Cursor deslizante (se elimina en el paso 1)
 ================================================================ */
 const iniciarNavPill = () => {
   const pill    = document.querySelector('.nav__pill');
@@ -438,10 +444,7 @@ const iniciarNavPill = () => {
 
   let linkActivo = links[0];
 
-  /* Mueve y redimensiona el cursor sobre el elemento dado.
-     Usa translateX para la posición (anima en el compositor) y
-     width para el tamaño: scaleX distorsionaría el border-radius
-     del pill al estirar sus esquinas. */
+  /* Mueve y redimensiona el cursor sobre el elemento dado */
   const moverCursor = (el) => {
     const pillRect = pill.getBoundingClientRect();
     const elRect   = el.getBoundingClientRect();
@@ -450,30 +453,23 @@ const iniciarNavPill = () => {
     cursor.style.width = `${elRect.width}px`;
   };
 
-  /* Función pública: recalcula el cursor sobre el link activo actual.
-     Se llama desde iniciarIdioma() después de cada cambio de idioma. */
+  /* Recalcula el cursor sobre el link activo actual (tras cambio de idioma) */
   const recalcularCursor = () => moverCursor(linkActivo);
 
-  /* Esperar el primer frame pintado para que el layout esté listo */
   requestAnimationFrame(recalcularCursor);
 
-  /* Hover: mover al item sobrevolado; al salir, volver al activo */
   links.forEach((link) => {
     link.addEventListener('mouseenter', () => moverCursor(link));
     link.addEventListener('mouseleave', () => moverCursor(linkActivo));
-
-    /* Teclado: Tab para focus, Escape ya lo maneja el nav existente */
     link.addEventListener('focus',  () => moverCursor(link));
     link.addEventListener('blur',   () => moverCursor(linkActivo));
-
-    /* Click: actualizar referencia al link activo manualmente */
     link.addEventListener('click', () => {
       linkActivo = link;
       moverCursor(link);
     });
   });
 
-  /* Sincronizar con la clase .activo que gestiona el IntersectionObserver del nav */
+  /* Sincronizar con la clase .activo que gestiona el Intersection Observer del nav */
   const observerClase = new MutationObserver(() => {
     const activoActual = document.querySelector('.nav__pill .nav__link.activo');
     if (activoActual && activoActual !== linkActivo) {
@@ -486,7 +482,6 @@ const iniciarNavPill = () => {
     observerClase.observe(link, { attributes: true, attributeFilter: ['class'] });
   });
 
-  /* Recalcular posición al redimensionar ventana */
   window.addEventListener('resize', recalcularCursor, { passive: true });
 
   return recalcularCursor;
@@ -494,7 +489,7 @@ const iniciarNavPill = () => {
 
 
 /* ================================================================
-   FOOTER — Año dinámico en los créditos
+   FOOTER - Año dinámico en los créditos
 ================================================================ */
 const iniciarFooter = () => {
   const span = document.getElementById('anio-actual');
@@ -503,7 +498,7 @@ const iniciarFooter = () => {
 
 
 /* ================================================================
-   INIT — Punto de entrada
+   INIT - Punto de entrada
 ================================================================ */
 document.addEventListener('DOMContentLoaded', () => {
   iniciarNav();
