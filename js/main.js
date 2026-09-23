@@ -119,7 +119,7 @@ const iniciarNav = () => {
 ================================================================ */
 
 /* Misma consulta que los <source> verticales del <picture> y el CSS */
-const CONSULTA_HERO_VERTICAL = '(max-width: 767px), (orientation: portrait) and (max-width: 1279px)';
+const CONSULTA_HERO_VERTICAL = '(max-width: 767px), (aspect-ratio <= 5/4) and (max-width: 1279px)';
 
 const iniciarVideoHero = () => {
   const hero   = document.querySelector('.hero');

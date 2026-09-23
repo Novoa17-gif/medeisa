@@ -740,8 +740,8 @@ html:not(.js) .encabezado,
 /* ====== HERO ====== */
 
 /* Foto clara a sangre, sin brightness(), sin degradado, sin text-shadow.
-   Base (móvil y tabletas en retrato): medio 9:16, texto ARRIBA sobre el muro.
-   Horizontal (>= 768px apaisado, o >= 1280px): medio 16:9, texto abajo a la izquierda.
+   Base (móvil, tabletas en retrato y ventanas casi cuadradas): medio 9:16, texto ARRIBA sobre el muro.
+   Horizontal (>= 768px con proporción > 5:4, o >= 1280px): medio 16:9, texto a la izquierda.
    La consulta vertical coincide con la de los <source> del <picture> y la de JS. */
 .hero {
   /* --hero-foco y --hero-texto-fin: valores base en :root */
@@ -885,7 +885,10 @@ html:not(.js) .encabezado,
   }
 }
 
-@media (min-width: 768px) and (orientation: landscape), (min-width: 1280px) {
+/* Horizontal solo con proporción mayor a 5:4: en ventanas casi cuadradas
+   (800x730) el muro libre a la izquierda del mueble no alcanza para
+   "Transformamos" y el titular lo montaba; ahí se usa la composición vertical */
+@media (min-width: 768px) and (aspect-ratio > 5/4), (min-width: 1280px) {
   .hero {
     --hero-foco: 70% 100%;
 
