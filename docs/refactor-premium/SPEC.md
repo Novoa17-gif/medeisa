@@ -11,7 +11,7 @@ Se copia la estructura (espaciado, radios, ritmo de bandas, restriccion), NO la 
 ## Decisiones cerradas por el usuario
 - **Tono:** claro con bandas oscuras (canvas hueso/blanco, algunas secciones #0a0a0a para ritmo).
 - **Rojo #F11E24:** en CTAs (WhatsApp, Cotizar) + detalles finos (lineas, numeros de seccion, eyebrow). Nunca en parrafos.
-- **Tipografia:** serif en titulos grandes (Cormorant Garamond 300, cursiva permitida) + sans limpia para todo lo demas (Jost o Montserrat, elegir una y justificar). Maximo 2 familias en la pagina.
+- **Tipografia:** serif en titulos grandes (Gloock, sin cursiva; enfasis por color) + Schibsted Grotesk para todo lo demas, ambas locales en assets/fonts. Cambiadas el 2026-09-23 desde Cormorant + Jost porque el usuario no queria la tipografia tipica de paginas hechas con IA. Maximo 2 familias en la pagina.
 - **Imagenes:** radio 32px en toda la fotografia contenida (catalogo, nosotros, expo). Controles 5px. Nada entre 6 y 31px.
 - **Hero:** "Galeria de luz". Foto completa luminosa (NO oscurecer: quitar brightness(0.82) y el degradado negro fuerte). Muro de yeso hueso, Centro TV Catania solo como pieza de museo, sombras de ventana. Version video: camara fija, solo avanzan las sombras (Higgsfield, modelo mas barato: Kling 3.0 std, 5s, sin audio). Texto oscuro sobre zona clara del muro.
   **Video tambien en movil** (la mayoria del trafico es movil): video vertical propio 9:16 (~720x1280, H.264 MP4 + WebM, objetivo <1.5 MB, 5s loop, muted autoplay playsinline). Desktop usa el 16:9. Poster estatico solo con prefers-reduced-motion o Save-Data.

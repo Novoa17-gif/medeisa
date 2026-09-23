@@ -7,14 +7,14 @@ y generar contacto directo vía WhatsApp.
 
 ## Stack
 - HTML5 semántico + CSS3 + JavaScript ES2024 vanilla
-- Google Fonts (Cormorant Garamond + Jost)
+- Fuentes locales en assets/fonts (Gloock + Schibsted Grotesk, OFL)
 - Sin frameworks, sin dependencias externas
 - Sin build tools — debe correr abriendo index.html directo
 
 ## Identidad de marca
 - Slogan: "Transformamos acero en estilo"
 - Subtítulo: "Metales de Innovación"
-- Tipografía: Cormorant Garamond 300 en titulares + Jost para todo lo demás (ver docs/refactor-premium/DESIGN.md)
+- Tipografía: Gloock en titulares + Schibsted Grotesk para todo lo demás (ver docs/refactor-premium/DESIGN.md)
 - Negro: #0a0a0a
 - Rojo: #F11E24
 - Blanco: #F5F5F5

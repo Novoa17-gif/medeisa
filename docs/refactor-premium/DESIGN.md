@@ -5,7 +5,7 @@
 
 Estructura tomada de Arc (Refero Styles, ver `ref-arc-DESIGN.md`): espaciado generoso, radios binarios 5px / 32px, casi cero sombra, ritmo de bandas claras y oscuras, restricción total. La identidad es MEDEISA: negro industrial, rojo de marca y hueso cálido. Todas las cifras de contraste de este documento están calculadas con la fórmula WCAG 2.1 de luminancia relativa.
 
-MEDEISA funciona como una galería de yeso hueso que exhibe muebles de acero y madera como si fueran piezas de museo. La página alterna entre fotografía luminosa a sangre completa (el hero), bandas silenciosas de papel y hueso dominadas por titulares serif muy ligeros, y bandas negras #0a0a0a que marcan el ritmo como las pausas de un recorrido. Los componentes son esqueléticos: botones de contorno con borde de 1px, 5px de radio en controles, sin sombras, con aire de sobra para que la fotografía y la tipografía cuenten la historia. La voz de display es Cormorant Garamond 300 (cursiva permitida) de 48 a 140px, editorial y cara; todo lo demás va en Jost 300/400/500, geométrica y precisa como una pieza de acero cortada con láser. El color es restricción: 98% acromático cálido y un solo acento, el rojo #F11E24, que aparece únicamente en CTAs y detalles finos (líneas, números de sección, etiquetas). La fotografía siempre va contenida en marcos de 32px de radio sobre el lienzo plano, salvo el hero, que va a sangre.
+MEDEISA funciona como una galería de yeso hueso que exhibe muebles de acero y madera como si fueran piezas de museo. La página alterna entre fotografía luminosa a sangre completa (el hero), bandas silenciosas de papel y hueso dominadas por titulares serif muy ligeros, y bandas negras #0a0a0a que marcan el ritmo como las pausas de un recorrido. Los componentes son esqueléticos: botones de contorno con borde de 1px, 5px de radio en controles, sin sombras, con aire de sobra para que la fotografía y la tipografía cuenten la historia. La voz de display es Gloock (serifa de alto contraste, sin cursiva), editorial y cara; todo lo demás va en Schibsted Grotesk 400/500, neutra y precisa como una pieza de acero cortada con láser. El color es restricción: 98% acromático cálido y un solo acento, el rojo #F11E24, que aparece únicamente en CTAs y detalles finos (líneas, números de sección, etiquetas). La fotografía siempre va contenida en marcos de 32px de radio sobre el lienzo plano, salvo el hero, que va a sangre.
 
 ## Tokens - Colores
 
@@ -26,7 +26,7 @@ MEDEISA funciona como una galería de yeso hueso que exhibe muebles de acero y m
 
 ### Contraste verificado (WCAG 2.1 AA)
 
-Umbrales: 4.5:1 texto normal, 3:1 texto grande (>= 24px regular o >= 18.66px con peso 700; Cormorant 300 solo cuenta como grande desde 24px) y 3:1 para componentes no textuales (bordes, iconos, anillo de foco).
+Umbrales: 4.5:1 texto normal, 3:1 texto grande (>= 24px regular o >= 18.66px con peso 700; Gloock cuenta como grande desde 24px) y 3:1 para componentes no textuales (bordes, iconos, anillo de foco).
 
 | Texto / elemento | Fondo | Ratio | Resultado | Uso permitido |
 |------------------|-------|-------|-----------|---------------|
@@ -58,21 +58,22 @@ Umbrales: 4.5:1 texto normal, 3:1 texto grande (>= 24px regular o >= 18.66px con
 
 ## Tokens - Tipografía
 
-### Cormorant Garamond - Display y titulares. Peso 300 (cursiva 300 permitida para una palabra de énfasis por titular), 400 solo para nombres de producto a tamaño pequeño. Su contraste de trazo alto y la ligereza del 300 dan la voz de galería cara; es el equivalente editorial del "whisper weight" de Arc. · `--font-serif`
-- **Pesos:** 300, 400 (y cursiva 300, 400)
-- **Tamaños:** 22px, 32px, 48px, 64-88px, 140px
+### Gloock - Display y titulares. Un solo peso (400) y sin cursiva. Serifa de alto contraste con remates afilados: voz de galería y revista de diseño, con más cuerpo que una serifa ligera para que se sostenga junto al acero. Elegida para no sonar a la tipografía por defecto de las páginas hechas con IA (Cormorant, Playfair, Instrument Serif, Fraunces). · `--font-serif`
+- **Pesos:** 400 (el token --fw-light cae en 400; no existe más ligera)
+- **Tamaños:** 22px, 32px, 48px, 64-88px; hero limitado por el ancho de "Transformamos" (7.3em)
 - **Interlineado:** 0.95 (display), 1.05 (heading-lg), 1.15 (heading), 1.25 (subheading)
-- **Tracking:** -0.02em a 88px o más, -0.015em a 48-64px, -0.01em a 32px, normal a 22px o menos
+- **Tracking:** -0.01em en display, -0.005em en titulares, normal en headings (Gloock ya es compacta)
+- **Énfasis:** la palabra en `<em>` va sin cursiva y en `--color-enfasis` (rojo `#C0001F` sobre claro, `#F11E24` sobre negro, gris `#5C5854` cuando el énfasis es una frase larga, como en Nosotros)
 - **Rol:** hero, titulares de sección (h2), bloque declaración, nombres de producto, números de sección grandes
 
-### Jost - Todo lo demás: cuerpo, navegación, etiquetas, botones, datos. Pesos 300 (cuerpo largo sobre oscuro), 400 (cuerpo), 500 (nav, etiquetas, botones). Nunca 600 o más. · `--font-sans`
-- **Pesos:** 300, 400, 500
+### Schibsted Grotesk - Todo lo demás: cuerpo, navegación, etiquetas, botones, datos. Grotesca neutra diseñada para medios noruegos; lectura precisa sin la cara genérica de Inter. Variable 400-900; se usan 400 (cuerpo) y 500 (nav, etiquetas, botones). Nunca 600 o más. · `--font-sans`
+- **Pesos:** 400, 500
 - **Tamaños:** 11px, 12px, 14px, 16px, 18px
 - **Interlineado:** 1.3 (etiquetas), 1.6 (cuerpo)
 - **Tracking:** normal en cuerpo; +0.18em en mayúsculas de 11-12px (etiquetas, nav, botones); +0.12em en mayúsculas de 14px
 - **OpenType:** `"tnum" on` en cifras de contacto y horario
 
-**Decisión Jost vs Montserrat:** se elige Jost. Es una geométrica de trazo fino y x-height contenida que acompaña a Cormorant sin competir y replica la voz ligera y técnica de Soehne en Arc; Montserrat es más ancha y pesada y vuelve el conjunto genérico. Además el CSS actual ya usa Jost en más de 30 reglas y Montserrat solo en 2, así que se elimina una familia de la carga de fuentes (máximo 2 familias en la página).
+**Fuentes locales:** ambas se alojan en `assets/fonts/` (woff2, subconjunto latino, licencia OFL, 64 KB en total) y se precargan. Sin peticiones a Google: Lighthouse móvil pasó de 92 a 97 (LCP 3.2 s a 2.4 s).
 
 ### Escala tipográfica
 
@@ -80,14 +81,14 @@ Nombres compatibles con el CLAUDE.md del proyecto (`--text-*` con `clamp()`). Va
 
 | Rol | Familia | Peso | Tamaño (min - max) | Interlineado | Tracking | Token |
 |-----|---------|------|--------------------|--------------|----------|-------|
-| etiqueta | Jost | 500 | 11 - 12px | 1.3 | +0.18em, mayúsculas | `--text-xs` |
-| cuerpo-sm | Jost | 400 | 14 - 15px | 1.6 | normal | `--text-sm` |
-| cuerpo | Jost | 400 | 16 - 18px | 1.6 | normal | `--text-base` |
-| subtítulo | Cormorant | 400 | 20 - 24px | 1.25 | normal | `--text-lg` |
-| heading | Cormorant | 300 | 28 - 36px | 1.15 | -0.01em | `--text-xl` |
-| heading-lg | Cormorant | 300 | 40 - 64px | 1.05 | -0.015em | `--text-2xl` |
-| sección | Cormorant | 300 | 48 - 88px | 1.0 | -0.02em | `--text-3xl` |
-| display (hero) | Cormorant | 300 | 56 - 140px | 0.95 | -0.02em | `--text-display` |
+| etiqueta | Schibsted | 500 | 11 - 12px | 1.3 | +0.18em, mayúsculas | `--text-xs` |
+| cuerpo-sm | Schibsted | 400 | 14 - 15px | 1.6 | normal | `--text-sm` |
+| cuerpo | Schibsted | 400 | 16 - 18px | 1.6 | normal | `--text-base` |
+| subtítulo | Gloock | 400 | 20 - 24px | 1.25 | normal | `--text-lg` |
+| heading | Gloock | 400 | 28 - 36px | 1.15 | -0.01em | `--text-xl` |
+| heading-lg | Gloock | 400 | 40 - 64px | 1.05 | -0.015em | `--text-2xl` |
+| sección | Gloock | 400 | 48 - 88px | 1.0 | -0.02em | `--text-3xl` |
+| display (hero) | Gloock | 400 | 56 - 140px | 0.95 | -0.01em | `--text-display` |
 
 Cuerpo de texto nunca por debajo de 14px ni por encima de 18px. Mayúsculas espaciadas solo en etiquetas, nav, botones y enlaces de footer, nunca en titulares ni en cuerpo.
 
@@ -148,12 +149,12 @@ Transparente sobre el hero con texto `#0a0a0a` (el hero es claro). Al pasar el h
 ### Enlace de navegación (ghost)
 **Rol:** Nosotros, Productos, Galería, Contacto
 
-Jost 500 12px mayúsculas +0.18em, `#0a0a0a`, sin borde ni fondo. Hover: línea de 1px `#F11E24` que crece desde la izquierda bajo el texto (0.3s ease). Área táctil mínima 44px.
+Schibsted Grotesk 500 12px mayúsculas +0.18em, `#0a0a0a`, sin borde ni fondo. Hover: línea de 1px `#F11E24` que crece desde la izquierda bajo el texto (0.3s ease). Área táctil mínima 44px.
 
 ### Botón CTA relleno
 **Rol:** WhatsApp en nav y hero, "Cotizar" principal
 
-Fondo `#C0001F`, texto `#F5F5F5` Jost 500 12px mayúsculas +0.18em, radio 5px, padding 16px x 28px, alto mínimo 48px. Hover/active `#A80019`. Sin sombra. Un solo CTA relleno visible por pantalla.
+Fondo `#C0001F`, texto `#F5F5F5` Schibsted Grotesk 500 12px mayúsculas +0.18em, radio 5px, padding 16px x 28px, alto mínimo 48px. Hover/active `#A80019`. Sin sombra. Un solo CTA relleno visible por pantalla.
 
 ### Botón de contorno
 **Rol:** acciones secundarias ("Ver catálogo", "Ver en mapa")
@@ -163,7 +164,7 @@ Transparente, borde 1px `#0a0a0a` (sobre claro) o `#F5F5F5` (sobre negro), texto
 ### Enlace "Cotizar" de producto
 **Rol:** CTA dentro de cada pieza del catálogo
 
-Texto Jost 500 12px mayúsculas +0.18em `#0a0a0a` seguido de una línea de 24px `#F11E24` que se alarga a 40px en hover. Abre WhatsApp con el nombre de la pieza prellenado.
+Texto Schibsted Grotesk 500 12px mayúsculas +0.18em `#0a0a0a` seguido de una línea de 24px `#F11E24` que se alarga a 40px en hover. Abre WhatsApp con el nombre de la pieza prellenado.
 
 ### Botón WhatsApp flotante
 **Rol:** contacto permanente, esquina inferior derecha
@@ -173,27 +174,27 @@ Círculo de 56px, fondo verde WhatsApp `#25D366` (decisión del usuario: se cons
 ### Hero "Galería de luz"
 **Rol:** apertura imponente
 
-100vw x 100svh, imagen o video a sangre con `object-fit: cover`, sin radio, sin `brightness()` ni degradado negro. Video en desktop (16:9) y en móvil (9:16 propio); póster estático solo con `prefers-reduced-motion` o ahorro de datos. Texto `#0a0a0a` en la zona clara del muro: en desktop abajo a la izquierda a `--space-lg` de los bordes; en móvil arriba, bajo el nav (el mueble queda en el tercio inferior). Orden: etiqueta (línea roja + texto negro) + titular display Cormorant 300 + CTA relleno + botón de contorno. Botón de pausa del video (WCAG 2.2.2) de 44px y radio 5px. Si la zona del muro baja de 4.5:1 contra el texto pequeño, se ajusta el encuadre de la imagen, no se oscurece la foto.
+100vw x 100svh, imagen o video a sangre con `object-fit: cover`, sin radio, sin `brightness()` ni degradado negro. Video en desktop (16:9) y en móvil (9:16 propio); póster estático solo con `prefers-reduced-motion` o ahorro de datos. Texto `#0a0a0a` en la zona clara del muro: en desktop abajo a la izquierda a `--space-lg` de los bordes; en móvil arriba, bajo el nav (el mueble queda en el tercio inferior). Orden: etiqueta (línea roja + texto negro) + titular display Gloock + CTA relleno + botón de contorno. Botón de pausa del video (WCAG 2.2.2) de 44px y radio 5px. Si la zona del muro baja de 4.5:1 contra el texto pequeño, se ajusta el encuadre de la imagen, no se oscurece la foto.
 
 ### Etiqueta meta (eyebrow)
 **Rol:** antetítulo de sección ("01 - Nosotros", "Hecho en Jalisco")
 
-Jost 500 11-12px mayúsculas +0.18em. Precedida por una línea de 24px x 1px `#F11E24`. Color del texto: `#C0001F` sobre claro, `#F11E24` sobre negro, o `#0a0a0a`/`#F5F5F5` si la línea roja ya da el acento (preferido: una sola nota roja por grupo).
+Schibsted Grotesk 500 11-12px mayúsculas +0.18em. Precedida por una línea de 24px x 1px `#F11E24`. Color del texto: `#C0001F` sobre claro, `#F11E24` sobre negro, o `#0a0a0a`/`#F5F5F5` si la línea roja ya da el acento (preferido: una sola nota roja por grupo).
 
 ### Número de sección
 **Rol:** 01, 02, 03... junto al h2
 
-Cormorant 300 a 32px o más, `#F11E24` (pasa como texto grande: 3.25 sobre hueso, 3.89 sobre papel, 4.67 sobre negro). Si se usa a menos de 24px, pasa a `#C0001F` sobre claro.
+Gloock a 32px o más, `#F11E24` (pasa como texto grande: 3.25 sobre hueso, 3.89 sobre papel, 4.67 sobre negro). Si se usa a menos de 24px, pasa a `#C0001F` sobre claro.
 
 ### Bloque declaración
 **Rol:** momento de silencio tras el hero
 
-Banda `#F5F5F5`, padding `--space-3xl`, texto centrado máximo 720px, Cormorant 300 `--text-2xl` con una palabra en cursiva ("Transformamos acero en *estilo*"). Nada más en la banda.
+Banda `#F5F5F5`, padding `--space-3xl`, texto centrado máximo 720px, Gloock `--text-2xl` con una palabra de énfasis en rojo ("Hecho a mano en Jalisco, pensado para durar *décadas*"). Nada más en la banda.
 
 ### Pieza de catálogo
 **Rol:** 6 productos del catálogo
 
-Marco de imagen 4:5 con radio 32px mostrando la foto de estudio; en hover (desktop, `(hover: hover)`) se funde a la foto de ambiente; en táctil, al abrir la pieza. Debajo, sin tarjeta ni borde: nombre en Cormorant 400 `--text-lg`, línea (material o colección) en Jost 400 `--text-sm` `#5C5854`, y enlace "Cotizar". Sin precios. Grid: 1 columna móvil, 2 desde 768px, 3 desde 1024px, gap `--space-md` columnas y `--space-lg` filas.
+Marco de imagen 4:5 con radio 32px mostrando la foto de estudio; en hover (desktop, `(hover: hover)`) se funde a la foto de ambiente; en táctil, al abrir la pieza. Debajo, sin tarjeta ni borde: nombre en Gloock `--text-lg`, línea (material o colección) en Schibsted Grotesk 400 `--text-sm` `#5C5854`, y enlace "Cotizar". Sin precios. Grid: 1 columna móvil, 2 desde 768px, 3 desde 1024px, gap `--space-md` columnas y `--space-lg` filas.
 
 ### Marco de imagen
 **Rol:** fotografía en Nosotros, Expo, Galería
@@ -208,7 +209,7 @@ Radio 32px, sin borde, sin sombra, sin chrome. La foto es la superficie. `overfl
 ### Selector de idioma ES/EN
 **Rol:** i18n existente
 
-Dos botones de texto Jost 500 11px +0.18em; el activo en `#0a0a0a` con subrayado rojo de 1px, el inactivo en `#5C5854`. Contenedor opcional con borde 1px `#6B6661` y radio 5px.
+Dos botones de texto Schibsted Grotesk 500 11px +0.18em; el activo en `#0a0a0a` con subrayado rojo de 1px, el inactivo en `#5C5854`. Contenedor opcional con borde 1px `#6B6661` y radio 5px.
 
 ### Botón hamburguesa
 **Rol:** menú móvil
@@ -218,13 +219,13 @@ Dos líneas de 1px x 20px `#0a0a0a`, radio 2px, área táctil 44px, `aria-label`
 ### Enlace de footer
 **Rol:** redes y navegación del footer
 
-Jost 500 12px mayúsculas +0.18em `#F5F5F5` sobre negro, gap 20px, sin separadores ni viñetas. Hover: `#F11E24` solo en la línea inferior, no en el texto.
+Schibsted Grotesk 500 12px mayúsculas +0.18em `#F5F5F5` sobre negro, gap 20px, sin separadores ni viñetas. Hover: `#F11E24` solo en la línea inferior, no en el texto.
 
 ## Do's and Don'ts
 
 ### Do
-- Usar solo Cormorant Garamond (titulares) y Jost (todo lo demás). Máximo 2 familias
-- Titulares display en Cormorant 300, 48-140px, tracking -0.015em a -0.02em; la ligereza es la firma
+- Usar solo Gloock (titulares) y Schibsted Grotesk (todo lo demás), alojadas en assets/fonts. Máximo 2 familias
+- Titulares display en Gloock, tracking -0.005em a -0.01em; el contraste afilado es la firma
 - Radio 5px en controles y 32px en toda fotografía contenida, nada intermedio
 - Alternar bandas hueso `#E3E1DE` / papel `#F5F5F5` con bandas negras `#0a0a0a`; sin grises intermedios de puente
 - Reservar el rojo para CTAs y detalles (líneas, números, etiquetas, foco); una nota roja por grupo visual
@@ -237,7 +238,7 @@ Jost 500 12px mayúsculas +0.18em `#F5F5F5` sobre negro, gap 20px, sin separador
 - Nunca rojo en párrafos, titulares completos ni como fondo de sección
 - Nunca `#F11E24` como texto de menos de 24px sobre hueso, papel o carbón; nunca como fondo de un botón con texto
 - Nunca `#888888` como texto sobre claro (2.72:1)
-- Nunca pesos 600 o más; Cormorant se queda en 300/400, Jost en 300/400/500
+- Nunca pesos 600 o más; Gloock solo 400, Schibsted Grotesk 400/500
 - Nunca sombras, glows, blur ni glassmorphism fuera del botón flotante
 - Nunca radios entre 6 y 31px
 - Nunca oscurecer el hero con `brightness()` o degradados negros para poder poner texto blanco
@@ -299,9 +300,9 @@ Hero a sangre completa (100vw x 100svh); todo lo demás contenido en 1280px con 
 
 **3 prompts de ejemplo**
 
-1. **Hero galería de luz:** imagen a sangre 100svh de un muro de yeso hueso con luz rasante de tarde y el Centro de TV Catania en el tercio inferior derecho. Abajo a la izquierda: línea roja 24px + etiqueta Jost 500 11px +0.18em `#0a0a0a` "MUEBLERÍA INDUSTRIAL · OCOTLÁN, JALISCO" (texto negro: sobre el muro con sombras de ventana el `#C0001F` puede bajar de 4.5:1); titular Cormorant 300 `--text-display` `#0a0a0a` "Transformamos acero en *estilo*"; CTA relleno `#C0001F` "COTIZAR POR WHATSAPP" y botón de contorno negro "VER CATÁLOGO".
-2. **Bloque declaración:** banda `#F5F5F5`, padding `--space-3xl`, texto centrado máx 720px, Cormorant 300 `--text-2xl` `#0a0a0a`, dos líneas. Nada más.
-3. **Pieza de catálogo:** marco 4:5 radio 32px con foto de estudio sobre hueso; hover funde a ambiente en 0.6s. Debajo: nombre Cormorant 400 `--text-lg`, línea Jost 400 `--text-sm` `#5C5854`, enlace "COTIZAR" Jost 500 12px con línea roja de 24px.
+1. **Hero galería de luz:** imagen a sangre 100svh de un muro de yeso hueso con luz rasante de tarde y el Centro de TV Catania en el tercio inferior derecho. Abajo a la izquierda: línea roja 24px + etiqueta Schibsted Grotesk 500 11px +0.18em `#0a0a0a` "MUEBLERÍA INDUSTRIAL · OCOTLÁN, JALISCO" (texto negro: sobre el muro con sombras de ventana el `#C0001F` puede bajar de 4.5:1); titular Gloock `--text-display` `#0a0a0a` "Transformamos acero en *estilo*"; CTA relleno `#C0001F` "COTIZAR POR WHATSAPP" y botón de contorno negro "VER CATÁLOGO".
+2. **Bloque declaración:** banda `#F5F5F5`, padding `--space-3xl`, texto centrado máx 720px, Gloock `--text-2xl` `#0a0a0a`, dos líneas. Nada más.
+3. **Pieza de catálogo:** marco 4:5 radio 32px con foto de estudio sobre hueso; hover funde a ambiente en 0.6s. Debajo: nombre Gloock 400 `--text-lg`, línea Schibsted Grotesk 400 `--text-sm` `#5C5854`, enlace "COTIZAR" Schibsted Grotesk 500 12px con línea roja de 24px.
 
 ## Animation
 
@@ -350,8 +351,8 @@ Quietud con una sola entrada elegante. El mueble y la luz son los que se mueven 
   --superficie-panel: var(--color-carbon);
 
   /* Tipografía - familias */
-  --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
-  --font-sans: 'Jost', 'Avenir Next', 'Segoe UI', system-ui, sans-serif;
+  --font-serif: 'Gloock', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Schibsted Grotesk', 'Helvetica Neue', 'Segoe UI', system-ui, sans-serif;
 
   /* Tipografía - pesos */
   --fw-light: 300;
@@ -422,9 +423,8 @@ Quietud con una sola entrada elegante. El mueble y la luz son los que se mueven 
 ### Carga de fuentes
 
 ```html
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" />
+<link rel="preload" href="assets/fonts/gloock-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="assets/fonts/schibsted-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
 ```
 
-Se quita Montserrat y el peso 200 de Jost; se agrega Jost 500 (nav, etiquetas, botones).
+Los `@font-face` viven al inicio de css/styles.css. Sin Google Fonts.
