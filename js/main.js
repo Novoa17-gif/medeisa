@@ -185,7 +185,7 @@ const TRADUCCIONES = {
     'prod.titulo':   'Nuestros productos',
     'prod.libreros': 'Libreros / Estantes industriales',
     'prod.mesas':    'Mesas de centro y auxiliares',
-    'prod.escrts':   'Escritorios',
+    'prod.escrts':   'Centros de TV',
     'prod.sillas':   'Sillas y sillones',
     'prod.cotizar':  'Cotizar',
     /* Galería / Expo */
@@ -257,7 +257,7 @@ const TRADUCCIONES = {
     'prod.titulo':   'Our products',
     'prod.libreros': 'Industrial Bookshelves & Shelves',
     'prod.mesas':    'Coffee & Side Tables',
-    'prod.escrts':   'Desks',
+    'prod.escrts':   'TV Stands',
     'prod.sillas':   'Chairs & Armchairs',
     'prod.cotizar':  'Quote',
     /* Galería / Expo */

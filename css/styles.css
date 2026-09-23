@@ -1582,9 +1582,9 @@ button {
   }
 }
 
-/* Tarjeta: blanca, sombra editorial, sin borde */
+/* Tarjeta: hueso claro, sombra editorial, sin borde */
 .producto-tarjeta {
-  background-color: #ffffff;
+  background-color: #F2F0ED;
   border-radius: 2px;
   overflow: hidden;
   display: flex;
@@ -1600,10 +1600,11 @@ button {
   }
 }
 
-/* Imagen: altura fija, sin overlay */
+/* Imagen: proporción 4:5 fija — reemplaza la altura fija anterior
+   para que el aire de composición de la foto no se recorte */
 .producto-tarjeta__imagen {
   width: 100%;
-  height: 280px;
+  aspect-ratio: 4 / 5;
   overflow: hidden;
   flex-shrink: 0;
 }
@@ -1623,13 +1624,49 @@ button {
   }
 }
 
+/* Fallback para fotos de producto con fondo blanco (PNG):
+   degradado cálido detrás + mix-blend-mode: multiply en la imagen.
+   isolation: isolate encierra el blend para que no se filtre a otros elementos. */
+.producto-tarjeta__imagen--degradado {
+  background: linear-gradient(180deg, #E4DED6 0%, #D8D0C6 100%);
+  isolation: isolate;
+  display: grid;
+}
+
+.producto-tarjeta__imagen--degradado .producto-tarjeta__img {
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+/* Encuadre de la mesa: ancho completo, pegada al borde inferior */
+.producto-tarjeta__img--mesa {
+  width: 100%;
+  align-self: end;
+}
+
+/* Encuadre del sillón: centrado y levantado para no salir sobredimensionado */
+.producto-tarjeta__img--silla {
+  width: 78%;
+  justify-self: center;
+  align-self: end;
+  margin-bottom: 9.2%;
+}
+
+/* Corrección de temperatura del centro de TV: su foto trae muro y piso
+   más fríos que la del librero — se empareja la serie sin tocar el producto */
+.producto-tarjeta__img--tv {
+  filter: saturate(1.08) sepia(0.09);
+}
+
 /* Cuerpo de la tarjeta */
 .producto-tarjeta__cuerpo {
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
   flex: 1;
-  background-color: #ffffff;
+  background-color: #F2F0ED;
 }
 
 /* Línea roja de acento sobre el nombre */
