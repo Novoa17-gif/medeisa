@@ -18,7 +18,7 @@
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
 
-    <!-- Hero, Nosotros, 18 piezas de las colecciones Industrial, Nex y Kai
+    <!-- Hero, Nosotros, 18 piezas de las colecciones Industrial, Nexo y Kai
          (estudio + ambiente), portadas de sala y Expo -->
     <image:image>
       <image:loc>https://www.medeisamuebles.com/assets/hero/hero-1920w.jpg</image:loc>
@@ -66,40 +66,40 @@
       <image:loc>https://www.medeisamuebles.com/assets/catalogo/recamara-tulum-ambiente.jpg</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://www.medeisamuebles.com/assets/catalogo/nex-cama-estudio.jpg</image:loc>
+      <image:loc>https://www.medeisamuebles.com/assets/catalogo/nexo-cama-estudio.jpg</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://www.medeisamuebles.com/assets/catalogo/nex-cama-ambiente.jpg</image:loc>
+      <image:loc>https://www.medeisamuebles.com/assets/catalogo/nexo-cama-ambiente.jpg</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://www.medeisamuebles.com/assets/catalogo/nex-buro-estudio.jpg</image:loc>
+      <image:loc>https://www.medeisamuebles.com/assets/catalogo/nexo-buro-estudio.jpg</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://www.medeisamuebles.com/assets/catalogo/nex-buro-ambiente.jpg</image:loc>
+      <image:loc>https://www.medeisamuebles.com/assets/catalogo/nexo-buro-ambiente.jpg</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://www.medeisamuebles.com/assets/catalogo/nex-comoda-estudio.jpg</image:loc>
+      <image:loc>https://www.medeisamuebles.com/assets/catalogo/nexo-comoda-estudio.jpg</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://www.medeisamuebles.com/assets/catalogo/nex-comoda-ambiente.jpg</image:loc>
+      <image:loc>https://www.medeisamuebles.com/assets/catalogo/nexo-comoda-ambiente.jpg</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://www.medeisamuebles.com/assets/catalogo/nex-bufetera-estudio.jpg</image:loc>
+      <image:loc>https://www.medeisamuebles.com/assets/catalogo/nexo-bufetera-estudio.jpg</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://www.medeisamuebles.com/assets/catalogo/nex-bufetera-ambiente.jpg</image:loc>
+      <image:loc>https://www.medeisamuebles.com/assets/catalogo/nexo-bufetera-ambiente.jpg</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://www.medeisamuebles.com/assets/catalogo/nex-mesa-centro-estudio.jpg</image:loc>
+      <image:loc>https://www.medeisamuebles.com/assets/catalogo/nexo-mesa-centro-estudio.jpg</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://www.medeisamuebles.com/assets/catalogo/nex-mesa-centro-ambiente.jpg</image:loc>
+      <image:loc>https://www.medeisamuebles.com/assets/catalogo/nexo-mesa-centro-ambiente.jpg</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://www.medeisamuebles.com/assets/catalogo/nex-centro-tv-estudio.jpg</image:loc>
+      <image:loc>https://www.medeisamuebles.com/assets/catalogo/nexo-centro-tv-estudio.jpg</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://www.medeisamuebles.com/assets/catalogo/nex-centro-tv-ambiente.jpg</image:loc>
+      <image:loc>https://www.medeisamuebles.com/assets/catalogo/nexo-centro-tv-ambiente.jpg</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://www.medeisamuebles.com/assets/catalogo/kai-credenza-estudio.jpg</image:loc>
@@ -141,7 +141,7 @@
       <image:loc>https://www.medeisamuebles.com/assets/colecciones/industrial-portada-2000w.jpg</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://www.medeisamuebles.com/assets/colecciones/nex-portada-2000w.jpg</image:loc>
+      <image:loc>https://www.medeisamuebles.com/assets/colecciones/nexo-portada-2000w.jpg</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://www.medeisamuebles.com/assets/colecciones/kai-portada-2000w.jpg</image:loc>

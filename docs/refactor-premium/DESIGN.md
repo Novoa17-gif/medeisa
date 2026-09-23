@@ -256,7 +256,7 @@ Schibsted Grotesk 500 12px mayúsculas +0.18em `#F5F5F5` sobre negro, gap 20px, 
 | 2 | Banda negra | `#0a0a0a` | Bandas oscuras de ritmo (Galería/Expo, footer) |
 | 3 | Carbón | `#161616` | Paneles elevados dentro de la banda negra (mapa, tarjeta de datos) |
 
-**Ritmo recomendado de bandas:** Hero (foto clara a sangre) -> Declaración (papel) -> Nosotros (hueso) -> Catálogo (papel) -> Galería/Expo (negro) -> Contacto (hueso) -> Footer (negro). Nunca dos bandas negras seguidas; dos bandas claras seguidas solo si cambian de hueso a papel.
+**Ritmo recomendado de bandas:** Hero (foto clara a sangre) -> Declaración (papel) -> Nosotros (hueso) -> Catálogo (papel) -> Galería/Expo (negro) -> Contacto (hueso) -> Footer (negro). Nunca dos bandas negras seguidas; dos bandas claras seguidas solo si cambian de hueso a papel. El catálogo es una sola banda papel: encabezado, índice y las tres salas (Nexo, Kai, Industrial) separadas por aire y una hairline `#D6D3CF`, nunca con bandas negras ni hueso (en hueso las fotos de estudio se pierden). Expo sigue siendo la banda negra. El catÃ¡logo es una sola banda papel: encabezado, Ã­ndice y las tres salas (Nexo, Kai, Industrial) separadas por aire y una hairline `#D6D3CF`, nunca con bandas negras ni hueso (en hueso las fotos de estudio se pierden). Expo sigue siendo la banda negra.
 
 ## Elevation
 

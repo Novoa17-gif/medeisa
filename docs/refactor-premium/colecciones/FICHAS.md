@@ -1,4 +1,4 @@
-# Fichas de fidelidad - Colecciones Kai y Nex
+# Fichas de fidelidad - Colecciones Kai y Nexo
 
 Fuente de verdad para prompts y QA de las fotos de estudio y ambiente. Todo sale de mirar las fotos de `originales/` con zoom (recortes PIL). Si una imagen generada contradice una ficha, se rechaza.
 
@@ -13,7 +13,7 @@ Convenciones: "frente" = cara con cajones/puertas; conteos siempre en el frente 
 - Firma: la "ola Kai", una ranura/canal ancha color taupe-bronce hundida entre dos cajones que corre horizontal, sube (o baja) con un escalon en diagonal suave con esquinas redondeadas y sigue horizontal. No es una jaladera: es un hueco continuo que sirve de agarre. Nunca jaladeras metalicas ni botones.
 - Cajas con radios grandes en las esquinas del marco frontal (vista frontal con esquinas redondeadas), cajones remetidos dentro del marco con junta de sombra fina oscura.
 
-### Nex (nogal + acero negro)
+### Nexo (nogal + acero negro)
 - Madera: chapa de nogal americano cafe medio rojizo, veta marcada con catedrales en puertas, horizontal en frentes de cajon.
 - Acero: negro mate, tubo cuadrado (camas, mesa de centro, buro) o redondo delgado (bufetera, comoda).
 - Firma: "modulo de listones": una columna o nicho remetido en nogal con listones horizontales salientes de nogal (agarre de dedo) repartidos a intervalos regulares, flanqueado por cajones lisos sin jaladeras.
@@ -59,33 +59,33 @@ Convenciones: "frente" = cara con cajones/puertas; conteos siempre en el frente 
 - 2 cajones apilados; entre ellos la ranura ola: alta a la izquierda, escalon diagonal hacia abajo a ~55% del ancho, baja a la derecha.
 - 4 patas champagne conicas abiertas. Vista 3/4 desde la izquierda.
 
-## Nex
+## Nexo
 
-### nex-centro-tv (nex-01)
+### nexo-centro-tv (nex-01)
 - Mueble largo y bajo (ancho:alto ~4:1 con patas), esquinas de la caja redondeadas en los 4 cantos de la cubierta/costados (radio medio), nogal.
 - Frente: arriba 2 nichos abiertos (el izquierdo mas ancho, ~55%) separados por un parante; abajo 3 cajones lisos iguales, sin jaladeras (junta fina).
 - 4 patas negras conicas abiertas (tipo Kai pero negro mate).
 
-### nex-cama (nex-02, rescate) y variante nex-base-cama (nex-03)
+### nexo-cama (nex-02, rescate) y variante nexo-base-cama (nex-03)
 - Cabecera: marco perimetral de tubo cuadrado negro, alta (~1.1x la anchura de la base en alto visual ~0.85 del ancho). Dentro, panel de nogal con: franja horizontal superior lisa (~18% de alto) separada por una junta; debajo 2 paneles grandes verticales lisos (izquierdo y derecho, cada ~36% del ancho) y al centro una columna remetida con 3 listones horizontales salientes de nogal (modulo de listones) repartidos regularmente; franja inferior lisa bajo los paneles. Travesano negro bajo la cabecera, luego un hueco antes de la base.
 - Base: caja de nogal rectangular de cantos rectos (sin radios), riel alto (~30 cm), dentro 7-8 tablillas de madera clara (maple/pino claro) transversales sobre larguero negro.
 - Patas: 2 delanteras (4 en total) de tubo cuadrado negro en forma de marco cuadrado hueco (ventana cuadrada), unidas por un travesano negro corrido bajo la caja.
 - Vista frontal pura, simetrica, sin colchon.
 
-### nex-buro (nex-04)
+### nexo-buro (nex-04)
 - Caja de nogal; cubierta en charola con reborde (galeria) en 3 lados: atras y los dos costados, con los extremos delanteros del reborde redondeados; frente abierto.
 - Frente: 4 cajones lisos (2 columnas x 2 filas) y columna central remetida con 2 listones horizontales salientes (uno por fila, a ~1/3 de la altura de cada fila).
 - Base: acero negro tubo cuadrado, 4 patas rectas verticales con regaton, marco perimetral bajo la caja y travesanos en X a media altura entre patas.
 - Vista 3/4 desde la izquierda, ligeramente desde arriba.
 
-### nex-comoda (nex-05, rescate)
+### nexo-comoda (nex-05, rescate)
 - Caja alta de nogal, casi cuadrada (ancho:alto ~1.15:1 con patas), cubierta plana de canto recto que sobresale apenas al frente.
 - Frente: columna izquierda con 5 cajones lisos, columna derecha con 5 cajones lisos, y al centro una columna remetida estrecha (~20% del ancho) con 5 listones horizontales salientes de nogal (uno por fila de cajon).
 - Veta: horizontal en todos los frentes, con alternancia de tonos de chapa (unos cajones un poco mas claros).
 - Base: acero negro, tubo redondo delgado, 4 patas rectas verticales; travesano frontal en arco suave (curva hacia arriba al centro) y travesanos laterales bajos.
 - Vista 3/4 desde la izquierda.
 
-### nex-bufetera (nex-07) - portada de sala
+### nexo-bufetera (nex-07) - portada de sala
 - Caja larga de nogal (ancho:alto ~2.1:1 con patas).
 - Cubierta en charola con reborde bajo en los 4 lados.
 - Banda superior de cajones que sobresale un poco del cuerpo: 4 cajones lisos + 2 modulos remetidos de liston (cada uno con 1 liston horizontal saliente). Orden izquierda a derecha: cajon, modulo de liston, cajon | cajon, modulo de liston, cajon.
@@ -93,12 +93,12 @@ Convenciones: "frente" = cara con cajones/puertas; conteos siempre en el frente 
 - Base: acero negro de tubo redondo delgado: 4 patas rectas verticales en las esquinas con regaton, largueros bajo la caja y travesanos cruzados en X bajo el mueble.
 - Vista 3/4 desde la izquierda.
 
-### nex-mesa-centro (nex-06)
+### nexo-mesa-centro (nex-06)
 - Cubierta rectangular gruesa de nogal con marqueteria en marco: 4 piezas perimetrales a inglete con veta radial hacia el centro y panel central.
 - Apoyo izquierdo: pieza de nogal escultorica en V asimetrica: una pata recta ancha y un arco curvo que sube en diagonal hasta la mitad de la cubierta.
 - Apoyo derecho: marco rectangular de tubo cuadrado negro (pata en U invertida cerrada, ventana rectangular).
 - Vista 3/4 desde la izquierda.
 
 ## Nota de ambientes (fase B)
-- Camas (kai-cama, nex-cama): en ambiente llevan colchon y ropa de cama lisa de lino avena (como Recamara Tulum). Se revisa todo lo visible: cabecera completa, rieles y patas. La estructura interior (postes, tirante de cuero, tablillas) queda cubierta a proposito y solo se valida en estudio.
+- Camas (kai-cama, nexo-cama): en ambiente llevan colchon y ropa de cama lisa de lino avena (como Recamara Tulum). Se revisa todo lo visible: cabecera completa, rieles y patas. La estructura interior (postes, tirante de cuero, tablillas) queda cubierta a proposito y solo se valida en estudio.
 - Madera Kai en ambiente: la relacion objetivo es la de kai-04 (r/g 1.45, g/b 1.76); se corrige local con `scripts/tono_kai.py` cuando el modelo la da palida.

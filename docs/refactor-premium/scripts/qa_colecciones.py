@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Hojas de QA de las colecciones Kai y Nex (local, PIL).
+# Hojas de QA de las colecciones Kai y Nexo (local, PIL).
 # Uso: python3 docs/refactor-premium/scripts/qa_colecciones.py
 #
 # Rescate (estudio): fuente | resultado Higgsfield | superposicion (fuente
@@ -65,9 +65,10 @@ def superposicion(fuente, gen):
     return base
 
 
-def rescate(slug, fuente):
+def rescate(slug, fuente, generado):
+    # generado: nombre del png en rescate/ (se conserva el nombre original de la fuente)
     src = abrir(COL / "originales" / fuente)
-    gen = abrir(COL / "rescate" / f"{slug}.png")
+    gen = abrir(COL / "rescate" / generado)
     if slug in CORRECCION:  # la misma correccion local que usa el estudio
         gen = CORRECCION[slug](gen)
     fin = abrir(CAT / f"{slug}-estudio.jpg")
@@ -100,9 +101,9 @@ def ambiente(slug, fuente, detalles, ref="centro-tv-catania"):
 FUENTES_B = {
     "kai-credenza": "kai-01-credenza.jpg", "kai-mesa-redonda": "kai-02-mesa-redonda.jpg",
     "kai-mesa-comedor": "kai-05-mesa-comedor.jpg", "kai-cama": "kai-06-cama.jpg",
-    "kai-buro": "kai-07-buro.jpg", "nex-cama": "nex-02-cama.jpg", "nex-comoda": "nex-05-comoda.jpg",
-    "nex-buro": "nex-04-buro.jpg", "nex-mesa-centro": "nex-06-mesa-centro.jpg",
-    "nex-centro-tv": "nex-01-centro-tv.jpg",
+    "kai-buro": "kai-07-buro.jpg", "nexo-cama": "nex-02-cama.jpg", "nexo-comoda": "nex-05-comoda.jpg",
+    "nexo-buro": "nex-04-buro.jpg", "nexo-mesa-centro": "nex-06-mesa-centro.jpg",
+    "nexo-centro-tv": "nex-01-centro-tv.jpg",
 }
 
 
@@ -111,7 +112,7 @@ def ambiente_b(slug, fuente):
     fin = abrir(CAT / f"{slug}-ambiente.jpg")
     src = abrir(COL / "originales" / fuente)
     det = alto(fin.crop((0, 800, 1600, 1840)), 600)
-    hoja([alto(src), alto(fin), alto(abrir(CAT / "nex-bufetera-ambiente.jpg" if slug.startswith("nex") else CAT / "kai-comoda-ambiente.jpg"))],
+    hoja([alto(src), alto(fin), alto(abrir(CAT / "nexo-bufetera-ambiente.jpg" if slug.startswith("nexo") else CAT / "kai-comoda-ambiente.jpg"))],
          f"{slug}: fuente | ambiente final | ambiente aprobado de fase A (misma escena) ; abajo zona del mueble",
          QA / f"{slug}-ambiente.jpg", det)
 
@@ -119,7 +120,7 @@ def ambiente_b(slug, fuente):
 def portadas():
     PORT = RAIZ / "assets" / "colecciones"
     for sala, refs in (("kai", ["kai-01-credenza.jpg", "kai-02-mesa-redonda.jpg"]),
-                       ("nex", ["nex-07-bufetera.jpg"]),
+                       ("nexo", ["nex-07-bufetera.jpg"]),
                        ("industrial", None)):
         d = abrir(PORT / f"{sala}-portada-2000w.jpg")
         m = abrir(PORT / f"{sala}-portada-movil-1080w.jpg")
@@ -136,7 +137,7 @@ def portadas():
 
 
 def contacto_b():
-    slugs = list(FUENTES_B) + ["kai-comoda", "nex-bufetera"]
+    slugs = list(FUENTES_B) + ["kai-comoda", "nexo-bufetera"]
     tw, th, gap = 300, 375, 14
     PORT = RAIZ / "assets" / "colecciones"
     pw = round(th * 1.5)
@@ -148,7 +149,7 @@ def contacto_b():
         out.paste(im, (gap + (i % 7) * (tw + gap), gap + (i // 7) * (th + gap)))
     y = gap + filas * (th + gap) + gap
     x = gap
-    for sala in ("kai", "nex", "industrial"):
+    for sala in ("kai", "nexo", "industrial"):
         im = abrir(PORT / f"{sala}-portada-1200w.jpg").resize((pw, th), Image.LANCZOS)
         out.paste(im, (x, y)); x += pw + gap
     out.save(QA / "ambientes-portadas-contacto.jpg", quality=88)
@@ -157,10 +158,10 @@ def contacto_b():
 
 if __name__ == "__main__":
     QA.mkdir(parents=True, exist_ok=True)
-    rescate("nex-cama", "nex-02-cama.jpg")
-    rescate("nex-comoda", "nex-05-comoda.jpg")
-    if (CAT / "nex-bufetera-ambiente.jpg").exists():
-        ambiente("nex-bufetera", "nex-07-bufetera.jpg",
+    rescate("nexo-cama", "nex-02-cama.jpg", "nex-cama.png")
+    rescate("nexo-comoda", "nex-05-comoda.jpg", "nex-comoda.png")
+    if (CAT / "nexo-bufetera-ambiente.jpg").exists():
+        ambiente("nexo-bufetera", "nex-07-bufetera.jpg",
                  [((0, 180, 1536, 440), (230, 950, 1400, 1100)),
                   ((0, 650, 1536, 900), (230, 1290, 1420, 1510))])
     if (CAT / "kai-comoda-ambiente.jpg").exists():

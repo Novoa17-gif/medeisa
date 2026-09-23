@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Termina las fotos de AMBIENTE generadas en Higgsfield para Kai y Nex.
+# Termina las fotos de AMBIENTE generadas en Higgsfield para Kai y Nexo.
 # Uso: python3 docs/refactor-premium/scripts/ambiente_colecciones.py <slug> <png generado>
 #
 # Nano Banana Pro entrega 4:5 "aproximado" (1856x2304 = 0.806); se recorta al

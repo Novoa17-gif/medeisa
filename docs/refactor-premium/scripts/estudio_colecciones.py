@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Fotos de ESTUDIO de las colecciones Kai y Nex (local, sin creditos).
+# Fotos de ESTUDIO de las colecciones Kai y Nexo (local, sin creditos).
 # Reutiliza el compositor de estudio.py (mismo canvas hueso, misma sombra de
 # contacto, mismo punto de piso y mismo ancho relativo) para que las 18 tarjetas
 # se lean como una sola sesion.
@@ -10,7 +10,7 @@
 #   247 o 254/255). Antes de recomponer se normaliza el fondo a 254.5 para que
 #   la division del compositor lo convierta en hueso exacto sin dejar un
 #   rectangulo mas oscuro alrededor del mueble.
-# - nex-cama y nex-comoda salen de los rescates Higgsfield (rescate/*.png).
+# - nexo-cama y nexo-comoda salen de los rescates Higgsfield (rescate/*.png).
 
 import sys
 from pathlib import Path
@@ -32,13 +32,13 @@ PIEZAS = {
     "kai-base-cama": ORIG / "kai-03-base-cama.jpg",
     "kai-comoda": ORIG / "kai-04-comoda.jpg",
     "kai-buro": ORIG / "kai-07-buro.jpg",
-    "nex-cama": RESCATE / "nex-cama.png",
-    "nex-base-cama": ORIG / "nex-03-base-cama.jpg",
-    "nex-buro": ORIG / "nex-04-buro.jpg",
-    "nex-comoda": RESCATE / "nex-comoda.png",
-    "nex-bufetera": ORIG / "nex-07-bufetera.jpg",
-    "nex-mesa-centro": ORIG / "nex-06-mesa-centro.jpg",
-    "nex-centro-tv": ORIG / "nex-01-centro-tv.jpg",
+    "nexo-cama": RESCATE / "nex-cama.png",
+    "nexo-base-cama": ORIG / "nex-03-base-cama.jpg",
+    "nexo-buro": ORIG / "nex-04-buro.jpg",
+    "nexo-comoda": RESCATE / "nex-comoda.png",
+    "nexo-bufetera": ORIG / "nex-07-bufetera.jpg",
+    "nexo-mesa-centro": ORIG / "nex-06-mesa-centro.jpg",
+    "nexo-centro-tv": ORIG / "nex-01-centro-tv.jpg",
 }
 
 
@@ -49,11 +49,11 @@ def fondo(img):
     return np.median(b, 0)
 
 
-# Rescate nex-cama (Higgsfield job 1167a3fa): todo coincide con la fuente salvo
+# Rescate nexo-cama (Higgsfield job 1167a3fa): todo coincide con la fuente salvo
 # la cabecera, 9.6% mas chata (ancho/alto del marco 1.722 vs 1.571 en nex-02).
 # Es un plano frontal y arriba del riel negro (y=997) solo hay cabecera y fondo
 # blanco, asi que se estira esa banda en vertical anclada al riel.
-def cabecera_nex(im):
+def cabecera_nexo(im):
     top, riel, k = 138, 997, 1.722 / 1.571
     banda = im.crop((0, top - 20, im.width, riel))
     alto = round(banda.height * k)
@@ -63,7 +63,7 @@ def cabecera_nex(im):
     return out
 
 
-CORRECCION = {"nex-cama": cabecera_nex}
+CORRECCION = {"nexo-cama": cabecera_nexo}
 
 
 def procesar(slug, ruta):
@@ -103,7 +103,7 @@ def main():
     for slug in elegidas:
         guardar(procesar(slug, PIEZAS[slug]), slug)
         print("ok", slug)
-    # hoja de contacto: las 6 industriales + todo lo que ya exista de Kai y Nex
+    # hoja de contacto: las 6 industriales + todo lo que ya exista de Kai y Nexo
     slugs = ["centro-tv-catania", "silla-sahara"] + [s for s in PIEZAS if (e.SALIDA / f"{s}-estudio.jpg").exists()]
     tw, th, gap, por_fila = 320, 400, 16, 8
     filas = -(-len(slugs) // por_fila)

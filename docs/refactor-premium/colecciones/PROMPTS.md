@@ -1,4 +1,4 @@
-# Prompts Higgsfield - Colecciones Kai y Nex (fase A)
+# Prompts Higgsfield - Colecciones Kai y Nexo (fase A)
 
 Fecha: 2026-09-23. Creditos: 186.54 antes, 176.54 despues = **10 gastados** (5 generaciones x 2). Tope de la fase: 10.
 
@@ -23,15 +23,15 @@ Fecha: 2026-09-23. Creditos: 186.54 antes, 176.54 despues = **10 gastados** (5 g
 ## Jobs
 | # | Pieza | Job id | Aspecto | Referencias | Resultado QA |
 |---|---|---|---|---|---|
-| 1 | nex-cama rescate | 1167a3fa-fd45-412a-9efc-f1037bcb5024 | 5:4 | nex-02 + nex-03 | Pasa tras correccion local: cabecera 9.6% mas chata que la fuente, estirada en `estudio_colecciones.py` (cabecera_nex) |
-| 2 | nex-comoda rescate | abffe091-6a6c-417b-8b8a-778a9007d81d | 1:1 | nex-05 + nex-04 | Pasa directo (superposicion sin lineas dobles) |
+| 1 | nexo-cama rescate | 1167a3fa-fd45-412a-9efc-f1037bcb5024 | 5:4 | nex-02 + nex-03 | Pasa tras correccion local: cabecera 9.6% mas chata que la fuente, estirada en `estudio_colecciones.py` (cabecera_nexo) |
+| 2 | nexo-comoda rescate | abffe091-6a6c-417b-8b8a-778a9007d81d | 1:1 | nex-05 + nex-04 | Pasa directo (superposicion sin lineas dobles) |
 | 3 | kai-comoda ambiente v1 | 7215b839-1c13-41fe-ba86-edfcb21a833a | 4:5 | kai-04 + escena Catania | Rechazado: ventana y esquina de muro visibles, ranura gris clara, roble palido. Geometria correcta |
-| 4 | nex-bufetera ambiente | 7ce084ec-b7ca-4af6-9930-bb132b426d69 | 4:5 | nex-07 + escena Catania | Pasa directo |
+| 4 | nexo-bufetera ambiente | 7ce084ec-b7ca-4af6-9930-bb132b426d69 | 4:5 | nex-07 + escena Catania | Pasa directo |
 | 5 | kai-comoda ambiente v2 (edicion de #3) | 0893bda2-d5d3-4d37-813a-ce94e854e80a | 4:5 | job #3 + kai-04 | Quita ventana y calienta el roble; la ranura sigue clara y queda esquina en x~175. Se termina local con `ranura_kai.py` (tinte taupe-bronce + recorte). Pasa |
 
 ## Prompts exactos
 
-### 1. Rescate nex-cama (plantilla de rescate de estudio)
+### 1. Rescate nexo-cama (plantilla de rescate de estudio)
 ```
 [TASK]
 Recreate image 1 as a crisp, high-resolution professional catalogue studio photograph of the exact same bed. Image 1 is a small low-resolution photo of the real product: it defines the design, proportions, layout and camera view, which must stay identical. Image 2 is a high-resolution photo of the same bed base from the same collection: use it only for the true walnut veneer colour, grain sharpness, the light wood slats and the black square-tube legs.
@@ -55,7 +55,7 @@ resolution: 2k
 ```
 Nota: se pidio fondo blanco puro (no hueso) a proposito: asi el rescate entra al mismo compositor local que los otros 12 renders (fondo -> hueso exacto, misma sombra de contacto y mismo punto de piso). Pedir hueso directo al modelo daria un tono y una sombra propios distintos del resto.
 
-### 2. Rescate nex-comoda
+### 2. Rescate nexo-comoda
 ```
 [TASK]
 Recreate image 1 as a crisp, high-resolution professional catalogue studio photograph of the exact same chest of drawers. Image 1 is a small low-resolution photo of the real product: it defines the design, proportions, drawer layout and camera view, which must stay identical. Image 2 is a high-resolution photo of a nightstand from the same collection: use it only as the reference for the true walnut veneer colour, grain sharpness, the recessed centre column with protruding walnut slats, and the matte black steel finish. Do not copy the nightstand's shape.
@@ -85,7 +85,7 @@ Image 1 is the exact real product: reproduce it faithfully as a physical object,
 Image 2 is ONLY a scene and lighting reference: match its plaster wall, pale concrete floor, window light and shadow direction, light temperature, colour grade, camera height and the single ceramic vase with a dry olive branch. Do NOT copy the furniture from image 2.
 
 [PRODUCT]
-(nex-bufetera) A long walnut sideboard. Top: a shallow tray with a low raised rim on all four sides. Below the top, a slightly projecting band of drawers, from left to right: a plain drawer, a recessed module with one horizontal protruding walnut slat, a plain drawer, then a plain drawer, a recessed module with one horizontal protruding walnut slat, a plain drawer. Below the band, exactly four equal handle-less doors with vertical walnut grain and cathedral figure. Base: slim matte black round steel tube frame with four straight vertical legs with foot caps at the corners, long rails under the cabinet and thin stretchers crossing in an X underneath. No handles, no knobs.
+(nexo-bufetera) A long walnut sideboard. Top: a shallow tray with a low raised rim on all four sides. Below the top, a slightly projecting band of drawers, from left to right: a plain drawer, a recessed module with one horizontal protruding walnut slat, a plain drawer, then a plain drawer, a recessed module with one horizontal protruding walnut slat, a plain drawer. Below the band, exactly four equal handle-less doors with vertical walnut grain and cathedral figure. Base: slim matte black round steel tube frame with four straight vertical legs with foot caps at the corners, long rails under the cabinet and thin stretchers crossing in an X underneath. No handles, no knobs.
 (kai-comoda) A mid-century chest of drawers in light honey oak veneer: a box whose front frame has large rounded corners and whose top wraps around in a soft curve. Exactly six handle-less drawers in two columns of three, separated by a vertical centre divider. Between the first and second row of drawers runs a continuous wide recessed groove in a taupe-bronze colour that forms a stepped wave: in the left column it runs low on the left then steps up diagonally with rounded corners towards the centre; in the right column it starts high next to the centre then steps down diagonally towards the right, mirrored. Between the second and third row the groove is straight. Four tapered splayed round legs in satin champagne metal with small black foot caps. No handles, no knobs.
 
 [COMPOSITION]
@@ -146,7 +146,7 @@ Creditos: 176.54 antes, 146.54 despues = **30 gastados** (15 generaciones x 2). 
 | nex-06-mesa-centro.jpg | 42a17bb5-ea4b-4bdd-8031-3d8024126c7a |
 | rescate/nex-cama-corregida.jpg (rescate con cabecera corregida) | 53495526-9721-425c-b034-68a37ba4e5e5 |
 | assets/catalogo/silla-sahara-estudio.jpg | 8f422663-e603-474f-a21a-788cf08b9f14 |
-nex-comoda uso como producto el job del rescate abffe091-6a6c-417b-8b8a-778a9007d81d.
+nexo-comoda uso como producto el job del rescate abffe091-6a6c-417b-8b8a-778a9007d81d.
 
 ## Jobs y resultado
 | Pieza | Job id | Aspecto | Imagen 1 | Resultado | Retoque local |
@@ -157,14 +157,14 @@ nex-comoda uso como producto el job del rescate abffe091-6a6c-417b-8b8a-778a9007
 | kai-mesa-comedor | 8d7c62ed-4292-4138-a84b-7d902acf46be | 4:5 | kai-05 | Pasa (2 pedestales) | tono_kai |
 | kai-cama | cb04ec71-0f5b-4650-9d31-ec309c369c2a | 4:5 | kai-06 | Pasa (ola del tapiz correcta) | tono_kai |
 | kai-buro | 4508dda2-2d7e-4f54-a7ad-b772aa7a07bd | 4:5 | kai-07 | Pasa tras retoque | tono_kai + ranura_kai (505 1200 1300 1480 0) |
-| nex-cama | 3b8b1807-8e82-4f73-aa13-f68895dc2041 | 4:5 | rescate corregido | Pasa directo | - |
-| nex-comoda | aba5084e-34cb-4b7d-8a05-49f87efefe73 | 4:5 | job rescate | Pasa directo | - |
-| nex-buro | a5100608-b074-4ffb-b485-10a0e7bc4c0b | 4:5 | nex-04 | Pasa directo | - |
-| nex-mesa-centro | 1a460e50-2de1-4abf-ae82-b6f93070a174 | 4:5 | nex-06 | Pasa directo | - |
-| nex-centro-tv | 07aef657-c613-4557-ab58-8e728306758d | 4:5 | nex-01 | Pasa tras retoque: 5a pata inventada al centro | quitar_pata (885 922 1678 1768) |
+| nexo-cama | 3b8b1807-8e82-4f73-aa13-f68895dc2041 | 4:5 | rescate corregido | Pasa directo | - |
+| nexo-comoda | aba5084e-34cb-4b7d-8a05-49f87efefe73 | 4:5 | job rescate | Pasa directo | - |
+| nexo-buro | a5100608-b074-4ffb-b485-10a0e7bc4c0b | 4:5 | nex-04 | Pasa directo | - |
+| nexo-mesa-centro | 1a460e50-2de1-4abf-ae82-b6f93070a174 | 4:5 | nex-06 | Pasa directo | - |
+| nexo-centro-tv | 07aef657-c613-4557-ab58-8e728306758d | 4:5 | nex-01 | Pasa tras retoque: 5a pata inventada al centro | quitar_pata (885 922 1678 1768) |
 | portada kai | de48caac-2b97-4758-aec8-878cd6ce1a5f | 3:2 | kai-01 + kai-02 | Pasa tras retoque: 5a pata al centro de la credenza | quitar_pata (975 998 1316 1376) + tono_kai |
-| portada nex v1 | b3eeab1e-e4fd-402a-b592-5f8b26d7bc11 | 3:2 | nex-07 + nex-06 | Rechazado: mesa de centro mal armada (marcos negros en ambos extremos) y ventana visible | - |
-| portada nex v2 | f901f9f6-e433-4891-9991-5eb07ea6f6f0 | 3:2 | nex-07 sola | Pasa; se recortan 190 px a la izq. (ventana/esquina) | recorte en portada_colecciones.py |
+| portada nexo v1 | b3eeab1e-e4fd-402a-b592-5f8b26d7bc11 | 3:2 | nex-07 + nex-06 | Rechazado: mesa de centro mal armada (marcos negros en ambos extremos) y ventana visible | - |
+| portada nexo v2 | f901f9f6-e433-4891-9991-5eb07ea6f6f0 | 3:2 | nex-07 sola | Pasa; se recortan 190 px a la izq. (ventana/esquina) | recorte en portada_colecciones.py |
 | portada industrial | 02595c83-f3a5-45e3-ba6f-d131c1523cba | 3:2 | ambiente Catania (producto + escena) + Sahara estudio | Pasa directo | - |
 En todas, imagen 2 (o 3 en portadas) = escena `centro-tv-catania-ambiente.jpg` (569f4884...).
 
@@ -176,16 +176,16 @@ Ambientes: plantilla de la fase A con estos cambios, ya incorporados en los 10 p
 - Camas: "The bed is made with a plain mattress, simple undyed oatmeal linen bedding and two linen pillows; the bedding sits inside the frame and does not cover the headboard, the rails or the legs" + vase en el piso a la izquierda, sin burós.
 - [PRODUCT] de cada pieza = la ficha de FICHAS.md traducida (ver el texto exacto en el historial de jobs de Higgsfield por job id).
 
-Portadas (3:2): "[REFERENCE] Image 1 and image 2 are two exact real products from the same collection ... Image 3 is ONLY a scene and lighting reference" + "[COMPOSITION] 3:2 horizontal frame, wide calm gallery view, camera at about 95 cm ... The <protagonist> stands against the wall exactly in the horizontal centre of the frame and occupies about 40 percent of the frame width; this centre part must work on its own as a vertical 4:5 crop. The <second piece> stands ... fully inside the <right/left> quarter" + 35mm, f/8. Portada nex v2 y la industrial piden ~44% y (nex) "The sideboard is the only piece of furniture".
+Portadas (3:2): "[REFERENCE] Image 1 and image 2 are two exact real products from the same collection ... Image 3 is ONLY a scene and lighting reference" + "[COMPOSITION] 3:2 horizontal frame, wide calm gallery view, camera at about 95 cm ... The <protagonist> stands against the wall exactly in the horizontal centre of the frame and occupies about 40 percent of the frame width; this centre part must work on its own as a vertical 4:5 crop. The <second piece> stands ... fully inside the <right/left> quarter" + 35mm, f/8. Portada nexo v2 y la industrial piden ~44% y (nexo) "The sideboard is the only piece of furniture".
 
 Edicion credenza v2: mismo texto que la edicion kai-comoda de la fase A, cambiando la pieza y pidiendo quitar "the window opening, the window jamb and the bright vertical strip along the left edge ... No vertical edges, no corner".
 
 ## Aprendizajes de la fase B
-- La receta de escena mejoro: 2 de 15 salidas aun mostraron ventana (credenza v1, nex portada v1/v2). La edicion sobre un job aprobado la quita sin tocar el mueble.
-- El modelo inventa una 5a pata central en piezas largas con 4 patas abiertas (centro TV Nex, credenza en la portada). Revisar siempre bajo el centro del mueble; se quita local con `quitar_pata.py`.
+- La receta de escena mejoro: 2 de 15 salidas aun mostraron ventana (credenza v1, nexo portada v1/v2). La edicion sobre un job aprobado la quita sin tocar el mueble.
+- El modelo inventa una 5a pata central en piezas largas con 4 patas abiertas (centro TV Nexo, credenza en la portada). Revisar siempre bajo el centro del mueble; se quita local con `quitar_pata.py`.
 - Madera Kai siempre sale palida; `tono_kai.py` la normaliza a la relacion de la fuente sin tocar muro, metal ni tapiz.
-- Portadas: con dos piezas la segunda falla mas (la mesa Nex asimetrica se armo mal). Un protagonista solo o una pieza secundaria de geometria simple (mesa redonda Kai, sillon Sahara) es mas seguro.
-- 4:5 movil de la portada Nex: la bufetera ocupa 1376 px de ancho y un 4:5 a alto completo mide 1357 px, no cabe; se usa el ambiente 4:5 aprobado `nex-bufetera-ambiente.jpg` (misma escena y pieza) como version movil. Kai e Industrial salen del recorte 4:5 del 3:2 (x 305-1662 y 382-1739).
+- Portadas: con dos piezas la segunda falla mas (la mesa Nexo asimetrica se armo mal). Un protagonista solo o una pieza secundaria de geometria simple (mesa redonda Kai, sillon Sahara) es mas seguro.
+- 4:5 movil de la portada Nexo: la bufetera ocupa 1376 px de ancho y un 4:5 a alto completo mide 1357 px, no cabe; se usa el ambiente 4:5 aprobado `nexo-bufetera-ambiente.jpg` (misma escena y pieza) como version movil. Kai e Industrial salen del recorte 4:5 del 3:2 (x 305-1662 y 382-1739).
 
 ## Scripts de acabado (fase B)
 - `scripts/tono_kai.py <in> <out>`, `scripts/quitar_pata.py <in> <out> x0 x1 y0 y1`, `scripts/ranura_kai.py <in> <out> [x0 x1 y0 y1 corte_x]`

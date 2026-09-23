@@ -1229,8 +1229,9 @@ html:not(.js) .encabezado,
 
 
 /* ====== CATÁLOGO ====== */
-/* "Tres salas de una galería": encabezado en papel, índice fijo de anclas
-   y tres salas a sangre. Industrial (papel) / Nex (negro) / Kai (hueso).
+/* "Tres salas de una galería": encabezado, índice fijo de anclas y tres
+   salas, todo en una sola banda papel. Nexo / Kai / Industrial, separadas
+   por aire y una hairline; la portada de cada sala abre el capítulo.
    Cada sala: portada editorial + 6 piezas (rejilla 3x2 en desktop, 2
    columnas en tableta, carril con scroll-snap en móvil). */
 .catalogo {
@@ -1282,7 +1283,8 @@ html:not(.js) .encabezado,
   font-variant-numeric: tabular-nums;
 }
 
-/* ---- Sala: banda a sangre con su propio contenedor ---- */
+/* ---- Sala: papel como el encabezado (en hueso, el tono del fondo de
+   estudio, las tarjetas se perdían). Sin bandas oscuras en el catálogo ---- */
 .sala {
   padding-block: var(--space-2xl);
   background-color: var(--superficie-papel);
@@ -1290,24 +1292,24 @@ html:not(.js) .encabezado,
   scroll-margin-top: var(--altura-indice);   /* + scroll-padding de html (nav) */
 }
 
-/* Industrial sigue al encabezado en la misma banda papel */
-.sala--industrial {
+/* La primera sala sigue al índice en la misma banda */
+.indice-salas + .sala {
   padding-top: var(--space-xl);
 }
 
-/* Nex: sala oscura. Se redefinen los tokens de texto para que todo lo que
-   hay dentro (piezas, enlaces, etiquetas) pase AA sobre negro:
-   papel 18.16:1, ceniza 6.81:1, foco rojo 4.67:1 */
-.sala--nex {
-  background-color: var(--superficie-oscura);
-  color: var(--color-texto-invertido);
-  --color-texto: var(--color-texto-invertido);
-  --color-texto-secundario: var(--color-texto-secundario-oscuro);
-  --muestra-borde: rgba(245, 245, 245, 0.35);
+/* Entre salas: hairline al ancho del contenido (sin el gutter) con aire a
+   ambos lados. Va al inicio de la sala: el ancla (#sala-x) cae sobre ella */
+.sala + .sala {
+  padding-top: 0;
 }
 
-/* Kai: papel como Industrial (la banda negra de Nex las separa). En hueso,
-   el mismo tono que el fondo de estudio, las tarjetas se perdían en la banda */
+.sala + .sala > .contenedor::before {
+  content: '';
+  display: block;
+  height: 1px;
+  margin-bottom: var(--space-2xl);
+  background-color: var(--color-linea);
+}
 
 /* ---- Portada: foto de ambiente + texto ---- */
 .sala__portada {
@@ -1319,10 +1321,6 @@ html:not(.js) .encabezado,
 /* Móvil 4:5; desde 768px 3:2. La proporción la fija el marco (sin CLS) */
 .sala__figura {
   aspect-ratio: 4 / 5;
-}
-
-.sala--nex .sala__figura {
-  background-color: var(--superficie-panel);
 }
 
 .sala__texto {
@@ -1469,12 +1467,12 @@ html:not(.js) .encabezado,
     grid-column: 8 / span 5;
   }
 
-  /* Nex: foto a la derecha */
-  .sala--nex .sala__figura {
+  /* Kai (sala 02): foto a la derecha; Nexo e Industrial a la izquierda */
+  .sala--kai .sala__figura {
     grid-column: 6 / span 7;
   }
 
-  .sala--nex .sala__texto {
+  .sala--kai .sala__texto {
     grid-column: 1 / span 5;
   }
 
@@ -1535,7 +1533,7 @@ html:not(.js) .encabezado,
   color: var(--color-texto-secundario);
 }
 
-/* Cédula de museo sobre el nombre: "NEX · 03" */
+/* Cédula de museo sobre el nombre: "NEXO · 03" */
 .pieza__cedula {
   margin-bottom: var(--space-xs);
   font-size: var(--text-xs);
@@ -2018,6 +2016,28 @@ html:not(.js) .encabezado,
 /* Tipografía y línea roja (solo la línea cambia, no el texto): .enlace-linea */
 .pie-pagina__enlace {
   color: var(--color-texto-invertido);
+}
+
+/* Redes como íconos: caja táctil de 44px; el nombre queda para lector de pantalla */
+.pie-pagina__lista--iconos {
+  column-gap: var(--space-xs);
+  margin-inline: calc((var(--area-tactil) - 1.375rem) / -2); /* los íconos, no sus cajas, se alinean con los bordes del contenido */
+}
+
+.pie-pagina__lista--iconos .pie-pagina__enlace {
+  justify-content: center;
+  min-width: var(--area-tactil);
+}
+
+.pie-pagina__lista--iconos .pie-pagina__enlace::after {
+  left: 0.6875rem;
+  right: 0.6875rem;
+  bottom: 0.25rem;
+}
+
+.pie-pagina__icono {
+  width: 1.375rem;
+  height: 1.375rem;
 }
 
 /* Fila 3: créditos bajo una hairline oscura */
