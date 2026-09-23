@@ -124,3 +124,17 @@ Una línea por decisión no trivial. Orden de prioridad: SPEC > DESIGN > BLUEPRI
 - Lista de redes con `aria-label` traducible (`pie.redes-aria`); nav del footer con `pie.nav-aria`. Logo con `nav.logo-aria` (misma frase que el nav) y ancla `#inicio`.
 - Créditos dentro del contenedor (la hairline mide lo mismo que el contenido). Para no quedar bajo el flotante: en móvil `padding-bottom` = flotante + 2 márgenes; desde 768px `padding-right` que se reduce a 0 cuando el margen lateral del contenedor ya libra el botón (a 1440 queda alineado con el borde del contenido).
 - Se eliminan: borde superior del footer, todos los `rgba(245,244,240,...)`, iconos SVG de redes, `:active` con `scale`, sombra verde, `::before` y `@keyframes pulso-whatsapp`.
+
+## Paso 7 - Metadatos y SEO
+
+- Favicon: solo la M del logo (sin texto, ilegible a 32px) centrada sobre papel #F5F5F5, recortada de `assets/logo.PNG` -> `assets/logo/favicon-32.png` (1.5 KB) y `favicon-180.png` (apple-touch-icon); sin .ico ni manifest (sin build, una sola página).
+- `og:image` -> `assets/hero/hero-og.jpg` (1200x630) con `og:image:width/height/type/alt`; el alt es el mismo de `hero.alt` en ES. `og:title` y `og:description` se conservan ("si procede" del BLUEPRINT: siguen siendo correctos).
+- Se añaden `og:locale:alternate` en_US (la página tiene EN), `twitter:card summary_large_image` (toma lo demás de OG) y `theme-color` #F5F5F5 (papel del nav).
+- Las meta OG/schema no se traducen con i18n: los rastreadores leen el HTML estático; `document.title` y `meta description` ya se traducían desde el paso 0 (`meta.title`, `meta.desc`).
+- Schema `FurnitureStore`: datos del negocio copiados sin cambios; `image` pasa a hero-og + hero-1920w; se añaden `@id`, `alternateName`, `slogan`, `logo` (medeisa-logo.png), `hasMap` (mismo enlace de Contacto) y `sameAs` (Instagram y Facebook del HTML).
+- Descripción del schema alineada al catálogo nuevo (centros de TV, mesas de centro, sillones y recámaras) en vez de "libreros, escritorios y sillas" (riesgo del BLUEPRINT sección 5).
+- `hasOfferCatalog` con las 6 piezas como `Offer > Product` (nombre, categoría, foto de estudio) y sin precio: el sitio no publica precios (CLAUDE.md), y al ir anidado en el negocio no se presenta como ficha de producto.
+- `sitemap.xml` reescrito: `lastmod` 2026-09-22 y 16 imágenes reales (hero 1920w + og, nosotros, 12 del catálogo estudio+ambiente, expo 1600w); se quitan las 4 inexistentes y `hero-v4`/`expo-1/2`. Solo `image:loc`: Google retiró `title`, `caption`, `geo_location` y `license` en 2022.
+- hreflang del sitemap se conserva (es-MX, en, x-default a la misma URL): el inglés vive en la misma página. Comentario decorativo con caracteres de caja sustituido por texto plano.
+- `robots.txt` no se toca (no está en el paso 7 del BLUEPRINT). Tras este paso `assets/hero-v4.jpeg` y `assets/logo.PNG` ya no tienen referencias (se listan, no se borran, para el paso 8).
+- Verificado: JSON-LD parsea (json.loads), `xmllint` valida el sitemap, las 16 rutas del sitemap y las 9 del schema existen, favicons/sitemap/og responden 200 en localhost:8321, ES/EN cambia título y descripción, sin errores de consola a 375 y 1440.

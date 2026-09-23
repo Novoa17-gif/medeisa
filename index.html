@@ -2,7 +2,6 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" href="assets/logo.PNG" type="image/png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="MEDEISA — Mueblería industrial en Ocotlán, Jalisco. Transformamos acero en estilo. Cotiza tus muebles metálicos a medida." />
   <link rel="canonical" href="https://www.medeisamuebles.com/" />
@@ -10,11 +9,26 @@
   <!-- Open Graph -->
   <meta property="og:title" content="MEDEISA — Metales de Innovación" />
   <meta property="og:description" content="Mueblería industrial en Ocotlán, Jalisco. Transformamos acero en estilo." />
-  <meta property="og:image" content="https://www.medeisamuebles.com/assets/hero-v4.jpeg" />
+  <meta property="og:image" content="https://www.medeisamuebles.com/assets/hero/hero-og.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Centro de TV Catania de acero negro y madera exhibido solo frente a un muro de yeso hueso con sombras de ventana" />
   <meta property="og:url" content="https://www.medeisamuebles.com/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="MEDEISA" />
   <meta property="og:locale" content="es_MX" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Tarjeta grande en X/Twitter: toma título, descripción e imagen de Open Graph -->
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Color de la barra del navegador móvil = papel del nav -->
+  <meta name="theme-color" content="#F5F5F5" />
+
+  <!-- Favicon: solo la M del logo sobre papel (el PNG completo pesaba 682 KB) -->
+  <link rel="icon" href="assets/logo/favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="assets/logo/favicon-180.png" sizes="180x180" />
 
   <title>MEDEISA — Mueblería Industrial en Ocotlán, Jalisco</title>
 
@@ -32,14 +46,22 @@
        (estado sin JS) y pasa a transparente al ejecutar main.js (defer) -->
   <script>document.documentElement.classList.add('js');</script>
 
-  <!-- Schema markup: negocio local -->
+  <!-- Schema markup: negocio local (datos idénticos a Contacto) + catálogo sin precios -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "FurnitureStore",
+    "@id": "https://www.medeisamuebles.com/#negocio",
     "name": "MEDEISA S.A. de C.V.",
-    "description": "Mueblería industrial en Ocotlán, Jalisco. Fabricamos libreros, mesas, escritorios y sillas de metal a medida.",
+    "alternateName": "MEDEISA",
+    "slogan": "Transformamos acero en estilo",
+    "description": "Mueblería industrial en Ocotlán, Jalisco. Fabricamos a mano centros de TV, mesas de centro, sillones y recámaras de acero y madera.",
     "url": "https://www.medeisamuebles.com/",
+    "logo": "https://www.medeisamuebles.com/assets/logo/medeisa-logo.png",
+    "image": [
+      "https://www.medeisamuebles.com/assets/hero/hero-og.jpg",
+      "https://www.medeisamuebles.com/assets/hero/hero-1920w.jpg"
+    ],
     "telephone": "+523921236728",
     "address": {
       "@type": "PostalAddress",
@@ -49,16 +71,32 @@
       "postalCode": "45965",
       "addressCountry": "MX"
     },
+    "hasMap": "https://www.google.com/maps/search/MEDEISA+S.A.+DE+C.V.,+Cuitzeo,+Jalisco",
     "openingHoursSpecification": [
       {
         "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
         "opens": "08:00",
         "closes": "16:00"
       }
     ],
     "priceRange": "$$",
-    "image": "https://www.medeisamuebles.com/assets/hero-v4.jpeg"
+    "sameAs": [
+      "https://instagram.com/medeisa.muebles",
+      "https://www.facebook.com/profile.php?id=61580795922902"
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Línea industrial MEDEISA",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Centro de TV Catania", "category": "Centro de TV", "image": "https://www.medeisamuebles.com/assets/catalogo/centro-tv-catania-estudio.jpg" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Mesa de Centro Catania", "category": "Mesa de centro", "image": "https://www.medeisamuebles.com/assets/catalogo/mesa-centro-catania-estudio.jpg" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Sillón Sahara", "category": "Sala", "image": "https://www.medeisamuebles.com/assets/catalogo/silla-sahara-estudio.jpg" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Centro de TV Sierra Azul", "category": "Centro de TV", "image": "https://www.medeisamuebles.com/assets/catalogo/centro-tv-sierra-azul-estudio.jpg" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Mesa de Centro Sierra Azul Parota", "category": "Mesa de centro", "image": "https://www.medeisamuebles.com/assets/catalogo/mesa-centro-sierra-azul-estudio.jpg" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Recámara Tulum", "category": "Recámara", "image": "https://www.medeisamuebles.com/assets/catalogo/recamara-tulum-estudio.jpg" } }
+      ]
+    }
   }
   </script>
 </head>

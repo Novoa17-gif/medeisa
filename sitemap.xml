@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ╔══════════════════════════════════════════════════════════════╗
-  ║  MEDEISA — medeisamuebles.com                               ║
-  ║  XML Sitemap  ·  Google Sitemap Protocol 0.9                ║
-  ║  Extensiones: Image Sitemap 1.1 · xHTML hreflang            ║
-  ║  Última actualización: 2026-04-07                           ║
-  ╚══════════════════════════════════════════════════════════════╝
+  MEDEISA - medeisamuebles.com
+  Sitemap (protocolo 0.9) con extension de imagenes 1.1 y hreflang.
+  Una sola URL: el ingles se sirve en la misma pagina con el selector ES/EN.
+  Solo image:loc: Google ya no usa image:title, caption, geo_location ni license.
 -->
 <urlset
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
@@ -13,122 +11,66 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
 >
 
-  <!-- ═══════════════════════════════════════════
-       URL PRINCIPAL — Página de inicio
-       Idioma predeterminado: Español (México)
-       ═══════════════════════════════════════════ -->
   <url>
     <loc>https://www.medeisamuebles.com/</loc>
 
-    <!-- hreflang: Español México (idioma principal) -->
-    <xhtml:link
-      rel="alternate"
-      hreflang="es-MX"
-      href="https://www.medeisamuebles.com/"
-    />
-    <!-- hreflang: Inglés (via selector de idioma en la página) -->
-    <xhtml:link
-      rel="alternate"
-      hreflang="en"
-      href="https://www.medeisamuebles.com/"
-    />
-    <!-- hreflang: Fallback global -->
-    <xhtml:link
-      rel="alternate"
-      hreflang="x-default"
-      href="https://www.medeisamuebles.com/"
-    />
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://www.medeisamuebles.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.medeisamuebles.com/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.medeisamuebles.com/" />
 
-    <lastmod>2026-04-07</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
 
-    <!-- ─────────────────────────────────────────
-         IMAGEN HERO — Portada del sitio
-         ───────────────────────────────────────── -->
+    <!-- Hero, Nosotros, 6 piezas del catalogo (estudio + ambiente) y Expo -->
     <image:image>
-      <image:loc>https://www.medeisamuebles.com/assets/hero-v4.jpeg</image:loc>
-      <image:title>MEDEISA — Mueblería Industrial en Ocotlán, Jalisco</image:title>
-      <image:caption>
-        Muebles industriales de acero fabricados a medida por MEDEISA,
-        ubicada en Ocotlán, Jalisco. Transformamos acero en estilo.
-      </image:caption>
-      <image:geo_location>Ocotlán, Jalisco, México</image:geo_location>
-      <image:license>https://www.medeisamuebles.com/</image:license>
+      <image:loc>https://www.medeisamuebles.com/assets/hero/hero-1920w.jpg</image:loc>
     </image:image>
-
-    <!-- ─────────────────────────────────────────
-         PRODUCTOS — Imágenes de catálogo
-         ───────────────────────────────────────── -->
     <image:image>
-      <image:loc>https://www.medeisamuebles.com/assets/producto-librero.jpg</image:loc>
-      <image:title>Libreros y estantes industriales de metal — MEDEISA</image:title>
-      <image:caption>
-        Libreros y estantes industriales de metal fabricados a medida por MEDEISA
-        en Ocotlán, Jalisco. Diseño robusto y acabado de alta calidad.
-      </image:caption>
-      <image:geo_location>Ocotlán, Jalisco, México</image:geo_location>
-      <image:license>https://www.medeisamuebles.com/</image:license>
+      <image:loc>https://www.medeisamuebles.com/assets/hero/hero-og.jpg</image:loc>
     </image:image>
-
     <image:image>
-      <image:loc>https://www.medeisamuebles.com/assets/producto-mesa.jpg</image:loc>
-      <image:title>Mesas de centro y auxiliares de acero industrial — MEDEISA</image:title>
-      <image:caption>
-        Mesas de centro y auxiliares de acero industrial fabricadas a medida
-        por MEDEISA. Estilo industrial y durabilidad garantizada.
-      </image:caption>
-      <image:geo_location>Ocotlán, Jalisco, México</image:geo_location>
-      <image:license>https://www.medeisamuebles.com/</image:license>
+      <image:loc>https://www.medeisamuebles.com/assets/nosotros/nosotros.jpg</image:loc>
     </image:image>
-
     <image:image>
-      <image:loc>https://www.medeisamuebles.com/assets/producto-escritorio.jpg</image:loc>
-      <image:title>Escritorios industriales de metal a medida — MEDEISA</image:title>
-      <image:caption>
-        Escritorios industriales de metal fabricados a medida por MEDEISA
-        en Ocotlán, Jalisco. Perfectos para oficinas y espacios de trabajo creativos.
-      </image:caption>
-      <image:geo_location>Ocotlán, Jalisco, México</image:geo_location>
-      <image:license>https://www.medeisamuebles.com/</image:license>
+      <image:loc>https://www.medeisamuebles.com/assets/catalogo/centro-tv-catania-estudio.jpg</image:loc>
     </image:image>
-
     <image:image>
-      <image:loc>https://www.medeisamuebles.com/assets/producto-comedor.jpg</image:loc>
-      <image:title>Sillas y sillones industriales de metal — MEDEISA</image:title>
-      <image:caption>
-        Sillas y sillones industriales de metal fabricados a medida por MEDEISA.
-        Diseño ergonómico con materiales de alta resistencia y durabilidad.
-      </image:caption>
-      <image:geo_location>Ocotlán, Jalisco, México</image:geo_location>
-      <image:license>https://www.medeisamuebles.com/</image:license>
+      <image:loc>https://www.medeisamuebles.com/assets/catalogo/centro-tv-catania-ambiente.jpg</image:loc>
     </image:image>
-
-    <!-- ─────────────────────────────────────────
-         EXPO MUEBLES OCOTLÁN — Imágenes del evento
-         ───────────────────────────────────────── -->
     <image:image>
-      <image:loc>https://www.medeisamuebles.com/assets/expo-1.jpeg</image:loc>
-      <image:title>MEDEISA en Expo Muebles Ocotlán 2026</image:title>
-      <image:caption>
-        Stand de MEDEISA en Expo Muebles Ocotlán, la feria de muebles más
-        importante de la región de Jalisco. Presencia anual desde 2018.
-      </image:caption>
-      <image:geo_location>Ocotlán, Jalisco, México</image:geo_location>
-      <image:license>https://www.medeisamuebles.com/</image:license>
+      <image:loc>https://www.medeisamuebles.com/assets/catalogo/mesa-centro-catania-estudio.jpg</image:loc>
     </image:image>
-
     <image:image>
-      <image:loc>https://www.medeisamuebles.com/assets/expo-2.jpeg</image:loc>
-      <image:title>Catálogo MEDEISA exhibido en Expo Muebles Ocotlán</image:title>
-      <image:caption>
-        Productos del catálogo de MEDEISA exhibidos en Expo Muebles Ocotlán.
-        Muebles industriales de acero fabricados a mano en Jalisco, México.
-      </image:caption>
-      <image:geo_location>Ocotlán, Jalisco, México</image:geo_location>
-      <image:license>https://www.medeisamuebles.com/</image:license>
+      <image:loc>https://www.medeisamuebles.com/assets/catalogo/mesa-centro-catania-ambiente.jpg</image:loc>
     </image:image>
-
+    <image:image>
+      <image:loc>https://www.medeisamuebles.com/assets/catalogo/silla-sahara-estudio.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.medeisamuebles.com/assets/catalogo/silla-sahara-ambiente.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.medeisamuebles.com/assets/catalogo/centro-tv-sierra-azul-estudio.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.medeisamuebles.com/assets/catalogo/centro-tv-sierra-azul-ambiente.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.medeisamuebles.com/assets/catalogo/mesa-centro-sierra-azul-estudio.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.medeisamuebles.com/assets/catalogo/mesa-centro-sierra-azul-ambiente.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.medeisamuebles.com/assets/catalogo/recamara-tulum-estudio.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.medeisamuebles.com/assets/catalogo/recamara-tulum-ambiente.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.medeisamuebles.com/assets/expo/expo-1600w.jpg</image:loc>
+    </image:image>
   </url>
 
 </urlset>
