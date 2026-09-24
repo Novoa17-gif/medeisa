@@ -8,7 +8,7 @@ y generar contacto directo vía WhatsApp.
 ## Stack
 - HTML5 semántico + CSS3 + JavaScript ES2024 vanilla
 - Fuentes locales en assets/fonts (Gloock + Schibsted Grotesk, OFL)
-- Sin frameworks, sin dependencias externas
+- Sin frameworks. Única dependencia: Lenis 1.3.26 (scroll suave, MIT), copia local en js/vendor/, aprobada por el cliente el 2026-09-23
 - Sin build tools — debe correr abriendo index.html directo
 
 ## Identidad de marca

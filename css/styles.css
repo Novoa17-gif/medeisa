@@ -196,6 +196,26 @@ html {
   scroll-padding-top: var(--altura-nav); /* compensa el nav fijo en anchor links */
 }
 
+/* Lenis (scroll suave con mouse/trackpad; en táctil queda el nativo).
+   Lenis anima el scroll: el smooth de CSS lo duplicaría. Durante el
+   desplazamiento el mapa no atrapa la rueda */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+html.lenis {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
 body {
   font-family: var(--font-sans);
   font-weight: var(--fw-regular);

@@ -1,6 +1,6 @@
 /* ================================================================
    MEDEISA - JavaScript principal
-   Orden: Nav → Hero (video) → Animaciones →
+   Orden: Scroll suave → Nav → Hero (video) → Animaciones →
           Idioma (i18n + WhatsApp) → Catálogo (salas) → Footer → Init
 ================================================================ */
 
@@ -8,6 +8,39 @@
 
 /* La clase .js de <html> la pone el script inline del <head>, antes del
    primer pintado (el CSS la usa para el estado oculto de .animar-entrada) */
+
+
+/* ================================================================
+   SCROLL SUAVE (Lenis, js/vendor/lenis.min.js)
+   Inercia sutil con rueda y trackpad; en táctil Lenis deja el scroll
+   nativo. Sin Lenis (movimiento reducido o si no cargó) todo sigue con
+   el scroll nativo y el CSS de siempre.
+================================================================ */
+
+let lenis = null;
+
+const iniciarScrollSuave = () => {
+  const reducido = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reducido || typeof window.Lenis !== 'function') return;
+
+  lenis = new window.Lenis({ lerp: 0.1, autoRaf: true });
+
+  /* Anclas internas con el mismo scroll suave. Lenis descuenta
+     scroll-padding-top (nav) y scroll-margin-top (índice de salas).
+     Con teclado (detail 0) se deja el salto nativo: mueve el punto de
+     partida del foco, que el skip link y la navegación con Tab necesitan */
+  document.addEventListener('click', (e) => {
+    const enlace = e.target.closest('a[href^="#"]');
+    if (!enlace || e.detail === 0) return;
+    const hash = enlace.getAttribute('href');
+    if (hash.length < 2) return;
+    const destino = document.getElementById(decodeURIComponent(hash.slice(1)));
+    if (!destino) return;
+    e.preventDefault();
+    lenis.scrollTo(destino);
+    history.pushState(null, '', hash);
+  });
+};
 
 
 /* ================================================================
@@ -54,6 +87,9 @@ const iniciarNav = () => {
     traducirAria(hamburguesa, abrir ? 'nav.menu-cerrar' : 'nav.menu-abrir');
     menuMovil.hidden = !abrir;
     encabezado.classList.toggle('encabezado--menu-abierto', abrir);
+    /* Con el menú abierto la página no se desplaza por debajo */
+    if (abrir) lenis?.stop();
+    else lenis?.start();
   };
 
   hamburguesa?.addEventListener('click', () => {
@@ -906,6 +942,7 @@ const iniciarFooter = () => {
    INIT - Punto de entrada
 ================================================================ */
 document.addEventListener('DOMContentLoaded', () => {
+  iniciarScrollSuave();
   iniciarNav();
   iniciarIdioma();
   iniciarVideoHero();
