@@ -145,6 +145,7 @@
      360px sin consulta max-width. Se redefinen en el bloque HERO. */
   --hero-foco: 50% 100%;
   --hero-texto-fin: max(26.5rem, 85rem - 260vw);
+  --hero-muro: #CEC8BF;   /* color del borde superior de la foto vertical */
 }
 
 @media (min-width: 768px) {
@@ -780,20 +781,15 @@ html:not(.js) .encabezado,
   isolation: isolate;
   display: grid;
   align-items: start;
-  /* En la foto 9:16 el mueble (ramas del jarrón) empieza al 49% del alto y
-     se ancla abajo. En pantallas bajas (Safari con barras: 390x664, 375x553)
-     el mueble subía hasta los botones; el hero crece lo justo para que el
-     mueble empiece bajo el texto: 49% del alto cuando la foto llena el alto,
-     o alto - 90.7vw cuando la foto se escala por el ancho */
-  min-height: max(
-    100svh,
-    var(--hero-texto-fin) / 0.49,
-    var(--hero-texto-fin) + 90.7vw
-  );
+  /* Foto vertical (1536x2752): siempre a todo el ancho (alto = 179.2vw) y
+     anclada abajo, así el mueble se ve completo en cualquier teléfono. Las
+     ramas del jarrón empiezan al 42% de la foto, a 103.9vw del borde de
+     abajo: el hero crece lo justo para que el mueble empiece bajo el texto */
+  min-height: max(100svh, var(--hero-texto-fin) + 103.9vw);
   padding-top: calc(var(--altura-nav) + var(--space-lg));
   padding-bottom: var(--space-xl);
   overflow: hidden;
-  background-color: var(--superficie-lienzo); /* mientras carga la imagen */
+  background-color: var(--hero-muro); /* si sobra alto, el muro continúa */
   color: var(--color-texto);
 }
 
@@ -813,6 +809,15 @@ html:not(.js) .encabezado,
   height: 100%;
   object-fit: cover;
   object-position: var(--hero-foco);
+}
+
+/* Vertical: la foto a lo ancho, anclada abajo; su borde superior se funde
+   con el color del hero para que no se note dónde termina */
+.hero__imagen {
+  inset: auto 0 0;
+  height: 179.2vw;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 8%);
+  mask-image: linear-gradient(to bottom, transparent, #000 8%);
 }
 
 /* El video entra con fundido al disparar "playing": sin salto sobre el póster */
@@ -920,6 +925,14 @@ html:not(.js) .encabezado,
    (800x730) el muro libre a la izquierda del mueble no alcanza para
    "Transformamos" y el titular lo montaba; ahí se usa la composición vertical */
 @media (min-width: 768px) and (aspect-ratio > 5/4), (min-width: 1280px) {
+  /* Horizontal: la foto 16:9 vuelve a cubrir todo el hero */
+  .hero__imagen {
+    inset: 0;
+    height: 100%;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
   .hero {
     --hero-foco: 70% 100%;
 

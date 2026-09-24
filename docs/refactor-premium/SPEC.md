@@ -46,3 +46,6 @@ Ojo: varias rutas tienen espacios al final del nombre de carpeta y acentos.
 - `BLUEPRINT.md` - plan seccion por seccion del refactor.
 - `HIGGSFIELD-PLAN.md` - prompts, modelo, costo estimado por imagen/video.
 - Skill: `~/.claude/skills/medeisa-estilo/SKILL.md`.
+
+## Cambio 2026-09-24: hero movil con imagen, sin video
+El video 9:16 cortaba el mueble en movil. Decision del usuario: en la composicion vertical (movil, tabletas en retrato, ventanas casi cuadradas) el hero usa solo imagen. Nueva foto assets/hero/hero-movil-{1080w,720w} (1536x2752 de origen): el hero de escritorio extendido hacia arriba con outpaint de Higgsfield (2 creditos) y el muro superior aclarado en local para el contraste del texto. Se muestra a todo el ancho, anclada abajo (el mueble siempre completo); si sobra alto, el muro sigue con --hero-muro. Se borraron hero-luz-movil.mp4/.webm. El video 16:9 sigue en horizontal.

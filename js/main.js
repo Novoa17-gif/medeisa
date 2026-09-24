@@ -150,8 +150,9 @@ const iniciarNav = () => {
    La entrada del texto es CSS puro (.entrada-hero), no espera a este
    archivo. La imagen es el póster a sangre (Chrome no la toma como LCP por
    cubrir todo el viewport; el LCP es el H1). El video se carga después de
-   load, solo sin reduced-motion ni Save-Data, y cada dispositivo baja solo
-   su versión.
+   load, solo en la composición horizontal (16:9) y sin reduced-motion ni
+   Save-Data. En vertical (móvil) se queda la foto: en 9:16 el mueble no
+   cabía entero, la foto vertical sí lo muestra completo.
 ================================================================ */
 
 /* Misma consulta que los <source> verticales del <picture> y el CSS */
@@ -182,19 +183,29 @@ const iniciarVideoHero = () => {
     }
   };
 
-  /* Crea las dos fuentes (webm primero) de la versión que toca y recarga */
+  /* Horizontal: crea las dos fuentes (webm primero) y recarga.
+     Vertical: vacía el video y deja solo la foto */
   const cargarFuentes = () => {
-    const sufijo = vertical.matches ? 'Movil' : '';
+    hero.classList.remove('hero--video-activo');
+    if (pausa) pausa.hidden = true;
+
+    if (vertical.matches) {
+      video.pause();
+      video.replaceChildren();
+      video.removeAttribute('poster');
+      video.load();
+      return;
+    }
+
     const fragmento = document.createDocumentFragment();
 
     [['webm', 'video/webm'], ['mp4', 'video/mp4']].forEach(([formato, tipo]) => {
       const fuente = document.createElement('source');
-      fuente.src = video.dataset[`fuente${sufijo}${formato === 'webm' ? 'Webm' : 'Mp4'}`];
+      fuente.src = video.dataset[formato === 'webm' ? 'fuenteWebm' : 'fuenteMp4'];
       fuente.type = tipo;
       fragmento.append(fuente);
     });
 
-    hero.classList.remove('hero--video-activo');
     video.replaceChildren(fragmento);
     video.poster = imagen?.currentSrc ?? '';
     video.load();
@@ -210,7 +221,7 @@ const iniciarVideoHero = () => {
       if (pausa) pausa.hidden = false;
     });
 
-    /* Rotación o cambio de tamaño: cambia a la otra proporción */
+    /* Rotación o cambio de tamaño: entra o sale el video */
     vertical.addEventListener('change', cargarFuentes);
 
     /* Fuera de vista o pestaña oculta: pausa; al volver, reanuda */
