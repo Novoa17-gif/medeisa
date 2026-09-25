@@ -1670,6 +1670,63 @@ html:not(.js) .encabezado,
 }
 
 
+/* ---- Cierre: las salas son lo más nuevo; invita a pedir el resto ---- */
+.catalogo-cierre {
+  padding-bottom: var(--space-2xl);
+}
+
+.catalogo-cierre > .contenedor::before {
+  content: '';
+  display: block;
+  height: 1px;
+  margin-bottom: var(--space-2xl);
+  background-color: var(--color-linea);
+}
+
+.catalogo-cierre__contenido {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  max-width: 36rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.catalogo-cierre__titulo {
+  font-family: var(--font-serif);
+  font-size: var(--text-2xl);
+  font-weight: var(--fw-regular);
+  line-height: var(--leading-titulo);
+  letter-spacing: var(--tracking-titulo);
+  text-wrap: balance;
+}
+
+.catalogo-cierre__titulo em {
+  font-style: normal;
+  color: var(--color-enfasis);
+}
+
+.catalogo-cierre__texto {
+  color: var(--color-texto-secundario);
+  text-wrap: pretty;
+}
+
+.catalogo-cierre__contenido .btn {
+  margin-top: var(--space-xs);
+}
+
+.catalogo-cierre__redes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  column-gap: var(--space-md);
+  font-size: var(--text-sm);
+  color: var(--color-texto-secundario);
+}
+
+
 /* ====== EXPO ====== */
 /* Banda negra: única banda oscura de contenido. Texto papel, secundario
    ceniza (6.81:1); el rojo solo en el número 03 y la línea de la etiqueta. */

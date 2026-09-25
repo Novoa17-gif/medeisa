@@ -325,6 +325,7 @@ const TRADUCCIONES = {
     'meta.desc':   'MEDEISA — Muebles de acero y madera en Ocotlán, Jalisco: colecciones Nexo, Kai e Industrial. Transformamos acero en estilo. Cotiza por WhatsApp.',
     'global.skip': 'Saltar al contenido principal',
     'wa.general':  'Hola, me gustaría cotizar un producto de MEDEISA.',
+    'wa.catalogo': 'Hola, me gustaría recibir el catálogo completo de MEDEISA.',
     'wa.aria':     'Contactar por WhatsApp (abre en nueva pestaña)',
 
     /* --- NAV --- */
@@ -386,8 +387,12 @@ const TRADUCCIONES = {
 
     /* --- CATALOGO --- */
     'cat.etiqueta':    'Lo que fabricamos',
-    'cat.titulo':      'Nuestras <em>colecciones</em>',
-    'cat.intro':       'Tres colecciones, tres salas: Nexo, Kai e Industrial. Acero y madera trabajados en Jalisco; cotiza cualquier pieza por WhatsApp.',
+    'cat.titulo':      'Colecciones <em>destacadas</em>',
+    'cat.intro':       'Nuestras colecciones más recientes: Nexo, Kai e Industrial. Fabricamos muchos más modelos; cotiza cualquier pieza por WhatsApp.',
+    'cat.cierre.titulo': '¿Buscas otra <em>pieza</em>?',
+    'cat.cierre.texto':  'Estas son nuestras colecciones más recientes. Fabricamos muchos más modelos en acero y madera, y también piezas a la medida.',
+    'cat.cierre.cta':    'Pide el catálogo completo',
+    'cat.cierre.redes':  'Más de nuestro trabajo en',
     'cat.indice-aria': 'Colecciones',
     'cat.sala-01':     'Sala 01',
     'cat.sala-02':     'Sala 02',
@@ -533,6 +538,7 @@ const TRADUCCIONES = {
     'meta.desc':   'MEDEISA — Steel and wood furniture in Ocotlán, Jalisco: the Nexo, Kai and Industrial collections. We transform steel into style. Get a quote on WhatsApp.',
     'global.skip': 'Skip to main content',
     'wa.general':  'Hello, I would like a quote for a MEDEISA product.',
+    'wa.catalogo': 'Hello, I would like to receive the full MEDEISA catalog.',
     'wa.aria':     'Contact us on WhatsApp (opens in a new tab)',
 
     /* --- NAV --- */
@@ -594,8 +600,12 @@ const TRADUCCIONES = {
 
     /* --- CATALOGO --- */
     'cat.etiqueta':    'What we make',
-    'cat.titulo':      'Our <em>collections</em>',
-    'cat.intro':       'Three collections, three rooms: Nexo, Kai and Industrial. Steel and wood crafted in Jalisco; request a quote for any piece on WhatsApp.',
+    'cat.titulo':      'Featured <em>collections</em>',
+    'cat.intro':       'Our newest collections: Nexo, Kai and Industrial. We make many more designs; request a quote for any piece on WhatsApp.',
+    'cat.cierre.titulo': 'Looking for another <em>piece</em>?',
+    'cat.cierre.texto':  'These are our newest collections. We make many more designs in steel and wood, as well as made-to-measure pieces.',
+    'cat.cierre.cta':    'Request the full catalog',
+    'cat.cierre.redes':  'More of our work on',
     'cat.indice-aria': 'Collections',
     'cat.sala-01':     'Room 01',
     'cat.sala-02':     'Room 02',

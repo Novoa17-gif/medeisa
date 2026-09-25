@@ -38,7 +38,7 @@
   <link rel="preload" href="assets/fonts/schibsted-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
 
   <!-- ?v= fuerza a los navegadores a bajar la versión nueva: cambiarlo en cada publicación -->
-  <link rel="stylesheet" href="css/styles.css?v=2026-09-24i" />
+  <link rel="stylesheet" href="css/styles.css?v=2026-09-25a" />
 
   <!-- Marca .js antes del primer pintado: sin esto el nav se pinta sólido
        (estado sin JS) y pasa a transparente al ejecutar main.js (defer) -->
@@ -53,7 +53,7 @@
     "name": "MEDEISA S.A. de C.V.",
     "alternateName": "MEDEISA",
     "slogan": "Transformamos acero en estilo",
-    "description": "Muebles de acero y madera en Ocotlán, Jalisco. Fabricamos a mano tres colecciones, Nexo, Kai e Industrial: centros de TV, mesas, sillones, camas, burós, cómodas, bufeteros.",
+    "description": "Muebles de acero y madera en Ocotlán, Jalisco. Fabricamos a mano muebles de acero y madera y también a la medida; nuestras colecciones más recientes son Nexo, Kai e Industrial: centros de TV, mesas, sillones, camas, burós, cómodas, bufeteros.",
     "url": "https://www.medeisamuebles.com/",
     "logo": "https://www.medeisamuebles.com/assets/logo/medeisa-logo.png",
     "image": [
@@ -465,8 +465,8 @@
             <span class="etiqueta__linea" aria-hidden="true"></span>
             <span data-i18n="cat.etiqueta">Lo que fabricamos</span>
           </p>
-          <h2 class="titulo-seccion" id="catalogo-titulo" data-i18n-html="cat.titulo">Nuestras <em>colecciones</em></h2>
-          <p class="entrada-seccion" data-i18n="cat.intro">Tres colecciones, tres salas: Nexo, Kai e Industrial. Acero y madera trabajados en Jalisco; cotiza cualquier pieza por WhatsApp.</p>
+          <h2 class="titulo-seccion" id="catalogo-titulo" data-i18n-html="cat.titulo">Colecciones <em>destacadas</em></h2>
+          <p class="entrada-seccion" data-i18n="cat.intro">Nuestras colecciones más recientes: Nexo, Kai e Industrial. Fabricamos muchos más modelos; cotiza cualquier pieza por WhatsApp.</p>
         </header>
       </div>
 
@@ -1634,6 +1634,29 @@
 
         </div>
       </section>
+
+      <!-- Cierre del catálogo: las salas son lo más nuevo, no todo el producto -->
+      <aside class="catalogo-cierre" aria-labelledby="catalogo-cierre-titulo">
+        <div class="contenedor">
+          <div class="catalogo-cierre__contenido animar-entrada">
+            <h3 class="catalogo-cierre__titulo" id="catalogo-cierre-titulo" data-i18n-html="cat.cierre.titulo">¿Buscas otra <em>pieza</em>?</h3>
+            <p class="catalogo-cierre__texto" data-i18n="cat.cierre.texto">Estas son nuestras colecciones más recientes. Fabricamos muchos más modelos en acero y madera, y también piezas a la medida.</p>
+            <a
+              class="btn btn--relleno"
+              data-wa="catalogo"
+              data-i18n="cat.cierre.cta"
+              href="https://wa.me/523921236728?text=Hola%2C%20me%20gustar%C3%ADa%20recibir%20el%20cat%C3%A1logo%20completo%20de%20MEDEISA."
+              target="_blank"
+              rel="noopener noreferrer"
+            >Pide el catálogo completo</a>
+            <p class="catalogo-cierre__redes">
+              <span data-i18n="cat.cierre.redes">Más de nuestro trabajo en</span>
+              <a class="enlace-linea" href="https://instagram.com/medeisa.muebles" target="_blank" rel="noopener noreferrer">Instagram<span class="solo-lector" data-i18n="pie.nueva-pestana"> (abre en nueva pestaña)</span></a>
+              <a class="enlace-linea" href="https://www.facebook.com/profile.php?id=61580795922902" target="_blank" rel="noopener noreferrer">Facebook<span class="solo-lector" data-i18n="pie.nueva-pestana"> (abre en nueva pestaña)</span></a>
+            </p>
+          </div>
+        </div>
+      </aside>
     </section>
 
     <!-- ============================================================
@@ -1898,6 +1921,6 @@
 
   <!-- Lenis 1.3.26 (MIT, darkroom.engineering): scroll suave en desktop, copia local -->
   <script src="js/vendor/lenis.min.js?v=1.3.26" defer></script>
-  <script src="js/main.js?v=2026-09-24i" defer></script>
+  <script src="js/main.js?v=2026-09-25a" defer></script>
 </body>
 </html>
