@@ -21,7 +21,13 @@ let lenis = null;
 
 const iniciarScrollSuave = () => {
   const reducido = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reducido || typeof window.Lenis !== 'function') return;
+
+  /* Safari limita requestAnimationFrame a 60 fps (también en pantallas de
+     120 Hz) y su scroll nativo con trackpad ya tiene inercia: con Lenis
+     encima se sentía pesado. Ahí se queda el nativo */
+  const esSafari = /^((?!chrome|chromium|crios|fxios|edg|android).)*safari/i.test(navigator.userAgent);
+
+  if (reducido || esSafari || typeof window.Lenis !== 'function') return;
 
   lenis = new window.Lenis({ lerp: 0.1, autoRaf: true });
 
@@ -387,6 +393,7 @@ const TRADUCCIONES = {
     'cat.sala-02':     'Sala 02',
     'cat.sala-03':     'Sala 03',
     'cat.conteo':      '6 piezas',
+    'cat.conteo-industrial': '5 piezas',
     'cat.materiales-aria': 'Materiales',
     'cat.material.acero-negro':    'Acero negro',
     'cat.material.parota':         'Parota',
@@ -410,10 +417,6 @@ const TRADUCCIONES = {
     'cat.centro-tv-monaco.alt':       'Centro de TV Monaco: estructura trapezoidal de acero negro, repisa superior de madera y gabinete de madera miel con tres cajones sin jaladeras, sobre fondo hueso',
     'cat.centro-tv-monaco.alt-ambiente': 'Centro de TV Monaco con un jarrón de ramas secas sobre la repisa, en una galería de muros de yeso hueso con luz de tarde y sombras de ventana',
     'cat.centro-tv-monaco.mensaje':   'Hola, me interesa cotizar el Centro de TV Monaco de MEDEISA.',
-    'cat.mesa-centro-catania.categoria': 'Mesa de centro · Acero y parota',
-    'cat.mesa-centro-catania.alt':       'Mesa de Centro Catania: base rectangular de tubo de acero negro y cubierta de tablones de parota unidos por dos bandas de acero negro, sobre fondo hueso',
-    'cat.mesa-centro-catania.alt-ambiente': 'Mesa de Centro Catania con un jarrón de ramas secas sobre la cubierta, en una galería de yeso hueso con piso de concreto claro y luz de tarde',
-    'cat.mesa-centro-catania.mensaje':   'Hola, me interesa cotizar la Mesa de Centro Catania de MEDEISA.',
     'cat.silla-ap.categoria': 'Sala · Tapizado bouclé y acero',
     'cat.silla-ap.alt':       'Silla AP: sillón individual tapizado en bouclé gris carbón con patas de acero negro en V invertida, sobre fondo hueso',
     'cat.silla-ap.alt-ambiente': 'Silla AP junto a un jarrón de ramas secas en una galería de yeso hueso con luz de tarde y sombras de ventana',
@@ -598,6 +601,7 @@ const TRADUCCIONES = {
     'cat.sala-02':     'Room 02',
     'cat.sala-03':     'Room 03',
     'cat.conteo':      '6 pieces',
+    'cat.conteo-industrial': '5 pieces',
     'cat.materiales-aria': 'Materials',
     'cat.material.acero-negro':    'Black steel',
     'cat.material.parota':         'Parota',
@@ -621,10 +625,6 @@ const TRADUCCIONES = {
     'cat.centro-tv-monaco.alt':       'Centro de TV Monaco: trapezoidal black steel frame, wooden top shelf and honey-toned wood cabinet with three handleless drawers, on a bone background',
     'cat.centro-tv-monaco.alt-ambiente': 'Centro de TV Monaco with a vase of dried branches on the top shelf, in a gallery with off-white plaster walls, afternoon light and window shadows',
     'cat.centro-tv-monaco.mensaje':   'Hi, I would like a quote for the Centro de TV Monaco by MEDEISA.',
-    'cat.mesa-centro-catania.categoria': 'Coffee table · Steel and parota',
-    'cat.mesa-centro-catania.alt':       'Mesa de Centro Catania: rectangular black steel tube base and a top of parota planks joined by two black steel bands, on a bone background',
-    'cat.mesa-centro-catania.alt-ambiente': 'Mesa de Centro Catania with a vase of dried branches on the top, in an off-white plaster gallery with a light concrete floor and afternoon light',
-    'cat.mesa-centro-catania.mensaje':   'Hi, I would like a quote for the Mesa de Centro Catania by MEDEISA.',
     'cat.silla-ap.categoria': 'Living · Bouclé and steel',
     'cat.silla-ap.alt':       'Silla AP: armchair upholstered in charcoal bouclé with black steel legs in an inverted V, on a bone background',
     'cat.silla-ap.alt-ambiente': 'Silla AP next to a vase of dried branches in an off-white plaster gallery with afternoon light and window shadows',
