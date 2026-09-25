@@ -38,7 +38,7 @@
   <link rel="preload" href="assets/fonts/schibsted-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
 
   <!-- ?v= fuerza a los navegadores a bajar la versión nueva: cambiarlo en cada publicación -->
-  <link rel="stylesheet" href="css/styles.css?v=2026-09-24g" />
+  <link rel="stylesheet" href="css/styles.css?v=2026-09-24i" />
 
   <!-- Marca .js antes del primer pintado: sin esto el nav se pinta sólido
        (estado sin JS) y pasa a transparente al ejecutar main.js (defer) -->
@@ -197,16 +197,28 @@
       <!-- Medio: la imagen es el respaldo universal (póster); el video se superpone -->
       <div class="hero__medio">
         <picture class="hero__poster">
-          <!-- Vertical 9:16: móviles, tabletas en retrato y ventanas casi cuadradas (misma consulta en CSS y JS) -->
+          <!-- Teléfonos: recorte cerrado al mueble (se ve cerca y completo) -->
           <source
-            media="(max-width: 767px), (aspect-ratio <= 5/4) and (max-width: 1279px)"
+            media="(max-width: 767px)"
             type="image/webp"
             srcset="assets/hero/hero-movil-720w.webp 720w, assets/hero/hero-movil-1080w.webp 1080w"
             sizes="100vw"
           />
           <source
-            media="(max-width: 767px), (aspect-ratio <= 5/4) and (max-width: 1279px)"
+            media="(max-width: 767px)"
             srcset="assets/hero/hero-movil-720w.jpg 720w, assets/hero/hero-movil-1080w.jpg 1080w"
+            sizes="100vw"
+          />
+          <!-- Vertical en tabletas y ventanas casi cuadradas: la foto con más muro (misma consulta en CSS y JS) -->
+          <source
+            media="(aspect-ratio <= 5/4) and (max-width: 1279px)"
+            type="image/webp"
+            srcset="assets/hero/hero-vertical-1080w.webp 1080w, assets/hero/hero-vertical-1536w.webp 1536w"
+            sizes="100vw"
+          />
+          <source
+            media="(aspect-ratio <= 5/4) and (max-width: 1279px)"
+            srcset="assets/hero/hero-vertical-1080w.jpg 1080w, assets/hero/hero-vertical-1536w.jpg 1536w"
             sizes="100vw"
           />
           <source
@@ -1886,6 +1898,6 @@
 
   <!-- Lenis 1.3.26 (MIT, darkroom.engineering): scroll suave en desktop, copia local -->
   <script src="js/vendor/lenis.min.js?v=1.3.26" defer></script>
-  <script src="js/main.js?v=2026-09-24g" defer></script>
+  <script src="js/main.js?v=2026-09-24i" defer></script>
 </body>
 </html>

@@ -144,7 +144,7 @@
      teléfonos, 512px a 320px en inglés); crece en pantallas de menos de
      360px sin consulta max-width. Se redefinen en el bloque HERO. */
   --hero-foco: 50% 100%;
-  --hero-texto-fin: max(26.5rem, 85rem - 260vw);
+  --hero-texto-fin: max(27.5rem, 85rem - 260vw);
   --hero-muro: #CEC8BF;   /* color del borde superior de la foto vertical */
 }
 
@@ -781,11 +781,14 @@ html:not(.js) .encabezado,
   isolation: isolate;
   display: grid;
   align-items: start;
-  /* Foto vertical (1536x2752): siempre a todo el ancho (alto = 179.2vw) y
-     anclada abajo, así el mueble se ve completo en cualquier teléfono. Las
-     ramas del jarrón empiezan al 42% de la foto, a 103.9vw del borde de
-     abajo: el hero crece lo justo para que el mueble empiece bajo el texto */
-  min-height: max(100svh, var(--hero-texto-fin) + 103.9vw);
+  /* Foto vertical a todo el ancho y anclada abajo: el mueble siempre completo.
+     Teléfono: recorte cerrado al mueble (1167x2752, alto = 235.8vw); las ramas
+     del jarrón empiezan al 42% de la foto, a 136.8vw (58%) del borde de abajo:
+     el hero crece lo justo para que el mueble empiece bajo el texto.
+     --hero-foto-alto y --hero-mueble-desde cambian en tabletas (>= 768px) */
+  --hero-foto-alto: 235.8vw;
+  --hero-mueble-desde: 136.8vw;
+  min-height: max(100svh, var(--hero-texto-fin) + var(--hero-mueble-desde));
   padding-top: calc(var(--altura-nav) + var(--space-lg));
   padding-bottom: var(--space-xl);
   overflow: hidden;
@@ -815,7 +818,7 @@ html:not(.js) .encabezado,
    con el color del hero para que no se note dónde termina */
 .hero__imagen {
   inset: auto 0 0;
-  height: 179.2vw;
+  height: var(--hero-foto-alto);
   -webkit-mask-image: linear-gradient(to bottom, transparent, #000 8%);
   mask-image: linear-gradient(to bottom, transparent, #000 8%);
 }
@@ -916,8 +919,11 @@ html:not(.js) .encabezado,
 /* ---- Horizontal: medio 16:9, texto abajo a la izquierda sobre el muro ---- */
 /* Tabletas en retrato: titular más grande, el texto termina más abajo (448px medido) */
 @media (min-width: 768px) {
+  /* Tabletas en vertical: la foto completa con más muro (1536x2752) */
   .hero {
     --hero-texto-fin: 29rem;
+    --hero-foto-alto: 179.2vw;
+    --hero-mueble-desde: 103.9vw;
   }
 }
 
